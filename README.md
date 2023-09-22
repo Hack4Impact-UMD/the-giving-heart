@@ -1,25 +1,50 @@
-# Payload Custom Server Example
+# The Giving Heart
 
-This example demonstrates how to serve your front-end alongside [Payload](https://github.com/payloadcms/payload) in a single Express server. This pattern will cut down on hosting costs and can simplify your deployment process.
+**Description**: [insert description later]
 
-Template Link: https://github.com/payloadcms/payload/tree/master/examples/custom-server
+**Point of Contact**:
+|Name| Email|
+| :---       | :---        |
+|Insert Name| Insert Email |
 
-## Quick Start
+## Installation + Quick Start
 
-To spin up this example locally, follow these steps:
+### Installation
+- VSCode: https://code.visualstudio.com/download
+  - Recommended Extensions:
+    - GitLens — Git supercharged
+    - Nextjs snippets
+- NVM + Node.js: https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/
+  - `nvm install --lts` will install and use the latest long-term support of Node.js (**18.18.0** as of 9/22/23)
+- Mongodb Community Edition: https://www.mongodb.com/docs/v4.4/administration/install-community/
+- Mongodb Compass (GUI): https://www.mongodb.com/products/tools/compass
+- Postman: https://www.postman.com/downloads/
 
-1. First clone the repo
-1. Next `yarn && yarn dev`
-1. Now `open http://localhost:3000/admin` to access the admin panel
-1. Login with email `demo@payloadcms.com` and password `demo`
+### Quick Start
+1. Clone the repo: `git clone https://github.com/Hack4Impact-UMD/the-giving-heart.git`
+2. Install Yarn (the package manager we will be using): `npm install --global yarn`
+3. Create a `.env` file with the following content:
+```env
+# to connect to hosted database
+# MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>
 
-That's it! Changes made in `./src` will be reflected in your app. See the [Development](#development) section for more details.
+# for local development
+MONGODB_URI=mongodb://localhost:27017 
 
-## How it works
+PAYLOAD_SECRET=PAYLOAD_CUSTOM_SERVER_EXAMPLE_SECRET_KEY
+PAYLOAD_PUBLIC_SERVER_URL=http://localhost:3000
+NEXT_PUBLIC_SERVER_URL=http://localhost:3000
+PAYLOAD_PUBLIC_SEED=true
+PAYLOAD_DROP_DATABASE=true
+```
+4. Use the MongoDB CLI `mongo` to create a database: run `mongo` then `db test` 
+5. `cd` into repo and run `yarn && yarn dev` to spin up application
+6. Admin portal: http://localhost:3000/admin
+7. Website: http://localhost:3000/
 
-When you use Payload, you plug it into _**your**_ Express server. That's a fundamental difference between Payload and other application frameworks. It means that when you use Payload, you're technically _adding_ Payload to _your_ app, and not building a "Payload app".
-
-One of the strengths of this pattern is that it lets you do powerful things like integrate your Payload instance directly with your front-end. This will allow you to host Payload alongside a fully dynamic, CMS-integrated website or app on a single, combined server—while still getting all of the benefits of a headless CMS.
+## Developer Notes
+### Tech Stack
+![Giving Heart Application Tech Stack](giving-heart-techstack.jpg)
 
 ### Express
 
@@ -81,7 +106,7 @@ Then your `package.json` might look something like this:
 
 Check out the [package.json](./src/package.json) in this repository for a complete working example. You can also see the [Next.js docs](https://nextjs.org/docs/api-reference/cli#build) for more details.
 
-## Eject
+### Eject
 
 If you prefer another front-end framework or would like to use Payload as a standalone CMS, you can easily eject the front-end from this template. To eject, simply run `yarn eject`. This will uninstall all Next.js related dependencies and delete all files and folders related to the Next.js front-end. It also removes all custom routing from your `server.ts` file and updates your `eslintrc.js`.
 
@@ -93,7 +118,7 @@ On boot, a seed script is included to scaffold a basic database for you to use a
 
 > NOTICE: seeding the database is destructive because it drops your current database to populate a fresh one from the seed template. Only run this command if you are starting a new project or can afford to lose your current data.
 
-## Production
+### Production
 
 To run Payload in production, you need to build and serve the Admin panel. To do so, follow these steps:
 

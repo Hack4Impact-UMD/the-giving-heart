@@ -43,6 +43,8 @@ PAYLOAD_DROP_DATABASE=true
 7. Website: http://localhost:3000/
 
 ## Developer Notes
+### Tech Stack
+![Giving Heart Application Tech Stack](giving-heart-techstack.jpg)
 
 ### Express
 

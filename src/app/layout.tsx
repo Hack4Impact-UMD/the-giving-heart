@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 
 import './app.scss'
 
@@ -14,9 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={classes.body}>
-        <header className={classes.header}>
-          The Giving Heart
-        </header>
+        <header className={classes.header}>The Giving Heart</header>
         {children}
       </body>
     </html>

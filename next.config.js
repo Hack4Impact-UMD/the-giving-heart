@@ -20,7 +20,7 @@ const nextConfig = {
   //     .filter(Boolean)
   //     .map(url => url.replace(/https?:\/\//, '')),
   // },
-  redirects,
+  // redirects,
   // async headers() {
   // const headers = []
 

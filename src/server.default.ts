@@ -24,7 +24,7 @@ const start = async (): Promise<void> => {
         newPayload.logger.info(`Payload Admin URL: ${newPayload.getAdminURL()}`)
       },
     },
-    seed: process.env.PAYLOAD_PUBLIC_SEED === 'true',
+    // seed: process.env.PAYLOAD_PUBLIC_SEED === 'true',
   })
 
   app.listen(PORT, async () => {

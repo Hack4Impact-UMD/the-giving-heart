@@ -10,9 +10,8 @@ const nextConfig = {
         fs: false,
       }
     }
+    return config
   },
-  //   return config
-  // },
   reactStrictMode: true,
   swcMinify: true,
   images: {

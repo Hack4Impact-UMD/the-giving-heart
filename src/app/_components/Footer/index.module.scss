@@ -2,9 +2,8 @@
 
 .footer {
   padding: calc(var(--base) * 4) 0;
-  background-color: var(--theme-elevation-1000);
-  color: var(--theme-elevation-0);
-
+  background-color: var(--theme-elevation-50);
+  background-color: #F0F0F0; //changed color
   @include small-break {
     padding: calc(var(--base) * 2) 0;
   }
@@ -19,6 +18,7 @@
 
 .wrap {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: calc(var(--base) / 2) var(--base);

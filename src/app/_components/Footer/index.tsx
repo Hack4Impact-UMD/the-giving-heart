@@ -34,7 +34,7 @@ export async function Footer() {
             justifyContent="space-between"
             alignItems="center"
             flexAlign="center"
-            height="100px"
+            height="150px"
             width="100%"
           >
             <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize', width: '20%' }}>
@@ -44,8 +44,9 @@ export async function Footer() {
             <Box
               display="flex"
               flexDirection="column"
-              justifyContent="space-around"
+              justifyContent="space-between"
               alignItems="center"
+              height="50%"
             >
               <Typography sx={{ fontWeight: 'bold' }}>Contact Us</Typography>
               <Typography>Info@givingheart.com</Typography>
@@ -55,8 +56,9 @@ export async function Footer() {
             <Box
               display="flex"
               flexDirection="column"
-              justifyContent="space-around"
+              justifyContent="space-between"
               alignItems="center"
+              height="50%"
             >
               <Typography sx={{ fontWeight: 'bold' }}>Useful Links</Typography>
               <Link
@@ -79,31 +81,38 @@ export async function Footer() {
             <Box
               display="flex"
               flexDirection="column"
-              justifyContent="space-around"
+              justifyContent="space-between"
               alignItems="center"
+              height="50%"
             >
               <Typography sx={{ fontWeight: 'bold' }}>Socials</Typography>
               <Box display="flex" flexDirection="row">
-                <img alt="S1" src="" />
-                <img alt="S2" src="" />
-                <img alt="S3" src="" />
+                <img src="" />
+                <img src="" />
+                <img src="" />
               </Box>
             </Box>
           </Box>
 
-          <br />
-          <Divider flexItem sx={{ color: '#606060' }} />
+          <Divider
+            flexItem
+            sx={{ backgroundColor: '#000000', opacity: '0.6', height: '1px', margin: '20px 0' }}
+          />
 
-          <Box width='100%' display="flex" justifyContent="space-between" alignItems="center">
+          <Box
+            margin="2rem 0 1rem 0"
+            width="100%"
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Typography sx={{ fontSize: 'body2.fontSize' }}>The Giving Heart</Typography>
-            <Typography sx={{ fontSize: 'body2.fontSize' }}>
-              <Link href="" target="_blank" rel="noopener noreferrer">
-                Privacy Policy
-              </Link>
-              |
-              <Link href="" target="_blank" rel="noopener noreferrer">
-                Terms of Use
-              </Link>
+            <Typography
+              sx={{
+                fontSize: 'body2.fontSize',
+              }}
+            >
+             Privacy Policy | Terms of Use
             </Typography>
           </Box>
         </nav>

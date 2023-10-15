@@ -1,16 +1,41 @@
+.mainContainer {
+    display: flex;
+}
+
 .grayContainer {
     background-color: #aaaaaa; 
-    color: #ffffff; /* White text color */
-    border: none; /* Remove border */
-    padding: 0.5rem 1rem; /* Adjust padding using rem units */
+    color: #ffffff; 
+    padding: 0.5rem 1rem; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    border-radius: 0.7rem; 
-  }
+    border-radius: 0.7rem;  
+}
 
 .eventInfoText {
     color: red;
     font-style: italic;
     font-weight: bold;
+}
+
+.container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.eventContainer {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+@media (max-width: 767px) {
+    .mainContainer {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .grayContainer {
+        border-radius: 2rem; 
+        padding: 0.3rem 1rem;
+    }
 }

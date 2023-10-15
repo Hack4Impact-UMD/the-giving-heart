@@ -12,19 +12,21 @@ import { LeftNavBar } from '../../_components/LeftNavBar';
 
 export default async function Dashboard() {
   return (
-    <Gutter>
+    <div className={classes.mainContainer}>
+        <LeftNavBar />
         
-        <h1> Welcome, [firstName]! </h1>
-        
-        <div className={classes.grayContainer}>
-            Account Type: Volunteer
-        </div>
+        {/* <Gutter> */}
+        <div className={classes.container}>
+            <h1> Welcome, [firstName]! </h1>
+            
+            <div className={classes.grayContainer}>
+                Account Type: Volunteer
+            </div>
 
-        <div>
-            <h2> Events Information </h2>
-            <p className={classes.eventInfoText}> You must sign up for an event to volunteer for it. </p>
-            <div>
-                {/* Replace this div for different Events Information structure, currently displayed as cards */}
+            <div className={classes.eventContainer}>
+                <h2> Events Information </h2>
+                <p className={classes.eventInfoText}> You must sign up for an event to volunteer for it. </p>
+                
                 <CardContainer>
                     <Card title="Event 1"> </Card>
                     <Card title="Event 2"> </Card>
@@ -34,9 +36,8 @@ export default async function Dashboard() {
                     <Card title="Event 6"> </Card>
                 </CardContainer>
             </div>
+        {/* </Gutter> */}
         </div>
-    </Gutter>
-
-
+    </div>
   )
 }

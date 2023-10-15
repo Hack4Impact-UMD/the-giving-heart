@@ -4,6 +4,7 @@
   padding: calc(var(--base) * 4) 0;
   background-color: var(--theme-elevation-50);
   background-color: #F0F0F0; //changed color
+  width: 100%;
   @include small-break {
     padding: calc(var(--base) * 2) 0;
   }
@@ -21,6 +22,7 @@
   flex-direction: column;
   justify-content: space-between;
   flex-wrap: wrap;
+  width: 100%;
   gap: calc(var(--base) / 2) var(--base);
 }
 
@@ -30,12 +32,15 @@
 
 .nav {
   display: flex;
+  flex-direction: column;
   gap: calc(var(--base) / 4) var(--base);
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   opacity: 1;
   transition: opacity 100ms linear;
   visibility: visible;
+  width: 100%;
 
   > * {
     text-decoration: none;

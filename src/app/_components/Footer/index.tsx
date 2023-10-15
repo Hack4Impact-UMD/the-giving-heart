@@ -27,12 +27,13 @@ export async function Footer() {
   return (
     <footer className={classes.footer}>
       <Gutter className={classes.wrap}>
-        <nav clasName={classes.nav}>
+        <nav className={classes.nav}>
           <Box
             display="flex"
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
+            width='100%'
           >
             <Typography sx={{ fontWeight: 'bold', fontSize: 'h4.fontSize', width: '25%' }}>
               The Giving
@@ -91,9 +92,9 @@ export async function Footer() {
           </Box>
 
           <br />
-          <Divider sx={{ color: '#606060' }} />
+          <Divider flexItem sx={{ color: '#606060' }} />
 
-          <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Box width='100%' display="flex" justifyContent="space-between" alignItems="center">
             <Typography sx={{ fontSize: 'body2.fontSize' }}>The Giving Heart</Typography>
             <Typography sx={{ fontSize: 'body2.fontSize' }}>
               <Link href="" target="_blank" rel="noopener noreferrer">

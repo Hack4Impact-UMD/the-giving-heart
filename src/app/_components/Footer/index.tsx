@@ -30,43 +30,28 @@ export async function Footer() {
         <nav className={classes.nav}>
           {/**error starts here! */}
           <Box
-          // display="flex"
-          // flexDirection="row"
-          // justifyContent="space-between"
-          // alignItems="center"
-          // flexAlign="center"
-          // height="150px"
-          // width="100%"
+            display="flex"
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="center"
+            width="100%"
           >
             <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize', width: '20%' }}>
               The Giving Heart
             </Typography>
 
-            <Box
-            // display="flex"
-            // flexDirection="column"
-            // justifyContent="space-between"
-            // alignItems="center"
-            // height="50%"
-            >
+            <Box display="flex" flexDirection="column" justifyContent="space-between">
               <Typography sx={{ fontWeight: 'bold' }}>Contact Us</Typography>
               <Typography>Info@givingheart.com</Typography>
               <Typography>(302)-532-2922</Typography>
             </Box>
 
-            <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="space-between"
-              alignItems="center"
-              height="50%"
-            >
+            <Box display="flex" flexDirection="column" justifyContent="space-between">
               <Typography sx={{ fontWeight: 'bold' }}>Useful Links</Typography>
               <Link
                 href="https://github.com/payloadcms/payload/tree/master/templates/website"
                 target="_blank"
                 rel="noopener noreferrer"
-                // sx={{ align: 'center' }}
               >
                 Donate
               </Link>
@@ -88,9 +73,9 @@ export async function Footer() {
             >
               <Typography sx={{ fontWeight: 'bold' }}>Socials</Typography>
               <Box display="flex" flexDirection="row">
-                <img src="" />
-                <img src="" />
-                <img src="" />
+                <img src="" alt="S1" />
+                <img src="" alt="S2" />
+                <img src="" alt="S3" />
               </Box>
             </Box>
           </Box>

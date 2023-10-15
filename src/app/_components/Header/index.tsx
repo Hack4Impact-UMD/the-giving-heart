@@ -30,26 +30,26 @@ export async function Header() {
         <Gutter className={classes.wrap}>
           <div>
             {/* <Link href="/"> */}
-              {/* Cannot use the `<picture>` element here with `srcSet`
+            {/* Cannot use the `<picture>` element here with `srcSet`
                 This is because the theme is able to be overridden by the user
                 And so `@media (prefers-color-scheme: dark)` will not work
                 Instead, we just use CSS to invert the color via `filter: invert(1)` based on `[data-theme="dark"]`
               */}
             <h2 className={classes.templogo}>The Giving Heart</h2>
-              {/* <img className={classes.logo} alt="The Giving Heart" src="" /> */}
+            {/* <img className={classes.logo} alt="The Giving Heart" src="" /> */}
             {/* </Link> */}
           </div>
           <div>
             {/*Add link for the following*/}
-         
             <Link className={classes.linkname} href="/">
               About Us
             </Link>
-         
-              <Link className={classes.linkname} href="/">Get involved</Link>
-          
-              <Link className={classes.linkname} href="/">Sign up/Login</Link>
-
+            <Link className={classes.linkname} href="/">
+              Get involved
+            </Link>
+            <Link className={classes.linkname} href="/">
+              Sign up/Login
+            </Link>
             <HeaderNav header={header} />
           </div>
         </Gutter>

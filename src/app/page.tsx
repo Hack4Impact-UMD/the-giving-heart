@@ -171,15 +171,15 @@ export default async function Home() {
 
             <RenderParams className={classes.params} />
           </Box>
-          <div style={galleryContainerStyle}>
+          <div
+          // style={galleryContainerStyle}
+          >
             {images.map((imageUrl, index) => (
-              <Card key={index} style={galleryItemStyle}>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={imageUrl}
-                  style={imageStyle}
-                />
+              <Card
+                key={index}
+                // style={galleryItemStyle}
+              >
+                <CardMedia component="img" height="300" image={imageUrl} style={imageStyle} />
               </Card>
             ))}
           </div>

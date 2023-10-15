@@ -28,25 +28,26 @@ export async function Footer() {
     <footer id={classes.homefooter} className={classes.footer}>
       <Gutter className={classes.wrap}>
         <nav className={classes.nav}>
+          {/**error starts here! */}
           <Box
-            display="flex"
-            flexDirection="row"
-            justifyContent="space-between"
-            alignItems="center"
-            flexAlign="center"
-            height="150px"
-            width="100%"
+          // display="flex"
+          // flexDirection="row"
+          // justifyContent="space-between"
+          // alignItems="center"
+          // flexAlign="center"
+          // height="150px"
+          // width="100%"
           >
             <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize', width: '20%' }}>
               The Giving Heart
             </Typography>
 
             <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="space-between"
-              alignItems="center"
-              height="50%"
+            // display="flex"
+            // flexDirection="column"
+            // justifyContent="space-between"
+            // alignItems="center"
+            // height="50%"
             >
               <Typography sx={{ fontWeight: 'bold' }}>Contact Us</Typography>
               <Typography>Info@givingheart.com</Typography>
@@ -65,7 +66,7 @@ export async function Footer() {
                 href="https://github.com/payloadcms/payload/tree/master/templates/website"
                 target="_blank"
                 rel="noopener noreferrer"
-                sx={{ align: 'center' }}
+                // sx={{ align: 'center' }}
               >
                 Donate
               </Link>
@@ -112,7 +113,7 @@ export async function Footer() {
                 fontSize: 'body2.fontSize',
               }}
             >
-             Privacy Policy | Terms of Use
+              Privacy Policy | Terms of Use
             </Typography>
           </Box>
         </nav>

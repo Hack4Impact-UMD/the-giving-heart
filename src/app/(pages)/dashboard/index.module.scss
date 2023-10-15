@@ -1,0 +1,16 @@
+.grayContainer {
+    background-color: #aaaaaa; 
+    color: #ffffff; /* White text color */
+    border: none; /* Remove border */
+    padding: 0.5rem 1rem; /* Adjust padding using rem units */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 0.7rem; 
+  }
+
+.eventInfoText {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+}

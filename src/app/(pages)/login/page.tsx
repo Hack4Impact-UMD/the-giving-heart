@@ -10,9 +10,11 @@ import LoginForm from './LoginForm'
 import classes from './index.module.scss'
 
 export default async function Login() {
+  /*
   await getMeUser({
     validUserRedirect: `/account?warning=${encodeURIComponent('You are already logged in.')}`,
   })
+  */
 
   return (
     <Gutter className={classes.login}>

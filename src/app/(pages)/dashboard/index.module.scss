@@ -1,5 +1,5 @@
-.mainContainer {
-    display: flex;
+.title {
+    font-weight: 600;
 }
 
 .grayContainer {
@@ -18,22 +18,15 @@
     font-weight: bold;
 }
 
-.container {
-    padding-left: 2rem;
-    padding-right: 2rem;
+.eventContainer {
+    padding-bottom: 2rem;
 }
 
-.eventContainer {
-    padding-left: 3rem;
-    padding-right: 3rem;
+.eventContainer > h2 {
+    font-weight: 600;
 }
 
 @media (max-width: 767px) {
-    .mainContainer {
-        display: flex;
-        flex-direction: column;
-    }
-
     .grayContainer {
         border-radius: 2rem; 
         padding: 0.3rem 1rem;

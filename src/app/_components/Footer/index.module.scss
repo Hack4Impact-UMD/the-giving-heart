@@ -1,13 +1,9 @@
 @use '../../_css/queries.scss' as *;
 
-.footer {
-  padding: calc(var(--base) * 4) 0;
-  background-color: var(--theme-elevation-50);
-  background-color: #F0F0F0; //changed color
-  width: 100%;
-  @include small-break {
-    padding: calc(var(--base) * 2) 0;
-  }
+
+#homefooter {
+  background-color: #B8B8B8;
+  color: black;
 }
 
 :global([data-theme="dark"]) {

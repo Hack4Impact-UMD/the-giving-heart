@@ -3,17 +3,40 @@
 .header {
   padding: var(--base) 0;
   background-color: #F0F0F0	;
+  color: black;
+
 }
+
+
+
 
 .wrap {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: calc(var(--base) / 2) var(--base);
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
+.templogo {
+  font-size: 1.7rem;
+  margin: 0;
+  padding: 0;
+}
+
+
 .logo {
-  width: 150px;
+  width: 250px;
+}
+
+.linkname {
+  padding: 10px;
+  padding-right: 10px;
+  text-decoration: none;
+}
+
+.linkname:hover {
+  color: grey;
 }
 
 :global([data-theme="light"]) {

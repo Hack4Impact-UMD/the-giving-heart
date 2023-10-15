@@ -28,19 +28,30 @@ export async function Header() {
     <>
       <header className={classes.header}>
         <Gutter className={classes.wrap}>
-          <Link href="/">
-            {/* Cannot use the `<picture>` element here with `srcSet`
-              This is because the theme is able to be overridden by the user
-              And so `@media (prefers-color-scheme: dark)` will not work
-              Instead, we just use CSS to invert the color via `filter: invert(1)` based on `[data-theme="dark"]`
-            */}
-            <img className={classes.logo} alt="The Giving Heart Logo" src="" />
-          </Link>
-          {/*Add link for the following*/}
-          <Link href="/">About Us</Link>
-          <Link href="/">Get Involved</Link>
-          <Link href="/login">Sign Up/Log In</Link>
-          <HeaderNav header={header} />
+          <div>
+            {/* <Link href="/"> */}
+              {/* Cannot use the `<picture>` element here with `srcSet`
+                This is because the theme is able to be overridden by the user
+                And so `@media (prefers-color-scheme: dark)` will not work
+                Instead, we just use CSS to invert the color via `filter: invert(1)` based on `[data-theme="dark"]`
+              */}
+            <h2 className={classes.templogo}>The Giving Heart</h2>
+              {/* <img className={classes.logo} alt="The Giving Heart" src="" /> */}
+            {/* </Link> */}
+          </div>
+          <div>
+            {/*Add link for the following*/}
+         
+            <Link className={classes.linkname} href="/">
+              About Us
+            </Link>
+         
+              <Link className={classes.linkname} href="/">Get involved</Link>
+          
+              <Link className={classes.linkname} href="/">Sign up/Login</Link>
+
+            <HeaderNav header={header} />
+          </div>
         </Gutter>
       </header>
     </>

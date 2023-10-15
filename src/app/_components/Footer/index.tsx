@@ -1,4 +1,5 @@
 import React from 'react'
+import { Box, Divider, Typography } from '@mui/material/'
 import Link from 'next/link'
 
 import { Footer } from '../../../payload/payload-types'
@@ -6,7 +7,6 @@ import { fetchFooter, fetchGlobals } from '../../_api/fetchGlobals'
 import { ThemeSelector } from '../../_providers/Theme/ThemeSelector'
 import { Gutter } from '../Gutter'
 import { CMSLink } from '../Link'
-import { Box, Typography, Divider } from '@mui/material/'
 
 import classes from './index.module.scss'
 
@@ -25,7 +25,7 @@ export async function Footer() {
   const navItems = footer?.navItems || []
 
   return (
-    <footer className={classes.footer}>
+    <footer id={classes.homefooter} className={classes.footer}>
       <Gutter className={classes.wrap}>
         <nav className={classes.nav}>
           <Box
@@ -33,12 +33,12 @@ export async function Footer() {
             flexDirection="row"
             justifyContent="space-between"
             alignItems="center"
-            width='100%'
+            flexAlign="center"
+            height="100px"
+            width="100%"
           >
-            <Typography sx={{ fontWeight: 'bold', fontSize: 'h4.fontSize', width: '25%' }}>
-              The Giving
-              <br />
-              Heart
+            <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize', width: '20%' }}>
+              The Giving Heart
             </Typography>
 
             <Box

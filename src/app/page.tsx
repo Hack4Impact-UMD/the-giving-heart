@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography, Button } from '@mui/material/'
+import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from '@mui/material/'
 import { Metadata } from 'next'
 
 import { Gutter } from './_components/Gutter'
@@ -11,120 +11,115 @@ import classes from './(pages)/home/index.module.scss'
 
 export default async function Home() {
   return (
-    <nav className={classes.nav}>
-      <Box
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="space-around"
-        sx={{
-          width: '100%',
-          height: '200px',
-          color: 'white',
-          backgroundColor: 'darkgrey',
-          margin: '0',
-        }}
-      >
-        <img alt="Background Image" src="" />
-
-        <Typography>Short description of org</Typography>
-      </Box>
-
-      <Gutter>
-        <RenderParams className={classes.params} />
-        <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-          sx={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'white',
-          }}
-        >
+    <>
+      <div style={{ background: 'grey', padding: '50px' }}>
+        <Container sx={{ height: '300px' }}>
+          <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <h3> Background Image </h3>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="h4">The Giving Heart</Typography>
+              <Typography>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Sed euismod nisi porta lorem mollis
+                aliquam. Adipiscing bibendum est ultricies integer quis.
+              </Typography>
+            </Grid>
+          </Grid>
+        </Container>
+      </div>
+      <div style={{ background: 'white', paddingTop: '30px', paddingBottom: '30px' }}>
+        <Container>
           <Box
             display="flex"
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
             sx={{
-              boxShadow: 5,
-              width: '60%',
-              height: '30%',
-              backgroundColor: '#E8E8E8',
-              padding: '3%',
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'white',
             }}
           >
-            <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize' }}>Heading</Typography>
-            <Typography>Content</Typography>
-            <br />
-            <Button sx={{ backgroundColor: 'darkgrey', color: 'white' }}> Get Involved </Button>
-          </Box>
-
-          <RenderParams className={classes.params} />
-
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            sx={{
-              width: '70%',
-              height: '30%',
-              backgroundColor: 'lightgray',
-              padding: '3%',
-            }}
-          >
-            <Typography sx={{ fontSize: 'h4.fontSize' }}>Our Impact So Far</Typography>
-            <br />
             <Box
               display="flex"
-              flexDirection="row"
+              flexDirection="column"
               alignItems="center"
-              justifyContent="space-around"
+              justifyContent="center"
               sx={{
-                width: '100%',
+                boxShadow: 5,
+                width: '70%',
+                height: '200px',
+                marginTop: '5%',
+                marginBottom: '5%',
+                backgroundColor: '#f5f5f5',
+                padding: '3%',
               }}
             >
-              <Box>
-                <Typography textAlign="center" sx={{ fontSize: 'h5.fontSize' }}>
-                  10,000
-                </Typography>
-                <Typography textAlign="center" sx={{ fontSize: 'body2.fontSize' }}>
-                  Meals Provided
-                </Typography>
-              </Box>
-              <Box>
-                <Typography textAlign="center" sx={{ fontSize: 'h5.fontSize' }}>
-                  1000
-                </Typography>
-                <Typography textAlign="center" sx={{ fontSize: 'body2.fontSize' }}>
-                  Volunteers
-                </Typography>
-              </Box>
-              <Box>
-                <Typography textAlign="center" sx={{ fontSize: 'h5.fontSize' }}>
-                  $100,000
-                </Typography>
-                <Typography textAlign="center" sx={{ fontSize: 'body2.fontSize' }}>
-                  Raised
-                </Typography>
+              <Typography variant="h5" color="black" fontWeight="fontWeightMedium"> Lorem Ipsum Dolor Sit Amet </Typography>
+              <Typography color="black" textAlign="center" fontSize="0.9rem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed euismod nisi porta lorem mollis aliquam. </Typography>
+              <br />
+              <Button sx={{ backgroundColor: 'darkgrey', color: 'white' }}> Get Involved </Button>
+            </Box>
+
+            <RenderParams className={classes.params} />
+
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+              sx={{
+                width: '90%',
+                height: '30%',
+                backgroundColor: 'lightgray',
+                padding: '3%',
+              }}
+            >
+              <Typography sx={{ color: 'black', fontSize: 'h5.fontSize' }}>Our Impact So Far</Typography>
+              <br />
+              <Box
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="space-around"
+                sx={{
+                  width: '100%',
+                }}
+              >
+                <Box>
+                  <Typography textAlign="center" sx={{ color: 'black', fontSize: 'h5.fontSize' }}>
+                    10,000
+                  </Typography>
+                  <Typography textAlign="center" sx={{ color: 'black',  fontSize: 'body2.fontSize' }}>
+                    Meals Provided
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography textAlign="center" sx={{ color: 'black', fontSize: 'h5.fontSize' }}>
+                    1000
+                  </Typography>
+                  <Typography textAlign="center" sx={{ color: 'black',  fontSize: 'body2.fontSize' }}>
+                    Volunteers
+                  </Typography>
+                </Box>
+                <Box>
+                  <Typography textAlign="center" sx={{ color: 'black',  fontSize: 'h5.fontSize' }}>
+                    $100,000
+                  </Typography>
+                  <Typography textAlign="center" sx={{ color: 'black',  fontSize: 'body2.fontSize' }}>
+                    Raised
+                  </Typography>
+                </Box>
               </Box>
             </Box>
+
+            <RenderParams className={classes.params} />
           </Box>
-
-          <RenderParams className={classes.params} />
-
-          <Typography textAlign="center" sx={{ fontSize: 'h4.fontSize' }}>
-            Gallery
-          </Typography>
-
-          <Typography>Replace this with the gallery component</Typography>
-
-        </Box>
-      </Gutter>
-    </nav>
+        </Container>
+      </div>
+    </>
   )
 }
 

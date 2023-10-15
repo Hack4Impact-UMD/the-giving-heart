@@ -21,10 +21,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <Providers>
           <AdminBar />
-          {/* @ts-expect-error */}
           <Header />
           {children}
-          {/* @ts-expect-error */}
           <Footer />
         </Providers>
       </body>

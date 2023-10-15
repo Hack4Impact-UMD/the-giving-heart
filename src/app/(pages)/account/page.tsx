@@ -64,40 +64,6 @@ export default async function Account() {
       />
       <Gutter className={classes.account}>
         <AccountForm />
-        <HR />
-        <h2>Comments</h2>
-        <p>
-          These are the comments you have placed over time. Each comment is associated with a
-          specific post. All comments must be approved by an admin before they appear on the site.
-        </p>
-        <HR />
-        {comments?.length === 0 && <p>You have not made any comments yet.</p>}
-        {comments.length > 0 &&
-          comments?.map((com, index) => {
-            const { doc, comment, createdAt } = com
-
-            if (!comment) return null
-
-            return (
-              <Fragment key={index}>
-                <div className={classes.column}>
-                  <p className={classes.comment}>"{comment}"</p>
-                  <p className={classes.meta}>
-                    {'Posted '}
-                    {doc && typeof doc === 'object' && (
-                      <Fragment>
-                        {' to '}
-                        <Link href={`/posts/${doc?.slug}`}>{doc?.title || 'Untitled Post'}</Link>
-                      </Fragment>
-                    )}
-                    {createdAt && ` on ${formatDateTime(createdAt)}`}
-                  </p>
-                </div>
-                {index < comments.length - 1 && <HR />}
-              </Fragment>
-            )
-          })}
-        <HR />
         <Button href="/logout" appearance="secondary" label="Log out" />
       </Gutter>
     </Fragment>

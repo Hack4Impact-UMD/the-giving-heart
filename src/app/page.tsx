@@ -1,12 +1,22 @@
-import React from 'react';
-import RegisteredEvent from './_components/registeredEvent';
+import React from 'react'
+
+import RegisteredEvent from './_components/registeredEvent'
 
 const Page: React.FC = () => {
   return (
     <div>
-      <RegisteredEvent eventName='being the goat' eventDate="everyday" eventTime='all day' eventLocation='the farm' volunteerRole="the goat" volunteerShifts='24/7 365' isMVP={true} eventActive={true} />
+      <RegisteredEvent
+        eventName="being the goat"
+        eventDate="everyday"
+        eventTime="all day"
+        eventLocation="the farm"
+        volunteerRole="the goat"
+        volunteerShifts="24/7 365"
+        isMVP={true}
+        eventActive={true}
+      />
     </div>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

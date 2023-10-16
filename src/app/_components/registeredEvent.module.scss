@@ -1,0 +1,19 @@
+.cardActions {
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+// used for inactive buttons
+.inactive {
+    background-color: #838383;
+}
+
+// used for active buttons
+.activecheckin {
+    background-color: green;
+}
+.activecheckout {
+    background-color: orange;
+}

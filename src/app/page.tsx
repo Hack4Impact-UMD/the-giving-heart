@@ -1,5 +1,12 @@
-import PageTemplate, { generateMetadata } from './(pages)/[slug]/page'
+import React from 'react';
+import RegisteredEvent from './_components/registeredEvent';
 
-export default PageTemplate
+const Page: React.FC = () => {
+  return (
+    <div>
+      <RegisteredEvent eventName='being the goat' eventDate="everyday" eventTime='all day' eventLocation='the farm' volunteerRole="the goat" volunteerShifts='24/7 365' isMVP={true} eventActive={true} />
+    </div>
+  );
+};
 
-export { generateMetadata }
+export default Page;

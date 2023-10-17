@@ -9,6 +9,7 @@ import { InitTheme } from './_providers/Theme/InitTheme'
 import { mergeOpenGraph } from './_utilities/mergeOpenGraph'
 
 import './_css/app.scss'
+import './_css/globals.css'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -53,6 +53,9 @@ export default async function Page({ params: { slug = 'home' } }) {
   return (
     <React.Fragment>
       <Hero {...hero} />
+      <h1 className="text-3xl font-bold underline text-blue-300">
+        Testing Tailwind
+      </h1>
       <Blocks
         blocks={layout}
         disableTopPadding={!hero || hero?.type === 'none' || hero?.type === 'lowImpact'}

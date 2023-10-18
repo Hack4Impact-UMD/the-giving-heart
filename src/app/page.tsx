@@ -45,7 +45,6 @@ export default function Home() {
   };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Navbar />
       <div style={{ background: "grey", padding: "50px" }}>
         <Container sx={{ height: "300px" }}>
           <Grid container spacing={3}>

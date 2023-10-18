@@ -1,0 +1,17 @@
+.cardActions {
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+        flex-direction: row;
+    }
+}
+
+.inactive {
+    background-color: #838383;
+}
+
+.activecheckin {
+    background-color: green;
+}
+.activecheckout {
+    background-color: orange;
+}

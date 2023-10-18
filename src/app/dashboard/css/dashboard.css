@@ -1,0 +1,34 @@
+.title {
+    font-weight: 600;
+}
+
+.grayContainer {
+    background-color: #aaaaaa; 
+    color: #ffffff; 
+    padding: 0.5rem 1rem; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 0.7rem;  
+}
+
+.eventInfoText {
+    color: red;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.eventContainer {
+    padding-bottom: 2rem;
+}
+
+.eventContainer > h2 {
+    font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    .grayContainer {
+        border-radius: 2rem; 
+        padding: 0.3rem 1rem;
+    }
+}

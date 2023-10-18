@@ -7,7 +7,6 @@ const navigation = [
   { name: "Dashboard", href: "/dashboard" },
   { name: "About", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
-  { name: "Get Involved", href: "/getinvolved" },
   { name: "Sign In/Sign Up", href: "/signin" },
   { name: "Example Strapi", href: "/example" },
 ];

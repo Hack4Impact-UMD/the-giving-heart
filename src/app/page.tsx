@@ -194,19 +194,6 @@ export default function Home() {
           <div
           // style={galleryContainerStyle}
           >
-            {images.map((imageUrl, index) => (
-              <Card
-                key={index}
-                // style={galleryItemStyle}
-              >
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={imageUrl}
-                  style={imageStyle}
-                />
-              </Card>
-            ))}
           </div>
         </Container>
       </div>

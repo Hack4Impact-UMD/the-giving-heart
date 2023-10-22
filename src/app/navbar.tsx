@@ -1,13 +1,14 @@
 "use client";
 
+import { FormItem } from "@/components/ui/form";
 import { usePathname } from "next/navigation";
 import React, { useState } from 'react';
 
 
 const navigation = [
-  { name: "About Us", href: "/" },
+  { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/dashboard" },
-  { name: "Sign up/Log in", href: "/about" },
+  { name: "Sign up/Log in", href: "/signin" },
 ];
 
 function classNames(...classes: string[]) {
@@ -25,7 +26,7 @@ export default function Navbar() {
     <>
       <div className="-my-px flex space-x-8 bg-neutral-300 w-full h-20 justify-between">
         <div className="mt-auto mb-auto ml-6">
-          <h1 className=" text-black font-semibold text-lg">The Giving Heart</h1>
+          <a href='/'><h1 className=" text-black font-semibold text-lg">The Giving Heart</h1></a>
         </div>
         <div className="hidden md:block m-auto">
         {navigation.map((item) => (

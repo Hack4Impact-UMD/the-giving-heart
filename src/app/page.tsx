@@ -1,214 +1,87 @@
 import Image from "next/image";
 import Navbar from "./navbar";
 import Footer from "./footer";
-
-import {
-  AppBar,
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  Container,
-  Grid,
-  Toolbar,
-  Typography,
-} from "@mui/material/";
 import { Metadata } from "next";
 
 export default function Home() {
-  const images = [
-    "https://via.placeholder.com/150",
-    "https://via.placeholder.com/150",
-    "https://via.placeholder.com/150",
-  ];
-
-  const galleryContainerStyle = {
-    display: "flex",
-    flexWrap: "nowrap",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "space-around",
-  };
-
-  const galleryItemStyle = {
-    margin: "0.5rem",
-    flex: "0 0 30%",
-    padding: "10px",
-    boxSizing: "border-box",
-    height: "300px",
-    backgroundColor: "lightGray",
-  };
-
-  const imageStyle = {
-    height: "auto",
-    width: "100%",
-  };
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div style={{ background: "grey", padding: "50px" }}>
-        <Container sx={{ height: "300px" }}>
-          <Grid container spacing={3}>
-            <Grid item xs={6}>
-              <h3> Background Image </h3>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography variant="h4">The Giving Heart</Typography>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed
-                euismod nisi porta lorem mollis aliquam. Adipiscing bibendum est
-                ultricies integer quis.
-              </Typography>
-            </Grid>
-          </Grid>
-        </Container>
+    <main className="flex min-h-screen flex-col items-center justify-between">
+      
+      {/* Setting up the background image and the text to the side */}
+      <div className="flex w-full bg-neutral-400 text-white h-80" >
+
+        <div className="sm:w-1/2 h-full p-4 md:text-center text-left">
+          <div className="mt-12"><h1 className="text-3xl">Background Image</h1></div>
+        </div>
+
+        <div className="w-1/2 md:p-16 p-2 pt-16">
+          <h2 className="text-left text-sm md:text-3xl pt-3 pb-3">The Giving Heart</h2>
+          <p className="md:text-lg text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+
       </div>
-      <div
-        style={{
-          background: "white",
-          paddingTop: "30px",
-          paddingBottom: "30px",
-        }}
-      >
-        <Container>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            justifyContent="center"
-            sx={{
-              width: "100%",
-              height: "100%",
-              backgroundColor: "white",
-            }}
-          >
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-              sx={{
-                boxShadow: 5,
-                width: "70%",
-                height: "200px",
-                marginTop: "5%",
-                marginBottom: "5%",
-                backgroundColor: "#f5f5f5",
-                padding: "3%",
-              }}
-            >
-              <Typography
-                variant="h5"
-                color="black"
-                fontWeight="fontWeightMedium"
-              >
-                {" "}
-                Lorem Ipsum Dolor Sit Amet{" "}
-              </Typography>
-              <Typography color="black" textAlign="center" fontSize="0.9rem">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed
-                euismod nisi porta lorem mollis aliquam.{" "}
-              </Typography>
-              <br />
-              <Button sx={{ backgroundColor: "darkgrey", color: "white" }}>
-                {" "}
-                Get Involved{" "}
-              </Button>
-            </Box>
 
-            {/* <RenderParams className={classes.params} /> */}
+      <div className="bg-white w-full">
 
-            <Box
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              justifyContent="center"
-              sx={{
-                width: "90%",
-                height: "30%",
-                backgroundColor: "lightgray",
-                padding: "3%",
-              }}
-            >
-              <Typography sx={{ color: "black", fontSize: "h5.fontSize" }}>
-                Our Impact So Far
-              </Typography>
-              <br />
-              <Box
-                display="flex"
-                flexDirection="row"
-                alignItems="center"
-                justifyContent="space-around"
-                sx={{
-                  width: "100%",
-                }}
-              >
-                <Box>
-                  <Typography
-                    textAlign="center"
-                    sx={{ color: "black", fontSize: "h5.fontSize" }}
-                  >
-                    10,000
-                  </Typography>
-                  <Typography
-                    textAlign="center"
-                    sx={{ color: "black", fontSize: "body2.fontSize" }}
-                  >
-                    Meals Provided
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography
-                    textAlign="center"
-                    sx={{ color: "black", fontSize: "h5.fontSize" }}
-                  >
-                    1000
-                  </Typography>
-                  <Typography
-                    textAlign="center"
-                    sx={{ color: "black", fontSize: "body2.fontSize" }}
-                  >
-                    Volunteers
-                  </Typography>
-                </Box>
-                <Box>
-                  <Typography
-                    textAlign="center"
-                    sx={{ color: "black", fontSize: "h5.fontSize" }}
-                  >
-                    $100,000
-                  </Typography>
-                  <Typography
-                    textAlign="center"
-                    sx={{ color: "black", fontSize: "body2.fontSize" }}
-                  >
-                    Raised
-                  </Typography>
-                </Box>
-              </Box>
-            </Box>
-
-            {/* <RenderParams className={classes.params} /> */}
-          </Box>
-          <div
-          // style={galleryContainerStyle}
-          >
-            {images.map((imageUrl, index) => (
-              <Card
-                key={index}
-                // style={galleryItemStyle}
-              >
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={imageUrl}
-                  style={imageStyle}
-                />
-              </Card>
-            ))}
+          {/* Box with the "get involved" button */}
+          <div className="flex-col align-center text-center justify-center w-5/6 lg:w-2/3 sm:h-80 h-44 bg-neutral-100 m-auto mt-10 mb-16 shadow shadow-black md:p-10 p-4">
+            <h2 className="sm:pb-8 pb-2 sm:text-2xl text-sm font-semibold"> 
+              Lorem Ipsum Dolor Sit Amet
+            </h2>
+            <p className="lg:pr-24 lg:pl-24 sm:text-lg text-xs">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed
+              euismod nisi porta lorem mollis aliquam.
+              Lorem ipsum dolor sit amet.
+            </p>
+            <button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-neutral-400 text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-1/3 rounded-md">
+              Get Involved
+            </button>
           </div>
-        </Container>
+
+            {/* <RenderParams className={classes.params} /> */}
+
+          {/* Our impact so far box */}
+          <div className="w-5/6 bg-neutral-300 m-auto h-44">
+            <div className="p-auto">
+              <h1 className="text-center font-normal text-lg sm:text-2xl p-5">
+                Our Impact So Far
+              </h1>
+          
+              <div className="flex align-center justify-around w-full">
+                <div className="text-center w-1/3">
+                  <h1 className="text-md p-2 sm:text-2xl">10,000</h1>
+                  <p className="text-xs">Meals Provided</p>
+                </div>
+                <div className="text-center w-1/3">
+                  <h1 className="text-md p-2 sm:text-2xl">1,000</h1>
+                  <p className="text-xs">Volunteers</p>
+                </div>
+                <div className="text-center w-1/3">
+                  <h1 className="text-md p-2 sm:text-2xl">
+                    $100,000
+                  </h1>
+                  <p className="text-xs">
+                    Raised
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+
+            {/* <RenderParams className={classes.params} /> */}
+
+          {/* Preliminary Gallery */}
+          <div className="mt-10 mb-32 w-full">
+            <h1 className="text-center text-3xl">Gallery</h1>
+            <div className="flex justify-around w-11/12 m-auto mt-10">
+              <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
+              <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
+              <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
+            </div>
+          </div>
+
       </div>
       <Footer />
     </main>

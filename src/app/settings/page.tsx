@@ -129,7 +129,7 @@ export default function Settings() {
                                 htmlFor="terms1"
                                 className="text-sm leading-none text-gray-600 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                                 >
-                                I would like to recieve emails from The Giving Heart's optional newsletter.
+                                I would like to recieve emails from The Giving Heart`&apos;`s optional newsletter.
                                 </label>
                             </div>
                         </div>

@@ -1,107 +1,62 @@
-import Navbar from "../navbar";
-import Image from "next/image";
+import { EventCard } from "./eventCard";
+
+//placeholder event data. replace with fetched data
+const eventData = [
+  {
+    title: "Event 1",
+    description: "Description for Event 1. ",
+    roles: "Role 1, Role 2, Role 3",
+  },
+  {
+    title: "Event 2",
+    description: "Description for Event 2.",
+    roles: "Role 1",
+  },
+  {
+    title: "Event 3",
+    description: "Description for Event 3.",
+    roles: "Role 1, Role 2",
+  },
+  {
+    title: "Event 4",
+    description: "Description for Event 4",
+    roles: "Role 1, Role 2, Role 3, Role 4, Role 5",
+  },
+  {
+    title: "Event 5",
+    description: "Description for Event 5.",
+    roles: "Role 1, Role 2",
+  },
+  {
+    title: "Event 6",
+    description: "Description for Event 6.",
+    roles: "Role 1, Role 2, Role 3",
+  },
+];
 
 export default function Dashboard() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <h1>Dashboard</h1>
-        <h1
-        // className={classes.title}
-        >
-          Welcome, [firstName]!
-        </h1>
+    <main className="flex min-h-screen flex-col justify-center p-16">
+      <div className="text-left mb-4">
+        <h1 className="font-semibold text-5xl mb-4"> Welcome, [firstName]! </h1>
+        <div className="bg-neutral-400 text-white py-2 px-4 md:rounded-md rounded-full inline-block mb-4 min-w-min"> Account Type: Volunteer </div>
+      </div>
 
-        <div
-        // className={classes.grayContainer}
-        >
-          Account Type: Volunteer
+      <div className="lg:m-10">
+        <div className="text-left">
+          <h2 className="font-semibold text-3xl mb-2"> Events Information </h2>
+          <p className="text-red-500 italic text-lg font-bold mb-4"> You must sign up for an event to volunteer for it. </p>
         </div>
 
-        <div
-        // className={classes.eventContainer}
-        >
-          <h2> Events Information </h2>
-          <p
-          // className={classes.eventInfoText}
-          >
-            You must sign up for an event to volunteer for it.
-          </p>
-
-          {/* placeholder cards */}
-          {/* <CardContainer> */}
-          <div>
-            <div className="max-w-sm rounded overflow-hidden shadow-lg">
-              <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2">Event 1</div>
-                <p className="text-gray-700 text-base">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Voluptatibus quia, nulla! Maiores et perferendis eaque,
-                  exercitationem praesentium nihil.
-                </p>
-              </div>
-              <div className="px-6 pt-4 pb-2">
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #photography
-                </span>
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #travel
-                </span>
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #winter
-                </span>
-              </div>
-            </div>
-            {/* <Card
-              className="test"
-              showCategories={false}
-              hideImagesOnMobile={true}
-              title="Event 1"
-              relationTo="projects"
-              orientation="vertical"
-            ></Card>
-            <Card
-              className="test"
-              showCategories={false}
-              hideImagesOnMobile={true}
-              title="Event 2"
-              relationTo="projects"
-              orientation="vertical"
-            ></Card>
-            <Card
-              className="test"
-              showCategories={false}
-              hideImagesOnMobile={true}
-              title="Event 3"
-              relationTo="projects"
-              orientation="vertical"
-            ></Card>
-            <Card
-              className="test"
-              showCategories={false}
-              hideImagesOnMobile={true}
-              title="Event 4"
-              relationTo="projects"
-              orientation="vertical"
-            ></Card>
-            <Card
-              className="test"
-              showCategories={false}
-              hideImagesOnMobile={true}
-              title="Event 5"
-              relationTo="projects"
-              orientation="vertical"
-            ></Card>
-            <Card
-              className="test"
-              showCategories={false}
-              hideImagesOnMobile={true}
-              title="Event 6"
-              relationTo="projects"
-              orientation="vertical"
-            ></Card> */}
-            {/* </CardContainer> */}
-          </div>
+        <div className="w-full self-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-20 gap-y-10">
+          {eventData.map((event, index) => (
+              <EventCard
+                key={index}
+                title={event.title}
+                description={event.description}
+                roles={event.roles}
+              />
+          ))}
         </div>
       </div>
     </main>

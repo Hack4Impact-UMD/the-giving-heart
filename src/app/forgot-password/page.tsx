@@ -36,10 +36,10 @@ export default function SignUp() {
   
   return (
     <div>
-      <main className="flex min-h-screen flex-col items-center justify-between p-16">
+      <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-16">
         <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
           <div className="w-full p-6 bg-gray-300">
-            <div className="flex flex-col items-center bg-white px-8 py-32">
+            <div className="flex flex-col items-center bg-white px-8 py-12 md:py-32">
               <h1 className="text-3xl font-bold text-gray-900 md:text-5xl">Forgot password?</h1>
               <p className="my-4 text-gray-400">
                 Please enter the email associated with your account to reset your password.
@@ -51,7 +51,7 @@ export default function SignUp() {
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                      <FormItem className="w-5/6 md:w-3/5">
+                      <FormItem className="w-full md:w-3/5">
                         <FormLabel>Email</FormLabel>
                         <FormControl>
                           <Input placeholder="email@example.com" {...field} />
@@ -61,7 +61,7 @@ export default function SignUp() {
                     )}
                   />
                   <div className="flex flex-col justify-center items-center pt-8">
-                    <Button type="submit" className="bg-gray-400 text-white px-8">Request Password Reset</Button>
+                    <Button type="submit" className="bg-gray-400 text-white px-2 md:px-8">Request Password Reset</Button>
                     <div className="mt-2 text-center text-xs">
                       <span>Back to </span>
                       <a href="/sign-in" className="text-red-500 font-bold hover:underline">Sign In</a>

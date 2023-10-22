@@ -39,7 +39,7 @@ export default function SignIn() {
   
   return (
     <div>
-      <main className="flex min-h-screen flex-col items-center justify-between p-16">
+      <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-16">
         <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
             <div className="flex flex-col w-full md:flex-row mx-auto">
               <div className="bg-gray-300 p-6 flex flex-col justify-between items-center md:w-full">

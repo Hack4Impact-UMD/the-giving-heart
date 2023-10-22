@@ -5,10 +5,10 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer
+    <footer className="w-full bg-neutral-400 h-60"
     // id={classes.homefooter} className={classes.footer}
     >
-      <nav
+      <nav className="w-5/6 m-auto mt-10"
       //   className={classes.nav}
       >
         {/**error starts here! */}

@@ -111,8 +111,14 @@ export default function Settings() {
                             </div>
                         ) : (
                             <div className="flex flex-col text-lg mb-6">
-                                <p><span className="font-bold">Email: </span>{email}</p>
-                                <p><span className="font-bold">Password: </span>{passwordAsterisks}</p>
+                                <div>
+                                    <p className="font-bold">Email:</p>
+                                    <p className="text-gray-600">{email}</p>
+                                </div>
+                                <div className="mt-2">
+                                    <p className="font-bold">Password:</p>
+                                    <p className="text-gray-600">{passwordAsterisks}</p>
+                                </div>
                             </div>
                         )}
                         <CardTitle>Preferences</CardTitle>

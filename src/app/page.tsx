@@ -34,7 +34,7 @@ export default function Home() {
               euismod nisi porta lorem mollis aliquam.
               Lorem ipsum dolor sit amet.
             </p>
-            <button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-neutral-400 text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-1/3 rounded-md">
+            <button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-1/3 rounded-md">
               Get Involved
             </button>
           </div>
@@ -42,26 +42,26 @@ export default function Home() {
             {/* <RenderParams className={classes.params} /> */}
 
           {/* Our impact so far box */}
-          <div className="w-5/6 bg-neutral-300 m-auto h-44">
+          <div className="w-5/6 m-auto h-44">
             <div className="p-auto">
               <h1 className="text-center font-normal text-lg sm:text-2xl p-5">
-                Our Impact So Far
+                Our <span className="text-[#ed1c24]">Impact</span> So Far
               </h1>
           
               <div className="flex align-center justify-around w-full">
                 <div className="text-center w-1/3">
-                  <h1 className="text-md p-2 sm:text-2xl">10,000</h1>
-                  <p className="text-xs">Meals Provided</p>
+                  <h1 className="text-md p-2 sm:text-2xl font-semibold">10,000</h1>
+                  <p className="text-xs font-light text-gray-800">Meals Provided</p>
                 </div>
                 <div className="text-center w-1/3">
-                  <h1 className="text-md p-2 sm:text-2xl">1,000</h1>
-                  <p className="text-xs">Volunteers</p>
+                  <h1 className="text-md p-2 sm:text-2xl font-semibold">1,000</h1>
+                  <p className="text-xs font-light text-gray-800">Volunteers</p>
                 </div>
                 <div className="text-center w-1/3">
-                  <h1 className="text-md p-2 sm:text-2xl">
+                  <h1 className="text-md p-2 sm:text-2xl font-semibold">
                     $100,000
                   </h1>
-                  <p className="text-xs">
+                  <p className="text-xs font-light text-gray-800">
                     Raised
                   </p>
                 </div>

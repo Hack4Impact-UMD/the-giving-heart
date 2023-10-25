@@ -23,7 +23,7 @@ export default function Navbar() {
   };
   return (
     <>
-      <div className="-my-px flex space-x-8 bg-neutral-300 w-full h-20 justify-between">
+      <div className="-my-px flex space-x-8 bg-white w-full h-20 justify-between">
         <div className="mt-auto mb-auto ml-6">
           <a href="/">
             <h1 className=" text-black font-semibold text-lg">
@@ -39,7 +39,7 @@ export default function Navbar() {
               className={classNames(
                 pathname === item.href
                   ? "border-slate-500 text-black bg-neutral-500"
-                  : "border-transparent text-black hover:text-gray-500 hover:border-gray-300",
+                  : "border-transparent text-black hover:text-[#ed1c24] hover:border-gray-300",
                 "inline-flex items-center px-1 pt-1 text-sm font-medium ml-3 mr-3"
               )}
               aria-current={pathname === item.href ? "page" : undefined}
@@ -52,9 +52,9 @@ export default function Navbar() {
           className="md:hidden w-20 flex h-8 flex-col justify-between m-auto"
           onClick={toggleMenu}
         >
-          <div className="w-1/2 h-1 bg-gray-800"></div>
-          <div className="w-1/2 h-1 bg-gray-800"></div>
-          <div className="w-1/2 h-1 bg-gray-800"></div>
+          <div className="w-1/2 h-1 bg-[#ed1c24]"></div>
+          <div className="w-1/2 h-1 bg-[#ed1c24]"></div>
+          <div className="w-1/2 h-1 bg-[#ed1c24]"></div>
         </div>
       </div>
       <div
@@ -66,7 +66,7 @@ export default function Navbar() {
           className={`fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-lg p-6`}
         >
           <button
-            className="text-3xl font-extralight block mb-10 text-gray-800"
+            className="text-3xl font-extralight block mb-10 text-gray-800 "
             onClick={toggleMenu}
           >
             X

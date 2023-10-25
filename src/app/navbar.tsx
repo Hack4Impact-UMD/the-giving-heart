@@ -10,6 +10,13 @@ const navigation = [
   { name: "Sign up/Log in", href: "/sign-in" },
 ];
 
+const mobileLinks = [
+  { name: "Home", href: "/"},
+  { name: "About Us", href: "/about" },
+  { name: "Get Involved", href: "/dashboard" },
+  { name: "Sign up/Log in", href: "/sign-in" },
+];
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -17,9 +24,10 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, onClose] = useState(false);
-
+  const [isSlide, OnSlide] = useState(false);
   const toggleMenu = () => {
     onClose(!isOpen);
+    OnSlide(!isSlide);
   };
   return (
     <>
@@ -58,27 +66,30 @@ export default function Navbar() {
         </div>
       </div>
       <div
-        className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-50 ${
+        className={`fixed inset-0 bg-gray-800 bg-opacity-75 z-40 ${
           isOpen ? "block" : "hidden"
         }`}
       >
+      </div>
         <div
-          className={`fixed inset-y-0 right-0 max-w-xs w-full bg-white shadow-lg p-6`}
+          className={`fixed inset-y-0 right-0 max-w-xs w-full bg-white z-40 shadow-lg p-6 transform duration-300 ease-in ${
+            isSlide? 'translate-x-0' : 'translate-x-full'
+          }`}
         >
           <button
-            className="text-3xl font-extralight block mb-10 text-gray-800 "
+            className="text-3xl font-extralight block mb-10 text-gray-800 w-full text-right"
             onClick={toggleMenu}
           >
             X
           </button>
           <div className="flex-col h-1/3 justify-between ">
-            {navigation.map((item) => (
+            {mobileLinks.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 className={classNames(
                   pathname === item.href
-                    ? " text-black hover:text-gray-500 "
+                    ? " text-[#ed1c24] hover:text-gray-500 "
                     : " text-black hover:text-gray-500",
                   "inline-flex w-full p-3"
                 )}
@@ -89,7 +100,7 @@ export default function Navbar() {
             ))}
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

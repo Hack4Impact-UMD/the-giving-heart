@@ -5,10 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
-
-// import styles from "css/registerEvent.css";
 
 // required props; some could be optional but not sure which
 interface EventData {
@@ -17,37 +14,15 @@ interface EventData {
   eventTime: string;
   eventLocation: string;
   volunteerRole: string;
-  volunteerShifts: string;
-  isMVP: boolean; // used to switch between slider and button
-  eventActive: boolean; // used to switch between active and inactive states
+  volunteerShifts: string; // fields to be filled in by database
+  eventActive: boolean;    // used to switch between active and inactive states
 }
 
 export default function BasicCard(props: EventData) {
-  // functions and states are all for the slider
-  const [value, setValue] = React.useState<number>(30);
-
-  const handleChange = (event: Event, newValue: number | number[]) => {
-    setValue(newValue as number); // ADD HANDLING FOR NEW SLIDER VALUES HERE
-  };
-  
-  // changes slider color and bottom messagebased on value
-  const getColorForValue = (value: any) => {
-    if (value == 0) {
-      return { sliderColor: "gray", sliderMessage: "Succesfully checked out" };
-    } else if (value < 100) {
-      return { sliderColor: "yellow", sliderMessage: "Checking in/out..." };
-    } else {
-      return {
-        sliderColor: "orange",
-        sliderMessage: "Succesfully checked in!",
-      };
-    }
-  };
-  const { sliderColor, sliderMessage } = getColorForValue(value);
-
   return (
     <Card
-      sx={{ minWidth: 275, maxWidth: "65%", display: "flex", borderRadius: 2 }}
+      sx={{ minWidth: 350, maxWidth: "65%", display: "flex"}}
+      className="border border-black" // mixed tailwind and material UI styles; component was made before codebase switch
     >
       <CardContent sx={{ mb: 5 }}>
         {/* Title */}
@@ -73,13 +48,15 @@ export default function BasicCard(props: EventData) {
 
         {/* Card Actions */}
         <CardContent
-          //   className={styles.cardActions}
-          sx={{ display: "flex", flexDirection: "column", gap: "20px", p: 0 }}
+          sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between", gap: "20px", p: 0 }}
+          className="md:flex-row"
         >
+          {/* left/top side actions */}
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
+              justifyContent: "space-between",
               flex: 1,
               p: 0,
               mt: 3,
@@ -94,19 +71,17 @@ export default function BasicCard(props: EventData) {
             </Typography>
             <Box sx={{ mt: 1 }}>
               {/* ADD ONCLICK BEHAVIOR HERE */}
-              <Button
-                // className={styles.inactive}
-                size="small"
-                variant="contained"
-              >
-                Drop Spot
-              </Button>
+              <button className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">
+                Check In
+              </button>
             </Box>
           </Box>
+          {/* right/bottom side actions */}
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
+              justifyContent: "space-between",
               flex: 1,
               p: 0,
               mt: 3,
@@ -114,66 +89,29 @@ export default function BasicCard(props: EventData) {
             }}
           >
             <Typography variant="body1">
-              {props.isMVP && (
-                <b>
-                  When the event is active, please check in/out of the event
-                  using this slider. Slide the circle to the right to check in,
-                  and once you`&apos;`re ready, slide it again to check out.
-                </b>
-              )}
-              {!props.isMVP && (
-                <b>
-                  When the event is active, please check in/out of the event
-                  using these buttons.
-                </b>
-              )}
+              <b>
+                When the event is active, please check in/out of the event using these buttons.
+              </b>
             </Typography>
 
-            {props.isMVP && (
-              <Box>
-                <Typography
-                  variant="body1"
-                  sx={{ float: "right", color: "black" }}
-                >
-                  <b>Check in</b>
-                </Typography>
-                <Slider
-                  size="small"
-                  value={value}
-                  disabled={!props.eventActive}
-                  onChange={handleChange}
-                  sx={{ color: sliderColor }}
-                />
-                <Typography variant="body1" sx={{ float: "right" }}>
-                  <b>{props.eventActive && sliderMessage}</b>
-                </Typography>
-              </Box>
-            )}
-            {!props.isMVP && (
-              <Box sx={{ display: "flex", mt: 1 }}>
-                {/* ADD CHECK IN ONCLICK BEHAVIOR */}
-                <Button
-                  //   className={`${
-                  //     props.eventActive ? styles.activecheckin : styles.inactive
-                  //   }`}
-                  size="small"
-                  variant="contained"
-                  sx={{ mr: 2 }}
-                >
-                  Check in
-                </Button>
-                {/* ADD CHECK OUT ONCLICK BEHAVIOR */}
-                <Button
-                  //   className={`${
-                  //     props.eventActive ? styles.activecheckout : styles.inactive
-                  //   }`}
-                  size="small"
-                  variant="contained"
-                >
-                  Check out
-                </Button>
-              </Box>
-            )}
+            <Box sx={{ display: "flex", mt: 1 }}>
+              {/* ADD CHECK IN ONCLICK BEHAVIOR */}
+              <button
+                className={`${
+                  props.eventActive ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-500 hover:bg-gray-600 shadow-none'
+                } text-white px-4 py-2 mr-4 rounded-md`} // change color based on active event
+              >
+                Check In
+              </button>
+              {/* ADD CHECK OUT ONCLICK BEHAVIOR */}
+              <button
+                className={`${
+                  props.eventActive ? 'bg-orange-500 hover:bg-orange-600' : 'bg-gray-500 hover:bg-gray-600 shadow-none'
+                } text-white px-4 py-2 rounded-md`} // change color based on active event
+              >
+                Check Out
+              </button>
+            </Box>
           </Box>
         </CardContent>
       </CardContent>

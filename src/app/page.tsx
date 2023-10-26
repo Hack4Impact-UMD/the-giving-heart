@@ -1,11 +1,9 @@
-import Image from "next/image";
-import Navbar from "./navbar";
 import Footer from "./footer";
 import { Metadata } from "next";
-import knifeFork from "./_images/fork-and-knife-icon.png"
-import peopleHouse from "./_images/people-and-house-icon.png"
-import moneySign from "./_images/dollar-sign-icon.png"
 
+import { Utensils } from 'lucide-react';
+import { Users } from 'lucide-react';
+import { DollarSign } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -46,7 +44,7 @@ export default function Home() {
             {/* <RenderParams className={classes.params} /> */}
 
           {/* Our impact so far box */}
-          <div className="w-5/6 m-auto h-44">
+          <div className="w-5/6 m-auto h-44 lg:mb-20">
             <div className="p-auto">
               <h1 className="text-center font-normal text-lg sm:text-2xl p-5">
                 Our <span className="text-[#ed1c24]">Impact</span> So Far
@@ -54,36 +52,21 @@ export default function Home() {
           
               <div className="flex align-center justify-around w-full">
                 <div className="flex flex-col justify-between text-center w-1/3">
-                  <Image className="m-auto my-2"
-                    src={knifeFork}
-                    width={20}
-                    height={20}
-                    alt="Knife and fork icon"
-                  />
+                  <Utensils className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
                   <div>
                     <h1 className="text-md p-2 sm:text-2xl font-semibold">10,000</h1>
                     <p className="text-xs font-light text-gray-800">Meals Provided</p>
                   </div>
                 </div>
                 <div className="flex flex-col justify-between text-center w-1/3">
-                  <Image className="m-auto my-2"
-                      src={peopleHouse}
-                      width={30}
-                      height={30}
-                      alt="People and house icon"
-                    />
+                  <Users className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
                   <div>
                     <h1 className="text-md p-2 sm:text-2xl font-semibold">1,000</h1>
                     <p className="text-xs font-light text-gray-800">Volunteers</p>
                   </div>
                 </div>
                 <div className="flex flex-col justify-between text-center w-1/3">
-                  <Image className="m-auto my-2"
-                        src={moneySign}
-                        width={15}
-                        height={15}
-                        alt="Money sign icon"
-                      />
+                  <DollarSign className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
                   <div>
                     <h1 className="text-md p-2 sm:text-2xl font-semibold">
                       $100,000
@@ -110,7 +93,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex justify-around">
+          <div className="flex justify-around lg:mt-32 mb-10">
             <div className="w-1/2 mb-8 px-5 pb-5 md:px-10">
               <p className="mb-2 text-gray-500 md:text-lg lg:text-xl">Watch Our Intro Video</p>
               <h2 className="font-semibold text-sm md:text-2xl lg:text-4xl">We're hear to help others in any way we can</h2>
@@ -124,9 +107,9 @@ export default function Home() {
                 // height="315" 
                 src="https://www.youtube.com/embed/y0sF5xhGreA?si=HGo6sxAIgZtJnXW2" 
                 title="YouTube video player" 
-                frameborder="0" 
+                frameBorder="0" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen>
+                allowFullScreen>
               </iframe>
             </div>
           </div>

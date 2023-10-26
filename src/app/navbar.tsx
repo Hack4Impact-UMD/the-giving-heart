@@ -6,6 +6,16 @@ import React, { useState } from "react";
 import Image from "../../node_modules/next/image";
 import logo from "./_images/giving-heart-logo.png"
 
+import { Home } from 'lucide-react';
+import { HelpCircle } from 'lucide-react';
+import { HeartHandshake } from 'lucide-react';
+import { UserCircle2 } from 'lucide-react';
+import { Settings } from 'lucide-react';
+import { CalendarDays } from 'lucide-react';
+import { XCircle } from 'lucide-react';
+import { X } from 'lucide-react';
+
+
 const navigation = [
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/dashboard" },
@@ -19,6 +29,8 @@ const mobileLinks = [
   { name: "Sign up/Log in", href: "/sign-in" },
 ];
 
+
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -27,6 +39,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, onClose] = useState(false);
   const [isSlide, OnSlide] = useState(false);
+  const mobileIcons = [<Home key="home" className="m-auto text-[#ed1c24]" />, <HelpCircle key="helpCircle" className="m-auto text-[#ed1c24]" />, <HeartHandshake key="heartHandshake" className="m-auto text-[#ed1c24]" />, <UserCircle2 key="userCircle2" className="m-auto text-[#ed1c24]" />];
   const toggleMenu = () => {
     onClose(!isOpen);
     OnSlide(!isSlide);
@@ -81,27 +94,31 @@ export default function Navbar() {
             isSlide? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          <button
-            className="text-3xl font-extralight block mb-10 text-gray-800 w-full text-right"
-            onClick={toggleMenu}
-          >
-            X
-          </button>
+          <div className="mb-10 w-full flex flex-row-reverse">
+            <X
+              className="hover:cursor-pointer text-gray-400"
+              onClick={toggleMenu}
+            />
+          </div>
           <div className="flex-col h-1/3 justify-between ">
-            {mobileLinks.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className={classNames(
-                  pathname === item.href
-                    ? " text-[#ed1c24] hover:text-gray-500 "
-                    : " text-black hover:text-gray-500",
-                  "inline-flex w-full p-3"
-                )}
-                aria-current={pathname === item.href ? "page" : undefined}
-              >
-                {item.name}
-              </a>
+            {mobileLinks.map((item, index) => (
+              <div key={item.name} className="flex">
+                {mobileIcons[index]}
+                <a
+                  
+                  href={item.href}
+                  className={classNames(
+                    pathname === item.href
+                      ? " text-gray-500 hover:text-[#ed1c24]"
+                      : " text-gray-500 hover:text-[#ed1c24]",
+                    "inline-flex w-full p-3"
+                  )}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                >
+                  {item.name}
+                </a>
+             </div>
+
             ))}
           </div>
         </div>

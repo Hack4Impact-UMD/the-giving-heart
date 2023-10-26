@@ -2,6 +2,10 @@ import Image from "next/image";
 import Navbar from "./navbar";
 import Footer from "./footer";
 import { Metadata } from "next";
+import knifeFork from "./_images/fork-and-knife-icon.png"
+import peopleHouse from "./_images/people-and-house-icon.png"
+import moneySign from "./_images/dollar-sign-icon.png"
+
 
 export default function Home() {
   return (
@@ -49,21 +53,45 @@ export default function Home() {
               </h1>
           
               <div className="flex align-center justify-around w-full">
-                <div className="text-center w-1/3">
-                  <h1 className="text-md p-2 sm:text-2xl font-semibold">10,000</h1>
-                  <p className="text-xs font-light text-gray-800">Meals Provided</p>
+                <div className="flex flex-col justify-between text-center w-1/3">
+                  <Image className="m-auto my-2"
+                    src={knifeFork}
+                    width={20}
+                    height={20}
+                    alt="Knife and fork icon"
+                  />
+                  <div>
+                    <h1 className="text-md p-2 sm:text-2xl font-semibold">10,000</h1>
+                    <p className="text-xs font-light text-gray-800">Meals Provided</p>
+                  </div>
                 </div>
-                <div className="text-center w-1/3">
-                  <h1 className="text-md p-2 sm:text-2xl font-semibold">1,000</h1>
-                  <p className="text-xs font-light text-gray-800">Volunteers</p>
+                <div className="flex flex-col justify-between text-center w-1/3">
+                  <Image className="m-auto my-2"
+                      src={peopleHouse}
+                      width={30}
+                      height={30}
+                      alt="People and house icon"
+                    />
+                  <div>
+                    <h1 className="text-md p-2 sm:text-2xl font-semibold">1,000</h1>
+                    <p className="text-xs font-light text-gray-800">Volunteers</p>
+                  </div>
                 </div>
-                <div className="text-center w-1/3">
-                  <h1 className="text-md p-2 sm:text-2xl font-semibold">
-                    $100,000
-                  </h1>
-                  <p className="text-xs font-light text-gray-800">
-                    Raised
-                  </p>
+                <div className="flex flex-col justify-between text-center w-1/3">
+                  <Image className="m-auto my-2"
+                        src={moneySign}
+                        width={15}
+                        height={15}
+                        alt="Money sign icon"
+                      />
+                  <div>
+                    <h1 className="text-md p-2 sm:text-2xl font-semibold">
+                      $100,000
+                    </h1>
+                    <p className="text-xs font-light text-gray-800">
+                      Raised
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -73,12 +101,33 @@ export default function Home() {
             {/* <RenderParams className={classes.params} /> */}
 
           {/* Preliminary Gallery */}
-          <div className="mt-10 mb-32 w-full">
+          <div className="mt-10 mb-20 w-full">
             <h1 className="text-center text-3xl">Gallery</h1>
             <div className="flex justify-around w-11/12 m-auto mt-10">
               <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
               <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
               <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
+            </div>
+          </div>
+
+          <div className="flex justify-around">
+            <div className="w-1/2 mb-8 px-5 pb-5 md:px-10">
+              <p className="mb-2 text-gray-500 md:text-lg lg:text-xl">Watch Our Intro Video</p>
+              <h2 className="font-semibold text-sm md:text-2xl lg:text-4xl">We're hear to help others in any way we can</h2>
+              <p className="text-gray-500 text-xs mt-3 md:text-base lg:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div className="w-2/3">
+              <iframe 
+                className="w-5/6 aspect-video m-auto mb-10"
+                // width="560" 
+                // height="315" 
+                src="https://www.youtube.com/embed/y0sF5xhGreA?si=HGo6sxAIgZtJnXW2" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                allowfullscreen>
+              </iframe>
             </div>
           </div>
 

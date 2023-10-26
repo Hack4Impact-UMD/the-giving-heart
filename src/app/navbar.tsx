@@ -3,6 +3,8 @@
 import { FormItem } from "@/components/ui/form";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import Image from "../../node_modules/next/image";
+import logo from "./_images/giving-heart-logo.png"
 
 const navigation = [
   { name: "About Us", href: "/about" },
@@ -34,9 +36,12 @@ export default function Navbar() {
       <div className="-my-px flex space-x-8 bg-white w-full h-20 justify-between">
         <div className="mt-auto mb-auto ml-6">
           <a href="/">
-            <h1 className=" text-black font-semibold text-lg">
-              The Giving Heart
-            </h1>
+            <Image
+              src={logo}
+              width={80}
+              height={80}
+              alt="Giving heart logo"
+            />
           </a>
         </div>
         <div className="hidden md:block m-auto">
@@ -57,7 +62,7 @@ export default function Navbar() {
           ))}
         </div>
         <div
-          className="md:hidden w-20 flex h-8 flex-col justify-between m-auto"
+          className="md:hidden w-20 flex h-8 flex-col justify-between m-auto hover:cursor-pointer"
           onClick={toggleMenu}
         >
           <div className="w-1/2 h-1 bg-[#ed1c24]"></div>

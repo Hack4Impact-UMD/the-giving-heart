@@ -1,6 +1,8 @@
 "use client"
 
 import { usePathname } from "next/navigation";
+import personImage from "./_images/person-filled-icon.png"
+import Image from "next/image"
 
 const navigation = [
   { name: "Donate", href: "/getinvolved" },
@@ -50,9 +52,24 @@ export default function Footer() {
           </div>
 
           <div className="hidden md:visible pt-1 md:flex justify-between items-center space-x-2">
-            <img src="" alt="S1" />
-            <img src="" alt="S2" />
-            <img src="" alt="S3" />
+            <Image className="m-auto my-2"
+                        src={personImage}
+                        width={30}
+                        height={30}
+                        alt="Social Media Icon"
+            />
+            <Image className="m-auto my-2"
+                        src={personImage}
+                        width={30}
+                        height={30}
+                        alt="Social Media Icon"
+            />
+            <Image className="m-auto my-2"
+                        src={personImage}
+                        width={30}
+                        height={30}
+                        alt="Social Media Icon"
+            />
           </div>
         </div>
         
@@ -63,9 +80,24 @@ export default function Footer() {
       <div className="visible md:hidden flex flex-row justify-between text-xs font-medium mr-5 mb-5 w-full">
         <div className=" pt-1 w-1/2">Privacy Policy | Terms of Use</div>
         <div className=" pt-1 flex justify-end space-x-1 w-1/3">
-          <img src="" alt="S1" />
-          <img src="" alt="S2" />
-          <img src="" alt="S3" />
+        <Image className=""
+            src={personImage}
+            width={25}
+            height={25}
+            alt="Social Media Icon"
+          />
+          <Image className=""
+            src={personImage}
+            width={25}
+            height={25}
+            alt="Social Media Icon"
+          />
+          <Image className=""
+            src={personImage}
+            width={25}
+            height={25}
+            alt="Social Media Icon"
+          />
         </div>
       </div>
 

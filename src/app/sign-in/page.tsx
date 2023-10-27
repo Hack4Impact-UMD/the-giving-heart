@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { useAuthContext } from "@/utils/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { setToken } from "@/utils/helpers";
+import { API } from "@/utils/constant";
 
 const schema = z.object({
   email: z.string().email(),
@@ -43,8 +44,9 @@ export default function SignIn() {
   });
 
   const onSubmit = async (values: FormData) => {
+    console.log(`${API}`);
     axios
-      .post("http://localhost:1337/api/auth/local", {
+      .post(`${API}/auth/local`, {
         identifier: values.email,
         password: values.password,
       })

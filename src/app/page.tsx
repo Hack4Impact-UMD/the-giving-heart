@@ -95,14 +95,14 @@ export default function Home() {
 
           <div className="flex justify-around lg:mt-32 mb-10">
             <div className="w-1/2 mb-8 px-5 pb-5 md:px-10">
-              <p className="mb-2 text-gray-500 md:text-lg lg:text-xl">Watch Our Intro Video</p>
-              <h2 className="font-semibold text-sm md:text-2xl lg:text-4xl">We're hear to help others in any way we can</h2>
+              <p className="text-xs  mb-2 text-gray-500 md:text-lg lg:text-xl">Watch Our Intro Video</p>
+              <h2 className="font-semibold text-xs md:text-2xl lg:text-4xl">We're hear to help others in any way we can</h2>
               <p className="text-gray-500 text-xs mt-3 md:text-base lg:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
             <div className="w-2/3">
               <iframe 
-                className="w-5/6 aspect-video m-auto mb-10"
+                className="mt-8 sm:mt-0  w-5/6 aspect-video m-auto mb-10"
                 // width="560" 
                 // height="315" 
                 src="https://www.youtube.com/embed/y0sF5xhGreA?si=HGo6sxAIgZtJnXW2" 

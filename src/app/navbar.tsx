@@ -1,10 +1,17 @@
 "use client";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
 
 import { FormItem } from "@/components/ui/form";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Image from "../../node_modules/next/image";
-import logo from "./_images/giving-heart-logo.png"
+import logo from "./_images/giving-heart-logo.jpeg"
 
 import { Home } from 'lucide-react';
 import { HelpCircle } from 'lucide-react';
@@ -26,7 +33,6 @@ const mobileLinks = [
   { name: "Home", href: "/"},
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/dashboard" },
-  { name: "Sign up/Log in", href: "/sign-in" },
 ];
 
 
@@ -39,7 +45,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, onClose] = useState(false);
   const [isSlide, OnSlide] = useState(false);
-  const mobileIcons = [<Home key="home" className="m-auto text-[#ed1c24]" />, <HelpCircle key="helpCircle" className="m-auto text-[#ed1c24]" />, <HeartHandshake key="heartHandshake" className="m-auto text-[#ed1c24]" />, <UserCircle2 key="userCircle2" className="m-auto text-[#ed1c24]" />];
+  const mobileIcons = [<Home key="home" className="m-auto text-[#ed1c24]" />, <HelpCircle key="helpCircle" className="m-auto text-[#ed1c24]" />, <HeartHandshake key="heartHandshake" className="m-auto text-[#ed1c24]" />];
   const toggleMenu = () => {
     onClose(!isOpen);
     OnSlide(!isSlide);
@@ -51,8 +57,8 @@ export default function Navbar() {
           <a href="/">
             <Image
               src={logo}
-              width={80}
-              height={80}
+              width={70}
+              height={70}
               alt="Giving heart logo"
             />
           </a>
@@ -120,9 +126,33 @@ export default function Navbar() {
              </div>
 
             ))}
+            <div className="flex">
+              <UserCircle2 className="text-[#ed1c24] mx-auto mt-4"/>  
+              <Accordion type="single" collapsible className="w-full px-3">
+                <AccordionItem value="item-1">
+                
+                  <AccordionTrigger className="text-gray-500">[First Name]'s Profile</AccordionTrigger>
+                  <AccordionContent className="text-gray-500 text-md">
+                    <div className="flex">
+                      <Settings className="my-auto mr-2 text-[#ed1c24]"/> <a className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer">Settings</a>
+                    </div>
+                    
+                  </AccordionContent >
+                  <AccordionContent className="text-gray-500 text-md">
+                    <div className="flex">
+                      <CalendarDays className="my-auto mr-2 text-[#ed1c24]"/> <a className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer">Event Management</a>
+                    </div>
+                  </AccordionContent>
+                  <AccordionContent className="text-gray-500 text-md">
+                    <div className="flex">
+                      <XCircle className="my-auto mr-2 text-[#ed1c24]"/> <a className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer">Logout</a>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+              </div>
           </div>
         </div>
-      {/* </div> */}
     </>
   );
 }

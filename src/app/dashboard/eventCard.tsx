@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardFooter, CardTitle, CardContent } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
+import Link from 'next/link';
 
 interface EventCardProps {
   title: string;
@@ -31,9 +32,11 @@ export const EventCard: React.FC<EventCardProps> = ({ title, description, roles 
         </CardContent>
 
         <CardFooter className="flex justify-center items-center">
+        <Link href="/event-signup">
           <Button variant="default" size="default" className="bg-neutral-400 text-white rounded-[0.7rem]">
             Signup
           </Button>
+          </Link>
         </CardFooter>
       </Card>
     </div>

@@ -1,40 +1,66 @@
 import React from 'react';
 import { Card, CardHeader, CardFooter, CardTitle, CardContent } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
+import Image from "../../../node_modules/next/image";
+
+import book_icon from ".././_images/book-open.svg";
+import user_icon from ".././_images/users.svg";
+import calendar_icon from ".././_images/calendar-clock.svg";
+import globe from ".././_images/globe.svg";
+
 
 interface EventCardProps {
+  card_header_image?: string;
   title: string;
   description: string;
   roles: string;
+  date: string;
+  start_time: string;
+  end_time: string;
+  location: string;
 }
 
-export const EventCard: React.FC<EventCardProps> = ({ title, description, roles }) => {
-  const rolesList = roles.split(',').map(role => role.trim());
+export const EventCard: React.FC<EventCardProps> = ({ card_header_image, title, description, roles, date, start_time, end_time, location }) => {
 
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]"> 
-      <Card className="border-none h-full flex flex-col justify-between rounded-none">
-        <CardHeader className="bg-neutral-400 text-black text-center py-4">
-          <CardTitle className="py-1"> {title} </CardTitle>
+      <Card className="border-none h-full flex flex-col justify-between rounded-xl">
+        <CardHeader className="h-full w-full">
+          {card_header_image && <Image src={card_header_image} alt="card header image"></Image>}  
         </CardHeader>
         
-        <CardContent className="rounded-none flex flex-col justify-start items-start flex-1 p-4">
-          <div className="pl-2 mb-2 text-center italic text-gray-700"> [Description & location] {description} </div>
-          <div className="pl-2 text-gray-700 italic">
-            Roles:
-            <ul className="list-disc pl-8">
-                {rolesList.map((role, index) => (
-                    <li key={index}>{role}</li>
-                ))}
-            </ul>
+        <CardTitle className="p-6 text-[#860E13]"> {title} </CardTitle>
+        
+        <CardContent className="rounded-none flex flex-col justify-start items-start flex-1 pl-6">
+          <div className="flex items-center mb-2 pb-2">
+            <Image src={book_icon} alt="description icon" className="mr-2" />
+            <p className="font-bold"> Description: </p>
+          </div>
+          <p className="text-[#6B7280] pb-3"> {description} </p>
+
+          <div className="flex items-center mb-2 pb-2">
+            <Image src={user_icon} alt="description icon" className="mr-2" />
+            <p className="font-bold"> Available Positions: </p>
+          </div>
+          <p className="text-[#6B7280] pb-4"> {roles} </p>
+
+          <div className="flex items-center mb-2 pb-2">
+            <Image src={calendar_icon} alt="description icon" className="mr-2" />
+            <p className="text-[#6B7280]"> {date} from {start_time} - {end_time} </p>
+          </div>
+
+          <div className="flex items-center mb-2">
+            <Image src={globe} alt="description icon" className="mr-2" />
+            <p className="text-[#6B7280]"> {location} </p>
           </div>
         </CardContent>
 
         <CardFooter className="flex justify-center items-center">
-          <Button variant="default" size="default" className="bg-neutral-400 text-white rounded-[0.7rem]">
-            Signup
+          <Button variant="default" size="default" className="bg-[#ED1C24] text-white rounded-md">
+            Register
           </Button>
         </CardFooter>
+
       </Card>
     </div>
   );

@@ -71,10 +71,10 @@ export default function Settings() {
       <div className="z-0 w-full h-40 bg-red-900">
          .
       </div>
-      <main className="flex min-h-screen flex-col items-center justify-between p-16 -mt-44">
+      <main className="flex min-h-screen flex-col items-center justify-between -mt-36 p-8 md:-mt-44md:p-16">
         <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
           <div className="w-full">
-            <h1 className="text-3xl font-semibold text-white mb-8 sm:text-3xl md:text-4xl">Settings</h1>
+            <h1 className="text-4xl font-semibold text-white mb-8 sm:text-3xl md:text-4xl">Settings</h1>
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>Contact Information</CardTitle>

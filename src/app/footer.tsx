@@ -1,107 +1,75 @@
-import { Box, Divider, Typography } from "@mui/material/";
-import Link from "next/link";
+"use client"
 
-// import classes from "./index.module.scss";
+import { usePathname } from "next/navigation";
+
+const navigation = [
+  { name: "Donate", href: "/getinvolved" },
+  { name: "Volunteer", href: "/getinvolved" },
+];
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
-    <footer
-    // id={classes.homefooter} className={classes.footer}
-    >
-      <nav
-      //   className={classes.nav}
-      >
-        {/**error starts here! */}
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-          alignItems="center"
-          width="100%"
-        >
-          <Typography
-            sx={{ fontWeight: "bold", fontSize: "h5.fontSize", width: "20%" }}
-          >
-            The Giving Heart
-          </Typography>
+    <div className="w-full bg-gray-200 content-between divide-y divide-solid divide-black px-5">
+      <div className="flex flex-col sm:flex-row justify-around m-5">
+        <div className="sm:text-3xl text-xl font-bold m-4">The Giving Heart</div>
 
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-between"
-          >
-            <Typography sx={{ fontWeight: "bold" }}>Contact Us</Typography>
-            <Typography>Info@givingheart.com</Typography>
-            <Typography>(302)-532-2922</Typography>
-          </Box>
+        <div className="m-4 flex flex-col sm:items-center">
+          <div className="text-md font-bold">Contact Us</div>
+          <p className="text-sm font-medium sm:pt-1">Info@givingheart.com</p>
+          <p className="text-sm font-medium sm:pt-1">(302)-532-2922</p>
+        </div>
 
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-between"
-          >
-            <Typography sx={{ fontWeight: "bold" }}>Useful Links</Typography>
-            <Link
-              href="https://github.com/payloadcms/payload/tree/master/templates/website"
-              target="_blank"
-              rel="noopener noreferrer"
+        <div className="m-4 flex flex-col sm:items-center">
+        <div className="text-md font-bold sm:text-center">Useful Links</div>
+          {navigation.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              className={classNames(
+                pathname === item.href
+                  ? "border-slate-500 text-gray-900"
+                  : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300",
+                "inline-flex sm:pt-1 border-b-2 text-sm font-medium"
+              )}
+              aria-current={pathname === item.href ? "page" : undefined}
             >
-              Donate
-            </Link>
-            <Link
-              href="https://github.com/payloadcms/payload/tree/master/templates/website"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Volunteer
-            </Link>
-          </Box>
+              {item.name}
+            </a>
+          ))}
+        </div>
 
-          <Box
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-between"
-            alignItems="center"
-            height="50%"
-          >
-            <Typography sx={{ fontWeight: "bold" }}>Socials</Typography>
-            <Box display="flex" flexDirection="row">
-              <img src="" alt="S1" />
-              <img src="" alt="S2" />
-              <img src="" alt="S3" />
-            </Box>
-          </Box>
-        </Box>
+        <div className="collapse sm:visible m-4 flex flex-col items-center">
+          <div className="hidden sm:flex text-md font-bold">
+            Socials
+          </div>
 
-        <Divider
-          flexItem
-          sx={{
-            backgroundColor: "#000000",
-            opacity: "0.6",
-            height: "1px",
-            margin: "20px 0",
-          }}
-        />
+          <div className="collapse sm:visible pt-1 flex justify-between items-center space-x-2">
+            <img src="" alt="S1" />
+            <img src="" alt="S2" />
+            <img src="" alt="S3" />
+          </div>
+        </div>
+      </div>
 
-        <Box
-          margin="2rem 0 1rem 0"
-          width="100%"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <Typography sx={{ fontSize: "body2.fontSize" }}>
-            The Giving Heart
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: "body2.fontSize",
-            }}
-          >
-            Privacy Policy | Terms of Use
-          </Typography>
-        </Box>
-      </nav>
-    </footer>
+      <div className="visible sm:collapse flex flex-row justify-between text-xs font-medium mx-5 my-2">
+        <div className="mx-2 pt-1">Privacy Policy | Terms of Use</div>
+        <div className="mx-2 pt-1 flex flex-row space-x-1">
+          <img src="" alt="S1" />
+          <img src="" alt="S2" />
+          <img src="" alt="S3" />
+        </div>
+      </div>
+
+      <div className="collapse sm:visible flex flex-row justify-between text-xs font-medium mx-5 my-2">
+        <div className="pt-1"> The Giving Heart </div>
+        <div className="pt-1">Privacy Policy | Terms of Use</div>
+      </div>
+    </div>
   );
 }

@@ -13,7 +13,6 @@ export default function RegisterEvent() {
           eventLocation="the farm"
           volunteerRole="the goat"
           volunteerShifts="24/7 365"
-          isMVP={true}
           eventActive={true}
         />
       </div>

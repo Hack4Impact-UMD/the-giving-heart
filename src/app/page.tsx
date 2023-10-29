@@ -4,6 +4,8 @@ import { Metadata } from "next";
 import { Utensils } from 'lucide-react';
 import { Users } from 'lucide-react';
 import { DollarSign } from 'lucide-react';
+import { Button } from "@/components/ui/button"
+
 
 export default function Home() {
   return (
@@ -17,8 +19,7 @@ export default function Home() {
         </div>
 
         <div className="w-1/2 md:p-16 p-2 pt-16">
-          <h2 className="text-left text-sm md:text-3xl pt-3 pb-3">The Giving Heart</h2>
-          <p className="md:text-lg text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p className="text-med">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
 
       </div>
@@ -27,7 +28,7 @@ export default function Home() {
 
           {/* Box with the "get involved" button */}
           <div className="flex-col align-center text-center justify-center w-5/6 lg:w-2/3 sm:h-80 h-44 bg-neutral-100 m-auto mt-10 mb-16 shadow shadow-black md:p-10 p-4">
-            <h2 className="sm:pb-8 pb-2 sm:text-2xl text-sm font-semibold"> 
+            <h2 className="sm:pb-8 pb-2 text-xl font-semibold"> 
               Lorem Ipsum Dolor Sit Amet
             </h2>
             <p className="lg:pr-24 lg:pl-24 sm:text-lg text-xs">
@@ -36,9 +37,9 @@ export default function Home() {
               euismod nisi porta lorem mollis aliquam.
               Lorem ipsum dolor sit amet.
             </p>
-            <button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-1/3 rounded-md">
+            <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-1/3 rounded-md">
               Get Involved
-            </button>
+            </Button>
           </div>
 
             {/* <RenderParams className={classes.params} /> */}
@@ -46,7 +47,7 @@ export default function Home() {
           {/* Our impact so far box */}
           <div className="w-5/6 m-auto h-44 lg:mb-20">
             <div className="p-auto">
-              <h1 className="text-center font-normal text-lg sm:text-2xl p-5">
+              <h1 className="text-center font-normal text-3xl sm:text-2xl p-5">
                 Our <span className="text-[#ed1c24]">Impact</span> So Far
               </h1>
           
@@ -95,10 +96,10 @@ export default function Home() {
 
           <div className="flex justify-around lg:mt-32 mb-10">
             <div className="w-1/2 mb-8 px-5 pb-5 md:px-10">
-              <p className="text-xs  mb-2 text-gray-500 md:text-lg lg:text-xl">Watch Our Intro Video</p>
-              <h2 className="font-semibold text-xs md:text-2xl lg:text-4xl">We're hear to help others in any way we can</h2>
-              <p className="text-gray-500 text-xs mt-3 md:text-base lg:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p className="text-xs mb-2 text-gray-500 md:text-md lg:text-lg">Watch Our Intro Video</p>
+              <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl">We're hear to help others in any way we can</h2>
+              <p className="text-gray-500 text-xs mt-3 md:text-lg lg:text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore.</p>
             </div>
             <div className="w-2/3">
               <iframe 
@@ -124,7 +125,3 @@ export const metadata: Metadata = {
   title: "Home",
   description: "Welcome to the Home Page",
 };
-
-//export default PageTemplate
-
-//export { generateMetadata }

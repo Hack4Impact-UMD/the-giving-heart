@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <div className="w-full content-between px-5 text-white bg-[#860e13]">
       <div className="flex flex-col sm:flex-row justify-around mr-5 mt-5">
-        <div className="sm:text-3xl text-3xl font-bold m-4">The Giving Heart</div>
+        <p className="w-full sm:w-1/3 text-center sm:text-left sm:text-3xl md:text-4xl text-2xl mt-4">The Giving Heart ❤</p>
 
         <div className="m-4 flex flex-col sm:items-center">
           <div className="text-xl underline">Contact Us</div>
@@ -29,7 +29,7 @@ export default function Footer() {
         </div>
 
         <div className="m-4 flex flex-col sm:items-center">
-        <div className="text-xl sm:text-center underline">Useful Links</div>
+          <div className="text-xl sm:text-center underline">Useful Links</div>
           {navigation.map((item) => (
             <a
               key={item.name}
@@ -53,12 +53,12 @@ export default function Footer() {
           </div>
 
           <div className="hidden md:visible pt-1 md:flex justify-between items-center space-x-2">
-            <User/>
-            <User/>
-            <User/>
+            <User />
+            <User />
+            <User />
           </div>
         </div>
-        
+
       </div>
 
       <hr className="text-white mt-8 mb-1" />
@@ -66,9 +66,9 @@ export default function Footer() {
       <div className="visible md:hidden flex flex-row justify-between text-xs font-medium mr-5 mb-5 w-full">
         <div className=" pt-1 w-1/2">Privacy Policy | Terms of Use</div>
         <div className=" pt-1 flex justify-end space-x-1 w-1/3">
-          <User/>
-          <User/>
-          <User/>
+          <User />
+          <User />
+          <User />
         </div>
       </div>
 

@@ -1,8 +1,6 @@
 import { EventCard } from "./eventCard";
-import Image from "../../../node_modules/next/image";
 import header_image from ".././_images/header-image.jpg";
 
-//placeholder event data. replace with fetched data
 const eventData = [
   {
     title: "Event 1",
@@ -60,12 +58,11 @@ const eventData = [
   },
 ];
 
-
 export default function Dashboard() {
   return (
-    <main className="flex min-h-screen flex-col justify-center p-16">
+    <main className="bg-[#860E13] flex min-h-screen flex-col justify-center p-16">
       <div className="text-left mb-4">
-        <h1 className="font-semibold text-5xl mb-4"> Welcome, [firstName]! </h1>
+        <h1 className="font-semibold text-5xl mb-4 text-white"> Welcome! </h1>
         <div className="bg-neutral-400 text-white py-2 px-4 md:rounded-md rounded-full inline-block mb-4 min-w-min"> Account Type: Volunteer </div>
       </div>
 
@@ -80,7 +77,7 @@ export default function Dashboard() {
           {eventData.map((event, index) => (
               <EventCard
                 key={index}
-                card_header_image={header_image}
+                image={header_image}
                 title={event.title}
                 description={event.description}
                 roles={event.roles}

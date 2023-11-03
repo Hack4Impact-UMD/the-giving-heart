@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardFooter, CardTitle, CardContent } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
-import Image from "../../../node_modules/next/image";
+import Image, { StaticImageData } from "../../../node_modules/next/image";
 
 import book_icon from ".././_images/book-open.svg";
 import user_icon from ".././_images/users.svg";
@@ -10,7 +10,7 @@ import globe from ".././_images/globe.svg";
 
 
 interface EventCardProps {
-  card_header_image?: string;
+  image: StaticImageData;
   title: string;
   description: string;
   roles: string;
@@ -20,13 +20,14 @@ interface EventCardProps {
   location: string;
 }
 
-export const EventCard: React.FC<EventCardProps> = ({ card_header_image, title, description, roles, date, start_time, end_time, location }) => {
+
+export const EventCard: React.FC<EventCardProps> = ({ image, title, description, roles, date, start_time, end_time, location }) => {
 
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]"> 
-      <Card className="border-none h-full flex flex-col justify-between rounded-xl">
-        <CardHeader className="h-full w-full">
-          {card_header_image && <Image src={card_header_image} alt="card header image"></Image>}  
+      <Card className="border-2 h-full flex flex-col justify-between rounded-xl">
+        <CardHeader className="p-0 h-[25%]">
+          <Image src={image} alt="card header image" className="rounded-t-xl object-cover h-full w-full"></Image>
         </CardHeader>
         
         <CardTitle className="p-6 text-[#860E13]"> {title} </CardTitle>

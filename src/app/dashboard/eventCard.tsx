@@ -26,7 +26,7 @@ export const EventCard: React.FC<EventCardProps> = ({ image, title, description,
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]"> 
       <Card className="border-2 h-full flex flex-col justify-between rounded-xl">
-        <CardHeader className="p-0 h-[25%]">
+        <CardHeader className="p-0">
           <Image src={image} alt="card header image" className="rounded-t-xl object-cover h-full w-full"></Image>
         </CardHeader>
         

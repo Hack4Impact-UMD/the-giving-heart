@@ -4,15 +4,16 @@ import { Metadata } from "next";
 import { Utensils } from 'lucide-react';
 import { Users } from 'lucide-react';
 import { DollarSign } from 'lucide-react';
+import { ArrowLeftCircle } from 'lucide-react';
+import { ArrowRightCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button"
-
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       
       {/* Setting up the background image and the text to the side */}
-      <div className="flex w-full bg-neutral-400 text-white h-80" >
+      <div className="flex w-full bg-cover bg-[url('./_images/homepage_bg.png')] text-white h-80" >
 
         <div className="sm:w-1/2 h-full p-4 md:text-center text-left">
           <div className="mt-12"><h1 className="text-3xl">Background Image</h1></div>
@@ -45,28 +46,21 @@ export default function Home() {
             {/* <RenderParams className={classes.params} /> */}
 
           {/* Our impact so far box */}
-          <div className="w-5/6 m-auto h-44 lg:mb-20">
-            <div className="p-auto">
+          <div className="w-5/6 m-auto sm:h-44 lg:mb-20">
+            <div className="p-auto  place-content-center flex  flex-col">
               <h1 className="text-center font-normal text-3xl sm:text-2xl p-5">
                 Our <span className="text-[#ed1c24]">Impact</span> So Far
               </h1>
           
-              <div className="flex align-center justify-around w-full">
-                <div className="flex flex-col justify-between text-center w-1/3">
-                  <Utensils className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
-                  <div>
-                    <h1 className="text-md p-2 sm:text-2xl font-semibold">10,000</h1>
-                    <p className="text-xs font-light text-gray-800">Meals Provided</p>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-between text-center w-1/3">
+              <div className="flex flex-col sm:flex-row align-center sm:justify-around w-full">
+                <div className="flex flex-col justify-between text-center sm:w-1/3  my-5">
                   <Users className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
                   <div>
                     <h1 className="text-md p-2 sm:text-2xl font-semibold">1,000</h1>
                     <p className="text-xs font-light text-gray-800">Volunteers</p>
                   </div>
                 </div>
-                <div className="flex flex-col justify-between text-center w-1/3">
+                <div className="flex flex-col justify-between text-center sm:w-1/3  my-5">
                   <DollarSign className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
                   <div>
                     <h1 className="text-md p-2 sm:text-2xl font-semibold">
@@ -75,6 +69,13 @@ export default function Home() {
                     <p className="text-xs font-light text-gray-800">
                       Raised
                     </p>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-around text-center sm:w-1/3 my-5">
+                  <Utensils className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
+                  <div>
+                    <h1 className="text-md p-2 sm:text-2xl font-semibold">10,000</h1>
+                    <p className="text-xs font-light text-gray-800">Meals Provided</p>
                   </div>
                 </div>
               </div>
@@ -88,22 +89,21 @@ export default function Home() {
           <div className="mt-10 mb-20 w-full">
             <h1 className="text-center text-3xl">Gallery</h1>
             <div className="flex justify-around w-11/12 m-auto mt-10">
-              <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
-              <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
-              <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
+              <ArrowLeftCircle className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
+              <div className="lg:w-80 md:w-60 sm:w-40 w-1/3 h-40 sm:h-60 bg-neutral-300"></div>
+              <ArrowRightCircle className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
             </div>
           </div>
 
-          <div className="flex justify-around lg:mt-32 mb-10">
-            <div className="w-1/2 mb-8 px-5 pb-5 md:px-10">
-              <p className="text-xs mb-2 text-gray-500 md:text-md lg:text-lg">Watch Our Intro Video</p>
-              <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl">We're hear to help others in any way we can</h2>
-              <p className="text-gray-500 text-xs mt-3 md:text-lg lg:text-xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          <div className="flex flex-col w-full sm:flex-row justify-around lg:mt-32 mb-10">
+            <div className="sm:w-1/2 sm:mb-8 px-5 pb-5 md:px-10">
+              <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl  text-center sm:text-left">Watch Our Introduction Video</h2>
+              <p className="text-gray-500 text-xs mt-3 md:text-lg lg:text-xl text-center sm:text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore.</p>
             </div>
-            <div className="w-2/3">
+            <div className="sm:w-2/3">
               <iframe 
-                className="mt-8 sm:mt-0  w-5/6 aspect-video m-auto mb-10"
+                className="sm:mt-8 w-5/6 aspect-video m-auto mb-10"
                 // width="560" 
                 // height="315" 
                 src="https://www.youtube.com/embed/y0sF5xhGreA?si=HGo6sxAIgZtJnXW2" 

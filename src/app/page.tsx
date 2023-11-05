@@ -6,6 +6,16 @@ import { Users } from 'lucide-react';
 import { DollarSign } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 
+import bird from "./_images/bird.jpeg"
+import frog from "./_images/frog.jpeg"
+import rose from "./_images/rose.jpeg"
+
+import ImageCarousel from "../components/ui/ImageCarousel"
+
+
+const carouselImages = [bird, frog, rose];
+
+
 
 export default function Home() {
   return (
@@ -85,14 +95,11 @@ export default function Home() {
             {/* <RenderParams className={classes.params} /> */}
 
           {/* Preliminary Gallery */}
-          <div className="mt-10 mb-20 w-full">
-            <h1 className="text-center text-3xl">Gallery</h1>
-            <div className="flex justify-around w-11/12 m-auto mt-10">
-              <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
-              <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
-              <div className="lg:w-72 md:w-56 sm:w-40 w-24 h-28 sm:h-60 bg-neutral-300"></div>
-            </div>
+          <div className="max-w-3xl mx-auto mt-5 mb-5">
+          <h1 className="text-center text-3xl p-10">Gallery</h1>
+            <ImageCarousel images={carouselImages} />
           </div>
+
 
           <div className="flex justify-around lg:mt-32 mb-10">
             <div className="w-1/2 mb-8 px-5 pb-5 md:px-10">

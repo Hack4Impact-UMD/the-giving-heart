@@ -2,6 +2,7 @@ import Image from "next/image";
 import Navbar from "./navbar";
 import Footer from "./footer";
 import { Metadata } from "next";
+import RegisterEvent from "./registerevent/page";
 
 export default function Home() {
   return (
@@ -83,6 +84,8 @@ export default function Home() {
           </div>
 
       </div>
+
+      <RegisterEvent></RegisterEvent>
       <Footer />
     </main>
   );

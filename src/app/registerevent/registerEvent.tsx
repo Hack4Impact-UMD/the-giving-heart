@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { useState } from 'react';
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import Switch from '@mui/material/Switch';
+import { Switch } from "@/components/ui/switch"
 import CardContent from "@mui/material/CardContent";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import Typography from "@mui/material/Typography";
@@ -29,6 +30,17 @@ const theme = createTheme({
 });
 
 export default function BasicCard(props: EventData) {
+  // stuff to change the check in value created from the checkin button
+  const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const checkInStyles = {
+    backgroundColor: isCheckedIn ? 'green' : '', // Change 'initialColor' to your desired initial background color
+  };
+  // stuff to change the check out value created from the check out button
+  const [isCheckedOut, setIsCheckedOut] = useState(false);
+  const checkOutStyles = {
+    backgroundColor: isCheckedOut ? 'green' : '', // Change 'initialColor' to your desired initial background color
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -40,16 +52,14 @@ export default function BasicCard(props: EventData) {
           {/* Title */}
           <Typography
             sx={{color: "#860E13", fontSize: 28, mt: 1, mb: 1}}
-            color="text.secondary"
-            gutterBottom
             >
             <b>{props.eventName}</b>
           </Typography>
+
+          {/* EVENT INFORMATION SECTION */}
           
           <Typography
             sx={{color: 'black', fontSize: 20}}
-            className="font-semibold"
-            gutterBottom
             >
             Event Information
           </Typography>
@@ -60,15 +70,11 @@ export default function BasicCard(props: EventData) {
             <div className="flex flex-col">
               <Typography
                 sx={{ color: 'black', fontSize: 16 }}
-                color="text.secondary"
-                gutterBottom
               >
                 <b>Description: </b>
               </Typography>
               <Typography
                 sx={{ color: 'gray  ', fontSize: 16 }}
-                color="text.secondary"
-                gutterBottom
                 >
                 {props.eventDescription}
               </Typography>
@@ -81,15 +87,11 @@ export default function BasicCard(props: EventData) {
             <div className="flex flex-col">
               <Typography
                 sx={{ color: 'black', fontSize: 16 }}
-                color="text.secondary"
-                gutterBottom
                 >
                 <b>Date & Time: </b>
               </Typography>
               <Typography
                 sx={{ color: 'gray  ', fontSize: 16 }}
-                color="text.secondary"
-                gutterBottom
                 >
                 Date: {props.eventDate} from {props.eventStartTime} - {props.eventEndTime}
               </Typography>
@@ -99,18 +101,14 @@ export default function BasicCard(props: EventData) {
           <div className="flex space-x-2 items-start mt-3">
             <img src="/_images/globe-2.svg" alt="globe-2-icon"/>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col justify-end">
               <Typography
                 sx={{ color: 'black', fontSize: 16 }}
-                color="text.secondary"
-                gutterBottom
                 >
                 <b>Location</b>
               </Typography>
               <Typography
                 sx={{ color: 'gray  ', fontSize: 16 }}
-                color="text.secondary"
-                gutterBottom
                 >
                 {props.eventLocation}
               </Typography>
@@ -133,15 +131,11 @@ export default function BasicCard(props: EventData) {
             <div className="flex flex-col">
               <Typography
                 sx={{ color: 'black', fontSize: 16 }}
-                color="text.secondary"
-                gutterBottom
               >
                 <b>Volunteer Role: </b>
               </Typography>
               <Typography
                 sx={{ color: 'gray  ', fontSize: 16 }}
-                color="text.secondary"
-                gutterBottom
               >
                 {props.volunteerRole}
               </Typography>
@@ -154,8 +148,6 @@ export default function BasicCard(props: EventData) {
             <div className="flex flex-col">
               <Typography
                 sx={{ color: 'black', fontSize: 16 }}
-                color="text.secondary"
-                gutterBottom
               >
                 <b>Drop event registration: </b>
               </Typography>
@@ -163,25 +155,30 @@ export default function BasicCard(props: EventData) {
           </div>
 
           <div className="text-center">
-            <button className="bg-red-500 hover:bg-red-600 text-white px-10 py-2 rounded-md mt-3 inline-block">
+            <button 
+              className="text-white px-10 py-2 rounded-md mt-3 inline-block"
+              style={{backgroundColor: '#ED1C24'}}
+            >
               <b>Drop Spot</b>
             </button>
           </div>
 
         </CardContent>
+
+        {/* CHECK IN/OUT SECTION (RED PART) */}
+
         <Box sx={{backgroundColor: "#860E13", px: 3, py: 3}}>
           <Typography
-            sx={{color: 'white', fontSize: 20 }}
-            >
+            sx={{color: 'white', fontSize: 20 }}>
             <b>Event Check-In/Out</b>
           </Typography>
 
           <div className="flex space-x-2 items-start mt-3">
-            <img src="/_images/users.svg" alt="users-icon"/>
+            <img src="/_images/badge-info.svg" alt="badge-info-icon"/>
 
             <div className="flex flex-col">
               <Typography
-                sx={{ color: '#E6E5E5', fontSize: 14 }}                >
+                sx={{ color: '#E6E5E5', fontSize: 14 }}>
                 <i>When the event has started, please check in/out of the event by clicking the switches below.</i>
               </Typography>
             </div>
@@ -194,7 +191,11 @@ export default function BasicCard(props: EventData) {
                 >
                 <b>Check-In</b>
               </Typography>
-              <Switch />
+              <Switch 
+                checked={isCheckedIn}
+                onCheckedChange={() => setIsCheckedIn(!isCheckedIn)}
+                style={checkInStyles}
+              />
             </div>
             <div className="flex flex-col items-center">
               <Typography
@@ -202,7 +203,11 @@ export default function BasicCard(props: EventData) {
                 >
                 <b>Check-Out</b>
               </Typography>
-              <Switch />
+              <Switch 
+                checked={isCheckedOut}
+                onCheckedChange={() => setIsCheckedOut(!isCheckedOut)}
+                style={checkOutStyles}
+              />
             </div>
           </div>
 

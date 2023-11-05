@@ -1,4 +1,5 @@
 import { EventCard } from "./eventCard";
+import RegisterEvent from "../registerevent/page";
 
 //placeholder event data. replace with fetched data
 const eventData = [
@@ -59,6 +60,7 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
+      <RegisterEvent></RegisterEvent>
     </main>
   );
 }

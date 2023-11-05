@@ -8,6 +8,7 @@ import {
 
 
 import { FormItem } from "@/components/ui/form";
+import { useAuthContext } from "@/utils/context/AuthContext";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Image from "../../node_modules/next/image";
@@ -22,11 +23,12 @@ import { CalendarDays } from 'lucide-react';
 import { XCircle } from 'lucide-react';
 import { X } from 'lucide-react';
 
+import { removeToken } from "@/utils/helpers";
 
 const navigation = [
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/dashboard" },
-  { name: "Sign up/Log in", href: "/sign-in" },
+  // { name: "Sign up/Log in", href: "/sign-in" },
 ];
 
 const mobileLinks = [
@@ -44,12 +46,19 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, onClose] = useState(false);
+  const { user, setUser } = useAuthContext();
   const [isSlide, OnSlide] = useState(false);
   const mobileIcons = [<Home key="home" className="m-auto text-[#ed1c24]" />, <HelpCircle key="helpCircle" className="m-auto text-[#ed1c24]" />, <HeartHandshake key="heartHandshake" className="m-auto text-[#ed1c24]" />];
   const toggleMenu = () => {
     onClose(!isOpen);
     OnSlide(!isSlide);
   };
+
+  const handleLogout = () => {
+    removeToken();
+    setUser(undefined);
+  };
+
   return (
     <>
       <div className="-my-px flex space-x-8 bg-white w-full h-20 justify-between">
@@ -79,6 +88,35 @@ export default function Navbar() {
               {item.name}
             </a>
           ))}
+
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className={classNames(
+                pathname === "/sign-in"
+                  ? "border-slate-500 text-black bg-neutral-500"
+                  : "border-transparent text-black hover:text-gray-500 hover:border-gray-300",
+                "inline-flex items-center px-1 pt-1 text-sm font-medium ml-3 mr-3"
+              )}
+              aria-current={pathname === "/sign-in" ? "page" : undefined}
+            >
+              Logout
+            </button>
+          ) : (
+            <a
+              key="Sign up/Log in"
+              href="/sign-in"
+              className={classNames(
+                pathname === "/sign-in"
+                  ? "border-slate-500 text-black bg-neutral-500"
+                  : "border-transparent text-black hover:text-gray-500 hover:border-gray-300",
+                "inline-flex items-center px-1 pt-1 text-sm font-medium ml-3 mr-3"
+              )}
+              aria-current={pathname === "/sign-in" ? "page" : undefined}
+            >
+              Sign up/Log in
+            </a>
+          )}
         </div>
         <div
           className="md:hidden w-20 flex h-8 flex-col justify-between m-auto hover:cursor-pointer"

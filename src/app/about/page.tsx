@@ -11,10 +11,16 @@ import IconButton from '@mui/material/IconButton';
 import { useState } from "react";
 
 export default function About() { 
-    const [expanded, setExpanded] = useState<string | false>(false);
+    const [expanded, setExpanded] = useState<string[]>([]);
 
-    const toggleAccordion = (panel: string) => (event: React.ChangeEvent<{}>, isExpanded: boolean) => {
-        setExpanded(isExpanded ? panel : false);
+    const toggleAccordion = (panel: string) => () => {
+        if (expanded.includes(panel)) {
+        // If the panel is already expanded, close it
+        setExpanded(expanded.filter((item) => item !== panel));
+        } else {
+        // If the panel is not expanded, open it
+        setExpanded([...expanded, panel]);
+        }
     };
 
   const accordionItems = [
@@ -188,23 +194,28 @@ export default function About() {
       {accordionItems.map((item) => (
         <Accordion
             key={item.id}
-            expanded={expanded === item.id}
+            expanded={expanded.includes(item.id)}
             onChange={toggleAccordion(item.id)}
             style={{
-                backgroundColor: item.backgroundColor,
-                width: '100%',
+            backgroundColor: item.backgroundColor,
+            width: '100%',
             }}
         >
           <AccordionSummary
                     sx={{
-                        backgroundColor: expanded === item.id ? '#F00' : '#D3D3D3'
+                        backgroundColor: expanded.includes(item.id) ? '#BA1218' : '#D3D3D3'
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',  flexDirection: 'row', textAlign: 'center', width: '100%',  color: expanded === item.id ? 'white' : 'black', fontFamily: 'Inter'}}>
-                      <Typography>{item.title}</Typography>
-                      <div style={{ fontSize: '1.5rem', cursor: 'pointer', fontFamily: 'Inter',}}>
-                        {expanded === item.id ? '-' : '+'}
-                      </div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', textAlign: 'center', width: '100%', 
+                    color: expanded.includes(item.id) ? 'white' : 'black', fontFamily: 'Open Sans' }}>
+                        <div>
+                            <Typography style={{ fontFamily: 'Open Sans', fontSize: '20px', fontStyle: 'normal', fontWeight: expanded.includes(item.id) ? '700' : '400'}}>
+                                {item.title}
+                            </Typography>
+                        </div>
+                        <div style={{ fontSize: '1.5rem', cursor: 'pointer', fontFamily: 'Open Sans' }}>
+                            {expanded.includes(item.id) ? '-' : '+'}
+                        </div>
                     </div>
                   </AccordionSummary>
                   <AccordionDetails>

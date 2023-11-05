@@ -131,7 +131,7 @@ export default function Navbar() {
               <Accordion type="single" collapsible className="w-full px-3">
                 <AccordionItem value="item-1">
                 
-                  <AccordionTrigger className="text-gray-500">[First Name]'s Profile</AccordionTrigger>
+                  <AccordionTrigger className="text-gray-500">[First Name]&apos;s Profile</AccordionTrigger>
                   <AccordionContent className="text-gray-500 text-md">
                     <div className="flex">
                       <Settings className="my-auto mr-2 text-[#ed1c24]"/> <a className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer">Settings</a>

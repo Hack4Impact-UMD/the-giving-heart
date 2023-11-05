@@ -1,4 +1,5 @@
 import { EventCard } from "./eventCard";
+import RegisterEvent from "../registerevent/page";
 import Image from "../../../node_modules/next/image";
 import warning_icon from ".././_images/warning.svg";
 import header_image from ".././_images/header-image.jpg";
@@ -92,6 +93,7 @@ export default function Dashboard() {
             ))}
           </div>
         </div>
+        <RegisterEvent></RegisterEvent>
       </main>
     </div>
   );

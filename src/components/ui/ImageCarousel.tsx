@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 
-const ImageCarousel = ({ images }) => {
+const ImageCarousel = ( { images }: any ) => {
   const [currentImage, setCurrentImage] = useState(0);
 
   const nextImage = () => {
@@ -40,5 +40,6 @@ const ImageCarousel = ({ images }) => {
     </div>
   );
 };
+
 
 export default ImageCarousel;

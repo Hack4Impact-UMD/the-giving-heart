@@ -12,7 +12,6 @@ import Typography from "@mui/material/Typography";
 interface EventData {
   eventName: string;
   eventDescription: string;
-  eventImage: string;
   eventDate: string;
   eventStartTime: string;
   eventEndTime: string;

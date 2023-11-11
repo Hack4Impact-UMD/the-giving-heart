@@ -9,13 +9,13 @@ import { ArrowRightCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 
 import bird from "./_images/bird.jpeg"
-import frog from "./_images/frog.jpeg"
+
 import rose from "./_images/rose.jpeg"
 
 import ImageCarousel from "../components/ui/ImageCarousel"
 
 
-const carouselImages = [bird, frog, rose];
+const carouselImages = [bird, rose];
 
 
 export default function Home() {
@@ -48,7 +48,7 @@ export default function Home() {
               euismod nisi porta lorem mollis aliquam.
               Lorem ipsum dolor sit amet.
             </p>
-            <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-1/3 rounded-md">
+            <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-3/5 rounded-md">
               Get Involved
             </Button>
           </div>
@@ -58,34 +58,34 @@ export default function Home() {
           {/* Our impact so far box */}
           <div className="w-5/6 m-auto sm:h-44 lg:mb-20">
             <div className="p-auto  place-content-center flex  flex-col">
-              <h1 className="text-center font-normal text-3xl sm:text-2xl p-5">
+              <h1 className="text-center font-normal text-xl sm:text-3xl p-5">
                 Our <span className="text-[#ed1c24]">Impact</span> So Far
               </h1>
           
               <div className="flex flex-col sm:flex-row align-center sm:justify-around w-full">
-                <div className="flex flex-col justify-between text-center sm:w-1/3  my-5">
-                  <Users className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
+                <div className="flex flex-col justify-between text-center sm:w-1/3  my-5 ">
+                  <Users className="m-auto text-[#ed1c24] h-8 w-8 lg:h-12 lg:w-12"/>
                   <div>
-                    <h1 className="text-md p-2 sm:text-2xl font-semibold">1,000</h1>
-                    <p className="text-xs font-light text-gray-800">Volunteers</p>
+                    <h1 className="text-xl p-2 sm:text-2xl font-semibold">1,000</h1>
+                    <p className="text-md font-light text-gray-800">Volunteers</p>
                   </div>
                 </div>
                 <div className="flex flex-col justify-between text-center sm:w-1/3  my-5">
-                  <DollarSign className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
+                  <DollarSign className="m-auto text-[#ed1c24] h-8 w-8 lg:h-12 lg:w-12"/>
                   <div>
-                    <h1 className="text-md p-2 sm:text-2xl font-semibold">
+                    <h1 className="text-xl p-2 sm:text-2xl font-semibold">
                       $100,000
                     </h1>
-                    <p className="text-xs font-light text-gray-800">
+                    <p className="text-md font-light text-gray-800">
                       Raised
                     </p>
                   </div>
                 </div>
                 <div className="flex flex-col justify-around text-center sm:w-1/3 my-5">
-                  <Utensils className="m-auto text-[#ed1c24] lg:h-12 lg:w-12"/>
+                  <Utensils className="m-auto text-[#ed1c24] h-8 w-8 lg:h-12 lg:w-12"/>
                   <div>
-                    <h1 className="text-md p-2 sm:text-2xl font-semibold">10,000</h1>
-                    <p className="text-xs font-light text-gray-800">Meals Provided</p>
+                    <h1 className="text-xl p-2 sm:text-2xl font-semibold">10,000</h1>
+                    <p className="text-md font-light text-gray-800">Meals Provided</p>
                   </div>
                 </div>
               </div>
@@ -95,16 +95,16 @@ export default function Home() {
 
             {/* <RenderParams className={classes.params} /> */}
 
-          {/* Preliminary Gallery */}
-          <div className="max-w-3xl mx-auto mt-5 mb-5">
-          <h1 className="text-center text-3xl p-10">Gallery</h1>
+          {/* Gallery */}
+          <div className="mx-auto mt-5 mb-20">
+            <h1 className="text-center text-3xl p-10">Gallery</h1>
             <ImageCarousel images={carouselImages} />
           </div>
 
 
-          <div className="flex flex-col w-full sm:flex-row justify-around lg:mt-32 mb-10">
-            <div className="sm:w-1/2 sm:mb-8 px-5 pb-5 md:px-10">
-              <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl  text-center sm:text-left">Watch Our Introduction Video</h2>
+          <div className="flex flex-col w-full sm:flex-row justify-around lg:mt-32 mb-10 mt-10">
+            <div className="sm:w-1/2 py-6 px-10">
+              <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl text-center sm:text-left">Watch Our Introduction Video</h2>
               <p className="text-gray-500 text-xs mt-3 md:text-lg lg:text-xl text-center sm:text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore.</p>
             </div>

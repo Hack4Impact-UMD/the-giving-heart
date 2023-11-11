@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { ArrowLeftCircle } from 'lucide-react';
+import { ArrowRightCircle } from 'lucide-react';
 
 const ImageCarousel = ( { images }: any ) => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -14,29 +16,31 @@ const ImageCarousel = ( { images }: any ) => {
   };
 
   return (
-    <div className="relative">
-      <button
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-        onClick={prevImage}
-      >
-        &lt;
-      </button>
-      <button
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-        onClick={nextImage}
-      >
-        &gt;
-      </button>
-      <div className="max-w-screen-xl mx-auto">
-        <Image
-          src={images[currentImage]}
-          alt={`Image ${currentImage + 1}`}
-          layout="responsive"
-          width={1080}
-          height={900}
-          className="w-full max-w-6xl mx-auto"
-        />
+    <div className="carousel flex justify-between">
+        <button>
+        <ArrowLeftCircle
+          className="p-2 text-[#ed1c24] w-10 h-10 my-auto ml-4 hover:text-slate-600"
+          onClick={prevImage}
+        > 
+        </ArrowLeftCircle>
+        </button>
+      <div className="">
+        <div className="mx-auto">
+          <Image
+            src={images[currentImage]}
+            alt={`Image ${currentImage + 1}`}
+            layout="responsive"
+            className="mx-auto max-w-md max-h-40 md:max-w-xl md:max-h-80 border-2 border-slate-700 lg:max-h-96 rounded-md"
+          />
+        </div>
       </div>
+      <button>
+      <ArrowRightCircle
+          className="p-2 text-[#ed1c24] w-10 h-10 my-auto mr-4 hover:text-slate-600"
+          onClick={nextImage}
+        >
+      </ArrowRightCircle>
+      </button>
     </div>
   );
 };

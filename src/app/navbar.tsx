@@ -57,7 +57,6 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    console.log(user);
     removeToken();
     setUser(undefined);
   };
@@ -170,7 +169,10 @@ export default function Navbar() {
                   <AccordionContent className="text-gray-500 text-md">
                     <div className="flex">
                       <Settings className="my-auto mr-2 text-[#ed1c24]" />{" "}
-                      <a className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer">
+                      <a
+                        className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer"
+                        href="/settings"
+                      >
                         Settings
                       </a>
                     </div>

@@ -1,7 +1,6 @@
 "use client"
 
 import { usePathname } from "next/navigation";
-import personImage from "./_images/person-filled-icon.png"
 import Image from "next/image"
 import { User } from 'lucide-react';
 
@@ -20,7 +19,7 @@ export default function Footer() {
   return (
     <div className="w-full content-between px-5 text-white bg-[#860e13]">
       <div className="flex flex-col sm:flex-row justify-around mr-5 mt-5">
-        <p className="w-full sm:w-1/3 text-center sm:text-left sm:text-3xl md:text-4xl text-2xl mt-4">The Giving Heart ❤</p>
+        <p className="w-full sm:w-1/3 text-center sm:text-left sm:text-3xl md:text-4xl text-2xl mt-4 mr-2">The Giving Heart ❤</p>
 
         <div className="m-4 flex flex-col sm:items-center">
           <div className="text-xl underline">Contact Us</div>

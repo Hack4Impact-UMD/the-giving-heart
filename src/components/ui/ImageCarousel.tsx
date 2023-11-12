@@ -19,7 +19,7 @@ const ImageCarousel = ( { images }: any ) => {
     <div className="carousel flex justify-between">
         <button>
         <ArrowLeftCircle
-          className="p-2 text-[#ed1c24] w-10 h-10 my-auto ml-4 hover:text-slate-600"
+          className="p-2 text-[#ed1c24] w-10 h-10 my-auto ml-10 text-red-700 hover:text-slate-600"
           onClick={prevImage}
         > 
         </ArrowLeftCircle>
@@ -30,13 +30,13 @@ const ImageCarousel = ( { images }: any ) => {
             src={images[currentImage]}
             alt={`Image ${currentImage + 1}`}
             layout="responsive"
-            className="mx-auto max-w-md max-h-40 md:max-w-xl md:max-h-80 border-2 border-slate-700 lg:max-h-96 rounded-md"
+            className="mx-auto max-w-md max-h-40 md:max-w-xl md:max-h-80 border-0 border-slate-700 lg:max-h-96 " 
           />
         </div>
       </div>
       <button>
       <ArrowRightCircle
-          className="p-2 text-[#ed1c24] w-10 h-10 my-auto mr-4 hover:text-slate-600"
+          className="p-2 text-[#ed1c24] w-10 h-10 my-auto mr-10 text-red-700 hover:text-slate-600"
           onClick={nextImage}
         >
       </ArrowRightCircle>

@@ -4,12 +4,11 @@ import { Metadata } from "next";
 import { Utensils } from 'lucide-react';
 import { Users } from 'lucide-react';
 import { DollarSign } from 'lucide-react';
-import { ArrowLeftCircle } from 'lucide-react';
-import { ArrowRightCircle } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 
-import bird from "./_images/bird.jpeg"
 
+{/*Sample Carousel Images*/}
+import bird from "./_images/bird.jpeg"
 import rose from "./_images/rose.jpeg"
 
 import ImageCarousel from "../components/ui/ImageCarousel"
@@ -111,8 +110,6 @@ export default function Home() {
             <div className="sm:w-2/3">
               <iframe 
                 className="sm:mt-8 w-5/6 aspect-video m-auto mb-10"
-                // width="560" 
-                // height="315" 
                 src="https://www.youtube.com/embed/y0sF5xhGreA?si=HGo6sxAIgZtJnXW2" 
                 title="YouTube video player" 
                 frameBorder="0" 

@@ -44,7 +44,6 @@ export default function SignIn() {
   });
 
   const onSubmit = async (values: FormData) => {
-    console.log(`${API}`);
     axios
       .post(`${API}/auth/local`, {
         identifier: values.email,

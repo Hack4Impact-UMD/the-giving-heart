@@ -7,6 +7,7 @@ import { DollarSign } from "lucide-react";
 import { ArrowLeftCircle } from "lucide-react";
 import { ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { API } from "@/utils/constant";
 
 import ImageCarousel from "../components/ui/ImageCarousel";
 
@@ -131,12 +132,9 @@ export default async function Home() {
 }
 
 async function fetchGallery() {
-  const response = await fetch(
-    "http://localhost:1337/api/home-page?populate=gallery",
-    {
-      cache: "no-store",
-    }
-  );
+  const response = await fetch(`${API}/home-page?populate=gallery`, {
+    cache: "no-store",
+  });
   const data = await response.json();
   if (!data.data) {
     return [];

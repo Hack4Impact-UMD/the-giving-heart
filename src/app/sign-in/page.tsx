@@ -44,17 +44,12 @@ export default function SignIn() {
   });
 
   const onSubmit = async (values: FormData) => {
-    console.log(`${API}`);
     axios
       .post(`${API}/auth/local`, {
         identifier: values.email,
         password: values.password,
       })
       .then((response) => {
-        console.log(response.data);
-        console.log("User profile", response.data.user);
-        console.log("User token", response.data.jwt);
-
         setUser(response.data.user);
         setToken(response.data.jwt);
         router.push("/");

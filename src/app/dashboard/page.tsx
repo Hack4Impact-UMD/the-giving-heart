@@ -1,67 +1,102 @@
+"use client";
+
+import axios from "axios";
+import { useState } from "react";
+import useSWR from "swr";
 import { EventCard } from "./eventCard";
 import RegisterEvent from "../registerevent/page";
 import Image from "../../../node_modules/next/image";
 import warning_icon from ".././_images/warning.svg";
 import header_image from ".././_images/header-image.jpg";
 
-const eventData = [
-  {
-    title: "Event 1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-    roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-    date: "Nov. 1, 2023",
-    start_time: "10:00 AM",
-    end_time: "2:00 PM",
-    location: "Main Location"
-  },
-  {
-    title: "Event 2",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-    roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-    date: "Nov. 1, 2023",
-    start_time: "10:00 AM",
-    end_time: "2:00 PM",
-    location: "Main Location"
-  },
-  {
-    title: "Event 3",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-    roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-    date: "Nov. 1, 2023",
-    start_time: "10:00 AM",
-    end_time: "2:00 PM",
-    location: "Main Location"
-  },
-  {
-    title: "Event 4",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-    roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-    date: "Nov. 1, 2023",
-    start_time: "10:00 AM",
-    end_time: "2:00 PM",
-    location: "Main Location"
-  },
-  {
-    title: "Event 5",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-    roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-    date: "Nov. 1, 2023",
-    start_time: "10:00 AM",
-    end_time: "2:00 PM",
-    location: "Main Location"
-  },
-  {
-    title: "Event 6",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-    roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-    date: "Nov. 1, 2023",
-    start_time: "10:00 AM",
-    end_time: "2:00 PM",
-    location: "Main Office"
-  },
-];
+// const eventData = [
+//   {
+//     title: "Event 1",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
+//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
+//     date: "Nov. 1, 2023",
+//     start_time: "10:00 AM",
+//     end_time: "2:00 PM",
+//     location: "Main Location"
+//   },
+//   {
+//     title: "Event 2",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
+//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
+//     date: "Nov. 1, 2023",
+//     start_time: "10:00 AM",
+//     end_time: "2:00 PM",
+//     location: "Main Location"
+//   },
+//   {
+//     title: "Event 3",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
+//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
+//     date: "Nov. 1, 2023",
+//     start_time: "10:00 AM",
+//     end_time: "2:00 PM",
+//     location: "Main Location"
+//   },
+//   {
+//     title: "Event 4",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
+//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
+//     date: "Nov. 1, 2023",
+//     start_time: "10:00 AM",
+//     end_time: "2:00 PM",
+//     location: "Main Location"
+//   },
+//   {
+//     title: "Event 5",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
+//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
+//     date: "Nov. 1, 2023",
+//     start_time: "10:00 AM",
+//     end_time: "2:00 PM",
+//     location: "Main Location"
+//   },
+//   {
+//     title: "Event 6",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
+//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
+//     date: "Nov. 1, 2023",
+//     start_time: "10:00 AM",
+//     end_time: "2:00 PM",
+//     location: "Main Office"
+//   },
+// ];
+
+//   {
+//     title: "Event 1",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
+//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
+//     date: "Nov. 1, 2023",
+//     start_time: "10:00 AM",
+//     end_time: "2:00 PM",
+//     location: "Main Location"
+//   },
+
 
 export default function Dashboard() {
+
+  const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/events`;
+  // const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/event-role-shifts`;
+  const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+
+  const fetcher = async (url: any) =>
+    await axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${auth}` },
+      })
+      .then((res) => res.data);
+
+  let { data, error } = useSWR(address, fetcher);
+  console.log(data);
+
+  if (error) return <div>Error loading data...</div>;
+  if (!data) return <div>Loading...</div>;
+
+
   return (
     <div className="bg-[#860E13] pt-16">
       <h1 className="pb-4 font-medium font-openSans text-5xl mb-4 text-white flex items-center justify-center"> Welcome! </h1>
@@ -78,7 +113,7 @@ export default function Dashboard() {
       <main className="flex min-h-screen flex-col justify-center px-16">
         <div className="lg:m-10">
           <div className="w-full self-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-20 gap-y-10">
-            {eventData.map((event, index) => (
+            {/* {eventData.map((event, index) => (
                 <EventCard
                   key={index}
                   image={header_image}
@@ -89,6 +124,19 @@ export default function Dashboard() {
                   start_time={event.start_time}
                   end_time={event.end_time}
                   location={event.location}
+                />
+            ))} */}
+            {data["data"].map((event: any) => (
+                <EventCard
+                  key={event["id"]}
+                  image={header_image}
+                  title={event["attributes"]["title"]}
+                  description={event["attributes"]["description"]}
+                  roles={event.roles}
+                  date={event.date}
+                  start_time={event["attributes"]["eventDateStart"]}
+                  end_time={event["attributes"]["eventDateEnd"]}
+                  location={event["attributes"]["location"]}
                 />
             ))}
           </div>

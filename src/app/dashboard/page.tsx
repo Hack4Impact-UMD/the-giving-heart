@@ -1,86 +1,65 @@
 "use client";
 
-import axios from "axios";
-import { useState } from "react";
-import useSWR from "swr";
+import axios from 'axios';
+import useSWR from 'swr';
+
 import { EventCard } from "./eventCard";
 import RegisterEvent from "../registerevent/page";
 import Image from "../../../node_modules/next/image";
 import warning_icon from ".././_images/warning.svg";
 import header_image from ".././_images/header-image.jpg";
 
-// const eventData = [
-//   {
-//     title: "Event 1",
-//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-//     date: "Nov. 1, 2023",
-//     start_time: "10:00 AM",
-//     end_time: "2:00 PM",
-//     location: "Main Location"
-//   },
-//   {
-//     title: "Event 2",
-//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-//     date: "Nov. 1, 2023",
-//     start_time: "10:00 AM",
-//     end_time: "2:00 PM",
-//     location: "Main Location"
-//   },
-//   {
-//     title: "Event 3",
-//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-//     date: "Nov. 1, 2023",
-//     start_time: "10:00 AM",
-//     end_time: "2:00 PM",
-//     location: "Main Location"
-//   },
-//   {
-//     title: "Event 4",
-//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-//     date: "Nov. 1, 2023",
-//     start_time: "10:00 AM",
-//     end_time: "2:00 PM",
-//     location: "Main Location"
-//   },
-//   {
-//     title: "Event 5",
-//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-//     date: "Nov. 1, 2023",
-//     start_time: "10:00 AM",
-//     end_time: "2:00 PM",
-//     location: "Main Location"
-//   },
-//   {
-//     title: "Event 6",
-//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-//     date: "Nov. 1, 2023",
-//     start_time: "10:00 AM",
-//     end_time: "2:00 PM",
-//     location: "Main Office"
-//   },
-// ];
+interface OrganizedData {
+  [eventId: string]: {
+    event: {
+      id: string; 
+      title: string;
+      description: string;
+      location: string;
+      date: string;
+    };
+    volunteerRoles: {
+      title: string;
+      description: string;
+    }[];
+  };
+}
 
-//   {
-//     title: "Event 1",
-//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta. Integer in enim nibh. Nullam convallis ligula ut turpis vestibulum accumsan.",
-//     roles: "[Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], [Volunteer role], etc.",
-//     date: "Nov. 1, 2023",
-//     start_time: "10:00 AM",
-//     end_time: "2:00 PM",
-//     location: "Main Location"
-//   },
+// organize the data to relate Events and Volunteer Roles
+const organizeData = (eventRoleShifts: any) => {
+  const organizedData: OrganizedData = {};
 
+  eventRoleShifts["data"].forEach((eventRoleShift: any) => {
+    const eventId = eventRoleShift["attributes"]["event"]["data"]["id"];
 
-export default function Dashboard() {
+    if (!organizedData[eventId]) {
+      organizedData[eventId] = {
+        event: {
+          id: eventId,
+          title: eventRoleShift["attributes"]["event"]["data"]["attributes"]["title"],
+          description: eventRoleShift["attributes"]["event"]["data"]["attributes"]["description"],
+          location: eventRoleShift["attributes"]["event"]["data"]["attributes"]["location"],
+          date: eventRoleShift["attributes"]["event"]["data"]["attributes"]["eventDateStart"],
+        },
+        volunteerRoles: [],
+      };
+    }
 
-  const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/events`;
-  // const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/event-role-shifts`;
+    organizedData[eventId].volunteerRoles.push({
+      title: eventRoleShift["attributes"]["volunteer_role"]["data"]["attributes"]["title"],
+      description: eventRoleShift["attributes"]["volunteer_role"]["data"]["attributes"]["description"],
+    });
+  });
+
+  return organizedData;
+};
+
+const generateVolunteerRolesString = (volunteerRoles: any) => {
+  return volunteerRoles.map((role: any) => `${role.title}`).join(', ');
+};
+
+export default function Dashboard() { 
+  const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/event-role-shifts?populate=*`;
   const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
   const fetcher = async (url: any) =>
@@ -91,11 +70,12 @@ export default function Dashboard() {
       .then((res) => res.data);
 
   let { data, error } = useSWR(address, fetcher);
-  console.log(data);
-
+  
   if (error) return <div>Error loading data...</div>;
   if (!data) return <div>Loading...</div>;
 
+  const organizedData = organizeData(data);
+  console.log(organizedData);
 
   return (
     <div className="bg-[#860E13] pt-16">
@@ -113,32 +93,22 @@ export default function Dashboard() {
       <main className="flex min-h-screen flex-col justify-center px-16">
         <div className="lg:m-10">
           <div className="w-full self-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-20 gap-y-10">
-            {/* {eventData.map((event, index) => (
+            {Object.keys(organizedData).map((eventId) => {
+              const event = organizedData[eventId].event;
+              const volunteerRolesString = generateVolunteerRolesString(organizedData[eventId].volunteerRoles);
+
+              return (
                 <EventCard
-                  key={index}
+                  key={eventId}
                   image={header_image}
                   title={event.title}
                   description={event.description}
-                  roles={event.roles}
+                  roles={volunteerRolesString}
                   date={event.date}
-                  start_time={event.start_time}
-                  end_time={event.end_time}
                   location={event.location}
                 />
-            ))} */}
-            {data["data"].map((event: any) => (
-                <EventCard
-                  key={event["id"]}
-                  image={header_image}
-                  title={event["attributes"]["title"]}
-                  description={event["attributes"]["description"]}
-                  roles={event.roles}
-                  date={event.date}
-                  start_time={event["attributes"]["eventDateStart"]}
-                  end_time={event["attributes"]["eventDateEnd"]}
-                  location={event["attributes"]["location"]}
-                />
-            ))}
+              );
+            })}
           </div>
         </div>
         <RegisterEvent></RegisterEvent>

@@ -15,13 +15,11 @@ interface EventCardProps {
   description: string;
   roles: string;
   date: string;
-  start_time: string;
-  end_time: string;
   location: string;
 }
 
 
-export const EventCard: React.FC<EventCardProps> = ({ image, title, description, roles, date, start_time, end_time, location }) => {
+export const EventCard: React.FC<EventCardProps> = ({ image, title, description, roles, date, location }) => {
 
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]"> 
@@ -47,7 +45,7 @@ export const EventCard: React.FC<EventCardProps> = ({ image, title, description,
 
           <div className="flex items-center mb-2 pb-2">
             <Image src={calendar_icon} alt="description icon" className="mr-2" />
-            <p className="text-[#6B7280]"> {date} from {start_time} - {end_time} </p>
+            <p className="text-[#6B7280]"> {date} </p>
           </div>
 
           <div className="flex items-center mb-2">

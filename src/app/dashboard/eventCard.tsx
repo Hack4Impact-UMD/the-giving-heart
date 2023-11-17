@@ -21,6 +21,8 @@ interface EventCardProps {
 
 export const EventCard: React.FC<EventCardProps> = ({ image, title, description, roles, date, location }) => {
 
+  const rolesArray = roles.split(', ');
+
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]"> 
       <Card className="border-2 h-full flex flex-col justify-between rounded-xl">
@@ -41,8 +43,17 @@ export const EventCard: React.FC<EventCardProps> = ({ image, title, description,
             <Image src={user_icon} alt="description icon" className="mr-2" />
             <p className="font-bold"> Available Positions: </p>
           </div>
-          <p className="text-[#6B7280] pb-4"> {roles} </p>
 
+          <div className="pl-4">
+            <ul className="text-[#6B7280] pb-4">
+              {rolesArray.map((role, index) => (
+                <li key={index}>
+                  <span style={{ marginLeft: '-1.25em', marginRight: '0.5em' }}>&#8226;</span> {role}
+                </li>
+              ))}
+            </ul>
+          </div>
+          
           <div className="flex items-center mb-2 pb-2">
             <Image src={calendar_icon} alt="description icon" className="mr-2" />
             <p className="text-[#6B7280]"> {date} </p>

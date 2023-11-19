@@ -4,13 +4,14 @@ import EventHelper from "./eventhelper";
 
 export default function GetInvolved() {
   return (
-    <main className="flex flex-col items-center justify-center p-4 sm:p-24">
-      <div className="flex items-center justify-center bg-cover h-full w-full align-middle font-sans"
-      style={{backgroundImage: 'url(https://s3-alpha-sig.figma.com/img/3d9f/533e/7b3a91405e9b8b8200346a425beddb5c?Expires=1699833600&Signature=CAQ~y66LwWD0Miw5F2WC34bEt7cTvh~TVP1iM4pB~qWKfLu~F5Akx9av3gDvT49X3GxzNCHV8KoqqN1LzShcVKv7MlJqKWKsSMEQTwaVnYQelkRD2Gnb4gBcvzL0BaI2dbIE4DubzIlzBTCkDdhIJkooVK0LA17wJqaqsqMpe3V7ybScLTAm0zHFQ5Zmy2g6Izl6bO2oElojErYvtnpgjkhYgqTqxT3FW9NFey0Nsx36O5ovanbacL5Z3-SlwxN3Vgm5wRCm9Uq7iE2BwvlWM0ossQK1gFTiKqEdvji~w1s-a~YWBjIWG-2r-G0cijDldpIIm4hrt9qSGTSW76vWkg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
+    <main className="flex min-h-screen flex-col items-center justify-center p:4">
+      <div className="w-screen flex items-center justify-center sm:bg-contain align-middle font-sans"
+      style={{backgroundImage: 'url(https://s3-alpha-sig.figma.com/img/3d9f/533e/7b3a91405e9b8b8200346a425beddb5c?Expires=1701043200&Signature=CJhqEZs6cKN1YmeGEo6Qd4RlHSc4A9wfX3Eopvt-7edn~fQfFufoJW4Unb5Dlt6-3Ka62xic1RTUAm7-iTya4LIlhJghFBrrtJNgLXLNwxpFv~oek7HZSHGiO3eFvjcXWAWFiIshB-JXHTOclTwE9bo2FZxY8er7z6m-R3RbflnbsCfY6Cms2zAnVN9Iflvxtpb7lbuBOkEDoZgfru2oX6dPwRTlAHlV1wxtdEnJKLI~TJyv28OX0tl0riGF8rnyH8uk01NZXJlD2ofpB1t7txDipPlWM4unAgBpPe4L9uCkz0wyQO2V7zgDdg99RNMTy8Tm6DKKUNo3O~JSJpkYeQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              width: '200vh',
-              height: '40vh'}}>
+              // width: '200vh',
+              height: '30vh',
+              position: 'relative'}}>
         <div>
           <h1 className='text-5xl font-sans font-bold text-white'>Get Involved</h1>
         </div>

@@ -9,6 +9,7 @@ const navigation = [
   { name: "Get Involved", href: "/dashboard" },
   // { name: "Sign up/Log in", href: "/sign-in" },
 ];
+
 const mobileLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },

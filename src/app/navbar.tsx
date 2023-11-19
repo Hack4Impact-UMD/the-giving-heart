@@ -6,8 +6,13 @@ import React, { useState } from "react";
 
 const navigation = [
   { name: "About Us", href: "/about" },
-  { name: "Get Involved", href: "/getinvolved" },
-  { name: "Sign up/Log in", href: "/sign-in" },
+  { name: "Get Involved", href: "/dashboard" },
+  // { name: "Sign up/Log in", href: "/sign-in" },
+];
+const mobileLinks = [
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
+  { name: "Get Involved", href: "/dashboard" },
 ];
 
 function classNames(...classes: string[]) {

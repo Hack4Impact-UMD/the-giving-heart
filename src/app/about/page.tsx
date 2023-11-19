@@ -51,7 +51,7 @@ export default function About() {
     <main className="flex min-h-screen flex-col items-center">
         <div className="flex items-center justify-center md:p-16 p-2 pt-16"
         style={{
-            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/c817/5127/594805745557a8e6edf7c0c616c75e94?Expires=1699228800&Signature=OBES9WNyQe02wWEZB46QegoAOmIk7SZRnhnsFiJCfwbIEx4ezAuZbF3mjhxEWewrdQe9zEORtVUFz6HUbFpGCmD4ml77jIYodu6LbSO1Vf~2NkG3svCHl7Jo6w7xbgEW4mFqxi6RHxUpziUvaMkJf9N6073eraFVBuxtMBvUvrGYwdqe0FyE3SCbKIEB5ak~yfcWoKTAJjnUgcYsbvSN-4Wi5ApsTYnrSbT6v1~RvjpdpeTzYgYZXJjCxhfwXN~JNglWPDNbiiz83F2UYQo3NI6Tw5P~VzDsA4SUNQkZkUeyj1O-2PG015ZAdkRIdsOp3OTm3d62EU-T3GP9mR1mPQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
+            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/c817/5127/594805745557a8e6edf7c0c616c75e94?Expires=1701043200&Signature=cj4Ut4WFbVmhzOJIiJZc218CbfAUm2D67O5CvLtY0hYW~-xVrPxmKr8OkxpUqWx1p8gkldNk~OnCQMtoO5nB9YGSr39KZIJ9e3leWLLZ~ZOjyZba1Q9tNHeTwM2ZPqiP4nk-Ivvq7xUZQXiIGEhkPEXDqnNkRooOaaIevEEKPNIBxKvhsfwBSCaHv8Pn~vKUGHMD-pCBMNQ3W21DplQbR~IdxrON~L7CS8dMCZug2J48MrVYTInK~hHZDG5iwUpIJkn5H9UOY8enwEUV~WdWAu4WAenh2M4L7SZdhXO0qplQ4l97fx-Qzx~TnfSAAQ6T-MLFKg4xM9KxgBb22R5AYA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             width: '200vh',
@@ -60,8 +60,8 @@ export default function About() {
         }}
         >
             <div>
-                <h2 className="text-center text-sm md:text-7xl pt-3 pb-3 font-bold" style = {{color: '#FFF', fontFamily: 'Inter',}}>About Us</h2>
-                <p className="text-center text-sm md:text-4xl pt-3 pb-3 font-bold" style={{ color: '#E5DEDE', fontFamily: 'Inter', fontStyle: 'italic' }}>Est. 2002</p>
+                <h2 className="text-center text-xl md:text-7xl pt-3 pb-3 font-bold" style={{ color: '#FFF', fontFamily: 'Inter' }}>About Us</h2>
+                <p className="text-center text-lg md:text-4xl pt-3 pb-3 font-bold" style={{ color: '#E5DEDE', fontFamily: 'Inter', fontStyle: 'italic' }}>Est. 2002</p>
             </div>
         </div>
 
@@ -109,10 +109,10 @@ export default function About() {
                         fontWeight: '600',
                         lineHeight: 'normal',
                     }}>Ways We Help Others</h1></div>
-                    <div className="flex justify-around w-11/12 m-auto mt-10">
+                    <div className="flex flex-col items-center w-11/12 m-auto mt-10">
                         <div
                         style={{
-                            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/7473/152d/7532aea559ed10b94265fbdbcd1fc9cc?Expires=1699228800&Signature=fRpGTZYirybxXwIOyFI8W7HqRf6Q9qbTESCVsc123~d4rCtLGz8qBxExWVIZa8w-E20imjEcOCh5FBFBtNCb1HfjLJ9G~ik9GbhU1Oyh1GBdh4cF89VIwaNVg7Pe4jdOOxLoDJUvGdf9Q-eWHPMvtbqcL~JnO3~C5kXWYYpYgUGsbOd8bTnnCKIx5CuVxI3pYtK28kVk3Yt0teKrg-JhqxMG8Gup0H4024mVUrwOLOOwrgeqi7nUBpYozSWdLrfzNgX0mVnZdtzxsQQgk9oKdCHyWFH7bZ~ltIqtfvhbPirAoFGL0YFq9YcBTGMqfYToLtJwLB2l3DdgkcEt6K2ySw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
+                            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/7473/152d/7532aea559ed10b94265fbdbcd1fc9cc?Expires=1701043200&Signature=M5QPGkCZZMlbPjlNSpBhQ3j6xY3FwyGmQqw46BH0-S~5IRtb3-UTAE6uv-GGlSmlXOi8gJ~VxjVEB2mxh-tOXgYDcqlzVwtnitqdIKJLwdtUvwvRVn4TvpCaAISnEOC7XW8ci10GnCebZX5bBQvrXLJVa~p7XLhlKrQFzfMdKD7yEpLIHzi8hHZZjKrHBOrq1TRA6sn8asYq827ySUdRxb2t5soyiJuRxUsXjw7neQcydEqCvqxJFBxmnNs0sGH70hujaYxYlDwI-GxDYCDiRbHV68HpqCpuSRKXof437cBKQPRKl1TVyRW9-jwrsS1T8RVFkAJFC9ecBa9M5MI5Ng__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center 10px',
                             width: '300px',
@@ -127,11 +127,12 @@ export default function About() {
                             display: 'flex',
                             flexDirection: 'column',
                             justifyContent: 'flex-end',
+                            paddingBottom: '4px'
                         }}
                         >Food Distribution</div>
-                        <div className="lg:w-72 md:w-56 sm:w-40 mx-4"
+                        <div className="lg:w-72 md:w-56 sm:w-40 mx-4 mt-4"
                         style={{
-                            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/dadb/a0ae/10d1630da1b459ff35748fbe00d1b83f?Expires=1699228800&Signature=G0DfaalhUQBajAfq49Smn4y5LD65A5jd83Sfq~nytA5jvre1vOhA91fS1XMz6QOP1~I~I2UZq6T5ED3ud0O5p60tmlFrFszqDXgm-Hj--MqjUEALMuOqCDnIkLJs8rNeE8BD89lAlcGz~VCXTKN7rPta36~QNxO6YIPks~Q4cKVa~Ih2JtAWyXuZ~dNbfdn6NFvnXULZqGuU0v7Kqi~ZF1vZTgYIWRihsz8vTI-y36-Mi2GnNpJ4jFbzL4RG1EclcyMrRdo4O4smsE731W~2qZPt1UY5H5lYyYodby6-uRuRaDDmytDDY~91YvP-Bts70FaM4lsT0QKpWBM9lGX0-Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
+                            backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/dadb/a0ae/10d1630da1b459ff35748fbe00d1b83f?Expires=1701043200&Signature=cKNea49bOng6t3MP2N8UOEP0v6BlG4QpYPzPJObk~3DOFGZsxX5GwAQbkOxEyEQs5POYXWr2IkKKKziyUvIPLk3qbNoUOXIRdQxPE9dQvYjyaH46j3H-Ow-y0t3NLO7m9Ewe6e-09Lx5quveY4C97X0qkVz-YXuTLPsvV0zvHMjhwKVCwEA4tFdwfO8k9o6Q6TPYIT7QhqY-f47s5vKoijlbyWYRJkO3bIt~YEpudQn6zHAIudcdhvVWURF0cOJXmEdlF88fE0BHlGg5Uj3iTpF-Acb19q9N6wNyrb6Uta~q~xpYaSYvoj8wOdK9pzGVnt8BH0TvWOvFbj5A81dOtQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center 10px',
                             width: '300px',
@@ -148,9 +149,9 @@ export default function About() {
                             justifyContent: 'flex-end',
                         }}
                         >Support for Vulnerable Populations</div>
-                        <div className="lg:w-72 md:w-56 sm:w-40 mx-4"
+                        <div className="lg:w-72 md:w-56 sm:w-40 mx-4 mt-4 mb-4"
                             style={{
-                                backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/660d/ed41/bd24b896233d414d99f3c30c1c4d9768?Expires=1699228800&Signature=NBaY9kQpA2TsTtbJuv5CR64GVyW3xqdFe7CyaAyyU2N3TS~NfQweD8v8GQjzlnBNFSzY6XpoeE~ogG9VEBkK4kxTm5j0J3-mDzyAvOg86dmCc0dlEZqU58ez15ipmMcAXUqdSGqWcqqIDhDvPMohDUflGCOEpgUBvvD3rSY08YVi1oobulwVoqeZasjJAinFBp9fAvKjfMBiOgzSts7fBZuQmEZMCgNXy6SIG69uvB5a5b0gccEq1wM~RqVRzxw4zf1KuSrXlPYvDxNQMpbSr745iZZDYYdoeiSk4FPfzUAAit~Fhubs6ksEZibk3F-TYEbt6cJD0rioVQndx71ClQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
+                                backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/660d/ed41/bd24b896233d414d99f3c30c1c4d9768?Expires=1701043200&Signature=NmKArShEfBzlMHv4gRsU22TlDfcKUWAAY19peTBGpqcDlTAzcJXUU5cqe1qKW6~KruPHBg2BiZIFxnUys5PeYzp3U3CAn3SBHsnN9xRD2b17grioK7FtuRXhwOMCn8DWAwjULGfUiBWm~F~IpbU6YH3OGKbyY7TkCnbNZamwR-G2UEEy6i1i4BuuwzF-u1nqXCIf0crZTLehGFaZCIOYl5X9TDxecSOTIiy3mGmSof16QhWrysHcVDqJ9ggMjLEGjY0o~54yqB-MUuPL7HvjcSI6pkvQqDacOqMd7K8G6FdACLvtm5WrcTBFnXJZKenVpN5~aO3Smsdc9jQjAZ1KGA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)',
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center 10px',
                                 width: '300px',

@@ -4,7 +4,7 @@ import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const Map = ReactMapboxGl({
-  accessToken: 'pk.eyJ1IjoidGhlZ2l2aW5naGVhcnQiLCJhIjoiY2xwNWl3bm50MWVudzJqbzRzMHQ4cHRpdyJ9.hd8bhxh4uUXhe1xA1X9tCA'
+  accessToken: process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string,
 });
 
 const MapboxMap: React.FC = () => {

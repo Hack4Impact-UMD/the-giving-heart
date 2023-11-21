@@ -25,15 +25,17 @@ import { X } from "lucide-react";
 import { removeToken } from "@/utils/helpers";
 
 const navigation = [
+  { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Get Involved", href: "/dashboard" },
-  // { name: "Sign up/Log in", href: "/sign-in" },
+  { name: "Get Involved", href: "/getinvolved" },
+  { name: "Sign up/Log in", href: "/sign-in" },
 ];
 
 const mobileLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "Get Involved", href: "/dashboard" },
+  { name: "Get Involved", href: "/getinvolved" },
+  { name: "Sign up/Log in", href: "/sign-in" },
 ];
 
 function classNames(...classes: string[]) {

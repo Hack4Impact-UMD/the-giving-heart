@@ -1,9 +1,9 @@
 "use client"
 
 import { usePathname } from "next/navigation";
-import personImage from "./_images/person-filled-icon.png"
 import Image from "next/image"
 import { User } from 'lucide-react';
+import { API } from "@/utils/constant";
 
 const navigation = [
   { name: "Donate", href: "/getinvolved" },
@@ -14,18 +14,19 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Footer() {
+export default async function Footer() {
   const pathname = usePathname();
+  const footer_email_phone: string [] = await fetchFooter();
 
   return (
     <div className="w-full content-between px-5 text-white bg-[#860e13]">
       <div className="flex flex-col sm:flex-row justify-around mr-5 mt-5">
-        <p className="w-full sm:w-1/3 text-center sm:text-left sm:text-3xl md:text-4xl text-2xl mt-4">The Giving Heart ❤</p>
+        <p className="w-full sm:w-1/3 text-center sm:text-left sm:text-3xl md:text-4xl text-2xl mt-4 mr-2">The Giving Heart ❤</p>
 
         <div className="m-4 flex flex-col sm:items-center">
           <div className="text-xl underline">Contact Us</div>
-          <p className="text-md font-medium sm:pt-1">Info@givingheart.com</p>
-          <p className="text-md font-medium sm:pt-1">(302)-532-2922</p>
+          <p className="text-md font-medium sm:pt-1">{footer_email_phone[0]}</p>
+          <p className="text-md font-medium sm:pt-1">{footer_email_phone[1]}</p>
         </div>
 
         <div className="m-4 flex flex-col sm:items-center">
@@ -78,4 +79,21 @@ export default function Footer() {
       </div>
     </div>
   );
+}
+
+async function fetchFooter() {
+  const email_phone: string[] = [];
+  const response = await fetch(`${API}/home-page?populate=footer_email`, {
+    cache: "no-store",
+  });
+  const data = await response.json();
+  if (!data.data) {
+    return [];
+  }
+  const footer_email = data.data.attributes.footer_email;
+  const footer_phone_number = data.data.attributes.footer_phone_number;
+  email_phone.push(footer_email);
+  email_phone.push(footer_phone_number);
+
+  return email_phone;
 }

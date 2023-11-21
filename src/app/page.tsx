@@ -1,37 +1,37 @@
 import Footer from "./footer";
 import { Metadata } from "next";
 
-import { Utensils } from 'lucide-react';
-import { Users } from 'lucide-react';
-import { DollarSign } from 'lucide-react';
-import { Button } from "@/components/ui/button"
+import { Utensils } from "lucide-react";
+import { Users } from "lucide-react";
+import { DollarSign } from "lucide-react";
+import { ArrowLeftCircle } from "lucide-react";
+import { ArrowRightCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { API } from "@/utils/constant";
 
+import ImageCarousel from "../components/ui/ImageCarousel";
 
-{/*Sample Carousel Images*/}
-import bird from "./_images/bird.jpeg"
-import rose from "./_images/rose.jpeg"
+// const carouselImages = [bird, frog, rose];
 
-import ImageCarousel from "../components/ui/ImageCarousel"
+export default async function Home() {
+  const carouselImages = await fetchGallery();
 
-
-const carouselImages = [bird, rose];
-
-
-export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
-      
       {/* Setting up the background image and the text to the side */}
-      <div className="flex w-full bg-cover bg-[url('./_images/homepage_bg.png')] text-white h-80" >
-
+      <div className="flex w-full bg-cover bg-[url('./_images/homepage_bg.png')] text-white h-80">
         <div className="sm:w-1/2 h-full p-4 md:text-center text-left">
-          <div className="mt-12"><h1 className="text-3xl">Background Image</h1></div>
+          <div className="mt-12">
+            <h1 className="text-3xl">Background Image</h1>
+          </div>
         </div>
 
         <div className="w-1/2 md:p-16 p-2 pt-16">
-          <p className="text-med">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          <p className="text-med">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
         </div>
-
       </div>
 
       <div className="bg-white w-full">
@@ -52,7 +52,7 @@ export default function Home() {
             </Button>
           </div>
 
-            {/* <RenderParams className={classes.params} /> */}
+        {/* <RenderParams className={classes.params} /> */}
 
           {/* Our impact so far box */}
           <div className="w-5/6 m-auto sm:h-44 lg:mb-20">
@@ -89,10 +89,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
           </div>
+     
 
-            {/* <RenderParams className={classes.params} /> */}
+        {/* <RenderParams className={classes.params} /> */}
 
           {/* Gallery */}
           <div className="mx-auto mt-5 mb-20">
@@ -118,12 +118,30 @@ export default function Home() {
               </iframe>
             </div>
           </div>
-
-      </div>
+        </div>
+ 
 
       <Footer />
     </main>
   );
+}
+
+async function fetchGallery() {
+  const response = await fetch(`${API}/home-page?populate=gallery`, {
+    cache: "no-store",
+  });
+  const data = await response.json();
+  if (!data.data) {
+    return [];
+  }
+  const galleryImages = data.data.attributes.gallery.data;
+
+  const carouselImages = galleryImages.map(
+    (image: { attributes: { formats: { large: { url: any } } } }) =>
+      image.attributes.formats.large.url
+  );
+
+  return carouselImages;
 }
 
 export const metadata: Metadata = {

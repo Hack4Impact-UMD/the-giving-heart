@@ -27,6 +27,8 @@ const ImageCarousel = ( { images }: any ) => {
       <div className="">
         <div className="mx-auto">
           <Image
+            width={100}
+            height={100}
             src={images[currentImage]}
             alt={`Image ${currentImage + 1}`}
             layout="responsive"

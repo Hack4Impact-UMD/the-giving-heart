@@ -51,6 +51,8 @@ export default function SignUp() {
         username: values.email,
         email: values.email,
         password: values.password,
+        firstName: values.firstName,
+        lastName: values.lastName,
       })
       .then((response) => {
         setToken(response.data.jwt);

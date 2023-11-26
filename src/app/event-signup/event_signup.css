@@ -1,0 +1,10 @@
+.background-element {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(114, 9, 14, 0.80);
+    z-index: -1;
+  }

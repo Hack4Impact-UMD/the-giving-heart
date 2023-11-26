@@ -28,14 +28,12 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
-  { name: "Sign up/Log in", href: "/sign-in" },
 ];
 
 const mobileLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
-  { name: "Sign up/Log in", href: "/sign-in" },
 ];
 
 function classNames(...classes: string[]) {
@@ -182,7 +180,7 @@ export default function Navbar() {
                   <AccordionContent className="text-gray-500 text-md">
                     <div className="flex">
                       <CalendarDays className="my-auto mr-2 text-[#ed1c24]" />{" "}
-                      <a className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer">
+                      <a className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer" href="/dashboard">
                         Event Management
                       </a>
                     </div>

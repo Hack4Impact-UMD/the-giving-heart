@@ -1,6 +1,4 @@
-import Footer from "./footer";
 import { Metadata } from "next";
-
 import { Utensils } from "lucide-react";
 import { Users } from "lucide-react";
 import { DollarSign } from "lucide-react";
@@ -10,8 +8,6 @@ import { Button } from "@/components/ui/button";
 import { API } from "@/utils/constant";
 
 import ImageCarousel from "../components/ui/ImageCarousel";
-
-// const carouselImages = [bird, frog, rose];
 
 export default async function Home() {
   const carouselImages = await fetchGallery();
@@ -125,8 +121,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </main>
   );
 }

@@ -4,8 +4,8 @@ import axios from 'axios';
 import useSWR from 'swr';
 
 import { EventCard } from "./eventCard";
-import RegisterEvent from "../registerevent/page";
-import AlertMessage from "../alert/AlertMessage";
+// import RegisterEvent from "../registerevent/page";
+// import AlertMessage from "../alert/AlertMessage";
 import Image from "../../../node_modules/next/image";
 import warning_icon from ".././_images/warning.svg";
 import header_image from ".././_images/header-image.jpg";
@@ -113,10 +113,10 @@ export default function Dashboard() {
           </div>
         </div>
         {/* for testing RegisterEvent component; shouldn't be here in actual product */}
-        <RegisterEvent></RegisterEvent>
+        {/* <RegisterEvent></RegisterEvent> */}
       </main>
       {/* for testing AlertMessage component */}
-      <AlertMessage success={false}></AlertMessage> 
+      {/* <AlertMessage success={false}></AlertMessage>  */}
     </div>
   );
 }

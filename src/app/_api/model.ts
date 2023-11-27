@@ -1,3 +1,5 @@
+//TODO: need to popualte with rest of collection schemas from Strapi
+
 type StrapiResponse<T> = {
   data: T;
   message: string;

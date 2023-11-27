@@ -76,7 +76,6 @@ export default function Dashboard() {
   if (!data) return <div>Loading...</div>;
 
   const organizedData = organizeData(data);
-  console.log(organizedData);
 
   return (
     <div className="bg-[#860E13] pt-16">

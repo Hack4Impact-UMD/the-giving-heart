@@ -21,6 +21,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff } from "lucide-react";
 import { useAuthContext } from "@/utils/context/AuthContext";
 
+// TODO?: might want to consider making passwords require at least a special character or number
 const schema = z
   .object({
     currentPassword: z.string().min(1, "Please enter your current password"),

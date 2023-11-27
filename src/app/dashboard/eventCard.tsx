@@ -24,6 +24,8 @@ interface EventCardProps {
   location: string;
 }
 
+// https://stackoverflow.com/questions/72221255/how-to-pass-data-from-one-page-to-another-page-in-next-js
+
 export const EventCard: React.FC<EventCardProps> = ({
   image,
   title,

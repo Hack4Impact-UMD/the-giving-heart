@@ -21,6 +21,7 @@ import { useAuthContext } from "@/utils/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { API } from "@/utils/constant";
 
+// TODO?: might want to consider making passwords require at least a special character or number
 const schema = z.object({
   firstName: z.string().min(1),
   lastName: z.string().min(1),

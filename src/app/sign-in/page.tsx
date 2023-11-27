@@ -53,7 +53,7 @@ export default function SignIn() {
       .then((response) => {
         setUser(response.data.user);
         setToken(response.data.jwt);
-        router.push("/");
+        router.push("/dashboard");
       })
       .catch((error) => {
         if (error.response.status === 400) {

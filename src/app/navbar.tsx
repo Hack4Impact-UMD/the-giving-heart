@@ -9,6 +9,7 @@ import {
 
 import { FormItem } from "@/components/ui/form";
 import { useAuthContext } from "@/utils/context/AuthContext";
+import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Image from "../../node_modules/next/image";
@@ -45,6 +46,7 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, onClose] = useState(false);
   const { user, setUser } = useAuthContext();
   const [isSlide, OnSlide] = useState(false);
@@ -63,6 +65,7 @@ export default function Navbar() {
   const handleLogout = () => {
     removeToken();
     setUser(undefined);
+    router.push("/");
   };
 
   return (

@@ -58,7 +58,7 @@ export default function SignUp() {
       .then((response) => {
         setToken(response.data.jwt);
         setUser(response.data.user);
-        router.push("/");
+        router.push("/dashboard");
       })
       .catch((error) => {
         if (error.response.status === 400) {

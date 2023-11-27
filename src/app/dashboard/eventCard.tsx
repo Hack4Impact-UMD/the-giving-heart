@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -13,7 +13,9 @@ import book_icon from ".././_images/book-open.svg";
 import user_icon from ".././_images/users.svg";
 import calendar_icon from ".././_images/calendar-clock.svg";
 import globe from ".././_images/globe.svg";
-import Link from "next/link";
+import AlertMessage from "../../components/ui/AlertMessage";
+import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/utils/context/AuthContext";
 
 interface EventCardProps {
   image: StaticImageData;
@@ -22,6 +24,7 @@ interface EventCardProps {
   roles: string;
   date: string;
   location: string;
+  setShowErrorMessage: (value: boolean) => void;
 }
 
 // https://stackoverflow.com/questions/72221255/how-to-pass-data-from-one-page-to-another-page-in-next-js
@@ -33,8 +36,19 @@ export const EventCard: React.FC<EventCardProps> = ({
   roles,
   date,
   location,
+  setShowErrorMessage,
 }) => {
   const rolesArray = roles.split(", ");
+  const { user, setUser } = useAuthContext();
+  const router = useRouter();
+
+  const handleRegisterClick = () => {
+    if (user) {
+      router.push("/event-signup");
+    } else {
+      setShowErrorMessage(true);
+    }
+  };
 
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]">
@@ -90,15 +104,14 @@ export const EventCard: React.FC<EventCardProps> = ({
         </CardContent>
 
         <CardFooter className="flex justify-center items-center">
-          <Link href="/event-signup">
-            <Button
-              variant="default"
-              size="default"
-              className="bg-[#ED1C24] text-white rounded-md"
-            >
-              Register
-            </Button>
-          </Link>
+          <Button
+            variant="default"
+            size="default"
+            className="bg-[#ED1C24] text-white rounded-md"
+            onClick={handleRegisterClick}
+          >
+            Register
+          </Button>
         </CardFooter>
       </Card>
     </div>

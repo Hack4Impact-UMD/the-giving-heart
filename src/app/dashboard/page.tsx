@@ -185,11 +185,6 @@ export default function Dashboard() {
                     organizedData[eventId].volunteerRoles
                   )}
                   image={header_image}
-                  title={event.title}
-                  description={event.description}
-                  roles={volunteerRolesString}
-                  date={event.eventDateStart} //FIXME: need to change
-                  location={event.location}
                   setShowErrorMessage={setShowErrorMessage}
                 />
               );

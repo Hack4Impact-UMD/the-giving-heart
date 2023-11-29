@@ -4,7 +4,7 @@ import EventHelper from "./eventhelper";
 
 export default function GetInvolved() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between">
       <div className="z-10 max-w-5xl w-full items-center justify-between flex flex-col">
         <div className="relative">
           <div
@@ -31,7 +31,7 @@ export default function GetInvolved() {
               Volunteer Roles
             </h1>
             <div className="border-none">
-            <EventHelper />
+              <EventHelper />
             </div>
         </div>
 

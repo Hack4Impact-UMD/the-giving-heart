@@ -26,16 +26,16 @@ export default function GetInvolved() {
               </h1>
           </div>
         </div> 
-        <div className="w-lg border flex flex-col">
+        <div className="w-5/6 border flex flex-col items-center">
             <h1 className="border-none text-center text-lg md:text-4xl font-bold font-sans dark:text-white">
               Volunteer Roles
             </h1>
-            <div className="border-none">
+            <div className="border-none items-center">
               <EventHelper />
             </div>
         </div>
 
-        <div className="flex flex-col items-center">
+        <div className="w-5/6 flex flex-col items-center">
           <h1 className="text-lg md:text-4xl font-bold font-sans dark:text-whit">
             Donate
           </h1>
@@ -49,8 +49,8 @@ export default function GetInvolved() {
             proident, sunt in culpa qui officia deserunt mollit anim id est
             laborum.
           </p>
+          <MapboxMap />
         </div>
-        {/* <MapboxMap /> */}
       </div>
     </main>
   );

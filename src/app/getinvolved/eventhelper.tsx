@@ -21,12 +21,12 @@ export default function EventHelper() {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="">
+    <div className="w-full">
       {data["data"].map((item: any) => (
         <div key="id">
           <a
             href="#"
-            className="h-full flex flex-row items-center justify-between space-x-4 border-none block max-w-sm md:w-screen p-6 bg-white rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+            className="h-full w-full md:max-w-lg flex flex-row items-center justify-between space-x-4 border-none block max-w-sm p-6 bg-white rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
             <div className="w-full">
               <h5 className="mb-2 text-sm md:text-xl font-sans tracking-tight text-gray-900 dark:text-white">

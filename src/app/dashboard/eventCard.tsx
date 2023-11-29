@@ -14,41 +14,25 @@ import user_icon from ".././_images/users.svg";
 import calendar_icon from ".././_images/calendar-clock.svg";
 import globe from ".././_images/globe.svg";
 import AlertMessage from "../../components/ui/AlertMessage";
-import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/utils/context/AuthContext";
+import Link from "next/link";
 
 interface EventCardProps {
+  key: string;
+  event: string;
+  volunteerRoles: string;
   image: StaticImageData;
-  title: string;
-  description: string;
-  roles: string;
-  date: string;
-  location: string;
   setShowErrorMessage: (value: boolean) => void;
 }
 
-// https://stackoverflow.com/questions/72221255/how-to-pass-data-from-one-page-to-another-page-in-next-js
-
 export const EventCard: React.FC<EventCardProps> = ({
+  event,
+  volunteerRoles,
   image,
-  title,
-  description,
-  roles,
-  date,
-  location,
   setShowErrorMessage,
 }) => {
-  const rolesArray = roles.split(", ");
-  const { user, setUser } = useAuthContext();
-  const router = useRouter();
-
-  const handleRegisterClick = () => {
-    if (user) {
-      router.push("/event-signup");
-    } else {
-      setShowErrorMessage(true);
-    }
-  };
+  const eventObject = JSON.parse(event);
+  const volunteerRolesObject = JSON.parse(volunteerRoles);
 
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]">
@@ -61,14 +45,17 @@ export const EventCard: React.FC<EventCardProps> = ({
           ></Image>
         </CardHeader>
 
-        <CardTitle className="p-6 text-[#860E13]"> {title} </CardTitle>
+        <CardTitle className="p-6 text-[#860E13]">
+          {" "}
+          {eventObject["title"]}{" "}
+        </CardTitle>
 
         <CardContent className="rounded-none flex flex-col justify-start items-start flex-1 pl-6">
           <div className="flex items-center mb-2 pb-2">
             <Image src={book_icon} alt="description icon" className="mr-2" />
             <p className="font-bold"> Description: </p>
           </div>
-          <p className="text-[#6B7280] pb-3"> {description} </p>
+          <p className="text-[#6B7280] pb-3"> {eventObject["description"]} </p>
 
           <div className="flex items-center mb-2 pb-2">
             <Image src={user_icon} alt="description icon" className="mr-2" />
@@ -77,12 +64,12 @@ export const EventCard: React.FC<EventCardProps> = ({
 
           <div className="pl-4">
             <ul className="text-[#6B7280] pb-4">
-              {rolesArray.map((role, index) => (
-                <li key={index}>
+              {volunteerRolesObject.map((role: any) => (
+                <li key={role["volunteerRoleId"]}>
                   <span style={{ marginLeft: "-1.25em", marginRight: "0.5em" }}>
                     &#8226;
                   </span>{" "}
-                  {role}
+                  {role["title"]}
                 </li>
               ))}
             </ul>
@@ -94,23 +81,37 @@ export const EventCard: React.FC<EventCardProps> = ({
               alt="description icon"
               className="mr-2"
             />
-            <p className="text-[#6B7280]"> {date} </p>
+            <p className="text-[#6B7280]">
+              {" "}
+              {eventObject["eventDateStart"]} - {eventObject["eventDateEnd"]}{" "}
+            </p>
           </div>
 
           <div className="flex items-center mb-2">
             <Image src={globe} alt="description icon" className="mr-2" />
-            <p className="text-[#6B7280]"> {location} </p>
+            <p className="text-[#6B7280]"> {eventObject["location"]} </p>
           </div>
         </CardContent>
 
         <CardFooter className="flex justify-center items-center">
+          {/**TODO: Set to inactive if user does not exist and have a banner at top saying you need to be signed in! */}
+
           <Button
             variant="default"
             size="default"
             className="bg-[#ED1C24] text-white rounded-md"
-            onClick={handleRegisterClick}
           >
-            Register
+            <Link
+              href={{
+                pathname: `/event-signup`,
+                query: {
+                  event: event,
+                  volunteerRoles: volunteerRoles,
+                },
+              }}
+            >
+              Register
+            </Link>
           </Button>
         </CardFooter>
       </Card>

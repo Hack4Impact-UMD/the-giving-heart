@@ -54,60 +54,61 @@ export default function SignUp() {
 
   return (
     <div>
-      <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-16">
-        <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
-          <div className="w-full p-6 bg-gray-300">
-            <div className="flex flex-col items-center bg-white px-8 py-12 md:py-32">
-              <h1 className="text-3xl font-bold text-gray-900 md:text-5xl">
-                Forgot password?
-              </h1>
-              <p className="my-4 text-gray-400">
-                Please enter the email associated with your account to reset
-                your password.
-              </p>
-              <div className="w-full my-8">
-                <Form {...form}>
-                  <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="flex flex-col items-center space-y-8"
-                  >
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem className="w-full md:w-3/5">
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input placeholder="email@example.com" {...field} />
-                          </FormControl>
-                          {errors.email && (
-                            <FormMessage>{errors.email.message}</FormMessage>
-                          )}
-                        </FormItem>
-                      )}
-                    />
-                    <div className="flex flex-col justify-center items-center pt-8">
-                      <Button
-                        type="submit"
-                        className="bg-gray-400 text-white px-2 md:px-8"
+      <main className="flex min-h-screen bg-[#4A0E11] flex-col items-center justify-center p-4 md:p-16">
+        <div className="z-10 max-w-5xl w-full items-center justify-between text-sm flex-col">
+          <div className="bg-[#860E13] text-center py-5 text-white rounded-t-2xl">
+            <h1 className="text-4xl text-white md:text-5xl">
+              Forgot password?
+            </h1>
+            <p className="italic pt-3">It’s okay! it happens to the best of us.</p>
+          </div>
+          <div className="flex flex-col items-center bg-[#E6E5E5] bg-opacity-75 px-8 py-12 md:py-32 rounded-b-2xl">
+            <p className="my-4 text-black text-center">
+              Please enter the email associated with your account to reset
+              your password.
+            </p>
+            <div className="w-full my-8">
+              <Form {...form}>
+                <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="flex flex-col items-center space-y-8"
+                >
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem className="w-full md:w-3/5">
+                        <FormLabel className="text-black">Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="email@example.com" {...field} />
+                        </FormControl>
+                        {errors.email && (
+                          <FormMessage>{errors.email.message}</FormMessage>
+                        )}
+                      </FormItem>
+                    )}
+                  />
+                  <div className="flex flex-col justify-center items-center pt-8">
+                    <Button
+                      type="submit"
+                      className="bg-[#ED1C24] text-white px-2 md:px-8"
+                    >
+                      Request Password Reset
+                    </Button>
+                    <div className="mt-2 text-center text-xs">
+                      <span>Back to </span>
+                      <a
+                        href="/sign-in"
+                        className="text-red-500 font-bold hover:underline"
                       >
-                        Request Password Reset
-                      </Button>
-                      <div className="mt-2 text-center text-xs">
-                        <span>Back to </span>
-                        <a
-                          href="/sign-in"
-                          className="text-red-500 font-bold hover:underline"
-                        >
-                          Sign In
-                        </a>
-                      </div>
+                        Log In
+                      </a>
                     </div>
-                  </form>
-                </Form>
+                  </div>
+                </form>
+              </Form>
               </div>
             </div>
-          </div>
         </div>
       </main>
     </div>

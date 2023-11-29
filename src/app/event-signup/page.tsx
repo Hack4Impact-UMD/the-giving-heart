@@ -15,8 +15,9 @@ import * as React from "react";
 import { Select, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { Button } from "../../components/ui/button";
 import axios from "axios";
-import useSWR from "swr";
+import { useAuthContext } from "@/utils/context/AuthContext";
 
 interface EventData {
   event: {
@@ -73,6 +74,57 @@ export default function EventSignupPage() {
   const eventD: EventData = {
     event: eventData,
     volunteerRoles: volunteerRolesData,
+  };
+
+  const { user, setUser } = useAuthContext();
+
+  //TODO: need to make sure that users haven't already registered for event
+  const handleRegisterClick = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+
+    if (user) {
+      console.log(user);
+      const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends`;
+      const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+
+      console.log({
+        users_permissions_user: {
+          id: user.id,
+        },
+        event_role_shifts: {
+          id: selectedRoleShift,
+        },
+        checkIn: false,
+        checkOut: false,
+      });
+
+      try {
+        await axios
+          .post(address, {
+            headers: {
+              Authorization: `Bearer ${auth}`,
+            },
+            data: {
+              users_permissions_user: {
+                id: user.id,
+              },
+              event_role_shifts: {
+                id: selectedRoleShift,
+              },
+              checkIn: false,
+              checkOut: false,
+            },
+          })
+          .then((res) => console.log(res));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    // TODO: show error message if not logged in
+
+    // else {
+    // setShowErrorMessage(true);
+    // }
   };
 
   return (
@@ -343,20 +395,34 @@ export default function EventSignupPage() {
               </div>
             </Card>
           </div>
-          <h3
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "black",
-              fontFamily: "Open Sans",
-              fontSize: "48px",
-              fontWeight: "600",
-              paddingTop: "30px",
-            }}
-          >
-            Submit Registration
-          </h3>
+          {selectedRoleShift !== "" ? (
+            <div>
+              <h3
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  color: "black",
+                  fontFamily: "Open Sans",
+                  fontSize: "48px",
+                  fontWeight: "600",
+                  paddingTop: "30px",
+                }}
+              >
+                Submit Registration
+              </h3>
+              <Button
+                variant="default"
+                size="default"
+                className="bg-[#ED1C24] text-white rounded-md"
+                onClick={handleRegisterClick}
+              >
+                Register
+              </Button>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       ) : (
         ""

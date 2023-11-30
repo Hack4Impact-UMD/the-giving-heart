@@ -18,15 +18,27 @@ interface OrganizedData {
       title: string;
       description: string;
       location: string;
-      date: string;
+      eventDateStart: string;
+      eventDateEnd: string;
+      eventCheckInKey: string;
+      signUpOpenDate: string;
+      signUpEndDate: string;
     };
     volunteerRoles: {
       title: string;
       description: string;
+      eventRoleShiftTimeStart: string;
+      eventRoleShiftTimeEnd: string;
+      eventRoleShiftDate: string;
+      capacity: number;
+      eventRoleShiftDescription: string;
+      shiftId: string;
+      volunteerRoleId: string;
     }[];
   };
 }
 
+//FIXME: need to optimize/refactor
 // organize the data to relate Events and Volunteer Roles
 const organizeData = (eventRoleShifts: any) => {
   const organizedData: OrganizedData = {};
@@ -50,9 +62,26 @@ const organizeData = (eventRoleShifts: any) => {
             eventRoleShift["attributes"]["event"]["data"]["attributes"][
               "location"
             ],
-          date: eventRoleShift["attributes"]["event"]["data"]["attributes"][
-            "eventDateStart"
-          ],
+          eventDateStart:
+            eventRoleShift["attributes"]["event"]["data"]["attributes"][
+              "eventDateStart"
+            ],
+          eventDateEnd:
+            eventRoleShift["attributes"]["event"]["data"]["attributes"][
+              "eventDateEnd"
+            ],
+          eventCheckInKey:
+            eventRoleShift["attributes"]["event"]["data"]["attributes"][
+              "eventCheckInKey"
+            ],
+          signUpOpenDate:
+            eventRoleShift["attributes"]["event"]["data"]["attributes"][
+              "signUpOpenDate"
+            ],
+          signUpEndDate:
+            eventRoleShift["attributes"]["event"]["data"]["attributes"][
+              "signUpEndDate"
+            ],
         },
         volunteerRoles: [],
       };
@@ -67,6 +96,17 @@ const organizeData = (eventRoleShifts: any) => {
         eventRoleShift["attributes"]["volunteer_role"]["data"]["attributes"][
           "description"
         ],
+      eventRoleShiftTimeStart:
+        eventRoleShift["attributes"]["eventRoleShiftTimeStart"],
+      eventRoleShiftTimeEnd:
+        eventRoleShift["attributes"]["eventRoleShiftTimeEnd"],
+      eventRoleShiftDate: eventRoleShift["attributes"]["eventRoleShiftDate"],
+      capacity: eventRoleShift["attributes"]["capacity"],
+      eventRoleShiftDescription:
+        eventRoleShift["attributes"]["eventRoleShiftDescription"],
+      shiftId: eventRoleShift["id"],
+      volunteerRoleId:
+        eventRoleShift["attributes"]["volunteer_role"]["data"]["id"],
     });
   });
 
@@ -140,23 +180,18 @@ export default function Dashboard() {
               return (
                 <EventCard
                   key={eventId}
+                  event={JSON.stringify(event)}
+                  volunteerRoles={JSON.stringify(
+                    organizedData[eventId].volunteerRoles
+                  )}
                   image={header_image}
-                  title={event.title}
-                  description={event.description}
-                  roles={volunteerRolesString}
-                  date={event.date}
-                  location={event.location}
                   setShowErrorMessage={setShowErrorMessage}
                 />
               );
             })}
           </div>
         </div>
-        {/* for testing RegisterEvent component; shouldn't be here in actual product */}
-        {/* <RegisterEvent></RegisterEvent> */}
       </main>
-      {/* for testing AlertMessage component */}
-      {/* <AlertMessage success={false}></AlertMessage>  */}
       {showErrorMessage && (
         <AlertMessage
           success={false}

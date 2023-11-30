@@ -1,14 +1,51 @@
-//TODO: need to popualte with rest of collection schemas from Strapi
+export interface StrapiEventData {
+  [eventId: string]: {
+    event: {
+      id: string;
+      title: string;
+      description: string;
+      location: string;
+      eventDateStart: string;
+      eventDateEnd: string;
+      eventCheckInKey: string;
+      signUpOpenDate: string;
+      signUpEndDate: string;
+    };
+    volunteerRoles: {
+      title: string;
+      description: string;
+      eventRoleShiftTimeStart: string;
+      eventRoleShiftTimeEnd: string;
+      eventRoleShiftDate: string;
+      capacity: number;
+      eventRoleShiftDescription: string;
+      shiftId: string;
+      volunteerRoleId: string;
+    }[];
+  };
+}
 
-type StrapiResponse<T> = {
-  data: T;
-  message: string;
-};
-
-export interface Event {
-    title: string,
-    description: string,
-    eventDate: Date,
-    signUpOpenDate: Date,
-    signUpEndDate: Date,
+export interface EventSignUpData {
+  event: {
+    id: string;
+    title: string;
+    description: string;
+    location: string;
+    eventDateStart: string;
+    eventDateEnd: string;
+    eventCheckInKey: string;
+    signUpOpenDate: string;
+    signUpEndDate: string;
+  };
+  volunteerRoles: {
+    title: string;
+    description: string;
+    eventRoleShiftTimeStart: string;
+    eventRoleShiftTimeEnd: string;
+    eventRoleShiftDate: string;
+    capacity: number;
+    eventRoleShiftDescription: string;
+    shiftId: string;
+    volunteerRoleId: string;
+  }[];
 }

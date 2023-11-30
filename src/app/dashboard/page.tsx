@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import useSWR from "swr";
-
 import { EventCard } from "./eventCard";
 // import RegisterEvent from "../registerevent/page";
 import AlertMessage from "../../components/ui/AlertMessage";
@@ -10,42 +9,16 @@ import Image from "../../../node_modules/next/image";
 import warning_icon from ".././_images/warning.svg";
 import header_image from ".././_images/header-image.jpg";
 import { useState } from "react";
+import { StrapiEventData } from "../_api/model";
 
-interface OrganizedData {
-  [eventId: string]: {
-    event: {
-      id: string;
-      title: string;
-      description: string;
-      location: string;
-      eventDateStart: string;
-      eventDateEnd: string;
-      eventCheckInKey: string;
-      signUpOpenDate: string;
-      signUpEndDate: string;
-    };
-    volunteerRoles: {
-      title: string;
-      description: string;
-      eventRoleShiftTimeStart: string;
-      eventRoleShiftTimeEnd: string;
-      eventRoleShiftDate: string;
-      capacity: number;
-      eventRoleShiftDescription: string;
-      shiftId: string;
-      volunteerRoleId: string;
-    }[];
-  };
-}
-
-//FIXME: need to optimize/refactor
+//FIXME: need to optimize/refactor 
+//TODO: filter by events that are still available! (i.e. signUpOpenDate/SignUpEndDate is in the future)
 // organize the data to relate Events and Volunteer Roles
 const organizeData = (eventRoleShifts: any) => {
-  const organizedData: OrganizedData = {};
+  const organizedData: StrapiEventData = {};
 
   eventRoleShifts["data"].forEach((eventRoleShift: any) => {
     const eventId = eventRoleShift["attributes"]["event"]["data"]["id"];
-
     if (!organizedData[eventId]) {
       organizedData[eventId] = {
         event: {
@@ -116,6 +89,7 @@ const organizeData = (eventRoleShifts: any) => {
 const generateVolunteerRolesString = (volunteerRoles: any) => {
   return volunteerRoles.map((role: any) => `${role.title}`).join(", ");
 };
+
 
 export default function Dashboard() {
   const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/event-role-shifts?populate=*`;

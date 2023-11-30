@@ -9,6 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
+//FIXME: need to match regular eventcard
 // required props; some could be optional but not sure which
 interface EventData {
   eventName: string;

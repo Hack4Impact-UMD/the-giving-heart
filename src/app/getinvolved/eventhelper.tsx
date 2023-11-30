@@ -15,7 +15,6 @@ export default function EventHelper() {
       .then((res) => res.data);
 
   let { data, error } = useSWR(address, fetcher);
-  console.log(data);
 
   if (error) return <div>Error loading data...</div>;
   if (!data) return <div>Loading...</div>;

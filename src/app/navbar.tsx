@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Accordion,
   AccordionContent,
@@ -8,6 +9,7 @@ import {
 
 import { FormItem } from "@/components/ui/form";
 import { useAuthContext } from "@/utils/context/AuthContext";
+import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Image from "../../node_modules/next/image";
@@ -28,14 +30,14 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
-  { name: "Sign up/Log in", href: "/sign-in" },
+  { name: "Events", href: "/dashboard" },
 ];
 
 const mobileLinks = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
-  { name: "Sign up/Log in", href: "/sign-in" },
+  { name: "Events", href: "/dashboard" },
 ];
 
 function classNames(...classes: string[]) {
@@ -44,6 +46,7 @@ function classNames(...classes: string[]) {
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, onClose] = useState(false);
   const { user, setUser } = useAuthContext();
   const [isSlide, OnSlide] = useState(false);
@@ -51,6 +54,7 @@ export default function Navbar() {
     <Home key="home" className="m-auto text-[#ed1c24]" />,
     <HelpCircle key="helpCircle" className="m-auto text-[#ed1c24]" />,
     <HeartHandshake key="heartHandshake" className="m-auto text-[#ed1c24]" />,
+    <CalendarDays key="calendar" className="my-auto text-[#ed1c24]" />,
     <UserCircle2 key="userCircle2" className="m-auto text-[#ed1c24]" />,
   ];
   const toggleMenu = () => {
@@ -61,6 +65,7 @@ export default function Navbar() {
   const handleLogout = () => {
     removeToken();
     setUser(undefined);
+    router.push("/");
   };
 
   return (
@@ -176,14 +181,6 @@ export default function Navbar() {
                         href="/settings"
                       >
                         Settings
-                      </a>
-                    </div>
-                  </AccordionContent>
-                  <AccordionContent className="text-gray-500 text-md">
-                    <div className="flex">
-                      <CalendarDays className="my-auto mr-2 text-[#ed1c24]" />{" "}
-                      <a className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer">
-                        Event Management
                       </a>
                     </div>
                   </AccordionContent>

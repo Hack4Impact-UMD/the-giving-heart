@@ -5,7 +5,7 @@
 **Point of Contact**:
 |Name| Email|
 | :--- | :--- |
-|Insert Name| Insert Email |
+|Dan Nguyen| danthedevnguyen@gmail.com |
 
 # Getting Started
 
@@ -34,6 +34,7 @@ NEXT_PUBLIC_STRAPI_API_URL=http://localhost:1337
 
 # hosted:
 # NEXT_PUBLIC_STRAPI_API_URL=""
+NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN=""
 ```
 
 # Tech Stack

@@ -21,6 +21,7 @@ import { useRouter } from "next/navigation";
 import { setToken } from "@/utils/helpers";
 import { API } from "@/utils/constant";
 
+// TODO?: might want to consider making passwords require at least a special character or number
 const schema = z.object({
   email: z.string().email(),
   password: z.string().min(8, {
@@ -52,7 +53,7 @@ export default function SignIn() {
       .then((response) => {
         setUser(response.data.user);
         setToken(response.data.jwt);
-        router.push("/");
+        router.push("/dashboard");
       })
       .catch((error) => {
         if (error.response.status === 400) {

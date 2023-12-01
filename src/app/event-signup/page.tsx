@@ -19,6 +19,7 @@ import { Button } from "../../components/ui/button";
 import axios from "axios";
 import { useAuthContext } from "@/utils/context/AuthContext";
 import { EventSignUpData, UserAttendsData } from "../_api/model";
+import { useRouter } from "next/navigation";
 
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
@@ -27,6 +28,7 @@ export default function EventSignupPage() {
   const searchParamsVolunteerRoles =
     searchParams.get("volunteerRoles") ?? "This was undefined - event data"; //FIXME: Need to change default val of params
   const volunteerRolesData = JSON.parse(`${searchParamsVolunteerRoles}`);
+  const router = useRouter();
 
   const [selectedRole, setSelectedRole] = React.useState<string>("");
   const [availableShifts, setAvailableShift] = useState([]);
@@ -84,7 +86,10 @@ export default function EventSignupPage() {
               checkOut: false,
             },
           })
-          .then((res) => console.log(res));
+          .then((res) => {
+            console.log(res);
+            router.push("/dashboard");
+          });
       } catch (error) {
         console.log(error);
       }

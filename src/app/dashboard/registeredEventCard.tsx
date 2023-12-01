@@ -8,6 +8,8 @@ import { Switch } from "@/components/ui/switch";
 import CardContent from "@mui/material/CardContent";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
+// import { useRouter } from "next/router";
 
 //FIXME: need to match regular eventcard
 // required props; some could be optional but not sure which
@@ -20,6 +22,7 @@ interface EventData {
   title: string;
   checkIn: boolean;
   checkOut: boolean;
+  userAttendId: number;
 }
 
 // Create a custom Material-UI theme with Open Sans font
@@ -31,14 +34,75 @@ const theme = createTheme({
 
 export default function RegisteredEventCard(props: EventData) {
   // stuff to change the check in value created from the checkin button
-  const [isCheckedIn, setIsCheckedIn] = useState(props.checkIn);
+  const [isCheckedIn, setIsCheckedIn] = useState(props.checkIn ?? false);
   const checkInStyles = {
     backgroundColor: isCheckedIn ? "green" : "", // Change 'initialColor' to your desired initial background color
   };
   // stuff to change the check out value created from the check out button
-  const [isCheckedOut, setIsCheckedOut] = useState(props.checkOut);
+  const [isCheckedOut, setIsCheckedOut] = useState(props.checkOut ?? false);
   const checkOutStyles = {
     backgroundColor: isCheckedOut ? "green" : "", // Change 'initialColor' to your desired initial background color
+  };
+
+  const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends/${props.userAttendId}`;
+  const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+  // const router = useRouter();
+
+  const handleCheckInToggle = async () => {
+    const newToggleValue = !isCheckedIn;
+    setIsCheckedIn(newToggleValue);
+
+    try {
+      await axios
+        .put(address, {
+          headers: {
+            Authorization: `Bearer ${auth}`,
+          },
+          data: {
+            checkIn: newToggleValue,
+          },
+        })
+        .then((res) => console.log(res));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleCheckOutToggle = async () => {
+    const newToggleValue = !isCheckedOut;
+    setIsCheckedOut(newToggleValue);
+
+    try {
+      await axios
+        .put(address, {
+          headers: {
+            Authorization: `Bearer ${auth}`,
+          },
+          data: {
+            checkOut: newToggleValue,
+          },
+        })
+        .then((res) => console.log(res));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDropSpot = async (event: { preventDefault: () => void }) => {
+    try {
+      await axios
+        .delete(address, {
+          headers: {
+            Authorization: `Bearer ${auth}`,
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          // router.reload(); //FIXME: need to refresh dashboard once we drop a spot 
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -53,31 +117,6 @@ export default function RegisteredEventCard(props: EventData) {
           <Typography sx={{ color: "#860E13", fontSize: 28, mt: 1, mb: 1 }}>
             <b>{props.name}</b>
           </Typography>
-
-          {/* EVENT INFORMATION SECTION */}
-          {/*           
-          <Typography
-            sx={{color: 'black', fontSize: 20}}
-            >
-            Event Information
-          </Typography>
-
-          <div className="flex space-x-2 items-start mt-3">
-            <img src="/_images/book-open.svg" alt="book-icon"/>
-
-            <div className="flex flex-col">
-              <Typography
-                sx={{ color: 'black', fontSize: 16 }}
-              >
-                <b>Description: </b>
-              </Typography>
-              <Typography
-                sx={{ color: 'gray  ', fontSize: 16 }}
-                >
-                {props.eventDescription}
-              </Typography>
-            </div>
-          </div> */}
 
           <div className="flex space-x-2 items-start mt-3">
             <img src="/_images/calendar-clock.svg" alt="calendar-clock-icon" />
@@ -143,6 +182,7 @@ export default function RegisteredEventCard(props: EventData) {
             <button
               className="text-white px-10 py-2 rounded-md mt-3 inline-block"
               style={{ backgroundColor: "#ED1C24" }}
+              onClick={handleDropSpot}
             >
               <b>Drop Spot</b>
             </button>
@@ -176,7 +216,7 @@ export default function RegisteredEventCard(props: EventData) {
               </Typography>
               <Switch
                 checked={isCheckedIn}
-                onCheckedChange={() => setIsCheckedIn(!isCheckedIn)}
+                onCheckedChange={handleCheckInToggle}
                 style={checkInStyles}
               />
             </div>
@@ -186,7 +226,7 @@ export default function RegisteredEventCard(props: EventData) {
               </Typography>
               <Switch
                 checked={isCheckedOut}
-                onCheckedChange={() => setIsCheckedOut(!isCheckedOut)}
+                onCheckedChange={handleCheckOutToggle}
                 style={checkOutStyles}
               />
             </div>

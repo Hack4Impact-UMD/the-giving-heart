@@ -233,6 +233,7 @@ export default function Dashboard() {
                   title={associatedEventRoleShift["title"]}
                   checkIn={userAttend["checkIn"]}
                   checkOut={userAttend["checkOut"]}
+                  userAttendId={userAttend["id"]}
                 />
               );
             })}

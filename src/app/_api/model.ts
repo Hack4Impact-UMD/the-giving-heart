@@ -55,7 +55,7 @@ export interface UserAttendsData {
     id: number,
     checkIn: boolean;
     checkOut: boolean;
-    users_permission_user: {
+    users_permissions_user: {
       data: {
         id: number;
         attributes: {

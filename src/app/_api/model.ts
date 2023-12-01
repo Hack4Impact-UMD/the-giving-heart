@@ -49,3 +49,24 @@ export interface EventSignUpData {
     volunteerRoleId: string;
   }[];
 }
+
+export interface UserAttendsData {
+  userAttend: {
+    id: number,
+    checkIn: boolean;
+    checkOut: boolean;
+    users_permission_user: {
+      data: {
+        id: number;
+        attributes: {
+          username: string;
+        };
+      };
+    };
+    event_role_shifts: {
+      data: {
+        id: number;
+      };
+    };
+  }[];
+}

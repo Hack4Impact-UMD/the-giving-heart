@@ -18,7 +18,7 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "../../components/ui/button";
 import axios from "axios";
 import { useAuthContext } from "@/utils/context/AuthContext";
-import { EventSignUpData } from "../_api/model";
+import { EventSignUpData, UserAttendsData } from "../_api/model";
 
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
@@ -68,36 +68,23 @@ export default function EventSignupPage() {
           })
           .then((res) => console.log(res));
 
-        const filteredCurrentCapacity = currentUserAttends["data"].filter(
-          (x: any) =>
-            x["attributes"]["event-role-shifts"]["id"] === selectedRoleShift
-        );
-
-        if (
-          //FIXME: need to get index of selectedRole within array
-          filteredCurrentCapacity.length <=
-          eventD.volunteerRoles[selectedRole][selectedRoleShift]["capacity"]
-        ) {
-          await axios
-            .post(address, {
-              headers: {
-                Authorization: `Bearer ${auth}`,
+        await axios
+          .post(address, {
+            headers: {
+              Authorization: `Bearer ${auth}`,
+            },
+            data: {
+              users_permissions_user: {
+                id: user.id,
               },
-              data: {
-                users_permissions_user: {
-                  id: user.id,
-                },
-                event_role_shifts: {
-                  id: selectedRoleShift,
-                },
-                checkIn: false,
-                checkOut: false,
+              event_role_shifts: {
+                id: selectedRoleShift,
               },
-            })
-            .then((res) => console.log(res));
-        } else {
-          //TODO: show error snackbar if spot has no more capacity  
-        }
+              checkIn: false,
+              checkOut: false,
+            },
+          })
+          .then((res) => console.log(res));
       } catch (error) {
         console.log(error);
       }

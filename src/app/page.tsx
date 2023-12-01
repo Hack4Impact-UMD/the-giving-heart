@@ -4,10 +4,12 @@ import { Users } from "lucide-react";
 import { DollarSign } from "lucide-react";
 import { ArrowLeftCircle } from "lucide-react";
 import { ArrowRightCircle } from "lucide-react";
+import RegisterEvent from "./dashboard/registerEvent";
 import { Button } from "@/components/ui/button";
 import { API } from "@/utils/constant";
 
 import ImageCarousel from "../components/ui/ImageCarousel";
+import DropSpot from "./dashboard/dropSpot";
 
 export default async function Home() {
   const carouselImages = await fetchGallery();
@@ -121,6 +123,8 @@ export default async function Home() {
           </div>
         </div>
       </div>
+
+      <RegisterEvent eventName="bruh" eventDescription="bruh" eventDate="bruh" eventStartTime="bruh" eventEndTime="bruh" eventLocation="bruh" volunteerRole="bruh" volunteerShifts="bruh" eventActive={true} ></RegisterEvent>
     </main>
   );
 }

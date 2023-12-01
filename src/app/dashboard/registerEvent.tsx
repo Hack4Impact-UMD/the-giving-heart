@@ -8,6 +8,7 @@ import { Switch } from "@/components/ui/switch"
 import CardContent from "@mui/material/CardContent";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import DropSpot from "./dropSpot"
 
 // required props; some could be optional but not sure which
 interface EventData {
@@ -154,13 +155,9 @@ export default function BasicCard(props: EventData) {
             </div>
           </div>
 
-          <div className="text-center">
-            <button 
-              className="text-white px-10 py-2 rounded-md mt-3 inline-block"
-              style={{backgroundColor: '#ED1C24'}}
-            >
-              <b>Drop Spot</b>
-            </button>
+          {/* dropping spot on backend should be handled in DropSpot */}
+          <div className="mt-3 text-center">
+            <DropSpot></DropSpot>
           </div>
 
         </CardContent>

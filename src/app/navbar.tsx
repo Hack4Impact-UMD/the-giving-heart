@@ -83,7 +83,7 @@ export default function Navbar() {
               href={item.href}
               className={classNames(
                 pathname === item.href
-                  ? "border-slate-500 text-black bg-neutral-500"
+                  ? "text-[#ed1c24] font-bold"
                   : "border-transparent text-black hover:text-[#ed1c24] hover:border-gray-300",
                 "inline-flex items-center px-1 pt-1 text-sm font-medium ml-3 mr-3"
               )}
@@ -98,8 +98,8 @@ export default function Navbar() {
               onClick={handleLogout}
               className={classNames(
                 pathname === "/sign-in"
-                  ? "border-slate-500 text-black bg-neutral-500"
-                  : "border-transparent text-black hover:text-gray-500 hover:border-gray-300",
+                  ? "text-[#ed1c24] font-bold"
+                  : "border-transparent text-black hover:text-[#ed1c24] hover:border-gray-300",
                 "inline-flex items-center px-1 pt-1 text-sm font-medium ml-3 mr-3"
               )}
               aria-current={pathname === "/sign-in" ? "page" : undefined}
@@ -112,8 +112,8 @@ export default function Navbar() {
               href="/sign-in"
               className={classNames(
                 pathname === "/sign-in"
-                  ? "border-slate-500 text-black bg-neutral-500"
-                  : "border-transparent text-black hover:text-gray-500 hover:border-gray-300",
+                  ? "text-[#ed1c24] font-bold"
+                  : "border-transparent text-black hover:text-[#ed1c24] hover:border-gray-300",
                 "inline-flex items-center px-1 pt-1 text-sm font-medium ml-3 mr-3"
               )}
               aria-current={pathname === "/sign-in" ? "page" : undefined}

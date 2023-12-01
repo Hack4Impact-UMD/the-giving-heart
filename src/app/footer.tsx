@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
 import { usePathname } from "next/navigation";
-import Image from "next/image"
-import { User } from 'lucide-react';
+import Image from "next/image";
+import { User } from "lucide-react";
 import { API } from "@/utils/constant";
 
 const navigation = [
@@ -16,16 +16,22 @@ function classNames(...classes: string[]) {
 
 export default async function Footer() {
   const pathname = usePathname();
-  const footer_email_phone: string [] = await fetchFooter();
+  const footer_email_phone: string[] = await fetchFooter();
 
   return (
     <div className="w-full content-between px-5 text-white bg-[#860e13]">
       <div className="flex flex-col sm:flex-row justify-around mr-5 mt-5">
-        <p className="w-full sm:w-1/3 text-center sm:text-left sm:text-3xl md:text-4xl text-2xl mt-4 mr-2">The Giving Heart ❤</p>
+        <p className="w-full sm:w-1/3 text-center sm:text-left sm:text-3xl md:text-4xl text-2xl mt-4 mr-2">
+          The Giving Heart ❤
+        </p>
 
         <div className="m-4 flex flex-col sm:items-center">
           <div className="text-xl underline">Contact Us</div>
-          <p className="text-md font-medium sm:pt-1">{footer_email_phone[0]}</p>
+          <p className="text-md font-medium sm:pt-1">
+            <a href={`mailto:${footer_email_phone[0]}`}>
+              {footer_email_phone[0]}
+            </a>
+          </p>
           <p className="text-md font-medium sm:pt-1">{footer_email_phone[1]}</p>
         </div>
 
@@ -49,9 +55,7 @@ export default async function Footer() {
         </div>
 
         <div className="hidden sm:visible m-4 md:flex flex-col items-center">
-          <div className="hidden sm:flex text-xl underline">
-            Socials
-          </div>
+          <div className="hidden sm:flex text-xl underline">Socials</div>
 
           <div className="hidden md:visible pt-1 md:flex justify-between items-center space-x-2">
             <User />
@@ -59,7 +63,6 @@ export default async function Footer() {
             <User />
           </div>
         </div>
-
       </div>
 
       <hr className="text-white mt-8 mb-1" />

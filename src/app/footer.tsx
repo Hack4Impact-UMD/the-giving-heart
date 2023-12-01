@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { User } from "lucide-react";
 import { API } from "@/utils/constant";
-
+import Link from "next/link";
 const navigation = [
   { name: "Donate", href: "/getinvolved" },
   { name: "Volunteer", href: "/getinvolved" },
@@ -78,7 +78,24 @@ export default async function Footer() {
 
       <div className="hidden md:visible md:flex flex-row justify-between text-xs font-medium mr-5 pb-8">
         <div className="pt-1"> The Giving Heart </div>
-        <div className="pt-1">Privacy Policy | Terms of Use</div>
+        <div className="pt-1">
+          {" "}
+          <Link
+            href={{
+              pathname: `/privacy-policy`,
+            }}
+          >
+            Privacy Policy{" "}
+          </Link>
+          |
+          <Link
+            href={{
+              pathname: `/terms-of-use`,
+            }}
+          >
+            Terms of Use
+          </Link>
+        </div>
       </div>
     </div>
   );

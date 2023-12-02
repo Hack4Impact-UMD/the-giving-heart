@@ -18,46 +18,28 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "../../components/ui/button";
 import axios from "axios";
 import { useAuthContext } from "@/utils/context/AuthContext";
-
-interface EventData {
-  event: {
-    id: string;
-    title: string;
-    description: string;
-    location: string;
-    eventDateStart: string;
-    eventDateEnd: string;
-    eventCheckInKey: string;
-    signUpOpenDate: string;
-    signUpEndDate: string;
-  };
-  volunteerRoles: {
-    title: string;
-    description: string;
-    eventRoleShiftTimeStart: string;
-    eventRoleShiftTimeEnd: string;
-    eventRoleShiftDate: string;
-    capacity: number;
-    eventRoleShiftDescription: string;
-    shiftId: string;
-    volunteerRoleId: string;
-  }[];
-}
+import { EventSignUpData, UserAttendsData } from "../_api/model";
+import { useRouter } from "next/navigation";
 
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
-
   const searchParamsEvent = searchParams.get("event") ?? "This was undefined"; //FIXME: Need to change default val of params
   const eventData = JSON.parse(`${searchParamsEvent}`);
-
   const searchParamsVolunteerRoles =
     searchParams.get("volunteerRoles") ?? "This was undefined - event data"; //FIXME: Need to change default val of params
   const volunteerRolesData = JSON.parse(`${searchParamsVolunteerRoles}`);
+  const router = useRouter();
 
   const [selectedRole, setSelectedRole] = React.useState<string>("");
-
   const [availableShifts, setAvailableShift] = useState([]);
   const [selectedRoleShift, setSelectedRoleShift] = useState("");
+  const { user, setUser } = useAuthContext();
+
+  const eventD: EventSignUpData = {
+    event: eventData,
+    volunteerRoles: volunteerRolesData,
+  };
+
   const handleRoleShiftSelection = (event: SelectChangeEvent<string>) => {
     setSelectedRoleShift(event.target.value);
   };
@@ -71,34 +53,23 @@ export default function EventSignupPage() {
     );
   };
 
-  const eventD: EventData = {
-    event: eventData,
-    volunteerRoles: volunteerRolesData,
-  };
-
-  const { user, setUser } = useAuthContext();
-
-  //TODO: need to make sure that users haven't already registered for event
+  //TODO: disable if event registration window has expired
   const handleRegisterClick = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     if (user) {
-      console.log(user);
       const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends`;
       const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
-      console.log({
-        users_permissions_user: {
-          id: user.id,
-        },
-        event_role_shifts: {
-          id: selectedRoleShift,
-        },
-        checkIn: false,
-        checkOut: false,
-      });
-
       try {
+        const currentUserAttends: any = await axios
+          .get(address, {
+            headers: {
+              Authorization: `Bearer ${auth}`,
+            },
+          })
+          .then((res) => console.log(res));
+
         await axios
           .post(address, {
             headers: {
@@ -115,16 +86,15 @@ export default function EventSignupPage() {
               checkOut: false,
             },
           })
-          .then((res) => console.log(res));
+          .then((res) => {
+            console.log(res);
+            router.push("/dashboard");
+          });
       } catch (error) {
         console.log(error);
       }
     }
-    // TODO: show error message if not logged in
-
-    // else {
-    // setShowErrorMessage(true);
-    // }
+    //TODO: need to make sure that users haven't already registered for event
   };
 
   return (

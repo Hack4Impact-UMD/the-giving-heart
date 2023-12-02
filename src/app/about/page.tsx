@@ -5,8 +5,15 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import backgroundPic from "../_images/about_background_header.png";
 import IconButton from "@mui/material/IconButton";
+import backgroundPic from "../_images/about_background_header.png";
+import foodDistribution from "../_images/food_distribution.png";
+import supportVulnerable from "../_images/support_vulnerable.png";
+import advocayAwareness from "../_images/advocay_awareness.png";
+
+
+//bg-[url('./_images/homepage_bg.png')]
+
 import { useState } from "react";
 
 export default function About() {
@@ -58,8 +65,7 @@ export default function About() {
       <div
         className="flex items-center justify-center md:p-16 p-2 pt-16"
         style={{
-          backgroundImage: // TODO: CHANGE S3 URL TO THE ACTUAL IMAGE
-            "linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/c817/5127/594805745557a8e6edf7c0c616c75e94?Expires=1701043200&Signature=cj4Ut4WFbVmhzOJIiJZc218CbfAUm2D67O5CvLtY0hYW~-xVrPxmKr8OkxpUqWx1p8gkldNk~OnCQMtoO5nB9YGSr39KZIJ9e3leWLLZ~ZOjyZba1Q9tNHeTwM2ZPqiP4nk-Ivvq7xUZQXiIGEhkPEXDqnNkRooOaaIevEEKPNIBxKvhsfwBSCaHv8Pn~vKUGHMD-pCBMNQ3W21DplQbR~IdxrON~L7CS8dMCZug2J48MrVYTInK~hHZDG5iwUpIJkn5H9UOY8enwEUV~WdWAu4WAenh2M4L7SZdhXO0qplQ4l97fx-Qzx~TnfSAAQ6T-MLFKg4xM9KxgBb22R5AYA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
+          backgroundImage: "url(../_images/about_background_header.png), linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5))",
           backgroundSize: "cover",
           backgroundPosition: "center",
           width: "200vh",
@@ -72,6 +78,7 @@ export default function About() {
             className="text-center text-xl md:text-7xl pt-3 pb-3 font-bold"
             style={{ color: "#FFF", fontFamily: "Inter" }}
           >
+            
             About Us
           </h2>
           <p
@@ -149,18 +156,18 @@ export default function About() {
              * - Change S3 URLS to actual images
              * - Stack pictures horizontally on desktop image
              */}
-            <div className="flex flex-col items-center w-11/12 m-auto mt-10">
+            <div className="flex flex-col lg:flex-row items-center w-11/12 m-auto mt-10">
               <div
+                className="lg:w-auto md:w-56 sm:w-40 mx-20 my-4"
                 style={{
                   backgroundImage:
-                    "linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/7473/152d/7532aea559ed10b94265fbdbcd1fc9cc?Expires=1701043200&Signature=M5QPGkCZZMlbPjlNSpBhQ3j6xY3FwyGmQqw46BH0-S~5IRtb3-UTAE6uv-GGlSmlXOi8gJ~VxjVEB2mxh-tOXgYDcqlzVwtnitqdIKJLwdtUvwvRVn4TvpCaAISnEOC7XW8ci10GnCebZX5bBQvrXLJVa~p7XLhlKrQFzfMdKD7yEpLIHzi8hHZZjKrHBOrq1TRA6sn8asYq827ySUdRxb2t5soyiJuRxUsXjw7neQcydEqCvqxJFBxmnNs0sGH70hujaYxYlDwI-GxDYCDiRbHV68HpqCpuSRKXof437cBKQPRKl1TVyRW9-jwrsS1T8RVFkAJFC9ecBa9M5MI5Ng__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
+                    "url(../_images/food_distribution.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center 10px",
                   width: "300px",
                   height: "350px",
                   position: "relative",
                   color: "white",
-                  fontFamily: "Inter",
                   fontSize: "20px",
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -168,23 +175,22 @@ export default function About() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-end",
-                  paddingBottom: "4px",
+                  paddingBottom: "20px",
                 }}
               >
                 Food Distribution
               </div>
               <div
-                className="lg:w-72 md:w-56 sm:w-40 mx-4 mt-4"
+                className="lg:w-auto md:w-56 sm:w-40 mx-20 my-4"
                 style={{
                   backgroundImage:
-                    "linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/dadb/a0ae/10d1630da1b459ff35748fbe00d1b83f?Expires=1701043200&Signature=cKNea49bOng6t3MP2N8UOEP0v6BlG4QpYPzPJObk~3DOFGZsxX5GwAQbkOxEyEQs5POYXWr2IkKKKziyUvIPLk3qbNoUOXIRdQxPE9dQvYjyaH46j3H-Ow-y0t3NLO7m9Ewe6e-09Lx5quveY4C97X0qkVz-YXuTLPsvV0zvHMjhwKVCwEA4tFdwfO8k9o6Q6TPYIT7QhqY-f47s5vKoijlbyWYRJkO3bIt~YEpudQn6zHAIudcdhvVWURF0cOJXmEdlF88fE0BHlGg5Uj3iTpF-Acb19q9N6wNyrb6Uta~q~xpYaSYvoj8wOdK9pzGVnt8BH0TvWOvFbj5A81dOtQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
+                    "url(../_images/support_vulnerable.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center 10px",
                   width: "300px",
                   height: "350px",
                   position: "relative",
                   color: "white",
-                  fontFamily: "Inter",
                   fontSize: "20px",
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -192,22 +198,22 @@ export default function About() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-end",
+                  paddingBottom: "20px",
                 }}
               >
                 Support for Vulnerable Populations
               </div>
               <div
-                className="lg:w-72 md:w-56 sm:w-40 mx-4 mt-4 mb-4"
+                className="lg:w-auto md:w-56 sm:w-40 mx-20 my-4"
                 style={{
                   backgroundImage:
-                    "linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/660d/ed41/bd24b896233d414d99f3c30c1c4d9768?Expires=1701043200&Signature=NmKArShEfBzlMHv4gRsU22TlDfcKUWAAY19peTBGpqcDlTAzcJXUU5cqe1qKW6~KruPHBg2BiZIFxnUys5PeYzp3U3CAn3SBHsnN9xRD2b17grioK7FtuRXhwOMCn8DWAwjULGfUiBWm~F~IpbU6YH3OGKbyY7TkCnbNZamwR-G2UEEy6i1i4BuuwzF-u1nqXCIf0crZTLehGFaZCIOYl5X9TDxecSOTIiy3mGmSof16QhWrysHcVDqJ9ggMjLEGjY0o~54yqB-MUuPL7HvjcSI6pkvQqDacOqMd7K8G6FdACLvtm5WrcTBFnXJZKenVpN5~aO3Smsdc9jQjAZ1KGA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
+                    "url(../_images/advocay_awareness.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center 10px",
                   width: "300px",
                   height: "350px",
                   position: "relative",
                   color: "white",
-                  fontFamily: "Inter",
                   fontSize: "20px",
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -215,6 +221,7 @@ export default function About() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-end",
+                  paddingBottom: "20px",
                 }}
               >
                 Advocacy and Awareness

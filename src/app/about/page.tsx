@@ -156,19 +156,18 @@ export default function About() {
              * - Change S3 URLS to actual images
              * - Stack pictures horizontally on desktop image
              */}
-            <div className="flex flex-col md:flex-row  items-center w-11/12 m-auto mt-10">
+            <div className="flex flex-col lg:flex-row items-center w-11/12 m-auto mt-10">
               <div
-                className="lg:w-auto md:w-56 sm:w-40 mx-4 mt-4 mb-4"
+                className="lg:w-auto md:w-56 sm:w-40 mx-20 my-4"
                 style={{
                   backgroundImage:
-                    "url(../_images/food_distribution.png), linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5))",
+                    "url(../_images/food_distribution.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center 10px",
                   width: "300px",
                   height: "350px",
                   position: "relative",
                   color: "white",
-                  fontFamily: "Inter",
                   fontSize: "20px",
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -176,23 +175,22 @@ export default function About() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-end",
-                  paddingBottom: "4px",
+                  paddingBottom: "20px",
                 }}
               >
                 Food Distribution
               </div>
               <div
-                className="lg:w-auto md:w-56 sm:w-40 mx-4 mt-4 mb-4"
+                className="lg:w-auto md:w-56 sm:w-40 mx-20 my-4"
                 style={{
                   backgroundImage:
-                    "url(../_images/support_vulnerable.png), linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5))",
+                    "url(../_images/support_vulnerable.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center 10px",
                   width: "300px",
                   height: "350px",
                   position: "relative",
                   color: "white",
-                  fontFamily: "Inter",
                   fontSize: "20px",
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -200,22 +198,22 @@ export default function About() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-end",
+                  paddingBottom: "20px",
                 }}
               >
                 Support for Vulnerable Populations
               </div>
               <div
-                className="lg:w-auto md:w-56 sm:w-40 mx-4 mt-4 mb-4"
+                className="lg:w-auto md:w-56 sm:w-40 mx-20 my-4"
                 style={{
                   backgroundImage:
-                    "url(../_images/advocay_awareness.png), linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5))",
+                    "url(../_images/advocay_awareness.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center 10px",
                   width: "300px",
                   height: "350px",
                   position: "relative",
                   color: "white",
-                  fontFamily: "Inter",
                   fontSize: "20px",
                   fontStyle: "normal",
                   fontWeight: "400",
@@ -223,6 +221,7 @@ export default function About() {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-end",
+                  paddingBottom: "20px",
                 }}
               >
                 Advocacy and Awareness

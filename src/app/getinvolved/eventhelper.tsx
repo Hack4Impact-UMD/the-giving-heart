@@ -20,19 +20,23 @@ export default function EventHelper() {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className="w-full">
       {data["data"].map((item: any) => (
         <div key="id">
           <a
             href="#"
-            className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+            className="h-full w-full md:max-w-lg flex flex-row items-center justify-between space-x-4 border-none block max-w-sm p-6 bg-white rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
           >
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-              {item["attributes"]["title"]}
-            </h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">
-              {item["attributes"]["description"]}
-            </p>
+            <div className="w-full">
+              <h5 className="mb-2 text-sm md:text-xl font-sans tracking-tight text-gray-900 dark:text-white">
+                {item["attributes"]["title"]}
+              </h5>
+              <p className="font-sans text-gray-700 font-light text-xs dark:text-gray-400">
+                {item["attributes"]["description"]}
+              </p>
+            </div>
+            <div className="text-center box-border h-28 w-full bg-gray-400">
+            </div>
           </a>
         </div>
       ))}

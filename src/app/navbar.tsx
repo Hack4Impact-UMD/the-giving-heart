@@ -23,8 +23,16 @@ import { Settings } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { XCircle } from "lucide-react";
 import { X } from "lucide-react";
-
 import { removeToken } from "@/utils/helpers";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -94,18 +102,42 @@ export default function Navbar() {
           ))}
 
           {user ? (
-            <button
-              onClick={handleLogout}
-              className={classNames(
-                pathname === "/sign-in"
-                  ? "text-[#ed1c24] font-bold"
-                  : "border-transparent text-black hover:text-[#ed1c24] hover:border-gray-300",
-                "inline-flex items-center px-1 pt-1 text-sm font-medium ml-3 mr-3"
-              )}
-              aria-current={pathname === "/sign-in" ? "page" : undefined}
-            >
-              Logout
-            </button>
+            <div className="inline-flex px-1 pt-1 text-sm font-medium ml-3 mr-8">
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline-flex align-center mr-2 lucide lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>
+                {user?.firstName}'s Profile
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>
+                    <a href="/settings">
+                    <Settings className="inline-flex mr-2 text-[#ed1c24]" />
+                      Settings
+                    </a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <a href="/dashboard">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline-flex align-center text-[#ed1c24] mr-2 lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                      Event Management
+                    </a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <button
+                      onClick={handleLogout}
+                      className={classNames(
+                        pathname === "/sign-in"
+                          ? "text-[#ed1c24] font-bold"
+                          : "border-transparent text-black hover:text-[#ed1c24] hover:border-gray-300",
+                      )}
+                      aria-current={pathname === "/sign-in" ? "page" : undefined}
+                    >
+                      <XCircle className="inline-flex mr-2 text-[#ed1c24]" />
+                      Logout
+                    </button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           ) : (
             <a
               key="Sign up/Log in"
@@ -173,6 +205,17 @@ export default function Navbar() {
                   <AccordionTrigger className="text-gray-500">
                     {user.firstName}&apos;s Profile
                   </AccordionTrigger>
+                  <AccordionContent className="text-gray-500 text-md">
+                    <div className="flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline-flex align-center text-[#ed1c24] mr-2 lucide lucide-calendar-days"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                      <a
+                        className="text-gray-500 hover:text-[#ed1c24] hover:cursor-pointer"
+                        href="/dashboard"
+                      >
+                        Event Management
+                      </a>
+                    </div>
+                  </AccordionContent>
                   <AccordionContent className="text-gray-500 text-md">
                     <div className="flex">
                       <Settings className="my-auto mr-2 text-[#ed1c24]" />{" "}

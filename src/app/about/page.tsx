@@ -56,16 +56,8 @@ export default function About() {
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div
-        className="flex items-center justify-center md:p-16 p-2 pt-16"
-        style={{
-          backgroundImage: // TODO: CHANGE S3 URL TO THE ACTUAL IMAGE
-            "linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/c817/5127/594805745557a8e6edf7c0c616c75e94?Expires=1701043200&Signature=cj4Ut4WFbVmhzOJIiJZc218CbfAUm2D67O5CvLtY0hYW~-xVrPxmKr8OkxpUqWx1p8gkldNk~OnCQMtoO5nB9YGSr39KZIJ9e3leWLLZ~ZOjyZba1Q9tNHeTwM2ZPqiP4nk-Ivvq7xUZQXiIGEhkPEXDqnNkRooOaaIevEEKPNIBxKvhsfwBSCaHv8Pn~vKUGHMD-pCBMNQ3W21DplQbR~IdxrON~L7CS8dMCZug2J48MrVYTInK~hHZDG5iwUpIJkn5H9UOY8enwEUV~WdWAu4WAenh2M4L7SZdhXO0qplQ4l97fx-Qzx~TnfSAAQ6T-MLFKg4xM9KxgBb22R5AYA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          width: "200vh",
-          height: "40vh",
-          position: "relative",
-        }}
+        className="flex items-center justify-center w-full bg-cover bg-[url('./_images/about_background_header.png')] md:p-16 p-2 pt-16"
+        
       >
         <div>
           <h2

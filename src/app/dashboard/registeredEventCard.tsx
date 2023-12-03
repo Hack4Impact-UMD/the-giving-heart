@@ -9,6 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import DropSpot from "./dropSpot"
 // import { useRouter } from "next/router";
 
 //FIXME: need to match regular eventcard
@@ -178,14 +179,9 @@ export default function RegisteredEventCard(props: EventData) {
             </div>
           </div>
 
-          <div className="text-center">
-            <button
-              className="text-white px-10 py-2 rounded-md mt-3 inline-block"
-              style={{ backgroundColor: "#ED1C24" }}
-              onClick={handleDropSpot}
-            >
-              <b>Drop Spot</b>
-            </button>
+          {/* dropping spot on backend should be handled in DropSpot */}
+          <div className="mt-3 text-center">
+            <DropSpot></DropSpot>
           </div>
         </CardContent>
 

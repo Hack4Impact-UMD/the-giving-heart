@@ -82,7 +82,7 @@ export default function SignUp() {
                 Sign Up
               </h1>
               <p className="my-4 text-gray-400">
-                You're one step closer to making a difference!
+                You&apos;re one step closer to making a difference!
               </p>
               <div className="w-full my-8">
                 <Form {...form}>

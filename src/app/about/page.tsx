@@ -62,7 +62,7 @@ export default function About() {
         <div>
           <h2
             className="text-center text-xl md:text-7xl pt-3 pb-3 font-bold"
-            style={{ color: "#FFF", fontFamily: "Inter" }}
+            style={{ color: "#FFF", fontFamily: "Inter", fontSize: "24px", }}
           >
             About Us
           </h2>
@@ -72,6 +72,7 @@ export default function About() {
               color: "#E5DEDE",
               fontFamily: "Inter",
               fontStyle: "italic",
+              fontSize: "14px",
             }}
           >
             Est. 2002
@@ -80,31 +81,29 @@ export default function About() {
       </div>
 
       <div>
-        <div className="flex w-full items-center">
-          <div className="h-full p-4 md:text-center text-left text-black">
-            <div className="mt-12">
-              <h1
-                style={{
-                  color: "#000",
-                  textAlign: "center",
-                  fontFamily: "Inter",
-                  fontSize: "50px",
-                  fontStyle: "normal",
-                  fontWeight: "600",
-                  lineHeight: "normal",
-                }}
-              >
-                Who We Are
+      <div className="flex w-full text-md items-center">
+        <div className="h-full p-4 md:text-center text-left text-black">
+          <div className="mt-12">
+            <h1
+              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
+              style={{
+                color: "#000",
+                textAlign: "center",
+                fontFamily: "Inter",
+                fontWeight: "600",
+                lineHeight: "normal",
+              }}
+            >
+              Who We Are
               </h1>
             </div>
 
             {/**TODO: need to add the below as a single type in Strapi for user to edit it*/}
-            <p
+            <p className = "text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl"
               style={{
                 color: "#838383",
                 textAlign: "center",
                 fontFamily: "Inter",
-                fontSize: "30px",
                 fontStyle: "normal",
                 fontWeight: "400",
                 lineHeight: "normal",
@@ -123,93 +122,85 @@ export default function About() {
         <div className="flex w-full items-center">
           <div className="h-full p-4 md:text-center text-left text-black">
             <div className="mt-12">
-              <h1
-                style={{
-                  color: "black",
-                  textAlign: "center",
-                  fontFamily: "Inter",
-                  fontSize: "50px",
-                  fontStyle: "normal",
-                  fontWeight: "600",
-                  lineHeight: "normal",
-                }}
-              >
-                Ways We Help Others
+            <h1
+              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
+              style={{
+                color: "#000",
+                textAlign: "center",
+                fontFamily: "Inter",
+                fontWeight: "600",
+                lineHeight: "normal",
+              }}
+            >
+              Ways We Help Others
               </h1>
             </div>
             {/**TODO:
              * - Change S3 URLS to actual images
              * - Stack pictures horizontally on desktop image
              */}
-            <div className="flex flex-col items-center w-11/12 m-auto mt-10">
-              <div
+             
+             <div className="flex flex-col items-center w-11/12 m-auto mt-10 md:flex-row">
+                <div className = "mx-4 mt-4 bg-cover bg-center bg-[url('./_images/food_distribution.png')]"
+                  style={{
+                    position: "relative",
+                    color: "white",
+                    width: "100px",
+                    height: "131px",
+                    fontFamily: "Inter",
+                    fontSize: "11px",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    paddingBottom: "4px",
+                    marginRight: "20px", 
+                  }}
+                > <div className="text-md" > Food Distribution </div>
+                </div>
+              <div className="mx-4 mt-4 bg-cover bg-center bg-[url('./_images/vulnerable_populations.png')]"
                 style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/7473/152d/7532aea559ed10b94265fbdbcd1fc9cc?Expires=1701043200&Signature=M5QPGkCZZMlbPjlNSpBhQ3j6xY3FwyGmQqw46BH0-S~5IRtb3-UTAE6uv-GGlSmlXOi8gJ~VxjVEB2mxh-tOXgYDcqlzVwtnitqdIKJLwdtUvwvRVn4TvpCaAISnEOC7XW8ci10GnCebZX5bBQvrXLJVa~p7XLhlKrQFzfMdKD7yEpLIHzi8hHZZjKrHBOrq1TRA6sn8asYq827ySUdRxb2t5soyiJuRxUsXjw7neQcydEqCvqxJFBxmnNs0sGH70hujaYxYlDwI-GxDYCDiRbHV68HpqCpuSRKXof437cBKQPRKl1TVyRW9-jwrsS1T8RVFkAJFC9ecBa9M5MI5Ng__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center 10px",
-                  width: "300px",
-                  height: "350px",
+                    position: "relative",
+                    color: "white",
+                    width: "100px",
+                    height: "131px",
+                    fontFamily: "Inter",
+                    fontSize: "11px",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "normal",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    paddingBottom: "4px",
+                    paddingInline: "50px"
+                  }}
+                > <div className="text-md" > Support for Vulnerable Populations </div> 
+              </div>
+
+            <div className="mx-4 mt-4 bg-cover bg-center bg-[url('./_images/advocacy.png')]"
+                style={{
                   position: "relative",
                   color: "white",
+                  width: "100px",
+                  height: "131px",
                   fontFamily: "Inter",
-                  fontSize: "20px",
+                  fontSize: "11px",
                   fontStyle: "normal",
                   fontWeight: "400",
                   lineHeight: "normal",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "flex-end",
+                  alignItems: "center",
                   paddingBottom: "4px",
+                  paddingInline: "50px"
                 }}
-              >
-                Food Distribution
-              </div>
-              <div
-                className="lg:w-72 md:w-56 sm:w-40 mx-4 mt-4"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/dadb/a0ae/10d1630da1b459ff35748fbe00d1b83f?Expires=1701043200&Signature=cKNea49bOng6t3MP2N8UOEP0v6BlG4QpYPzPJObk~3DOFGZsxX5GwAQbkOxEyEQs5POYXWr2IkKKKziyUvIPLk3qbNoUOXIRdQxPE9dQvYjyaH46j3H-Ow-y0t3NLO7m9Ewe6e-09Lx5quveY4C97X0qkVz-YXuTLPsvV0zvHMjhwKVCwEA4tFdwfO8k9o6Q6TPYIT7QhqY-f47s5vKoijlbyWYRJkO3bIt~YEpudQn6zHAIudcdhvVWURF0cOJXmEdlF88fE0BHlGg5Uj3iTpF-Acb19q9N6wNyrb6Uta~q~xpYaSYvoj8wOdK9pzGVnt8BH0TvWOvFbj5A81dOtQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center 10px",
-                  width: "300px",
-                  height: "350px",
-                  position: "relative",
-                  color: "white",
-                  fontFamily: "Inter",
-                  fontSize: "20px",
-                  fontStyle: "normal",
-                  fontWeight: "400",
-                  lineHeight: "normal",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                }}
-              >
-                Support for Vulnerable Populations
-              </div>
-              <div
-                className="lg:w-72 md:w-56 sm:w-40 mx-4 mt-4 mb-4"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(https://s3-alpha-sig.figma.com/img/660d/ed41/bd24b896233d414d99f3c30c1c4d9768?Expires=1701043200&Signature=NmKArShEfBzlMHv4gRsU22TlDfcKUWAAY19peTBGpqcDlTAzcJXUU5cqe1qKW6~KruPHBg2BiZIFxnUys5PeYzp3U3CAn3SBHsnN9xRD2b17grioK7FtuRXhwOMCn8DWAwjULGfUiBWm~F~IpbU6YH3OGKbyY7TkCnbNZamwR-G2UEEy6i1i4BuuwzF-u1nqXCIf0crZTLehGFaZCIOYl5X9TDxecSOTIiy3mGmSof16QhWrysHcVDqJ9ggMjLEGjY0o~54yqB-MUuPL7HvjcSI6pkvQqDacOqMd7K8G6FdACLvtm5WrcTBFnXJZKenVpN5~aO3Smsdc9jQjAZ1KGA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center 10px",
-                  width: "300px",
-                  height: "350px",
-                  position: "relative",
-                  color: "white",
-                  fontFamily: "Inter",
-                  fontSize: "20px",
-                  fontStyle: "normal",
-                  fontWeight: "400",
-                  lineHeight: "normal",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "flex-end",
-                }}
-              >
-                Advocacy and Awareness
+              > <div className="text-md" >Advocacy and Awareness</div>
               </div>
             </div>
           </div>
@@ -225,7 +216,7 @@ export default function About() {
                   color: "#000",
                   textAlign: "center",
                   fontFamily: "Inter",
-                  fontSize: "50px",
+                  fontSize: "20px",
                   fontStyle: "normal",
                   fontWeight: "600",
                   lineHeight: "normal",
@@ -265,14 +256,14 @@ export default function About() {
                   textAlign: "center",
                   width: "100%",
                   color: expanded.includes(item.id) ? "white" : "black",
-                  fontFamily: "Open Sans",
+                  fontFamily: "Inter",
                 }}
               >
                 <div>
                   <Typography
                     style={{
-                      fontFamily: "Open Sans",
-                      fontSize: "20px",
+                      fontFamily: "Inter",
+                      fontSize: "13px",
                       fontStyle: "normal",
                       fontWeight: expanded.includes(item.id) ? "700" : "400",
                     }}
@@ -282,9 +273,9 @@ export default function About() {
                 </div>
                 <div
                   style={{
-                    fontSize: "1.5rem",
+                    fontSize: "13px",
                     cursor: "pointer",
-                    fontFamily: "Open Sans",
+                    fontFamily: "Inter",
                   }}
                 >
                   {expanded.includes(item.id) ? "-" : "+"}

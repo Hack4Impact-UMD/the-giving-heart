@@ -76,14 +76,13 @@ export default function SignUp() {
     <div>
       <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-16">
         <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
-          <div className="w-full p-6 bg-gray-300">
+          <div className="w-full p-6">
             <div className="flex flex-col bg-white p-8">
               <h1 className="text-3xl font-bold text-gray-900 md:text-5xl">
                 Sign Up
               </h1>
               <p className="my-4 text-gray-400">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
+                You're one step closer to making a difference!
               </p>
               <div className="w-full my-8">
                 <Form {...form}>
@@ -96,9 +95,9 @@ export default function SignUp() {
                       name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>First Name</FormLabel>
+                          <FormLabel>First Name:</FormLabel>
                           <FormControl>
-                            <Input placeholder="First Name" {...field} />
+                            <Input placeholder="Enter first name" {...field} />
                           </FormControl>
                           {errors.firstName && (
                             <FormMessage>
@@ -113,9 +112,9 @@ export default function SignUp() {
                       name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Last Name</FormLabel>
+                          <FormLabel>Last Name:</FormLabel>
                           <FormControl>
-                            <Input placeholder="Last Name" {...field} />
+                            <Input placeholder="Enter last name" {...field} />
                           </FormControl>
                           {errors.lastName && (
                             <FormMessage>{errors.lastName.message}</FormMessage>
@@ -128,9 +127,9 @@ export default function SignUp() {
                       name="email"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel>Email:</FormLabel>
                           <FormControl>
-                            <Input placeholder="email@example.com" {...field} />
+                            <Input placeholder="Enter email" {...field} />
                           </FormControl>
                           {errors.email && (
                             <FormMessage>{errors.email.message}</FormMessage>
@@ -143,11 +142,11 @@ export default function SignUp() {
                       name="password"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel>Password:</FormLabel>
                           <FormControl>
                             <Input
                               type="password"
-                              placeholder="Password"
+                              placeholder="Enter password"
                               {...field}
                             />
                           </FormControl>
@@ -166,7 +165,7 @@ export default function SignUp() {
                     <div className="flex flex-row justify-center items-center pt-8">
                       <Button
                         type="submit"
-                        className="bg-gray-400 text-white px-8"
+                        className="bg-[#ED1C24] text-white px-8"
                       >
                         Sign Up
                       </Button>

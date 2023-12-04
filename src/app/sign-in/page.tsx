@@ -15,11 +15,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import Image from "../../../node_modules/next/image";
 import { Input } from "@/components/ui/input";
 import { useAuthContext } from "@/utils/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { setToken } from "@/utils/helpers";
 import { API } from "@/utils/constant";
+import logo from "../_images/giving-heart-logo.jpeg";
 
 // TODO?: might want to consider making passwords require at least a special character or number
 const schema = z.object({
@@ -69,28 +71,15 @@ export default function SignIn() {
 
   return (
     <div>
-      <main className="flex min-h-screen flex-col items-center justify-between p-4 md:p-16">
+      <main className="flex max-h-screen flex-col items-center justify-between p-4 md:p-16 px-8 pt-10 pb-32">
         <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
           <div className="flex flex-col w-full md:flex-row mx-auto">
-            <div className="bg-gray-300 p-6 flex flex-col justify-between items-center md:w-full">
-              <div className="flex flex-col items-center">
-                <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                  Lorem ips
-                </h1>
-
-                <p className="text-center italic my-4 text-white">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
-                </p>
-              </div>
-
-              <div className="h-60 w-full bg-white">
-                <p>Logo goes here</p>
-              </div>
+            <div className="p-6 flex-col justify-between items-center md:w-full hidden md:flex">
+              <Image src={logo} width={300} height={300} alt="Giving heart logo" />
             </div>
 
             <div className="flex flex-col bg-white p-6 md:w-full">
-              <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
+              <h1 className="text-3xl font-bold text-gray-900 md:text-4xl">
                 Login
               </h1>
               <div className="w-full mt-12">
@@ -106,7 +95,7 @@ export default function SignIn() {
                         <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
-                            <Input placeholder="email@example.com" {...field} />
+                            <Input placeholder="Enter email" {...field} />
                           </FormControl>
                           {errors.email && (
                             <FormMessage>{errors.email.message}</FormMessage>
@@ -123,7 +112,7 @@ export default function SignIn() {
                           <FormControl>
                             <Input
                               type="password"
-                              placeholder="Password"
+                              placeholder="Enter password"
                               {...field}
                             />
                           </FormControl>
@@ -133,7 +122,7 @@ export default function SignIn() {
                           <FormDescription>
                             <a
                               href="/forgot-password"
-                              className="text-red-500 text-xs hover:underline"
+                              className="text-xs hover:underline"
                             >
                               Forgot password?
                             </a>
@@ -148,10 +137,10 @@ export default function SignIn() {
                       </FormMessage>
                     )}
 
-                    <div className="flex flex-col justify-center items-center pt-8">
+                    <div className="flex flex-col justify-center items-center">
                       <Button
                         type="submit"
-                        className="bg-gray-400 text-white px-12"
+                        className="bg-[#ED1C24] text-white px-12"
                       >
                         Login
                       </Button>

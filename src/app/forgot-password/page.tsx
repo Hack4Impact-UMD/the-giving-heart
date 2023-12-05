@@ -16,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { API } from "@/utils/constant";
 
 const schema = z.object({
   email: z.string().email(),
@@ -40,7 +41,7 @@ export default function SignUp() {
     console.log(values);
     // need to set up email provider - currently 500 internal server error
     axios
-      .post("http://localhost:1337/api/auth/forgot-password", {
+      .post(`${API}/auth/forgot-password`, {
         email: values.email,
       })
       .then((response) => {

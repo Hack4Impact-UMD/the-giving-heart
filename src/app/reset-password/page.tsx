@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
+import { API } from "@/utils/constant";
 
 const schema = z.object({
   password: z.string().min(8).max(20),
@@ -40,7 +41,7 @@ export default function SignUp() {
     console.log(values);
 
     axios
-      .post("http://localhost:1337/api/auth/reset-password", {
+      .post(`${API}/auth/reset-password`, {
         code: searchParams.get("code"),
         password: values.password,
         passwordConfirmation: values.password,

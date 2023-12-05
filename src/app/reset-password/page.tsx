@@ -15,7 +15,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { API } from "@/utils/constant";
 
 const schema = z.object({
@@ -34,14 +34,15 @@ export default function ResetPassword() {
   });
 
   const form = useForm<FormData>({});
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
   const onSubmit = (values: FormData) => {
     console.log(values);
 
     axios
       .post(`${API}/auth/reset-password`, {
-        code: searchParams.get("code"),
+        //code: searchParams.get("code"),
+        code: "",
         password: values.password,
         passwordConfirmation: values.password,
       })

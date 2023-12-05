@@ -44,6 +44,7 @@ export default function ResetPassword({ searchParams }: Props) {
 
   const onSubmit = (values: FormData) => {
     console.log(values);
+    console.log("searchParam" + searchParams.code?.toString());
 
     axios
       .post(`${API}/auth/reset-password`, {

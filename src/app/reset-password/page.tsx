@@ -24,6 +24,14 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+type Props = {
+  searchParams?: {
+    code?: string;
+  };
+};
+
+// { searchParams }: Props
+
 export default function ResetPassword() {
   const {
     register,
@@ -115,3 +123,5 @@ export default function ResetPassword() {
     </div>
   );
 }
+
+export const dynamic = "force-dynamic";

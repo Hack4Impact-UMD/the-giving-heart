@@ -25,7 +25,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function SignUp() {
+export default function ResetPassword() {
   const {
     register,
     handleSubmit,

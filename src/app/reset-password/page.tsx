@@ -25,14 +25,12 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 type Props = {
-  searchParams?: {
+  searchParams: {
     code?: string;
   };
 };
 
-// { searchParams }: Props
-
-export default function ResetPassword() {
+export default function ResetPassword({ searchParams }: Props) {
   const {
     register,
     handleSubmit,
@@ -42,14 +40,14 @@ export default function ResetPassword() {
   });
 
   const form = useForm<FormData>({});
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
 
   const onSubmit = (values: FormData) => {
     console.log(values);
 
     axios
       .post(`${API}/auth/reset-password`, {
-        code: searchParams.get("code"),
+        code: searchParams.code,
         //code: "",
         password: values.password,
         passwordConfirmation: values.password,

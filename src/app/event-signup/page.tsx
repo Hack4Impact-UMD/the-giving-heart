@@ -43,7 +43,7 @@ interface EventData {
     volunteerRoleId: string;
   }[];
 }
-
+{/** */}
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
 
@@ -69,7 +69,7 @@ export default function EventSignupPage() {
         (x: any) => x["volunteerRoleId"] === event.target.value
       )
     );
-  };
+  }; 
 
   const eventD: EventData = {
     event: eventData,
@@ -130,12 +130,8 @@ export default function EventSignupPage() {
   return (
     <main className="flex min-h-screen flex-col">
       <div
-        className="flex md:p-16 p-2 pt-16"
+        className="flex md:p-16 w-full bg-cover bg-[url('./_images/event_registration_bkgd.png')] p-2 pt-16"
         style={{
-          backgroundImage:
-            "url(https://s3-alpha-sig.figma.com/img/4077/24e8/d2ceb9dcfeb6b305b7a653ac2d098c9e?Expires=1699833600&Signature=ELKLUbvN~tmYQCv9Krx5Hy8QvOm8gPfSuCVZ6M4k8R~uTaqV-Au2iNoHSEc0N2kNwNmDywilDftRjnvwIAq0fh6AVPkbfjFZ7tHzjmNgqfqRi5CzcIpW2dOoMpqdtN8-gF~weXAQZN21vW1Kt3B72QAGWVodX-NWzBghKrA01k7bw-VwkcDQKn6lv~0cCHmhUjYNr3usvFfksFzXCz5-ftA~CmBfjRqWIDdlLzDdulZhWfZTy5NzWYskzKNwgDp3dtjxR3zcx3HR~q~kpwHDEjqvgDUbEVubUokSg5lIAuASgxTQQ0jHX-RRlUPvwyG2pvLGixcVHcYfTMypYpIdGA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
           width: "100%",
           height: "40vh",
           position: "relative",
@@ -209,7 +205,10 @@ export default function EventSignupPage() {
           className="border border-black"
         >
           <div style={{ marginLeft: "10px", marginTop: "10px" }}>
-            <h3>Event Description</h3>
+            <div style = {{display: "flex"}}>
+              <img src="open-book.svg" alt="Icon" className="icon" />
+              <h3>Event Description</h3>
+            </div>
             <p
               style={{
                 color: "var(--components-card-secondary-text-color, #6B7280)",
@@ -221,7 +220,10 @@ export default function EventSignupPage() {
           </div>
 
           <div style={{ marginLeft: "10px", marginTop: "20px" }}>
+          <div style = {{display: "flex"}}>
+              <img src="users.svg" alt="Icon" className="icon" />
             <h3>Available Positions</h3>
+          </div>
             {eventD.volunteerRoles.map((role, index) => (
               <li
                 key={index}
@@ -246,7 +248,10 @@ export default function EventSignupPage() {
           </div>
 
           <div style={{ marginLeft: "10px", marginTop: "20px" }}>
-            <h3>Date and Time</h3>
+            <div style = {{display: "flex"}}>
+              <img src="calendar-clock.svg" alt="Icon" className="icon" />
+              <h3>Date and Time</h3>
+            </div>
             <p
               style={{
                 color: "var(--components-card-secondary-text-color, #6B7280)",
@@ -258,7 +263,10 @@ export default function EventSignupPage() {
           </div>
 
           <div style={{ marginLeft: "10px", marginTop: "20px" }}>
-            <h3>Location</h3>
+            <div style = {{ display: "flex", alignItems: "center"}}>
+              <img src="globe-2.svg" alt="Icon" className="icon" />
+              <h3>Location</h3>
+            </div>
             <p
               style={{
                 color: "var(--components-card-secondary-text-color, #6B7280)",
@@ -303,21 +311,27 @@ export default function EventSignupPage() {
           }}
           className="border border-black"
         >
-          <h3
-            style={{
-              fontStyle: "italic",
-              fontFamily: "Open Sans",
-              color: "#9D5425",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              margin: "5px",
-              fontSize: "13px",
-            }}
-          >
-            Roles already at full-capacity for this event appear gray.
-          </h3>
-          <FormControl>
+          <div style = {{ display: "flex", alignItems: "center"}}>
+              <img src="warning.svg" alt="Icon" className="icon" />
+            <h3
+              style={{
+                fontStyle: "italic",
+                fontFamily: "Open Sans",
+                color: "#9D5425",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                margin: "5px",
+                fontSize: "13px",
+              }}
+            > Roles already at full-capacity for this event appear gray.</h3>
+          </div>
+          <FormControl sx={{
+            marginTop: 2,
+            '&:hover': {
+              backgroundColor: 'yellow',
+            },
+          }}>
             <InputLabel sx={{ marginTop: 2 }} htmlFor="v-roles">
               Click to choose role
             </InputLabel>

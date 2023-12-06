@@ -9,6 +9,8 @@ import CardContent from "@mui/material/CardContent";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import { useToast } from "@/components/ui/use-toast";
+
 // import { useRouter } from "next/router";
 
 //FIXME: need to match regular eventcard
@@ -46,6 +48,7 @@ export default function RegisteredEventCard(props: EventData) {
 
   const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends/${props.userAttendId}`;
   const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+  const { toast } = useToast();
   // const router = useRouter();
 
   const handleCheckInToggle = async () => {
@@ -62,9 +65,21 @@ export default function RegisteredEventCard(props: EventData) {
             checkIn: newToggleValue,
           },
         })
-        .then((res) => console.log(res));
+        .then((res) => {
+          console.log(res);
+          toast({
+            variant: "confirmation",
+            title: "Checked in!",
+            description: "You have successfully checked in.",
+          })
+        });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Oops!",
+        description: "Something went wrong. Please try again.",
+      });
     }
   };
 
@@ -82,9 +97,21 @@ export default function RegisteredEventCard(props: EventData) {
             checkOut: newToggleValue,
           },
         })
-        .then((res) => console.log(res));
+        .then((res) => {
+          console.log(res);
+          toast({
+            variant: "confirmation",
+            title: "Checked out!",
+            description: "You have successfully checked out.",
+          });
+        });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Oops!",
+        description: "Something went wrong. Please try again.",
+      });
     }
   };
 
@@ -102,6 +129,11 @@ export default function RegisteredEventCard(props: EventData) {
         });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Oops!",
+        description: "Something went wrong. Please try again.",
+      });
     }
   };
 

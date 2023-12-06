@@ -63,19 +63,19 @@ export default function About() {
   return (
     <main className="flex min-h-screen flex-col items-center">
       <div
-        className="flex items-center justify-center md:p-16 p-2 pt-16"
+        className="flex items-center justify-center md:p-16 p-2 pt-16 overflow-hidden"
         style={{
           backgroundImage: "url(../_images/about_background_header.png), linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5))",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          width: "200vh",
+          width: "100vw",
           height: "40vh",
           position: "relative",
         }}
       >
         <div>
           <h2
-            className="text-center text-xl md:text-7xl pt-3 pb-3 font-bold"
+            className="text-center text-4xl md:text-7xl pt-3 pb-3 font-bold"
             style={{ color: "#FFF", fontFamily: "Inter" }}
           >
             
@@ -96,14 +96,14 @@ export default function About() {
 
       <div>
         <div className="flex w-full items-center">
-          <div className="h-full p-4 md:text-center text-left text-black">
-            <div className="mt-12">
-              <h1
+          <div className="h-full p-4 md:text-center text-center text-black md:px-20">
+            <div className="mt-12 p-8">
+              <h1 className="text-4xl md:text-5xl"
                 style={{
                   color: "#000",
                   textAlign: "center",
                   fontFamily: "Inter",
-                  fontSize: "50px",
+                  
                   fontStyle: "normal",
                   fontWeight: "600",
                   lineHeight: "normal",
@@ -114,12 +114,12 @@ export default function About() {
             </div>
 
             {/**TODO: need to add the below as a single type in Strapi for user to edit it*/}
-            <p
+            <p className="text-xl md:text-3xl"
               style={{
                 color: "#838383",
                 textAlign: "center",
                 fontFamily: "Inter",
-                fontSize: "30px",
+    
                 fontStyle: "normal",
                 fontWeight: "400",
                 lineHeight: "normal",
@@ -136,14 +136,14 @@ export default function About() {
 
       <div>
         <div className="flex w-full items-center">
-          <div className="h-full p-4 md:text-center text-left text-black">
+          <div className="h-full md:p-4 md:text-center text-left text-black">
             <div className="mt-12">
-              <h1
+              <h1 className="text-4xl md:text-5xl px-3"
                 style={{
                   color: "black",
                   textAlign: "center",
                   fontFamily: "Inter",
-                  fontSize: "50px",
+                
                   fontStyle: "normal",
                   fontWeight: "600",
                   lineHeight: "normal",
@@ -156,9 +156,9 @@ export default function About() {
              * - Change S3 URLS to actual images
              * - Stack pictures horizontally on desktop image
              */}
-            <div className="flex flex-col lg:flex-row items-center w-11/12 m-auto mt-10">
+            <div className="flex flex-col lg:flex-row items-center w-11/12 m-auto mt-10 justify-around">
               <div
-                className="lg:w-auto md:w-56 sm:w-40 mx-20 my-4"
+                className="lg:w-auto md:w-56 sm:w-40 md:mx-10 my-4 text-center"
                 style={{
                   backgroundImage:
                     "url(../_images/food_distribution.png)",
@@ -181,7 +181,7 @@ export default function About() {
                 Food Distribution
               </div>
               <div
-                className="lg:w-auto md:w-56 sm:w-40 mx-20 my-4"
+                className="lg:w-auto md:w-56 sm:w-40 md:mx-10 my-4 text-center"
                 style={{
                   backgroundImage:
                     "url(../_images/support_vulnerable.png)",
@@ -204,7 +204,7 @@ export default function About() {
                 Support for Vulnerable Populations
               </div>
               <div
-                className="lg:w-auto md:w-56 sm:w-40 mx-20 my-4"
+                className="lg:w-auto md:w-56 sm:w-40 md:mx-10 my-4 text-center"
                 style={{
                   backgroundImage:
                     "url(../_images/advocay_awareness.png)",

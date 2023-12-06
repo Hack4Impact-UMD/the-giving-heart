@@ -172,19 +172,21 @@ export default function EventSignupPage() {
         </div>
       </div>
 
-      <h3
+      <h3 className = "text-center text-3xl"
         style={{
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           color: "black",
-          fontFamily: "Open Sans",
-          fontSize: "48px",
-          fontWeight: "600",
+          fontFamily: "Inter",
         }}
-      >
-        Review event details
-      </h3>
+      >Review event details</h3>
+
+    <div
+      className="flex justify-between items-start"
+      style={{
+        borderLeft: "2px solid red", // Red line on the left
+        paddingLeft: "20px", // Adjust as needed
+      }}
+    >
 
       <div
         style={{
@@ -205,7 +207,7 @@ export default function EventSignupPage() {
           className="border border-black"
         >
           <div style={{ marginLeft: "10px", marginTop: "10px" }}>
-            <div style = {{display: "flex"}}>
+            <div className = "flex">
               <img src="open-book.svg" alt="Icon" className="icon" />
               <h3>Event Description</h3>
             </div>
@@ -220,7 +222,7 @@ export default function EventSignupPage() {
           </div>
 
           <div style={{ marginLeft: "10px", marginTop: "20px" }}>
-          <div style = {{display: "flex"}}>
+          <div className = "flex">
               <img src="users.svg" alt="Icon" className="icon" />
             <h3>Available Positions</h3>
           </div>
@@ -248,7 +250,7 @@ export default function EventSignupPage() {
           </div>
 
           <div style={{ marginLeft: "10px", marginTop: "20px" }}>
-            <div style = {{display: "flex"}}>
+          <div className = "flex">
               <img src="calendar-clock.svg" alt="Icon" className="icon" />
               <h3>Date and Time</h3>
             </div>
@@ -263,7 +265,7 @@ export default function EventSignupPage() {
           </div>
 
           <div style={{ marginLeft: "10px", marginTop: "20px" }}>
-            <div style = {{ display: "flex", alignItems: "center"}}>
+            <div className = "flex">
               <img src="globe-2.svg" alt="Icon" className="icon" />
               <h3>Location</h3>
             </div>
@@ -279,20 +281,13 @@ export default function EventSignupPage() {
         </Card>
       </div>
 
-      <h3
+      <h3 className = "text-center text-3xl pt-10"
         style={{
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           color: "black",
-          fontFamily: "Open Sans",
-          fontSize: "48px",
-          fontWeight: "600",
-          paddingTop: "30px",
+          fontFamily: "Inter",
         }}
-      >
-        Choose an available volunteer role
-      </h3>
+      >Choose an available volunteer role</h3>
 
       <div
         style={{
@@ -353,13 +348,21 @@ export default function EventSignupPage() {
       </div>
       {selectedRole !== "" ? (
         <div>
+          <h3 className = "text-center text-3xl pt-10"
+            style={{
+              display: "flex",
+              color: "black",
+              fontFamily: "Inter",
+              paddingTop: "30px",
+            }}
+      ></h3>
           <h3
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               color: "black",
-              fontFamily: "Open Sans",
+              fontFamily: "Inter",
               fontSize: "48px",
               fontWeight: "600",
               paddingTop: "30px",
@@ -441,6 +444,7 @@ export default function EventSignupPage() {
       ) : (
         ""
       )}
+      </div>
     </main>
   );
 }

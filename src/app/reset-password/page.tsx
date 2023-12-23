@@ -44,9 +44,6 @@ export default function ResetPassword({ searchParams }: Props) {
   const [samePasswordError, setSamePasswordError] = React.useState(true);
 
   const onSubmit = (values: FormData) => {
-    console.log(values);
-    console.log("searchParam" + searchParams.code?.toString());
-
     axios
       .post(`${API}/auth/reset-password`, {
         code: searchParams.code,

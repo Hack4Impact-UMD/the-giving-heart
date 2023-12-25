@@ -16,6 +16,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { API } from "@/utils/constant";
+import { useRouter } from "next/navigation";
+import React from "react";
 
 const schema = z.object({
   password: z.string().min(8).max(20),
@@ -37,13 +39,11 @@ export default function ResetPassword({ searchParams }: Props) {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-
+  const router = useRouter();
   const form = useForm<FormData>({});
+  const [samePasswordError, setSamePasswordError] = React.useState(true);
 
   const onSubmit = (values: FormData) => {
-    console.log(values);
-    console.log("searchParam" + searchParams.code?.toString());
-
     axios
       .post(`${API}/auth/reset-password`, {
         code: searchParams.code,
@@ -51,9 +51,13 @@ export default function ResetPassword({ searchParams }: Props) {
         passwordConfirmation: values.password,
       })
       .then((response) => {
+        router.push("/sign-in");
         console.log("Your user's password has been reset.");
       })
       .catch((error) => {
+        if (error.response.status === 400) {
+          setSamePasswordError(true);
+        }
         console.log("An error occurred:", error.response);
       });
   };
@@ -89,6 +93,11 @@ export default function ResetPassword({ searchParams }: Props) {
                         </FormControl>
                         {errors.password && (
                           <FormMessage>{errors.password.message}</FormMessage>
+                        )}
+                        {samePasswordError && (
+                          <FormMessage>
+                            Please double check the new password and try again.
+                          </FormMessage>
                         )}
                       </FormItem>
                     )}

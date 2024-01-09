@@ -55,32 +55,22 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 export default function About() {
   /* TODO: 
   - add accordionItems a Single Types in Strapi so users can alter it
-  - backgrouundColor and summaryBackgroundColor does not change so just use those color values in the code directly
   */
   const accordionItems = [
     {
-      id: "panel1",
       title: "Our Beginning: Early 2000's",
       content:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      backgroundColor: "#F5F5F5",
-      summaryBackgroundColor: "#D3D3D3",
     },
     {
-      id: "panel2",
       title: "Growth Phase: 2005 - 2009",
       content:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      backgroundColor: "#F5F5F5",
-      summaryBackgroundColor: "#D3D3D3",
     },
     {
-      id: "panel3",
       title: "Fighting hunger & our future: 2010 - Beyond",
       content:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      backgroundColor: "#F5F5F5",
-      summaryBackgroundColor: "#D3D3D3",
     },
   ];
 

@@ -23,8 +23,16 @@ import { Settings } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { XCircle } from "lucide-react";
 import { X } from "lucide-react";
-
 import { removeToken } from "@/utils/helpers";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -94,18 +102,36 @@ export default function Navbar() {
           ))}
 
           {user ? (
-            <button
-              onClick={handleLogout}
-              className={classNames(
-                pathname === "/sign-in"
-                  ? "text-[#ed1c24] font-bold"
-                  : "border-transparent text-black hover:text-[#ed1c24] hover:border-gray-300",
-                "inline-flex items-center px-1 pt-1 text-sm font-medium ml-3 mr-3"
-              )}
-              aria-current={pathname === "/sign-in" ? "page" : undefined}
-            >
-              Logout
-            </button>
+            <div className="inline-flex px-1 pt-1 text-sm font-medium ml-3 mr-8">
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="inline-flex align-center mr-2 lucide lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>
+                {user?.firstName}&apos;s Profile
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>
+                    <a href="/settings">
+                    <Settings className="inline-flex mr-2 text-[#ed1c24]" />
+                      Settings
+                    </a>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <button
+                      onClick={handleLogout}
+                      className={classNames(
+                        pathname === "/sign-in"
+                          ? "text-[#ed1c24] font-bold"
+                          : "border-transparent text-black hover:text-[#ed1c24] hover:border-gray-300",
+                      )}
+                      aria-current={pathname === "/sign-in" ? "page" : undefined}
+                    >
+                      <XCircle className="inline-flex mr-2 text-[#ed1c24]" />
+                      Logout
+                    </button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           ) : (
             <a
               key="Sign up/Log in"

@@ -16,6 +16,7 @@ import globe from ".././_images/globe.svg";
 import AlertMessage from "../../components/ui/AlertMessage";
 import { useAuthContext } from "@/utils/context/AuthContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface EventCardProps {
   key: string;
@@ -31,8 +32,16 @@ export const EventCard: React.FC<EventCardProps> = ({
   image,
   setShowErrorMessage,
 }) => {
+  const router = useRouter();
   const eventObject = JSON.parse(event);
   const volunteerRolesObject = JSON.parse(volunteerRoles);
+  const { user, setUser } = useAuthContext();
+
+  const handleButtonClick = () => {
+    router.push(
+      `/event-signup?event=${event}&volunteerRoles=${volunteerRoles}`
+    );
+  };
 
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]">
@@ -94,24 +103,14 @@ export const EventCard: React.FC<EventCardProps> = ({
         </CardContent>
 
         <CardFooter className="flex justify-center items-center">
-          {/**TODO: Set to inactive if user does not exist and have a banner at top saying you need to be signed in! */}
-
           <Button
             variant="default"
             size="default"
             className="bg-[#ED1C24] text-white rounded-md"
+            onClick={handleButtonClick}
+            disabled={!user}
           >
-            <Link
-              href={{
-                pathname: `/event-signup`,
-                query: {
-                  event: event,
-                  volunteerRoles: volunteerRoles,
-                },
-              }}
-            >
-              Register
-            </Link>
+            Register
           </Button>
         </CardFooter>
       </Card>

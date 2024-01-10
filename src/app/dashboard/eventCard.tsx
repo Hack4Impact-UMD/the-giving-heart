@@ -38,6 +38,9 @@ export const EventCard: React.FC<EventCardProps> = ({
   const { user, setUser } = useAuthContext();
 
   const handleButtonClick = () => {
+    console.log(
+      "event-signup?event=" + event + "&volunteerRoles=" + volunteerRoles
+    );
     router.push(
       `/event-signup?event=${event}&volunteerRoles=${volunteerRoles}`
     );

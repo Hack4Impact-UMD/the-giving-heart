@@ -41,7 +41,11 @@ export const EventCard: React.FC<EventCardProps> = ({
     console.log(
       "event-signup?event=" + event + "&volunteerRoles=" + volunteerRoles
     );
-    router.push(`/event-signup`);
+    const params = new URLSearchParams();
+    params.append("event", event);
+    params.append("volunteerRoles", volunteerRoles);
+
+    router.push(`/event-signup?${params.toString()}`);
   };
 
   return (

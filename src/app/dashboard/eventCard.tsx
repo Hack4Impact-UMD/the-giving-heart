@@ -45,9 +45,7 @@ export const EventCard: React.FC<EventCardProps> = ({
     params.append("forceNavigation", new Date().getTime().toString());
 
     const newUrl = `/event-signup?${params.toString()}`;
-
-    console.log(`Navigating to ${newUrl}`);
-    router.replace(newUrl);
+    window.location.href = newUrl;
   };
 
   return (

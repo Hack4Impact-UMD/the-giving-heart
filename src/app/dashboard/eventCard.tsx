@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import {
   Card,
@@ -40,13 +38,14 @@ export const EventCard: React.FC<EventCardProps> = ({
   const { user, setUser } = useAuthContext();
 
   const handleButtonClick = () => {
-    console.log(
-      "event-signup?event=" + event + "&volunteerRoles=" + volunteerRoles
-    );
     const params = new URLSearchParams();
     params.append("event", event);
     params.append("volunteerRoles", volunteerRoles);
 
+    const queryString = params.toString();
+    params.append("forceNavigation", new Date().getTime().toString());
+
+    console.log(`Navigating to /event-signup?${queryString}`);
     router.push(`/event-signup?${params.toString()}`);
   };
 

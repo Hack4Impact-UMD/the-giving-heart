@@ -41,11 +41,8 @@ export const EventCard: React.FC<EventCardProps> = ({
     const params = new URLSearchParams();
     params.append("event", event);
     params.append("volunteerRoles", volunteerRoles);
-
-    params.append("forceNavigation", new Date().getTime().toString());
-
-    const newUrl = `/event-signup?${params.toString()}`;
-    window.location.href = newUrl;
+    router.refresh();
+    router.push(`/event-signup?${params.toString()}`);
   };
 
   return (

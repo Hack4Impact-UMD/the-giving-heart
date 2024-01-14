@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+import Image, { StaticImageData } from "../../../node_modules/next/image";
+import success_icon from "../../app/_images/success.svg"
+import error_icon from "../../app/_images/error.svg";
 
 interface AlertMessageProps {
   success: boolean; // false = use error message
@@ -13,7 +16,6 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
 }) => {
   const [isVisible, setVisible] = useState(true);
   const highlightColor = success ? "bg-green-600" : "bg-red-600";
-  const iconSrc = success ? "/_images/success.svg" : "/_images/error.svg";
 
   const handleCloseClick = () => {
     setVisible(false);
@@ -29,7 +31,7 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
             className={`w-1.5 ${highlightColor} rounded-tl-lg rounded-bl-lg`}
           ></div>
           <div className="flex-grow flex justify-between py-4 px-3">
-            <img src={iconSrc} alt={success ? "success-icon" : "error-icon"} />
+            <Image src={success ? success_icon : error_icon} alt={success ? "success-icon" : "error-icon"}/>
             <div className="flex-col">
               <h1>
                 <b>{success ? "Success!" : "Oops! Something went wrong."}</b>

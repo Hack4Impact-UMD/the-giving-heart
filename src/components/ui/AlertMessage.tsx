@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import Image, { StaticImageData } from "../../../node_modules/next/image";
-import success_icon from "../../app/_images/success.svg"
-import error_icon from "../../app/_images/error.svg";
-import close_icon from "../../app/_images/close.svg";
+import Image from "../../../node_modules/next/image";
+
+import successIcon from "../../app/_images/success.svg"
+import errorIcon from "../../app/_images/error.svg";
+import closeIcon from "../../app/_images/close.svg";
 
 interface AlertMessageProps {
   success: boolean; // false = use error message
@@ -32,7 +33,7 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
             className={`w-1.5 ${highlightColor} rounded-tl-lg rounded-bl-lg`}
           ></div>
           <div className="flex-grow flex justify-between py-4 px-3">
-            <Image src={success ? success_icon : error_icon} alt={success ? "success-icon" : "error-icon"}/>
+            <Image src={success ? successIcon : errorIcon} alt={success ? "success-icon" : "error-icon"}/>
             <div className="flex-col">
               <h1>
                 <b>{success ? "Success!" : "Oops! Something went wrong."}</b>
@@ -40,7 +41,7 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
               <h1 className="text-gray-600">{description}</h1>
             </div>
             <button type="button" onClick={handleCloseClick}>
-              <Image src={close_icon} alt={"close-icon"}/>
+              <Image src={closeIcon} alt={"close-icon"}/>
             </button>
           </div>
           <div className="w-1.5 bg-white rounded-tr-lg rounded-br-lg"></div>

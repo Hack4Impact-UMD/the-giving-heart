@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image, { StaticImageData } from "../../../node_modules/next/image";
 import success_icon from "../../app/_images/success.svg"
 import error_icon from "../../app/_images/error.svg";
+import close_icon from "../../app/_images/close.svg";
 
 interface AlertMessageProps {
   success: boolean; // false = use error message
@@ -39,7 +40,7 @@ const AlertMessage: React.FC<AlertMessageProps> = ({
               <h1 className="text-gray-600">{description}</h1>
             </div>
             <button type="button" onClick={handleCloseClick}>
-              <img src="/_images/close.svg" alt="close-icon" />
+              <Image src={close_icon} alt={"close-icon"}/>
             </button>
           </div>
           <div className="w-1.5 bg-white rounded-tr-lg rounded-br-lg"></div>

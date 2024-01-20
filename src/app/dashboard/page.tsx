@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { EventCard } from "./eventCard";
 import AlertMessage from "../../components/ui/AlertMessage";
 import Image from "../../../node_modules/next/image";
@@ -147,6 +147,10 @@ export default function Dashboard() {
     fetcher
   );
 
+  const mutateUserAttend = () => {
+    mutate(userAttendAddress);
+  };
+
   if (error) return <div>Error loading data...</div>;
   if (userAttendError) return <div>Error loading data...</div>;
   if (!data) return <div>Loading...</div>;
@@ -234,6 +238,7 @@ export default function Dashboard() {
                   checkIn={userAttend["checkIn"]}
                   checkOut={userAttend["checkOut"]}
                   userAttendId={userAttend["id"]}
+                  onDropSpot={mutateUserAttend}
                 />
               );
             })}

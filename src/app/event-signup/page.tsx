@@ -100,53 +100,123 @@ export default function EventSignupPage() {
   return (
     <main className="flex min-h-screen flex-col">
       <div
-        className="flex md:p-16 p-2 pt-16"
+        className="flex py-20 lg:justify-center "
         style={{
           backgroundImage:
-            "url(https://s3-alpha-sig.figma.com/img/4077/24e8/d2ceb9dcfeb6b305b7a653ac2d098c9e?Expires=1699833600&Signature=ELKLUbvN~tmYQCv9Krx5Hy8QvOm8gPfSuCVZ6M4k8R~uTaqV-Au2iNoHSEc0N2kNwNmDywilDftRjnvwIAq0fh6AVPkbfjFZ7tHzjmNgqfqRi5CzcIpW2dOoMpqdtN8-gF~weXAQZN21vW1Kt3B72QAGWVodX-NWzBghKrA01k7bw-VwkcDQKn6lv~0cCHmhUjYNr3usvFfksFzXCz5-ftA~CmBfjRqWIDdlLzDdulZhWfZTy5NzWYskzKNwgDp3dtjxR3zcx3HR~q~kpwHDEjqvgDUbEVubUokSg5lIAuASgxTQQ0jHX-RRlUPvwyG2pvLGixcVHcYfTMypYpIdGA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
+            "url(../_images/event_registration_background.jpg), linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5))",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          width: "100%",
-          height: "40vh",
+          width: "100vw",
+          height: "30vh",
           position: "relative",
         }}
       >
         <div>
-          <p
-            className="text-center text-sm pt-3 pb-3 font-bold"
-            style={{
-              background: "rgba(114, 9, 14, 0.80)",
-              color: "white",
-              fontFamily: "Open Sans",
-              fontSize: "64px",
-              margin: "10px 0",
-              paddingLeft: "30px",
-              position: "relative",
-            }}
-          >
-            Event Registration
-            <span className="background-element" />
-          </p>
-
-          <p
-            className="text-center text-sm pt-3 pb-3 font-bold"
-            style={{
-              background: "rgba(114, 9, 14, 0.80)",
-              color: "white",
-              fontFamily: "Open Sans",
-              fontSize: "48px",
-              margin: "10px 0",
-              paddingLeft: "30px",
-              position: "relative",
-            }}
-          >
-            {eventD.event.title}
-            <span className="background-element" />
-          </p>
+          <div className=" bg-[#72090E] bg-opacity-70 p-3 my-2">
+            <h1 className="text-neutral-50 text-5xl md:text-7xl">Event registration</h1>
+          </div>
+          <div className="w-2/3 md:w-3/4 lg:m-auto">
+            <h2 className="bg-[#72090E] bg-opacity-70 text-xl text-neutral-50 md:text-4xl p-3 my-2">{eventD.event.title}</h2>
+          </div>
         </div>
       </div>
+      <h2 className="pt-3 px-3 italic">Step:</h2>
+      <div className="px-6 py-3 pb-12">
+        <ol className="relative border-s-8 border-[#B91920]">                  
+            <li className="mb-10 ms-8 text-center">
+                <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">1</p></div>
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Review event Details</h3>
+                <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
+                  <h4>Description</h4>
+                  <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{eventD.event.description}</p>
+                  <h4>Available Positions</h4>
+                    <ul>
+                      {eventD.volunteerRoles.map((role, index) => (
+                        <>
+                          <p>Category #{index + 1}</p>
+                          <li key={index}>
+                            {role.title}
+                          </li>
+                        </>
+                      ))}
+                    </ul>
+                  <h4>Date & Time</h4>
+                    <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{eventD.event.eventDateStart} - {eventD.event.eventDateEnd}</p>
+                  <h4>Location</h4>
+                    <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{eventD.event.location}</p>
+                </div>     
+            </li>
+            <li className="mb-10 ms-8 text-center">
+            <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">2</p></div>
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Choose an available volunteer role</h3>
+                <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
+                  <FormControl>
+                    <InputLabel sx={{ marginTop: 2 }} htmlFor="v-roles">
+                      Click to choose role
+                    </InputLabel>
+                    <Select
+                      sx={{ marginTop: 2, marginLeft: 2, width: 200, height: 50 }}
+                      labelId="v-roles"
+                      id="v-roles"
+                      value={selectedRole}
+                      onChange={handleRoleSelection}
+                    >
+                      {eventD.volunteerRoles.map((role, index) => (
+                        <MenuItem key={index} value={role.volunteerRoleId}>
+                          {role.title}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </div>     
+            </li>
+            {selectedRole !== "" ? (
+            <>
+              <li className="ms-8 mb-10 text-center">
+              <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">3</p></div>
+                  <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Choose what shifts you would like to work</h3>
+                  <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
+                    <Select
+                        sx={{
+                          marginTop: 2,
+                          marginLeft: 2,
+                          width: 200,
+                          height: 50,
+                        }}
+                        labelId="v-roles"
+                        id="v-roles"
+                        value={selectedRoleShift}
+                        onChange={handleRoleShiftSelection}
+                      >
+                        {availableShifts.map((shift: any) => (
+                          <MenuItem key={shift.shiftId} value={shift.shiftId}>
+                            {shift["eventRoleShiftTimeStart"]} -
+                            {shift["eventRoleShiftTimeEnd"]}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                  </div>   
+              </li>
+            </>) : ("")}
+            {selectedRoleShift !== "" ? (
+              <>
+                <li className="ms-8 text-center">
+                <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">4</p></div>
+                    <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Submit Registration!</h3>
+                      <Button
+                      variant="default"
+                      size="default"
+                      className="bg-[#ED1C24] text-white rounded-md"
+                      onClick={handleRegisterClick}
+                      >
+                        Submit Signup
+                      </Button> 
+                </li>
+                </>) : ("")}
+        </ol>
+      </div>
 
-      <h3
+      {/* <h3
         style={{
           display: "flex",
           justifyContent: "center",
@@ -193,7 +263,7 @@ export default function EventSignupPage() {
           <div style={{ marginLeft: "10px", marginTop: "20px" }}>
             <h3>Available Positions</h3>
             {eventD.volunteerRoles.map((role, index) => (
-              <li
+              <ul
                 key={index}
                 style={{
                   color: "var(--components-card-secondary-text-color, #6B7280)",
@@ -211,8 +281,9 @@ export default function EventSignupPage() {
                   {role.title}
                   <ul></ul>
                 </li>
-              </li>
+              </ul>
             ))}
+    
           </div>
 
           <div style={{ marginLeft: "10px", marginTop: "20px" }}>
@@ -396,7 +467,7 @@ export default function EventSignupPage() {
         </div>
       ) : (
         ""
-      )}
+      )} */}
     </main>
   );
 }

@@ -10,6 +10,14 @@ import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import DropSpot from "./dropSpot"
+import { useToast } from "@/components/ui/use-toast";
+import Image from "../../../node_modules/next/image";
+
+import calendarClockIcon from "../../app/_images/calendar-clock.svg"
+import globeIcon from "../../app/_images/globe.svg";
+import usersIcon from "../../app/_images/users.svg";
+import trashIcon from "../../app/_images/trash.svg"
+import badgeIcon from "../../app/_images/badge-info.svg";
 // import { useRouter } from "next/router";
 
 //FIXME: need to match regular eventcard
@@ -24,6 +32,7 @@ interface EventData {
   checkIn: boolean;
   checkOut: boolean;
   userAttendId: number;
+  onDropSpot: () => void;
 }
 
 // Create a custom Material-UI theme with Open Sans font
@@ -47,7 +56,7 @@ export default function RegisteredEventCard(props: EventData) {
 
   const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends/${props.userAttendId}`;
   const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
-  // const router = useRouter();
+  const { toast } = useToast();
 
   const handleCheckInToggle = async () => {
     const newToggleValue = !isCheckedIn;
@@ -63,9 +72,21 @@ export default function RegisteredEventCard(props: EventData) {
             checkIn: newToggleValue,
           },
         })
-        .then((res) => console.log(res));
+        .then((res) => {
+          console.log(res);
+          toast({
+            variant: "confirmation",
+            title: "Checked in!",
+            description: "You have successfully checked in.",
+          });
+        });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Oops!",
+        description: "Something went wrong. Please try again.",
+      });
     }
   };
 
@@ -83,9 +104,21 @@ export default function RegisteredEventCard(props: EventData) {
             checkOut: newToggleValue,
           },
         })
-        .then((res) => console.log(res));
+        .then((res) => {
+          console.log(res);
+          toast({
+            variant: "confirmation",
+            title: "Checked out!",
+            description: "You have successfully checked out.",
+          });
+        });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Oops!",
+        description: "Something went wrong. Please try again.",
+      });
     }
   };
 
@@ -99,10 +132,15 @@ export default function RegisteredEventCard(props: EventData) {
         })
         .then((res) => {
           console.log(res);
-          // router.reload(); //FIXME: need to refresh dashboard once we drop a spot 
+          props.onDropSpot();
         });
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Oops!",
+        description: "Something went wrong. Please try again.",
+      });
     }
   };
 
@@ -120,7 +158,7 @@ export default function RegisteredEventCard(props: EventData) {
           </Typography>
 
           <div className="flex space-x-2 items-start mt-3">
-            <img src="/_images/calendar-clock.svg" alt="calendar-clock-icon" />
+            <Image src={calendarClockIcon} alt="calendar-clock-icon" />
 
             <div className="flex flex-col">
               <Typography sx={{ color: "black", fontSize: 16 }}>
@@ -134,7 +172,7 @@ export default function RegisteredEventCard(props: EventData) {
           </div>
 
           <div className="flex space-x-2 items-start mt-3">
-            <img src="/_images/globe-2.svg" alt="globe-2-icon" />
+            <Image src={globeIcon} alt="globe-2-icon" />
 
             <div className="flex flex-col justify-end">
               <Typography sx={{ color: "black", fontSize: 16 }}>
@@ -157,7 +195,7 @@ export default function RegisteredEventCard(props: EventData) {
           </Typography>
 
           <div className="flex space-x-2 items-start mt-3">
-            <img src="/_images/users.svg" alt="users-icon" />
+            <Image src={usersIcon} alt="users-icon" />
 
             <div className="flex flex-col">
               <Typography sx={{ color: "black", fontSize: 16 }}>
@@ -170,7 +208,7 @@ export default function RegisteredEventCard(props: EventData) {
           </div>
 
           <div className="flex space-x-2 items-start mt-3">
-            <img src="/_images/trash-2.svg" alt="trash-2-icon" />
+            <Image src={trashIcon} alt="trash-2-icon" />
 
             <div className="flex flex-col">
               <Typography sx={{ color: "black", fontSize: 16 }}>
@@ -193,7 +231,7 @@ export default function RegisteredEventCard(props: EventData) {
           </Typography>
 
           <div className="flex space-x-2 items-start mt-3">
-            <img src="/_images/badge-info.svg" alt="badge-info-icon" />
+            <Image src={badgeIcon} alt="badge-info-icon" />
 
             <div className="flex flex-col">
               <Typography sx={{ color: "#E6E5E5", fontSize: 14 }}>

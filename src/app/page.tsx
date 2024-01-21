@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { API } from "@/utils/constant";
 
 import ImageCarousel from "../components/ui/ImageCarousel";
+import AlertMessage from "@/components/ui/AlertMessage";
 
 export default async function Home() {
   const carouselImages = await fetchGallery();

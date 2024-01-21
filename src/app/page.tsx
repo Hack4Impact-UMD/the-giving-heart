@@ -4,7 +4,6 @@ import { Users } from "lucide-react";
 import { DollarSign } from "lucide-react";
 import { ArrowLeftCircle } from "lucide-react";
 import { ArrowRightCircle } from "lucide-react";
-import RegisteredEventCard from "./dashboard/registeredEventCard";
 import { Button } from "@/components/ui/button";
 import { API } from "@/utils/constant";
 
@@ -123,9 +122,6 @@ export default async function Home() {
           </div>
         </div>
       </div>
-
-      {/* for testing */}
-      <RegisteredEventCard name="bruh" location="bruh" eventRoleShiftDate="bruh" eventRoleShiftTimeStart="bruh" eventRoleShiftTimeEnd="bruh" title="bruh" checkIn={false} checkOut={true} userAttendId={1}></RegisteredEventCard>
     </main>
   );
 }

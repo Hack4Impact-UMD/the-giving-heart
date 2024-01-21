@@ -17,6 +17,7 @@ import globeIcon from "../../app/_images/globe.svg";
 import usersIcon from "../../app/_images/users.svg";
 import trashIcon from "../../app/_images/trash.svg"
 import badgeIcon from "../../app/_images/badge-info.svg";
+// import { useRouter } from "next/router";
 
 //FIXME: need to match regular eventcard
 // required props; some could be optional but not sure which
@@ -30,6 +31,7 @@ interface EventData {
   checkIn: boolean;
   checkOut: boolean;
   userAttendId: number;
+  onDropSpot: () => void;
 }
 
 // Create a custom Material-UI theme with Open Sans font
@@ -54,7 +56,6 @@ export default function RegisteredEventCard(props: EventData) {
   const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends/${props.userAttendId}`;
   const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
   const { toast } = useToast();
-  // const router = useRouter();
 
   const handleCheckInToggle = async () => {
     const newToggleValue = !isCheckedIn;
@@ -76,7 +77,7 @@ export default function RegisteredEventCard(props: EventData) {
             variant: "confirmation",
             title: "Checked in!",
             description: "You have successfully checked in.",
-          })
+          });
         });
     } catch (error) {
       console.log(error);
@@ -130,7 +131,7 @@ export default function RegisteredEventCard(props: EventData) {
         })
         .then((res) => {
           console.log(res);
-          // router.reload(); //FIXME: need to refresh dashboard once we drop a spot 
+          props.onDropSpot();
         });
     } catch (error) {
       console.log(error);

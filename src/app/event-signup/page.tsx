@@ -100,23 +100,23 @@ export default function EventSignupPage() {
   return (
     <main className="flex min-h-screen flex-col">
       <div
-        className="flex py-20 lg:justify-center "
+        className="flex py-10 xs:py-20 lg:justify-center "
         style={{
           backgroundImage:
             "url(../_images/event_registration_background.jpg), linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5))",
           backgroundSize: "cover",
           backgroundPosition: "center",
-          width: "100vw",
+          width: "100%",
           height: "30vh",
           position: "relative",
         }}
       >
         <div>
           <div className=" bg-[#72090E] bg-opacity-70 p-3 my-2">
-            <h1 className="text-neutral-50 text-5xl md:text-7xl">Event registration</h1>
+            <h1 className="text-neutral-50 text-4xl xs:text-5xl md:text-7xl">Event registration</h1>
           </div>
           <div className="w-2/3 md:w-3/4 lg:m-auto">
-            <h2 className="bg-[#72090E] bg-opacity-70 text-xl text-neutral-50 md:text-4xl p-3 my-2">{eventD.event.title}</h2>
+            <h2 className="bg-[#72090E] bg-opacity-70 text-lg xs:text-xl text-neutral-50 md:text-4xl p-3 my-2">{eventD.event.title}</h2>
           </div>
         </div>
       </div>
@@ -127,35 +127,36 @@ export default function EventSignupPage() {
                 <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">1</p></div>
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Review event Details</h3>
                 <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
-                  <h4>Description</h4>
-                  <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{eventD.event.description}</p>
-                  <h4>Available Positions</h4>
-                    <ul>
+                  <h4 className="font-bold">Description</h4>
+                  <p className="mb-2 text-gray-500">{eventD.event.description}</p>
+                  <h4 className="font-bold">Available Positions</h4>
+                    <ul className="mb-2">
                       {eventD.volunteerRoles.map((role, index) => (
                         <>
-                          <p>Category #{index + 1}</p>
-                          <li key={index}>
+                          
+                          <li className="py-1 text-gray-500" key={index}>
                             {role.title}
                           </li>
                         </>
                       ))}
                     </ul>
-                  <h4>Date & Time</h4>
-                    <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{eventD.event.eventDateStart} - {eventD.event.eventDateEnd}</p>
-                  <h4>Location</h4>
-                    <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{eventD.event.location}</p>
+                  <h4 className="font-bold">Date & Time</h4>
+                    <p className="mb-2 text-gray-500">{eventD.event.eventDateStart} - {eventD.event.eventDateEnd}</p>
+                  <h4 className="font-bold">Location</h4>
+                    <p className="mb-4 text-gray-500">{eventD.event.location}</p>
                 </div>     
             </li>
             <li className="mb-10 ms-8 text-center">
             <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">2</p></div>
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Choose an available volunteer role</h3>
                 <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
+                  <p className="text-yellow-400 pb-4 px-4 sm:px-12 text-sm md:text-lg">Roles already at full-capacity for this event appear gray.</p>
                   <FormControl>
-                    <InputLabel sx={{ marginTop: 2 }} htmlFor="v-roles">
+                    <InputLabel  htmlFor="v-roles">
                       Click to choose role
                     </InputLabel>
                     <Select
-                      sx={{ marginTop: 2, marginLeft: 2, width: 200, height: 50 }}
+                      className="w-56"
                       labelId="v-roles"
                       id="v-roles"
                       value={selectedRole}
@@ -178,8 +179,6 @@ export default function EventSignupPage() {
                   <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
                     <Select
                         sx={{
-                          marginTop: 2,
-                          marginLeft: 2,
                           width: 200,
                           height: 50,
                         }}

@@ -18,9 +18,12 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const fetchLoggedInUser = async (token: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${API}/users/me`, {
-        headers: { Authorization: `${BEARER} ${token}` },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/users/me`,
+        {
+          headers: { Authorization: `${BEARER} ${token}` },
+        }
+      );
       const data: any = await response.json();
 
       setUserData(data);

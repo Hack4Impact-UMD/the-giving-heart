@@ -127,9 +127,12 @@ export default async function Home() {
 }
 
 async function fetchGallery() {
-  const response = await fetch(`${API}/home-page?populate=gallery`, {
-    cache: "no-store",
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/home-page?populate=gallery`,
+    {
+      cache: "no-store",
+    }
+  );
   const data = await response.json();
   if (!data.data) {
     return [];

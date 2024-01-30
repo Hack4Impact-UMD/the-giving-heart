@@ -41,9 +41,12 @@ export default function SignUp() {
     console.log(values);
     // need to set up email provider - currently 500 internal server error
     axios
-      .post(`${API}/auth/forgot-password`, {
-        email: values.email,
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/forgot-password`,
+        {
+          email: values.email,
+        }
+      )
       .then((response) => {
         console.log(response.data);
       })

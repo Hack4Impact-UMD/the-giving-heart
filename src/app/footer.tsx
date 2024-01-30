@@ -30,7 +30,7 @@ const fetcher = async (url: string) => {
 export default function Footer() {
   const pathname = usePathname();
   const { data: footerData, error } = useSWR(
-    `${API}/home-page?populate=footer_email`,
+    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/home-page?populate=footer_email`,
     fetcher
   );
 

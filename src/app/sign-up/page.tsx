@@ -48,13 +48,16 @@ export default function SignUp() {
 
   const onSubmit = (values: FormData) => {
     axios
-      .post(`${API}/auth/local/register`, {
-        username: values.email,
-        email: values.email,
-        password: values.password,
-        firstName: values.firstName,
-        lastName: values.lastName,
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local/register`,
+        {
+          username: values.email,
+          email: values.email,
+          password: values.password,
+          firstName: values.firstName,
+          lastName: values.lastName,
+        }
+      )
       .then((response) => {
         setToken(response.data.jwt);
         setUser(response.data.user);

@@ -26,6 +26,36 @@ export default function About() {
         </div>
       </div>
 
+
+      <div className="flex-col align-center text-center justify-center w-5/6 lg:w-2/3 m-auto mt-10 mb-10 md:p-10 p-4">
+        <p className="lg:pr-24 lg:pl-24 sm:text-lg text-xs">
+          Friends of the Feast (formerly called Table Sponsors) is a unique way for many in
+          our Community to support The Giving Heart&apos;s Community Thanksgiving Feast. As a 
+          &quot;Feast Friend&quot; we offer options for individuals, families, groups, Churches
+          and small businesses.
+        </p>
+        <br/>
+        <p className="lg:pr-24 lg:pl-24 sm:text-lg text-xs">
+          This is a great way for individuals or families to send a Thanksgiving message or 
+         to honor a loved one during this time.
+        </p>
+        <br/>
+          <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+            Friends of the Feast Levels
+          </h2>
+          <p className="lg:pr-24 lg:pl-24 sm:text-lg text-xs text-left">
+          $200.00 - Business Level: Includes inclusion on The Giving Heart website with a link to your site.
+          </p>
+          <br/>
+          <p className="lg:pr-24 lg:pl-24 sm:text-lg text-xs text-left">
+          $100.00 - Church, Group, Nonprofit: Listing on our website with a link to your site.
+          </p>
+          <br/>
+          <p className="lg:pr-24 lg:pl-24 sm:text-lg text-xs text-left">
+          $50.00 - Individuals/Family Level: Offers dedications, shout outs, memorials or Holiday greetings on our website
+          </p>
+        </div>
+
       </main>
     );
   }

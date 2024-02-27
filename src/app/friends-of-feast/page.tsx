@@ -1,8 +1,8 @@
+"use client";
 
+import { PayLevel } from "./payLevel";
 
-
-
-export default function About() {
+export default function FriendsOfTheFeast() {
   
     return (
       <main className="flex min-h-screen flex-col items-center">
@@ -56,7 +56,19 @@ export default function About() {
           </p>
         </div>
 
+
+        {/* Pay Here Section */}
+        <h2 className="sm:pb-8 text-xl font-semibold">
+            Pay Here
+        </h2>
+
+        <div className="flex flex-col sm:flex-row pb-10">
+          <PayLevel type="Business Listing" donation="200"/>
+          <PayLevel type="Church, Nonprofit, Club Listing" donation="100"/>
+          <PayLevel type="Personal Dedication" donation="50"/>
+        </div>
+
       </main>
     );
-  }
+  };
   

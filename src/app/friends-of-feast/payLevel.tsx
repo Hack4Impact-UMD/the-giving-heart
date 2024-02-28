@@ -27,7 +27,7 @@ export const PayLevel: React.FC<PayLevelProps> = ({
 
   return (
     <div className="flex flex-col items-center justify-center p-10">
-      <p className="content-center px-4 pb-6"> {type} </p>
+      <p className="content-center text-center px-4 pb-6"> {type} </p>
       <p className="text-[#FF0000] px-4 pb-6"> ${donation}.00 </p>
 
       <Form {...form}>

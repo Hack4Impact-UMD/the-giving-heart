@@ -18,36 +18,32 @@ export default function GetInvolved() {
               height: "30vh",
               position: "relative",
             }}
-          >
-          </div>
+          ></div>
           <div className="absolute inset-0 flex items-center justify-center">
-              <h1 className="text-3xl md:text-5xl font-sans font-bold text-white">
-                Get Involved
-              </h1>
-          </div>
-        </div> 
-        <div className="w-5/6 border flex flex-col items-center">
-            <h1 className="border-none text-center text-lg md:text-4xl font-bold font-sans dark:text-white">
-              Volunteer Roles
+            <h1 className="text-3xl md:text-5xl font-sans font-bold text-white">
+              Get Involved
             </h1>
-            <div className="border-none items-center">
-              <EventHelper />
-            </div>
+          </div>
+        </div>
+        <div className="w-5/6 border flex flex-col items-center">
+          <h1 className="border-none text-center text-lg md:text-4xl font-semibold font-sans dark:text-white">
+            Volunteer Roles
+          </h1>
+          <div className="border-none items-center">
+            <EventHelper />
+          </div>
         </div>
 
-        <div className="w-5/6 flex flex-col items-center">
-          <h1 className="text-lg md:text-4xl font-bold font-sans dark:text-whit">
-            Donate
-          </h1>
-          <p className="text-sm font-sans dark:text-white">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do{" "}
-            <br></br>eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            <br></br> nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.
+        <div className="w-5/6 flex flex-col items-center mt-8">
+          <h1 className="text-lg md:text-4xl font-semibold">Donate</h1>
+          <p className="text-center text-m dark:text-white mt-4 mb-8">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
           </p>
           <MapboxMap />
         </div>

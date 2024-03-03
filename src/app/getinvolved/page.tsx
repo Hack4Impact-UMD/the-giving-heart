@@ -1,8 +1,28 @@
 "use client";
 import MapboxMap from "@/components/map";
 import EventHelper from "./eventhelper";
+import { API } from "@/utils/constant";
+import { useState, useEffect } from 'react';
+import useSWR from "swr";
+import axios from "axios";
 
 export default function GetInvolved() {
+  const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/get-involved`;
+  const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+
+  const fetcher = async (url: any) =>
+    await axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${auth}` },
+      })
+      .then((res) => res.data);
+
+  let { data, error } = useSWR(address, fetcher);
+
+  //if (error) return <div>Error loading data...</div>;
+  //if (!data) return <div>Loading...</div>;
+
+  const description = data?.description;
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className="z-10 max-w-5xl w-full items-center justify-between flex flex-col">
@@ -10,11 +30,10 @@ export default function GetInvolved() {
           <div
             className="brightness-50 w-screen flex items-center justify-center sm:bg-contain align-middle font-sans"
             style={{
-              backgroundImage:
-                "url(https://s3-alpha-sig.figma.com/img/3d9f/533e/7b3a91405e9b8b8200346a425beddb5c?Expires=1702252800&Signature=hXrW7GnPSoC1ODX~1LUYVH0vjnxKHPS0~cqmp4tkkN4GAdO60l8CMNiD2LdO~3EB9kqvS40E4APNqWO-GU1CFUkXyX5~7KHqeNEdraCQPY90CzACk~S53EPsE0Z4jsxp9P7pYh4CIQ0dYBDQxY8nmpCt0m9gb-Hl2X7PDLaQwy3L9AmMwA~7xnYGn37bW7pWqUjsF~wASuy2LxDTD9JrahGTmcNd-NGVQGpNUfZYvAZkqFMCpqpCI1n0WN4VwWu5PqUxHa8tdlUIFE5cRzcqplXsd~E9cJU835vIBGOVkBN7gdfv9GmX8iG9l1poDEcpQKcbOiDMQY2SG1FIt4qzrg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4)",
+              backgroundImage: "url(../_images/getinv.png)",
               backgroundSize: "cover",
               backgroundPosition: "center",
-              // width: '200vh',
+              width: '200vh',
               height: "30vh",
               position: "relative",
             }}
@@ -40,14 +59,7 @@ export default function GetInvolved() {
             Donate
           </h1>
           <p className="text-sm font-sans dark:text-white">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do{" "}
-            <br></br>eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            <br></br> nisi ut aliquip ex ea commodo consequat. Duis aute irure
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.
+              {description}
           </p>
           <MapboxMap />
         </div>
@@ -55,3 +67,4 @@ export default function GetInvolved() {
     </main>
   );
 }
+

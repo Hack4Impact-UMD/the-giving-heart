@@ -59,6 +59,7 @@ export default function SignUp() {
           password: values.password,
           firstName: values.firstName,
           lastName: values.lastName,
+          phoneNumber: values.phoneNumber,
         }
       )
       .then((response) => {

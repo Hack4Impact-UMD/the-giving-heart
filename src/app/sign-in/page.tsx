@@ -48,7 +48,7 @@ export default function SignIn() {
 
   const onSubmit = async (values: FormData) => {
     axios
-      .post(`${API}/auth/local`, {
+      .post(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local`, {
         identifier: values.email,
         password: values.password,
       })
@@ -75,7 +75,12 @@ export default function SignIn() {
         <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
           <div className="flex flex-col w-full md:flex-row mx-auto">
             <div className="p-6 flex-col justify-between items-center md:w-full hidden md:flex">
-              <Image src={logo} width={300} height={300} alt="Giving heart logo" />
+              <Image
+                src={logo}
+                width={300}
+                height={300}
+                alt="Giving heart logo"
+              />
             </div>
 
             <div className="flex flex-col bg-white p-6 md:w-full">

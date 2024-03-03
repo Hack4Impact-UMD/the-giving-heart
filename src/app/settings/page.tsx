@@ -105,18 +105,21 @@ export default function Settings() {
     newPasswordConfirmation: String
   ) {
     const authToken = getToken();
-    const response = await fetch(`${API}/auth/change-password`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        currentPassword: currentPassword,
-        password: newPassword,
-        passwordConfirmation: newPasswordConfirmation,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/change-password`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currentPassword: currentPassword,
+          password: newPassword,
+          passwordConfirmation: newPasswordConfirmation,
+        }),
+      }
+    );
 
     if (response.ok) {
       return await response.json();

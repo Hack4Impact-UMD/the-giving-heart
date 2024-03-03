@@ -45,11 +45,14 @@ export default function ResetPassword({ searchParams }: Props) {
 
   const onSubmit = (values: FormData) => {
     axios
-      .post(`${API}/auth/reset-password`, {
-        code: searchParams.code,
-        password: values.password,
-        passwordConfirmation: values.password,
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/reset-password`,
+        {
+          code: searchParams.code,
+          password: values.password,
+          passwordConfirmation: values.password,
+        }
+      )
       .then((response) => {
         router.push("/sign-in");
         console.log("Your user's password has been reset.");

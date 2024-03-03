@@ -29,6 +29,9 @@ const schema = z.object({
   password: z.string().min(8, {
     message: "Password must be at least 8 characters",
   }),
+  phoneNumber: z.string().min(10, {
+    message: "Invalid phone number",
+  }),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -48,13 +51,17 @@ export default function SignUp() {
 
   const onSubmit = (values: FormData) => {
     axios
-      .post(`${API}/auth/local/register`, {
-        username: values.email,
-        email: values.email,
-        password: values.password,
-        firstName: values.firstName,
-        lastName: values.lastName,
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local/register`,
+        {
+          username: values.email,
+          email: values.email,
+          password: values.password,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          phoneNumber: values.phoneNumber,
+        }
+      )
       .then((response) => {
         setToken(response.data.jwt);
         setUser(response.data.user);
@@ -124,12 +131,29 @@ export default function SignUp() {
                     />
                     <FormField
                       control={form.control}
+                      name="phoneNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Phone Number:</FormLabel>
+                          <FormControl>
+                            <Input placeholder="" {...field} />
+                          </FormControl>
+                          {errors.phoneNumber && (
+                            <FormMessage>
+                              {errors.phoneNumber.message}
+                            </FormMessage>
+                          )}
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
                       name="email"
                       render={({ field }) => (
                         <FormItem>
                           <FormLabel>Email:</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter email" {...field} />
+                            <Input placeholder="" {...field} />
                           </FormControl>
                           {errors.email && (
                             <FormMessage>{errors.email.message}</FormMessage>

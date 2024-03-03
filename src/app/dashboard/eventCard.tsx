@@ -33,6 +33,7 @@ export const EventCard: React.FC<EventCardProps> = ({
 }) => {
   const eventObject = JSON.parse(event);
   const volunteerRolesObject = JSON.parse(volunteerRoles);
+  const { user } = useAuthContext();
 
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]">
@@ -100,6 +101,7 @@ export const EventCard: React.FC<EventCardProps> = ({
             variant="default"
             size="default"
             className="bg-[#ED1C24] text-white rounded-md"
+            disabled={!user}
           >
             <Link
               href={{

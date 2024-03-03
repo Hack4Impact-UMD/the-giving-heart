@@ -3,7 +3,10 @@
 import * as React from "react";
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
+import {
+  Card,
+  CardTitle
+} from "../../components/ui/card";
 import { Switch } from "@/components/ui/switch";
 import CardContent from "@mui/material/CardContent";
 import { CssBaseline, createTheme, ThemeProvider } from "@mui/material";
@@ -122,7 +125,7 @@ export default function RegisteredEventCard(props: EventData) {
     }
   };
 
-  const handleDropSpot = async (event: { preventDefault: () => void }) => {
+  const handleDropSpot = async () => {
     try {
       await axios
         .delete(address, {
@@ -145,18 +148,12 @@ export default function RegisteredEventCard(props: EventData) {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Card
-        sx={{ width: 425 }}
-        className="px-0 flex flex-col" // mixed tailwind and material UI styles; component was made before codebase switch
-      >
-        <CardContent sx={{ mb: 1, px: 3 }}>
-          {/* Title */}
-          <Typography sx={{ color: "#860E13", fontSize: 28, mt: 1, mb: 1 }}>
-            <b>{props.name}</b>
-          </Typography>
-
+      <Card className="border-2 px-0 flex flex-col drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)] rounded-xl mb-3">
+        <CardContent sx={{ mb: 1, px: 3 }}> 
+          <CardTitle className="p-6 text-[#860E13] mt-1 mb-1 text-start ml-0 pl-0 pt-1 pb-3">
+            {" "}
+            {props.name}{" "}
+          </CardTitle>
           <div className="flex space-x-2 items-start mt-3">
             <Image src={calendarClockIcon} alt="calendar-clock-icon" />
 
@@ -219,13 +216,13 @@ export default function RegisteredEventCard(props: EventData) {
 
           {/* dropping spot on backend should be handled in DropSpot */}
           <div className="mt-3 text-center">
-            <DropSpot></DropSpot>
+            <DropSpot onDropSpot={handleDropSpot}></DropSpot>
           </div>
         </CardContent>
 
         {/* CHECK IN/OUT SECTION (RED PART) */}
 
-        <Box sx={{ backgroundColor: "#860E13", px: 3, py: 3 }}>
+        <Box sx={{ backgroundColor: "#860E13", px: 3, py: 3 }} className="rounded-b-lg">
           <Typography sx={{ color: "white", fontSize: 20 }}>
             <b>Event Check-In/Out</b>
           </Typography>
@@ -267,6 +264,5 @@ export default function RegisteredEventCard(props: EventData) {
           </div>
         </Box>
       </Card>
-    </ThemeProvider>
   );
 }

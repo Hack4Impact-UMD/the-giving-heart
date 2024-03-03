@@ -29,7 +29,7 @@ const schema = z.object({
   password: z.string().min(8, {
     message: "Password must be at least 8 characters",
   }),
-  phoneNumber: z.string().min(10, { 
+  phoneNumber: z.string().min(10, {
     message: "Invalid phone number",
   }),
 });
@@ -59,7 +59,6 @@ export default function SignUp() {
           password: values.password,
           firstName: values.firstName,
           lastName: values.lastName,
-          phoneNumber: values.phoneNumber,
         }
       )
       .then((response) => {
@@ -139,7 +138,9 @@ export default function SignUp() {
                             <Input placeholder="" {...field} />
                           </FormControl>
                           {errors.phoneNumber && (
-                            <FormMessage>{errors.phoneNumber.message}</FormMessage>
+                            <FormMessage>
+                              {errors.phoneNumber.message}
+                            </FormMessage>
                           )}
                         </FormItem>
                       )}

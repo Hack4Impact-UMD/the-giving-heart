@@ -1,28 +1,23 @@
 "use client";
 import MapboxMap from "@/components/map";
 import EventHelper from "./eventhelper";
+import { usePathname } from "next/navigation";
 import { API } from "@/utils/constant";
 import { useState, useEffect } from 'react';
 import useSWR from "swr";
 import axios from "axios";
 
 export default function GetInvolved() {
-  const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/get-involved`;
-  const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
-  const fetcher = async (url: any) =>
-    await axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${auth}` },
-      })
-      .then((res) => res.data);
+  const [data, setData] = useState<string[]>([]);
 
-  let { data, error } = useSWR(address, fetcher);
+  useEffect(() => {
+    fetchData().then(data => setData(data));
+  }, []);
 
-  //if (error) return <div>Error loading data...</div>;
-  //if (!data) return <div>Loading...</div>;
+  const description = data[0];
+  const img = data[1];
 
-  const description = data?.description;
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className="z-10 max-w-5xl w-full items-center justify-between flex flex-col">
@@ -30,7 +25,7 @@ export default function GetInvolved() {
           <div
             className="brightness-50 w-screen flex items-center justify-center sm:bg-contain align-middle font-sans"
             style={{
-              backgroundImage: "url(../_images/getinv.png)",
+              backgroundImage: img,
               backgroundSize: "cover",
               backgroundPosition: "center",
               width: '200vh',
@@ -58,7 +53,7 @@ export default function GetInvolved() {
           <h1 className="text-lg md:text-4xl font-bold font-sans dark:text-whit">
             Donate
           </h1>
-          <p className="text-sm font-sans dark:text-white">
+          <p className="text-sm font-sans dark:text-white"> 
               {description}
           </p>
           <MapboxMap />
@@ -68,3 +63,19 @@ export default function GetInvolved() {
   );
 }
 
+async function fetchData() {
+  const arr: string[] = [];
+  const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/get-involved`, {
+    cache: "no-store",
+  });
+  const data = await response.json();
+  if (!data.data) {
+    return [];
+  }
+  const description = data.data.attributes.description;
+  const image = data.data.attributes.image;
+  arr.push(description);
+  arr.push(image);
+
+  return arr;
+}

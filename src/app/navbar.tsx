@@ -38,6 +38,8 @@ const navigation = [
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
   { name: "Events", href: "/dashboard" },
+  { name: "Sponsors", href: "/sponsors" },
+  { name: "Friends of Feast", href: "/friends-of-feast" },
 ];
 
 const mobileLinks = [
@@ -45,6 +47,8 @@ const mobileLinks = [
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
   { name: "Events", href: "/dashboard" },
+  { name: "Sponsors", href: "/sponsors" },
+  { name: "Friends of Feast", href: "/friends-of-feast" },
 ];
 
 function classNames(...classes: string[]) {

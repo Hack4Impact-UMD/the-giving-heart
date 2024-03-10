@@ -20,6 +20,7 @@ import axios from "axios";
 import { useAuthContext } from "@/utils/context/AuthContext";
 import { EventSignUpData, UserAttendsData } from "../_api/model";
 import { useRouter } from "next/navigation";
+import useSWR from "swr";
 
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
@@ -29,6 +30,8 @@ export default function EventSignupPage() {
     searchParams.get("volunteerRoles") ?? "This was undefined - event data"; //FIXME: Need to change default val of params
   const volunteerRolesData = JSON.parse(`${searchParamsVolunteerRoles}`);
   const router = useRouter();
+  const userAttendAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends?populate=*`;
+  const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
   const [selectedRole, setSelectedRole] = React.useState<string>("");
   const [availableShifts, setAvailableShift] = useState([]);
@@ -41,6 +44,7 @@ export default function EventSignupPage() {
   };
 
   const handleRoleShiftSelection = (event: SelectChangeEvent<string>) => {
+    console.log(event.target.value);
     setSelectedRoleShift(event.target.value);
   };
 
@@ -53,6 +57,18 @@ export default function EventSignupPage() {
     );
   };
 
+  const fetcher = async (url: any) =>
+    await axios
+      .get(url, {
+        headers: { Authorization: `Bearer ${auth}` },
+      })
+      .then((res) => res.data);
+
+  let { data: userAttendData, error: userAttendError } = useSWR(
+    userAttendAddress,
+    fetcher
+  );
+
   //TODO: disable if event registration window has expired
   const handleRegisterClick = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -61,15 +77,45 @@ export default function EventSignupPage() {
       const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends`;
       const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
-      try {
-        const currentUserAttends: any = await axios
-          .get(address, {
-            headers: {
-              Authorization: `Bearer ${auth}`,
-            },
-          })
-          .then((res) => console.log(res));
+      userAttendData["data"].forEach((item: any) => {
+        if (
+          item["attributes"]["users_permissions_user"]["data"]["attributes"][
+            "username"
+          ] === user.username &&
+          item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
+            selectedRoleShift
+        ) {
+          // TODO: Add modal in replacement of console.log -> give user the option to try again or return to dashboard
+          console.log("User has already registered for this shift");
+          return;
+        }
+      });
 
+      //
+      const numRegisteredForShift = userAttendData["data"].reduce(
+        (acc: number, item: any) => {
+          if (
+            item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
+            selectedRoleShift
+          ) {
+            acc += 1;
+          }
+          return acc;
+        },
+        0
+      );
+
+      volunteerRolesData.forEach((role: any) => {
+        if (role["volunteerRoleId"] === selectedRole) {
+          if (numRegisteredForShift >= role["capacity"]) {
+            // TODO: Add modal in replacement of console.log -> "Role is at full capacity" give the user the option to waitlist or return to dashboard
+            console.log("Shift is at full capacity");
+            return;
+          }
+        }
+      });
+
+      try {
         await axios
           .post(address, {
             headers: {
@@ -113,106 +159,136 @@ export default function EventSignupPage() {
       >
         <div>
           <div className=" bg-[#72090E] bg-opacity-70 p-3 my-2">
-            <h1 className="text-neutral-50 text-5xl md:text-7xl">Event registration</h1>
+            <h1 className="text-neutral-50 text-5xl md:text-7xl">
+              Event registration
+            </h1>
           </div>
           <div className="w-2/3 md:w-3/4 lg:m-auto">
-            <h2 className="bg-[#72090E] bg-opacity-70 text-xl text-neutral-50 md:text-4xl p-3 my-2">{eventD.event.title}</h2>
+            <h2 className="bg-[#72090E] bg-opacity-70 text-xl text-neutral-50 md:text-4xl p-3 my-2">
+              {eventD.event.title}
+            </h2>
           </div>
         </div>
       </div>
       <h2 className="pt-3 px-3 italic">Step:</h2>
       <div className="px-6 py-3 pb-12">
-        <ol className="relative border-s-8 border-[#B91920]">                  
-            <li className="mb-10 ms-8 text-center">
-                <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">1</p></div>
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Review event Details</h3>
-                <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
-                  <h4>Description</h4>
-                  <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{eventD.event.description}</p>
-                  <h4>Available Positions</h4>
-                    <ul>
-                      {eventD.volunteerRoles.map((role, index) => (
-                        <>
-                          <p>Category #{index + 1}</p>
-                          <li key={index}>
-                            {role.title}
-                          </li>
-                        </>
-                      ))}
-                    </ul>
-                  <h4>Date & Time</h4>
-                    <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{eventD.event.eventDateStart} - {eventD.event.eventDateEnd}</p>
-                  <h4>Location</h4>
-                    <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">{eventD.event.location}</p>
-                </div>     
-            </li>
-            <li className="mb-10 ms-8 text-center">
-            <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">2</p></div>
-                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Choose an available volunteer role</h3>
-                <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
-                  <FormControl>
-                    <InputLabel sx={{ marginTop: 2 }} htmlFor="v-roles">
-                      Click to choose role
-                    </InputLabel>
-                    <Select
-                      sx={{ marginTop: 2, marginLeft: 2, width: 200, height: 50 }}
-                      labelId="v-roles"
-                      id="v-roles"
-                      value={selectedRole}
-                      onChange={handleRoleSelection}
-                    >
-                      {eventD.volunteerRoles.map((role, index) => (
-                        <MenuItem key={index} value={role.volunteerRoleId}>
-                          {role.title}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  </FormControl>
-                </div>     
-            </li>
-            {selectedRole !== "" ? (
+        <ol className="relative border-s-8 border-[#B91920]">
+          <li className="mb-10 ms-8 text-center">
+            <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200">
+              <p className="py-0.5">1</p>
+            </div>
+            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">
+              Review event Details
+            </h3>
+            <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
+              <h4>Description</h4>
+              <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                {eventD.event.description}
+              </p>
+              <h4>Available Positions</h4>
+              <ul>
+                {eventD.volunteerRoles.map((role, index) => (
+                  <>
+                    <p>Category #{index + 1}</p>
+                    <li key={index}>{role.title}</li>
+                  </>
+                ))}
+              </ul>
+              <h4>Date & Time</h4>
+              <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                {eventD.event.eventDateStart} - {eventD.event.eventDateEnd}
+              </p>
+              <h4>Location</h4>
+              <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                {eventD.event.location}
+              </p>
+            </div>
+          </li>
+          <li className="mb-10 ms-8 text-center">
+            <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200">
+              <p className="py-0.5">2</p>
+            </div>
+            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">
+              Choose an available volunteer role
+            </h3>
+            <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
+              <FormControl>
+                <InputLabel sx={{ marginTop: 2 }} htmlFor="v-roles">
+                  Click to choose role
+                </InputLabel>
+                <Select
+                  sx={{ marginTop: 2, marginLeft: 2, width: 200, height: 50 }}
+                  labelId="v-roles"
+                  id="v-roles"
+                  value={selectedRole}
+                  onChange={handleRoleSelection}
+                >
+                  {eventD.volunteerRoles.map((role, index) => (
+                    <MenuItem key={index} value={role.volunteerRoleId}>
+                      {role.title}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+          </li>
+          {selectedRole !== "" ? (
             <>
               <li className="ms-8 mb-10 text-center">
-              <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">3</p></div>
-                  <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Choose what shifts you would like to work</h3>
-                  <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
-                    <Select
-                        sx={{
-                          marginTop: 2,
-                          marginLeft: 2,
-                          width: 200,
-                          height: 50,
-                        }}
-                        labelId="v-roles"
-                        id="v-roles"
-                        value={selectedRoleShift}
-                        onChange={handleRoleShiftSelection}
-                      >
-                        {availableShifts.map((shift: any) => (
-                          <MenuItem key={shift.shiftId} value={shift.shiftId}>
-                            {shift["eventRoleShiftTimeStart"]} -
-                            {shift["eventRoleShiftTimeEnd"]}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                  </div>   
+                <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200">
+                  <p className="py-0.5">3</p>
+                </div>
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">
+                  Choose what shifts you would like to work
+                </h3>
+                <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
+                  <Select
+                    sx={{
+                      marginTop: 2,
+                      marginLeft: 2,
+                      width: 200,
+                      height: 50,
+                    }}
+                    labelId="v-roles"
+                    id="v-roles"
+                    value={selectedRoleShift}
+                    onChange={handleRoleShiftSelection}
+                  >
+                    {availableShifts.map((shift: any) => (
+                      <MenuItem key={shift.shiftId} value={shift.shiftId}>
+                        {shift["eventRoleShiftTimeStart"]} -
+                        {shift["eventRoleShiftTimeEnd"]}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </div>
               </li>
-            </>) : ("")}
-            {selectedRoleShift !== "" ? (
-              <>
-                <li className="ms-8 text-center">
-                <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200"><p className="py-0.5">4</p></div>
-                    <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">Submit Registration!</h3>
-                      <Button
-                      variant="default"
-                      size="default"
-                      className="bg-[#ED1C24] text-white rounded-md"
-                      onClick={handleRegisterClick}
-                      >
-                        Submit Signup
-                      </Button> 
-                </li>
-                </>) : ("")}
+            </>
+          ) : (
+            ""
+          )}
+          {selectedRoleShift !== "" ? (
+            <>
+              <li className="ms-8 text-center">
+                <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200">
+                  <p className="py-0.5">4</p>
+                </div>
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">
+                  Submit Registration!
+                </h3>
+                <Button
+                  variant="default"
+                  size="default"
+                  className="bg-[#ED1C24] text-white rounded-md"
+                  onClick={handleRegisterClick}
+                >
+                  Submit Signup
+                </Button>
+              </li>
+            </>
+          ) : (
+            ""
+          )}
         </ol>
       </div>
 

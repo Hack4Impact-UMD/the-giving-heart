@@ -6,6 +6,8 @@ import backgroundPic from "../_images/about_background_header.png";
 import foodDistribution from "../_images/food_distribution.png";
 import supportVulnerable from "../_images/support_vulnerable.png";
 import advocayAwareness from "../_images/advocay_awareness.png";
+import useSWR from "swr";
+import axios from "axios";
 
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -14,6 +16,8 @@ import MuiAccordionSummary, {
   AccordionSummaryProps,
 } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
+import ImageCarousel from "../../components/ui/ImageCarousel";
+import WaysWeHelp from "./waysWeHelp";
 
 //bg-[url('./_images/homepage_bg.png')]
 
@@ -52,7 +56,34 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
   borderTop: "1px solid rgba(0, 0, 0, .125)",
 }));
 
+
+
 export default function About() {
+  // const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attend`;
+  // const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+
+  // const fetcher = async (url: any) =>
+  //   await axios
+  //     .get(url)
+  //     .then((res) => res.data);
+
+  // let { data, error } = useSWR(address, fetcher);
+
+  // const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/about-us-page`;
+  // const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+
+  // const fetcher = async (url: any) =>
+  //   await axios
+  //     .get(url, {
+  //       headers: { Authorization: `Bearer ${auth}` },
+  //     })
+  //     .then((res) => res.data);
+
+  // let { data, error } = useSWR(address, fetcher);
+  // console.log(error);
+  // console.log(data);
+  //const timelineText = [data["data"]["attribute"]["timeline_textfield_1"], data["data"]["attribute"]["timeline_textfield_2"], data["data"]["attribute"]["timeline_textfield_3"]]
+
   /* TODO: 
   - add accordionItems a Single Types in Strapi so users can alter it
   */
@@ -60,17 +91,17 @@ export default function About() {
     {
       title: "Our Beginning: Early 2000's",
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "text",
     },
     {
       title: "Growth Phase: 2005 - 2009",
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "text",
     },
     {
       title: "Fighting hunger & our future: 2010 - Beyond",
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      "text",
     },
   ];
 
@@ -124,11 +155,44 @@ export default function About() {
                 Ways We Help Others
               </h1>
             </div>
-            {/**TODO:
-             * - Change S3 URLS to actual images
-             * - Stack pictures horizontally on desktop image
-             */}
-            <div className="flex flex-col lg:flex-row items-center w-11/12 m-auto mt-4 justify-around">
+            {/*TODO:
+              * - Change S3 URLS to actual images
+              * - Stack pictures horizontally on desktop image */}
+            
+            <WaysWeHelp/>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div className="flex w-full items-center">
+          <div className="h-full p-4 md:text-center text-left text-black">
+            <div className="mt-12 text-2xl leading-7 text-center font-semibold">
+              <h1>Our Timeline</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="pb-16">
+        {accordionItems.map((item, index) => (
+          <Accordion key={index} className="max-w-full md:max-w-md lg:max-w-xl">
+            <AccordionSummary
+              aria-controls={`panel${index + 1}-content`}
+              id={`panel${index + 1}-header`}
+            >
+              {item.title}
+            </AccordionSummary>
+            <AccordionDetails>{item.content}</AccordionDetails>
+          </Accordion>
+        ))}
+      </div>
+    </main>
+  );
+}
+
+/*
+<div className="flex flex-col lg:flex-row items-center w-11/12 m-auto mt-4 justify-around">
               <div
                 className="lg:w-auto md:w-56 sm:w-40 md:mx-10 my-4 text-center"
                 style={{
@@ -195,34 +259,4 @@ export default function About() {
               >
                 Advocacy and Awareness
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div className="flex w-full items-center">
-          <div className="h-full p-4 md:text-center text-left text-black">
-            <div className="mt-12 text-2xl leading-7 text-center font-semibold">
-              <h1>Our Timeline</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="pb-16">
-        {accordionItems.map((item, index) => (
-          <Accordion key={index} className="max-w-full md:max-w-md lg:max-w-xl">
-            <AccordionSummary
-              aria-controls={`panel${index + 1}-content`}
-              id={`panel${index + 1}-header`}
-            >
-              {item.title}
-            </AccordionSummary>
-            <AccordionDetails>{item.content}</AccordionDetails>
-          </Accordion>
-        ))}
-      </div>
-    </main>
-  );
-}
+            </div> */

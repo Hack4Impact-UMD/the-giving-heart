@@ -35,15 +35,15 @@ export default function GetInvolved() {
           </div>
         </div>
 
-        <div className="w-5/6 flex flex-col items-center mt-8">
+        <div className="w-5/6 flex flex-col items-center mt-8 pb-16">
           <h1 className="text-lg md:text-4xl font-semibold">Donate</h1>
           <p className="text-center text-m dark:text-white mt-4 mb-8">
             [Items can donate + address to donate] 
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
             incididunt ut labore Ut enim ad minim veniam, quis nostrud exercitation ullamco 
             laboris nisi ut aliquip ex ea commodo!
-            </p>
-          {/* <MapboxMap /> */}
+          </p>
+          <MapboxMap />
         </div>
       </div>
 

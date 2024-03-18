@@ -17,6 +17,7 @@ export default function GetInvolved() {
 
   const description = data[0];
   const img = data[1];
+  const donate = data[2];
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
@@ -51,7 +52,7 @@ export default function GetInvolved() {
 
         <div className="w-5/6 flex flex-col items-center">
           <h1 className="text-lg md:text-4xl font-bold font-sans dark:text-whit">
-            Donate
+            {donate}
           </h1>
           <p className="text-sm font-sans dark:text-white"> 
               {description}
@@ -73,9 +74,11 @@ async function fetchData() {
     return [];
   }
   const description = data.data.attributes.description;
-  const image = data.data.attributes.image;
+  const image = data.data.attributes.banner;
+  const donate = data.data.attributes.Donate;
   arr.push(description);
   arr.push(image);
+  arr.push(donate);
 
   return arr;
 }

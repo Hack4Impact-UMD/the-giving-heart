@@ -55,28 +55,14 @@ export default function About() {
 
   return (
     <main className="flex min-h-screen flex-col items-center">
-      <div
-        className="flex items-center justify-center w-full bg-cover bg-[url('./_images/about_background_header.png')] md:p-16 p-2 pt-16"
-        
-      >
-        <div>
-          <h2
-            className="text-center text-xl md:text-7xl pt-3 pb-3 font-bold"
-            style={{ color: "#FFF", fontFamily: "Inter", fontSize: "24px", }}
-          >
-            About Us
+      <div className="flex items-center justify-center w-full bg-cover bg-[url('./_images/about_background_header.png')] md:p-16 p-2 pt-16">
+        <div className = "text-center">
+          <h1 className="text-3xl md:text-6xl font-sans text-white">
+                About Us
+          </h1>
+          <h2 className="text-2xl md:text-4xl font-sans">
+            <span style={{ fontSize: "0.8em", fontStyle: "italic", color: "#E5DEDE" }}>Est. 2002</span>
           </h2>
-          <p
-            className="text-center text-lg md:text-4xl pt-3 pb-3 font-bold"
-            style={{
-              color: "#E5DEDE",
-              fontFamily: "Inter",
-              fontStyle: "italic",
-              fontSize: "14px",
-            }}
-          >
-            Est. 2002
-          </p>
         </div>
       </div>
 
@@ -85,12 +71,10 @@ export default function About() {
         <div className="h-full p-4 md:text-center text-left text-black">
           <div className="mt-12">
             <h1
-              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
+              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-sans"
               style={{
                 color: "#000",
                 textAlign: "center",
-                fontFamily: "Inter",
-                fontWeight: "600",
                 lineHeight: "normal",
               }}
             >
@@ -99,13 +83,11 @@ export default function About() {
             </div>
 
             {/**TODO: need to add the below as a single type in Strapi for user to edit it*/}
-            <p className = "text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl"
+            <p className = "text-md md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl font-sans"
               style={{
                 color: "#838383",
                 textAlign: "center",
-                fontFamily: "Inter",
                 fontStyle: "normal",
-                fontWeight: "400",
                 lineHeight: "normal",
               }}
             > 
@@ -123,12 +105,10 @@ export default function About() {
           <div className="h-full p-4 md:text-center text-left text-black">
             <div className="mt-12">
             <h1
-              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl"
+              className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-sans"
               style={{
                 color: "#000",
                 textAlign: "center",
-                fontFamily: "Inter",
-                fontWeight: "600",
                 lineHeight: "normal",
               }}
             >
@@ -211,14 +191,10 @@ export default function About() {
         <div className="flex w-full items-center">
           <div className="h-full p-4 md:text-center text-left text-black">
             <div className="mt-12">
-              <h1
+              <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-sans"
                 style={{
                   color: "#000",
                   textAlign: "center",
-                  fontFamily: "Inter",
-                  fontSize: "20px",
-                  fontStyle: "normal",
-                  fontWeight: "600",
                   lineHeight: "normal",
                 }}
               >
@@ -247,7 +223,7 @@ export default function About() {
                   : "#D3D3D3",
               }}
             >
-              <div
+              <div className = "font-sans"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -256,13 +232,12 @@ export default function About() {
                   textAlign: "center",
                   width: "100%",
                   color: expanded.includes(item.id) ? "white" : "black",
-                  fontFamily: "Inter",
                 }}
               >
                 <div>
                   <Typography
                     style={{
-                      fontFamily: "Inter",
+                      font: "Sans",
                       fontSize: "13px",
                       fontStyle: "normal",
                       fontWeight: expanded.includes(item.id) ? "700" : "400",
@@ -275,7 +250,7 @@ export default function About() {
                   style={{
                     fontSize: "13px",
                     cursor: "pointer",
-                    fontFamily: "Inter",
+                    font: "Sans",
                   }}
                 >
                   {expanded.includes(item.id) ? "-" : "+"}

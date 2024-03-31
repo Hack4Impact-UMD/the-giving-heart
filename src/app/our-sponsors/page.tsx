@@ -71,7 +71,7 @@ export default function OurSponsors() {
         <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
             Our Sponsors
         </h2>
-        <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center">
+        <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center align-start">
           <Image src={UO} alt="Urban One"/>
           <Image src={UH} alt="United Healthcare" />
           <Image src={Sysco} alt="Sysco" />
@@ -89,10 +89,11 @@ export default function OurSponsors() {
           <Image src={Ukrops} alt="Ukrops" />
           <Image src={NPHC} alt="National Pan-Hellenic Council" />
           <Image src={RVA} alt="Richmond, VA" />
-          <div className="flex flex-col justify-center align-center">
-            <Image className="justify-self-center" src={Walmart} alt="Walmart" />
+          <div className="flex flex-col justify-center align-center items-center">
+            <Image src={Walmart} alt="Walmart" />
             <p className="text-xs text-center">Stores 1969 and 2821</p>
           </div>
+          <div/>
           <Image src={ML} alt="Massie Law" />
         </div>
 
@@ -100,23 +101,23 @@ export default function OurSponsors() {
         <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
             Supporters
         </h2>
-        <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center">
-          <p className="sm:text-lg text-xs">
+        <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center align-start">
+          <p className="sm:text-lg text-xs h-full">
             The Honorable Cynthia I. Newbille <br/>(Councilwoman - 7th District)
           </p>
-          <p className="sm:text-lg text-xs">
+          <p className="sm:text-lg text-xs h-full">
             Eda H. Cabaniss <br/> Charitable
           </p>
-          <p className="sm:text-lg text-xs">
+          <p className="sm:text-lg text-xs h-full">
             St. John&apos;s United Church of Christ Richmond, VA
           </p>
-          <p className="sm:text-lg text-xs">
+          <p className="sm:text-lg text-xs h-full">
             The Honorable Lamont Bagby <br/> (VA. State Senate)
           </p>
-          <p className="sm:text-lg text-xs">
+          <p className="sm:text-lg text-xs h-full">
             The Honorable Lamont Bagby <br/> (VA. State Senate)
           </p>
-          <p className="sm:text-lg text-xs">
+          <p className="sm:text-lg text-xs h-full">
             Clovia Lawrence, Margaret Grooms and Family
           </p>
         </div>
@@ -126,13 +127,13 @@ export default function OurSponsors() {
             Auxillary Supporters
         </h2>
         <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center">
-          <p className="sm:text-lg text-xs">
+          <p className="sm:text-lg text-xs h-full">
             First English Evangelical Lutheran Church
           </p>
-          <p className="sm:text-lg text-xs">
+          <p className="sm:text-lg text-xs h-full">
             Project Give Back to the Community
           </p>
-          <p className="sm:text-lg text-xs">
+          <p className="sm:text-lg text-xs h-full">
             Urban League of Richmond Young Professionals
           </p>
           <Image src={GR} alt="Greater Richmond Convention Center" />

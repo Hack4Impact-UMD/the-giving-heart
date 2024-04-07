@@ -19,7 +19,7 @@ const Progress = React.forwardRef<
   React.ElementRef<typeof ProgressPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
 >(({ className, value, ...props }, ref) => {
-  const colorClass = getColor(value);
+  const colorClass = getColor(value ?? 0);
   return (
     <ProgressPrimitive.Root
       ref={ref}

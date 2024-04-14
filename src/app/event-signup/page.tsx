@@ -21,13 +21,15 @@ import { useAuthContext } from "@/utils/context/AuthContext";
 import { EventSignUpData, UserAttendsData } from "../_api/model";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
+import { Earth, Users, BookOpen, CalendarClock } from "lucide-react";
 
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
-  const searchParamsEvent = searchParams.get("event") ?? "This was undefined"; //FIXME: Need to change default val of params
+  const searchParamsEvent = searchParams.get("event") ?? 
+    "{\"id\":\"This was undefined\", \"title\":\"[Event Name]\", \"description\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta.\", \"location\":\"[Location]\", \"eventDateStart\":\"[Date]\", \"eventDateEnd\":\"[Date]\", \"eventCheckInKey\":\"This was undefined\", \"signUpOpenDate\":\"[Date]\", \"signUpEndDate\":\"[Date]\"}"; //FIXME: Need to change default val of params
   const eventData = JSON.parse(`${searchParamsEvent}`);
   const searchParamsVolunteerRoles =
-    searchParams.get("volunteerRoles") ?? "This was undefined - event data"; //FIXME: Need to change default val of params
+    searchParams.get("volunteerRoles") ?? "[{\"title\":\"[Volunteer Role]\", \"description\":\"This was undefined\", \"eventRoleShiftTimeStart\":\"[Time]\", \"eventRoleShiftTimeEnd\":\"[Time]\", \"eventRoleShiftDate\":\"[Date]\", \"capacity\":\"10\", \"eventRoleShiftDescription\":\"This was undefined\", \"shiftId\":\"This was undefined\", \"volunteerRoleId\":\"This was undefined\"}, {\"title\":\"[Volunteer Role]\", \"description\":\"This was undefined\", \"eventRoleShiftTimeStart\":\"[Time]\", \"eventRoleShiftTimeEnd\":\"[Time]\", \"eventRoleShiftDate\":\"[Date]\", \"capacity\":\"10\", \"eventRoleShiftDescription\":\"This was undefined\", \"shiftId\":\"This was undefined\", \"volunteerRoleId\":\"This was undefined\"}, {\"title\":\"[Volunteer Role]\", \"description\":\"This was undefined\", \"eventRoleShiftTimeStart\":\"[Time]\", \"eventRoleShiftTimeEnd\":\"[Time]\", \"eventRoleShiftDate\":\"[Date]\", \"capacity\":\"10\", \"eventRoleShiftDescription\":\"This was undefined\", \"shiftId\":\"This was undefined\", \"volunteerRoleId\":\"This was undefined\"}]"; //FIXME: Need to change default val of params
   const volunteerRolesData = JSON.parse(`${searchParamsVolunteerRoles}`);
   const router = useRouter();
   const userAttendAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends?populate=*`;
@@ -80,10 +82,10 @@ export default function EventSignupPage() {
       userAttendData["data"].forEach((item: any) => {
         if (
           item["attributes"]["users_permissions_user"]["data"]["attributes"][
-            "username"
+          "username"
           ] === user.username &&
           item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
-            selectedRoleShift
+          selectedRoleShift
         ) {
           // TODO: Add modal in replacement of console.log -> give user the option to try again or return to dashboard
           console.log("User has already registered for this shift");
@@ -159,12 +161,12 @@ export default function EventSignupPage() {
       >
         <div>
           <div className=" bg-[#72090E] bg-opacity-70 p-3 my-2">
-            <h1 className="text-neutral-50 text-5xl md:text-7xl">
+            <h1 className="pl-5 pr-5 text-neutral-50 text-5xl md:text-7xl">
               Event registration
             </h1>
           </div>
-          <div className="w-2/3 md:w-3/4 lg:m-auto">
-            <h2 className="bg-[#72090E] bg-opacity-70 text-xl text-neutral-50 md:text-4xl p-3 my-2">
+          <div className="w-fit lg:m-auto">
+            <h2 className="bg-[#72090E] bg-opacity-70 text-xl text-neutral-50 md:text-4xl p-3 pl-8 pr-8 my-2">
               {eventD.event.title}
             </h2>
           </div>
@@ -173,35 +175,58 @@ export default function EventSignupPage() {
       <h2 className="pt-3 px-3 italic">Step:</h2>
       <div className="px-6 py-3 pb-12">
         <ol className="relative border-s-8 border-[#B91920]">
-          <li className="mb-10 ms-8 text-center">
+          <li className="mb-10 ms-8">
             <div className="absolute w-8 h-8 bg-[#72090E] rounded-full -start-5 border border-white text-center text-neutral-200">
               <p className="py-0.5">1</p>
             </div>
             <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">
-              Review event Details
+              Review Event Details
             </h3>
             <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
-              <h4>Description</h4>
-              <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                {eventD.event.description}
-              </p>
-              <h4>Available Positions</h4>
-              <ul>
-                {eventD.volunteerRoles.map((role, index) => (
-                  <>
-                    <p>Category #{index + 1}</p>
-                    <li key={index}>{role.title}</li>
-                  </>
-                ))}
-              </ul>
-              <h4>Date & Time</h4>
-              <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                {eventD.event.eventDateStart} - {eventD.event.eventDateEnd}
-              </p>
-              <h4>Location</h4>
-              <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
-                {eventD.event.location}
-              </p>
+              <div className="flex">
+                <BookOpen />
+                <div className="flex flex-col w-11/12 pl-5">
+                  <h4><b>Description</b></h4>
+
+                  <p className="mb-4 mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
+                    {eventD.event.description}
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <Users />
+                <div className="flex flex-col w-11/12 pl-5">
+                  <h4><b>Available Positions</b></h4>
+                  <ul className="mb-2">
+                    {eventD.volunteerRoles.map((role, index, array) => (
+                      <ul key={index} className="mb-2 text-base font-normal text-gray-500 dark:text-gray-400 pl-5 list-disc list-outside">
+                        <li className="mb-2 mt-2"><b>Category #{index + 1}</b></li>
+                        <ul className="pl-5 list-disc list-inside">
+                          <li className="mt-2" key={index}>{role.title}</li>
+                        </ul>
+                      </ul>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="flex">
+                <CalendarClock />
+                <div className="flex flex-col w-11/12 pl-5">
+                  <h4><b>Date & Time</b></h4>
+                  <p className="mb-4 mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
+                    {eventD.event.eventDateStart} to {eventD.event.eventDateEnd}
+                  </p>
+                </div>
+              </div>
+              <div className="flex">
+                <Earth />
+                <div className="flex flex-col w-11/12 pl-5">
+                  <h4><b>Location</b></h4>
+                  <p className="mb-4 mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
+                    {eventD.event.location}
+                  </p>
+                </div>
+              </div>
             </div>
           </li>
           <li className="mb-10 ms-8 text-center">

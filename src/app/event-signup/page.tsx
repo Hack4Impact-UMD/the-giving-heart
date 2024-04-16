@@ -21,6 +21,7 @@ import { useAuthContext } from "@/utils/context/AuthContext";
 import { EventSignUpData, UserAttendsData } from "../_api/model";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
+import Modal from "./signupModal";
 
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
@@ -37,6 +38,9 @@ export default function EventSignupPage() {
   const [availableShifts, setAvailableShift] = useState([]);
   const [selectedRoleShift, setSelectedRoleShift] = useState("");
   const { user, setUser } = useAuthContext();
+
+  const [showTryAgainModal, setShowTryAgainModal] = useState(false);
+  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
 
   const eventD: EventSignUpData = {
     event: eventData,
@@ -69,7 +73,6 @@ export default function EventSignupPage() {
     fetcher
   );
 
-  //TODO: disable if event registration window has expired
   const handleRegisterClick = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
@@ -77,70 +80,73 @@ export default function EventSignupPage() {
       const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends`;
       const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
-      userAttendData["data"].forEach((item: any) => {
-        if (
-          item["attributes"]["users_permissions_user"]["data"]["attributes"][
-            "username"
-          ] === user.username &&
-          item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
-            selectedRoleShift
-        ) {
-          // TODO: Add modal in replacement of console.log -> give user the option to try again or return to dashboard
-          console.log("User has already registered for this shift");
-          return;
+      var shiftCapacity = Number.MAX_VALUE;
+      try {
+        for (const item of userAttendData["data"]) {
+          if (
+            item["attributes"]["users_permissions_user"]["data"]["attributes"][
+              "username"
+            ] === user.username &&
+            item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
+              selectedRoleShift
+          ) {
+            setShowTryAgainModal(true);
+            return;
+          }
         }
-      });
 
-      //
-      const numRegisteredForShift = userAttendData["data"].reduce(
-        (acc: number, item: any) => {
+        const numRegisteredForShift = userAttendData["data"].reduce(
+          (acc: number, item: any) => {
+            if (
+              item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
+              selectedRoleShift
+            ) {
+              acc += 1;
+            }
+            return acc;
+          },
+          0
+        );
+
+        for (const item of userAttendData["data"]) {
           if (
             item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
             selectedRoleShift
           ) {
-            acc += 1;
-          }
-          return acc;
-        },
-        0
-      );
-
-      volunteerRolesData.forEach((role: any) => {
-        if (role["volunteerRoleId"] === selectedRole) {
-          if (numRegisteredForShift >= role["capacity"]) {
-            // TODO: Add modal in replacement of console.log -> "Role is at full capacity" give the user the option to waitlist or return to dashboard
-            console.log("Shift is at full capacity");
-            return;
+            shiftCapacity =
+              item["attributes"]["event_role_shifts"]["data"][0]["attributes"][
+                "capacity"
+              ];
+            break;
           }
         }
-      });
 
-      try {
-        await axios
-          .post(address, {
-            headers: {
-              Authorization: `Bearer ${auth}`,
+        if (numRegisteredForShift >= shiftCapacity) {
+          setShowWaitlistModal(true);
+          return;
+        }
+
+        await axios.post(address, {
+          headers: {
+            Authorization: `Bearer ${auth}`,
+          },
+          data: {
+            users_permissions_user: {
+              id: user.id,
             },
-            data: {
-              users_permissions_user: {
-                id: user.id,
-              },
-              event_role_shifts: {
-                id: selectedRoleShift,
-              },
-              checkIn: false,
-              checkOut: false,
+            event_role_shifts: {
+              id: selectedRoleShift,
             },
-          })
-          .then((res) => {
-            console.log(res);
-            router.push("/dashboard");
-          });
+            checkIn: false,
+            checkOut: false,
+          },
+        });
+
+        router.push("/dashboard");
       } catch (error) {
         console.log(error);
       }
     }
-    //TODO: need to make sure that users haven't already registered for event
   };
 
   return (
@@ -291,6 +297,24 @@ export default function EventSignupPage() {
           )}
         </ol>
       </div>
+
+      <Modal
+        titleText="Sign-up Failed"
+        descriptionText="You have already registered for this shift."
+        buttonText="Try Again"
+        onConfirm={() => setShowTryAgainModal(false)}
+        open={showTryAgainModal}
+        onOpenChange={setShowTryAgainModal}
+      ></Modal>
+
+      <Modal
+        titleText="Full Capacity"
+        descriptionText="This role and shit are at full capacity. Would you like to  join the waitlist?"
+        buttonText="Join Waitlist"
+        onConfirm={() => console.log("TODO: Trigger waitlist function needed")}
+        open={showWaitlistModal}
+        onOpenChange={setShowWaitlistModal}
+      ></Modal>
 
       {/* <h3
         style={{

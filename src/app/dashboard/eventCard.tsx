@@ -6,6 +6,12 @@ import {
   CardTitle,
   CardContent,
 } from "../../components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../../components/ui/tooltip"
 import { Button } from "../../components/ui/button";
 import Image, { StaticImageData } from "../../../node_modules/next/image";
 
@@ -95,26 +101,54 @@ export const EventCard: React.FC<EventCardProps> = ({
         </CardContent>
 
         <CardFooter className="flex justify-center items-center">
-          {/**TODO: Set to inactive if user does not exist and have a banner at top saying you need to be signed in! */}
-
-          <Button
-            variant="default"
-            size="default"
-            className="bg-[#ED1C24] text-white rounded-md"
-            disabled={!user}
-          >
-            <Link
-              href={{
-                pathname: `/event-signup`,
-                query: {
-                  event: event,
-                  volunteerRoles: volunteerRoles,
-                },
-              }}
-            >
-              Register
-            </Link>
-          </Button>
+          {!user ? (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span tabIndex={0}>
+                    <Button
+                      variant="default"
+                      size="default"
+                      className="bg-[#ED1C24] text-white rounded-md"
+                      disabled
+                    >
+                      <Link
+                        href={{
+                          pathname: `/event-signup`,
+                          query: {
+                            event: event,
+                            volunteerRoles: volunteerRoles,
+                          },
+                        }}
+                      >
+                        Register
+                      </Link>
+                    </Button>
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent>You must sign in to register for this event.</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+            ) : (
+              <Button
+                variant="default"
+                size="default"
+                className="bg-[#ED1C24] text-white rounded-md"
+              >
+                <Link
+                  href={{
+                    pathname: `/event-signup`,
+                    query: {
+                      event: event,
+                      volunteerRoles: volunteerRoles,
+                    },
+                  }}
+                >
+                  Register
+                </Link>
+              </Button>
+            )
+          }
         </CardFooter>
       </Card>
     </div>

@@ -22,6 +22,8 @@ import { EventSignUpData, UserAttendsData } from "../_api/model";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 
+import { Progress } from "@/components/ui/progress"
+
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
   const searchParamsEvent = searchParams.get("event") ?? "This was undefined"; //FIXME: Need to change default val of params
@@ -242,25 +244,36 @@ export default function EventSignupPage() {
                   Choose what shifts you would like to work
                 </h3>
                 <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
-                  <Select
-                    sx={{
-                      marginTop: 2,
-                      marginLeft: 2,
-                      width: 200,
-                      height: 50,
-                    }}
-                    labelId="v-roles"
-                    id="v-roles"
-                    value={selectedRoleShift}
-                    onChange={handleRoleShiftSelection}
-                  >
-                    {availableShifts.map((shift: any) => (
-                      <MenuItem key={shift.shiftId} value={shift.shiftId}>
-                        {shift["eventRoleShiftTimeStart"]} -
-                        {shift["eventRoleShiftTimeEnd"]}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  {availableShifts.map((shift: any) => (
+                    <div className="flex flex-col my-8">
+                      <div className="flex flex-row justify-between text-lg mb-4">
+                        {/* <p> {shift.eventRoleShiftTimeStart} - {shift.eventRoleShiftTimeEnd} </p> */}
+                        <div className="flex items-center">
+                          <input
+                            type="radio"
+                            name="shift"
+                            id={shift.shiftId}
+                            value={shift.id}
+                            // checked={selectedRoleShift === shift.id}
+                            onChange={handleRoleShiftSelection}
+                            className="form-radio h-5 w-5 text-orange-600"
+                          />
+                          <label htmlFor={shift.shiftId} className="ml-2 font-semibold">
+                            {shift["eventRoleShiftTimeStart"]} - {shift["eventRoleShiftTimeEnd"]}
+                          </label>
+                        </div>
+          
+
+                        <div className="flex flex-row">
+                          <p className="font-semibold mr-4">Capacity: {shift.capacity}</p>
+                          {/* TODO: modify open spots  */}
+                          <p className="font-semibold">Open: {shift.capacity}</p> 
+                        </div>
+                      </div>
+                      <Progress value={ (1 / shift.capacity) *  100} />
+                      <Button className="bg-red-500 w-32 mt-4"> Join Waitlist</Button>
+                    </div>
+                  ))}
                 </div>
               </li>
             </>
@@ -289,6 +302,8 @@ export default function EventSignupPage() {
           ) : (
             ""
           )}
+
+
         </ol>
       </div>
 

@@ -71,6 +71,16 @@ export default function EventSignupPage() {
     fetcher
   );
 
+  let numRegisteredForShift = 0;
+  if (userAttendData && Array.isArray(userAttendData["data"])) {
+    numRegisteredForShift = userAttendData["data"].reduce((acc, item) => {
+      if (item["attributes"]["event_role_shifts"]["data"][0]["id"] === selectedRoleShift) {
+        acc += 1;
+      }
+      return acc;
+    }, 0);
+  }
+
   //TODO: disable if event registration window has expired
   const handleRegisterClick = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
@@ -254,7 +264,6 @@ export default function EventSignupPage() {
                             name="shift"
                             id={shift.shiftId}
                             value={shift.id}
-                            // checked={selectedRoleShift === shift.id}
                             onChange={handleRoleShiftSelection}
                             className="form-radio h-5 w-5 text-orange-600"
                           />
@@ -263,14 +272,12 @@ export default function EventSignupPage() {
                           </label>
                         </div>
           
-
                         <div className="flex flex-row">
                           <p className="font-semibold mr-4">Capacity: {shift.capacity}</p>
-                          {/* TODO: modify open spots  */}
-                          <p className="font-semibold">Open: {shift.capacity}</p> 
+                          <p className="font-semibold">Open: {shift.capacity - numRegisteredForShift}</p> 
                         </div>
                       </div>
-                      <Progress value={ (1 / shift.capacity) *  100} />
+                      <Progress value={ (numRegisteredForShift / shift.capacity) *  100} />
                       <Button className="bg-red-500 w-32 mt-4"> Join Waitlist</Button>
                     </div>
                   ))}

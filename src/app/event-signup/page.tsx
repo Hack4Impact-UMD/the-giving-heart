@@ -263,7 +263,7 @@ export default function EventSignupPage() {
                 </h3>
                 <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
                   {availableShifts.map((shift: any) => (
-                    <div className="flex flex-col my-8">
+                    <div key={shift.shiftId} className="flex flex-col my-8">
                       <div className="flex flex-row justify-between text-lg mb-4">
                         {/* <p> {shift.eventRoleShiftTimeStart} - {shift.eventRoleShiftTimeEnd} </p> */}
                         <div className="flex items-center">

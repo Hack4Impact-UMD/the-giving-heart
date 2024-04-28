@@ -1,8 +1,30 @@
-"use client";
+// "use client";
+import useSWR from "swr";
+import axios from "axios";
 import MapboxMap from "@/components/map";
 import EventHelper from "./eventhelper";
 
-export default function GetInvolved() {
+async function getBannerAndDonate() {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/get-involved?populate=banner`,
+    {
+      cache: "no-store",
+    }
+  );
+  const data = await response.json();
+  if (!data.data) {
+    return "";
+  }
+  const banner = data.data.attributes.banner.data[0].attributes.formats.thumbnail.url;
+  const donate = data.data.attributes.Donate;
+
+  return [banner, donate];
+}
+
+export default async function GetInvolved() {
+  const data = await getBannerAndDonate();
+  const banner = data[0];
+  const donate_desc = data[1];
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div
@@ -10,7 +32,7 @@ export default function GetInvolved() {
           style={{
               // TODO: get better header image, current one is very pixelated 
             backgroundImage:
-              "url(../_images/getinv.png), linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5))",
+              `url(\"${banner}\"), linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5))`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             width: "100vw",
@@ -38,10 +60,7 @@ export default function GetInvolved() {
         <div className="w-5/6 flex flex-col items-center mt-8 pb-16">
           <h1 className="text-lg md:text-4xl font-semibold">Donate</h1>
           <p className="text-center text-m dark:text-white mt-4 mb-8">
-            [Items can donate + address to donate] 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-            incididunt ut labore Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-            laboris nisi ut aliquip ex ea commodo!
+            {donate_desc}
           </p>
           <MapboxMap />
         </div>

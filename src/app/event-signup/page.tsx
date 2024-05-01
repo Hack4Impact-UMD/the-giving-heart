@@ -18,22 +18,21 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "../../components/ui/button";
 import axios from "axios";
 import { useAuthContext } from "@/utils/context/AuthContext";
-import { EventSignUpData, UserAttendsData } from "../_api/model";
+import { EventSignUpData } from "../_api/model";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
-<<<<<<< HEAD
 import Modal from "./signupModal";
-=======
 import { Earth, Users, BookOpen, CalendarClock } from "lucide-react";
->>>>>>> cdfea7c (Matched review event details to figma)
 
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
-  const searchParamsEvent = searchParams.get("event") ?? 
-    "{\"id\":\"This was undefined\", \"title\":\"[Event Name]\", \"description\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta.\", \"location\":\"[Location]\", \"eventDateStart\":\"[Date]\", \"eventDateEnd\":\"[Date]\", \"eventCheckInKey\":\"This was undefined\", \"signUpOpenDate\":\"[Date]\", \"signUpEndDate\":\"[Date]\"}"; //FIXME: Need to change default val of params
+  const searchParamsEvent =
+    searchParams.get("event") ??
+    '{"id":"This was undefined", "title":"[Event Name]", "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta.", "location":"[Location]", "eventDateStart":"[Date]", "eventDateEnd":"[Date]", "eventCheckInKey":"This was undefined", "signUpOpenDate":"[Date]", "signUpEndDate":"[Date]"}'; //FIXME: Need to change default val of params
   const eventData = JSON.parse(`${searchParamsEvent}`);
   const searchParamsVolunteerRoles =
-    searchParams.get("volunteerRoles") ?? "[{\"title\":\"[Volunteer Role]\", \"description\":\"This was undefined\", \"eventRoleShiftTimeStart\":\"[Time]\", \"eventRoleShiftTimeEnd\":\"[Time]\", \"eventRoleShiftDate\":\"[Date]\", \"capacity\":\"10\", \"eventRoleShiftDescription\":\"This was undefined\", \"shiftId\":\"This was undefined\", \"volunteerRoleId\":\"This was undefined\"}, {\"title\":\"[Volunteer Role]\", \"description\":\"This was undefined\", \"eventRoleShiftTimeStart\":\"[Time]\", \"eventRoleShiftTimeEnd\":\"[Time]\", \"eventRoleShiftDate\":\"[Date]\", \"capacity\":\"10\", \"eventRoleShiftDescription\":\"This was undefined\", \"shiftId\":\"This was undefined\", \"volunteerRoleId\":\"This was undefined\"}, {\"title\":\"[Volunteer Role]\", \"description\":\"This was undefined\", \"eventRoleShiftTimeStart\":\"[Time]\", \"eventRoleShiftTimeEnd\":\"[Time]\", \"eventRoleShiftDate\":\"[Date]\", \"capacity\":\"10\", \"eventRoleShiftDescription\":\"This was undefined\", \"shiftId\":\"This was undefined\", \"volunteerRoleId\":\"This was undefined\"}]"; //FIXME: Need to change default val of params
+    searchParams.get("volunteerRoles") ??
+    '[{"title":"[Volunteer Role]", "description":"This was undefined", "eventRoleShiftTimeStart":"[Time]", "eventRoleShiftTimeEnd":"[Time]", "eventRoleShiftDate":"[Date]", "capacity":"10", "eventRoleShiftDescription":"This was undefined", "shiftId":"This was undefined", "volunteerRoleId":"This was undefined"}, {"title":"[Volunteer Role]", "description":"This was undefined", "eventRoleShiftTimeStart":"[Time]", "eventRoleShiftTimeEnd":"[Time]", "eventRoleShiftDate":"[Date]", "capacity":"10", "eventRoleShiftDescription":"This was undefined", "shiftId":"This was undefined", "volunteerRoleId":"This was undefined"}, {"title":"[Volunteer Role]", "description":"This was undefined", "eventRoleShiftTimeStart":"[Time]", "eventRoleShiftTimeEnd":"[Time]", "eventRoleShiftDate":"[Date]", "capacity":"10", "eventRoleShiftDescription":"This was undefined", "shiftId":"This was undefined", "volunteerRoleId":"This was undefined"}]'; //FIXME: Need to change default val of params
   const volunteerRolesData = JSON.parse(`${searchParamsVolunteerRoles}`);
   const router = useRouter();
   const userAttendAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends?populate=*`;
@@ -85,7 +84,6 @@ export default function EventSignupPage() {
       const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends`;
       const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
-<<<<<<< HEAD
       var shiftCapacity = Number.MAX_VALUE;
       try {
         for (const item of userAttendData["data"]) {
@@ -99,19 +97,6 @@ export default function EventSignupPage() {
             setShowTryAgainModal(true);
             return;
           }
-=======
-      userAttendData["data"].forEach((item: any) => {
-        if (
-          item["attributes"]["users_permissions_user"]["data"]["attributes"][
-          "username"
-          ] === user.username &&
-          item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
-          selectedRoleShift
-        ) {
-          // TODO: Add modal in replacement of console.log -> give user the option to try again or return to dashboard
-          console.log("User has already registered for this shift");
-          return;
->>>>>>> cdfea7c (Matched review event details to figma)
         }
 
         const numRegisteredForShift = userAttendData["data"].reduce(
@@ -209,7 +194,9 @@ export default function EventSignupPage() {
               <div className="flex">
                 <BookOpen />
                 <div className="flex flex-col w-11/12 pl-5">
-                  <h4><b>Description</b></h4>
+                  <h4>
+                    <b>Description</b>
+                  </h4>
 
                   <p className="mb-4 mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
                     {eventD.event.description}
@@ -219,13 +206,22 @@ export default function EventSignupPage() {
               <div className="flex">
                 <Users />
                 <div className="flex flex-col w-11/12 pl-5">
-                  <h4><b>Available Positions</b></h4>
+                  <h4>
+                    <b>Available Positions</b>
+                  </h4>
                   <ul className="mb-2">
                     {eventD.volunteerRoles.map((role, index, array) => (
-                      <ul key={index} className="mb-2 text-base font-normal text-gray-500 dark:text-gray-400 pl-5 list-disc list-outside">
-                        <li className="mb-2 mt-2"><b>Category #{index + 1}</b></li>
+                      <ul
+                        key={index}
+                        className="mb-2 text-base font-normal text-gray-500 dark:text-gray-400 pl-5 list-disc list-outside"
+                      >
+                        <li className="mb-2 mt-2">
+                          <b>Category #{index + 1}</b>
+                        </li>
                         <ul className="pl-5 list-disc list-inside">
-                          <li className="mt-2" key={index}>{role.title}</li>
+                          <li className="mt-2" key={index}>
+                            {role.title}
+                          </li>
                         </ul>
                       </ul>
                     ))}
@@ -235,7 +231,9 @@ export default function EventSignupPage() {
               <div className="flex">
                 <CalendarClock />
                 <div className="flex flex-col w-11/12 pl-5">
-                  <h4><b>Date & Time</b></h4>
+                  <h4>
+                    <b>Date & Time</b>
+                  </h4>
                   <p className="mb-4 mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
                     {eventD.event.eventDateStart} to {eventD.event.eventDateEnd}
                   </p>
@@ -244,7 +242,9 @@ export default function EventSignupPage() {
               <div className="flex">
                 <Earth />
                 <div className="flex flex-col w-11/12 pl-5">
-                  <h4><b>Location</b></h4>
+                  <h4>
+                    <b>Location</b>
+                  </h4>
                   <p className="mb-4 mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
                     {eventD.event.location}
                   </p>

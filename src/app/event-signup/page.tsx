@@ -261,21 +261,24 @@ export default function EventSignupPage() {
                 <h3 className="text-2xl font-semibold text-gray-900 dark:text-white my-3">
                   Choose what shifts you would like to work
                 </h3>
+
+
                 <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
                   {availableShifts.map((shift: any) => (
                     <div key={shift.shiftId} className="flex flex-col my-8">
                       <div className="flex flex-row justify-between text-lg mb-4">
-                        {/* <p> {shift.eventRoleShiftTimeStart} - {shift.eventRoleShiftTimeEnd} </p> */}
+                        
                         <div className="flex items-center">
                           <input
                             type="radio"
                             name="shift"
-                            id={shift.shiftId}
-                            value={shift.id}
+                            id="v-roles"
+                            // checked={selectedRoleShift === shift.shiftId}
+                            value={shift.shiftId}
                             onChange={handleRoleShiftSelection}
                             className="form-radio h-5 w-5 text-orange-600"
                           />
-                          <label htmlFor={shift.shiftId} className="ml-2 font-semibold">
+                          <label htmlFor={selectedRoleShift} className="ml-2 font-semibold">
                             {shift["eventRoleShiftTimeStart"]} - {shift["eventRoleShiftTimeEnd"]}
                           </label>
                         </div>
@@ -285,11 +288,12 @@ export default function EventSignupPage() {
                           <p className="font-semibold">Open: {shift.capacity - numRegisteredForShift}</p> 
                         </div>
                       </div>
-                      <Progress value={ (numRegisteredForShift / shift.capacity) *  100} />
-                      <Button className="bg-red-500 w-32 mt-4"> Join Waitlist</Button>
+                      <Progress value={ (numRegisteredForShift || 0 / shift.capacity) *  100} />
+                      <Button className="bg-[#72090E] w-32 h-8 mt-4 rounded-3xl"> Join Waitlist</Button>
                     </div>
                   ))}
                 </div>
+
               </li>
             </>
           ) : (

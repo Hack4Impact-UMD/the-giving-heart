@@ -149,6 +149,95 @@ export default function EventSignupPage() {
     }
   };
 
+  const handleAddWaitlist = async () => {
+    // check to make sure user is not already waitlisted
+    if (user) {
+      const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends`;
+      const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+
+      try {
+        await axios.post(address, {
+          headers: {
+            Authorization: `Bearer ${auth}`,
+          },
+          data: {
+            users_permissions_user: {
+              id: user.id,
+            },
+            event_role_shifts: {
+              id: selectedRoleShift,
+            },
+            checkIn: true,
+            checkOut: true,
+          },
+        });
+
+        console.log("Successfully added to waitlist.");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const handleDropClick = async () => {
+    if (user) {
+      try {
+        // fetch all entries from WaitlistUserAttends
+        const waitlistEntryResponse = await axios.get(
+          `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends?populate=*`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth}`,
+            },
+          }
+        );
+
+        // Filter the entries to find the one with matching event_role_shifts
+        const waitlistEntry = waitlistEntryResponse.data.data.find(
+          (entry: any) =>
+            entry.attributes.event_role_shifts.data[0].id === selectedRoleShift
+        );
+
+        if (waitlistEntry) {
+          const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends`;
+          console.log(waitlistEntry.attributes.event_role_shifts.data[0].id);
+          // Add the fetched entry to UserAttends
+          await axios.post(address, {
+            headers: {
+              Authorization: `Bearer ${auth}`,
+            },
+            data: {
+              users_permissions_user: {
+                id: waitlistEntry.attributes.users_permissions_user.data.id,
+              },
+              event_role_shifts: {
+                id: waitlistEntry.attributes.event_role_shifts.data[0].id,
+              },
+              checkIn: false,
+              checkOut: false,
+            },
+          });
+
+          // Delete the fetched entry from WaitlistUserAttends
+          await axios.delete(
+            `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends/${waitlistEntry.id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${auth}`,
+              },
+            }
+          );
+
+          console.log("Successfully moved from waitlist to attends.");
+        } else {
+          console.log("No entry found in the waitlist.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <main className="flex min-h-screen flex-col">
       <div
@@ -290,6 +379,14 @@ export default function EventSignupPage() {
                 >
                   Submit Signup
                 </Button>
+                <Button
+                  variant="default"
+                  size="default"
+                  className="bg-[#ED1C24] text-white rounded-md"
+                  onClick={handleDropClick}
+                >
+                  Drop
+                </Button>
               </li>
             </>
           ) : (
@@ -311,7 +408,7 @@ export default function EventSignupPage() {
         titleText="Full Capacity"
         descriptionText="This role and shit are at full capacity. Would you like to  join the waitlist?"
         buttonText="Join Waitlist"
-        onConfirm={() => console.log("TODO: Trigger waitlist function needed")}
+        onConfirm={handleAddWaitlist}
         open={showWaitlistModal}
         onOpenChange={setShowWaitlistModal}
       ></Modal>

@@ -74,7 +74,6 @@ export default function Settings() {
   };
 
   const handleCancel = () => {
-    console.log(form.watch("currentPassword"));
     form.reset({ newPassword: "", confirmPassword: "" });
     setIsEditing(false);
   };
@@ -87,7 +86,6 @@ export default function Settings() {
       form.watch("confirmPassword")
     )
       .then((data) => {
-        console.log(data);
         form.reset({ newPassword: "", confirmPassword: "" });
         setIsEditing(false);
       })

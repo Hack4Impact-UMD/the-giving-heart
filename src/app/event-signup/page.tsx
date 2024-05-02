@@ -54,7 +54,6 @@ export default function EventSignupPage() {
   };
 
   const handleRoleShiftSelection = (event: SelectChangeEvent<string>) => {
-    console.log(event.target.value);
     setSelectedRoleShift(event.target.value);
   };
 
@@ -93,10 +92,7 @@ export default function EventSignupPage() {
 
       var shiftCapacity = Number.MAX_VALUE;
       try {
-        // Check if user is already registered
-        console.log(userAttendData["data"]);
-        console.log("selectedRoleShift" + selectedRoleShift);
-
+        // Check if user is already registered for the shift
         for (const item of userAttendData["data"]) {
           if (
             item["attributes"]["users_permissions_user"]["data"]["attributes"][

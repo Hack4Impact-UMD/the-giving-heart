@@ -28,6 +28,9 @@ import Aramark from "./AuxSupporters/Aramark.png"
 import GR from "./AuxSupporters/GreaterRichmondConventionCenter.png"
 import Market from "./AuxSupporters/TheMarket25.png"
 
+import SponsorImages from "./SponsorImages"
+//import AuxSponsImages from "./AuxSponsImages"
+
 export default function OurSponsors() {
   
   
@@ -67,38 +70,22 @@ export default function OurSponsors() {
         <br/>
         </div>
 
-        {/* Sponsors Section */}
-        <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
-            Our Sponsors
-        </h2>
-        <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center align-start">
-          <Image src={UO} alt="Urban One"/>
-          <Image src={UH} alt="United Healthcare" />
-          <Image src={Sysco} alt="Sysco" />
-          <Image src={DE} alt="Dominion Energy" />
-          <Image src={Threads} alt="Threads" />
-          <Image src={Pepsi} alt="Pepsi" />
-          <Image src={Bombas} alt="Bombas" />
-          <Image src={KK} alt="Krispy Kreme" />
-          <Image src={BH} alt="Boar's Head" />
-          <Image src={EZB} alt="E-Z Box" />
-          <Image src={WB} alt="Williams Bakery" />
-          <Image src={APRI} alt="APRI" />
-          <Image src={NAACP} alt="NAACP" />
-          <Image src={CV} alt="Clearview Counseling" />
-          <Image src={Ukrops} alt="Ukrops" />
-          <Image src={NPHC} alt="National Pan-Hellenic Council" />
-          <Image src={RVA} alt="Richmond, VA" />
-          <div className="flex flex-col justify-center align-center items-center">
-            <Image src={Walmart} alt="Walmart" />
-            <p className="text-xs text-center">Stores 1969 and 2821</p>
-          </div>
-          <div/>
-          <Image src={ML} alt="Massie Law" />
+        <div>
+        <SponsorImages/>
         </div>
 
+        
+        {/* Sponsors Section */}
+
+        {/* <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+            Our Sponsors
+        </h2>
+        <div>
+        <SponsorImages/>
+        </div> */}
+
         {/* Supporters Section */}
-        <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+        {/* <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
             Supporters
         </h2>
         <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center align-start">
@@ -120,10 +107,10 @@ export default function OurSponsors() {
           <p className="sm:text-lg text-xs h-full">
             Clovia Lawrence, Margaret Grooms and Family
           </p>
-        </div>
+        </div> */}
 
         {/* Auxillary Supporters Section */}
-        <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+        {/* <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
             Auxillary Supporters
         </h2>
         <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center">
@@ -136,12 +123,11 @@ export default function OurSponsors() {
           <p className="sm:text-lg text-xs h-full">
             Urban League of Richmond Young Professionals
           </p>
-          <Image src={GR} alt="Greater Richmond Convention Center" />
-          <Image src={Market} alt="The 25th Market" />
-          <Image src={Aramark} alt="Aramark" />
-        </div>
+          
+        </div> */}
 
       </main>
     );
   };
+  
   

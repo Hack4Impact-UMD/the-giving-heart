@@ -266,9 +266,9 @@ export default function EventSignupPage() {
                 <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
                   {availableShifts.map((shift: any) => (
                     <div key={shift.shiftId} className="flex flex-col my-8">
-                      <div className="flex flex-row justify-between text-lg mb-4">
+                      <div className="flex flex-col sm:flex-row justify-between text-md sm:text-lg mb-4">
                         
-                        <div className="flex items-center">
+                        <div className="flex items-center mb-2 sm:mb-0">
                           <input
                             type="radio"
                             name="shift"
@@ -283,7 +283,7 @@ export default function EventSignupPage() {
                           </label>
                         </div>
           
-                        <div className="flex flex-row">
+                        <div className="flex flex-row pl-7">
                           <p className="font-semibold mr-4">Capacity: {shift.capacity}</p>
                           <p className="font-semibold">Open: {shift.capacity - numRegisteredForShift}</p> 
                         </div>

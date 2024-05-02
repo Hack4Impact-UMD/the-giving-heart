@@ -1,61 +1,70 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-async function fetchSponsImages() {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/sponsors?populate=*`,
-      {
-        cache: "no-store",
-      }
-    );
-    const data = await response.json();
-    if (!data.data) {
-      return [];
-    }
-    const sponsorAttributes = data.data.attributes;
-  
-    let sponsorImages = [];
-    for (const key in sponsorAttributes) {
-      const mediaAttribute = sponsorAttributes[key];
-      if (mediaAttribute && mediaAttribute.data) {
-        if (Array.isArray(mediaAttribute.data)) {
-          if (mediaAttribute.data.attributes.url && mediaAttribute.data.attributes.mime.startsWith('image')) {
-            sponsorImages.push(mediaAttribute.data.attributes.url);
-          }
+// Define an interface for the image data
+interface SponsorImage {
+    url: string; // Adjust this if your actual data structure is different
+}
+
+// Define an interface for the state
+interface SponsorImagesState {
+    ourSponsors: SponsorImage[];
+    ourSupporters: SponsorImage[];
+    auxiliarySupporters: SponsorImage[];
+}
+
+// Define the component
+function SponsorImages() {
+    // Initialize state with explicit types
+    const [sponsorImages, setSponsorImages] = useState<SponsorImagesState>({
+        ourSponsors: [],
+        ourSupporters: [],
+        auxiliarySupporters: []
+    });
+
+    useEffect(() => {
+        async function fetchSponsImages() {
+            const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/sponsor-categories?populate=*`;
+            const response = await fetch(apiUrl, { cache: "no-store" });
+            const data = await response.json();
+            
+            if (!data.data) {
+                return { ourSponsors: [], ourSupporters: [], auxiliarySupporters: [] };
+            }
+
+            // Helper function to extract image URLs from a media list
+            const extractUrls = (mediaList: any[]) => {
+                return mediaList.map((item: any) => ({
+                    url: item.attributes.url
+                })).filter((image: SponsorImage) => image.url);
+            };
+
+            const { ourSponsors, ourSupporters, auxiliarySupporters } = data.data.attributes;
+            return {
+                ourSponsors: extractUrls(ourSponsors.data),
+                ourSupporters: extractUrls(ourSupporters.data),
+                auxiliarySupporters: extractUrls(auxiliarySupporters.data),
+            };
         }
-      }
-    }
-  
-    return sponsorImages;
-  };
 
-  async function SponsorImages(){
-    const images = await fetchSponsImages();
+        fetchSponsImages().then(images => setSponsorImages(images));
+    }, []);
+
     return (
         <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center align-start">
-            <img src={images[16]} alt="Urban One"/>
-            <img src={images[15]} alt="United Healthcare" />
-            <img src={images[12]} alt="Sysco" />
-            <img src={images[4]} alt="Dominion Energy" />
-            <img src={images[13]} alt="Threads" />
-            <img src={images[10]} alt="Pepsi" />
-            <img src={images[2]} alt="Bombas" />
-            <img src={images[6]} alt="Krispy Kreme" />
-            <img src={images[1]} alt="Boar's Head" />
-            <img src={images[5]} alt="E-Z Box" />
-            <img src={images[18]} alt="Williams Bakery" />
-            <img src={images[0]} alt="APRI" />
-            <img src={images[8]} alt="NAACP" />
-            <img src={images[3]} alt="Clearview Counseling" />
-            <img src={images[14]} alt="Ukrops" />
-            <img src={images[9]} alt="National Pan-Hellenic Council" />
-            <img src={images[11]} alt="Richmond, VA" />
-            <div className="flex flex-col justify-center align-center items-center">
-                <img src={images[17]} alt="Walmart" />
-                <p className="text-xs text-center">Stores 1969 and 2821</p>
-            </div>
-            <div/>
-            <img src={images[7]} alt="Massie Law" />
-          </div>)
-  }
+            <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+              Our Sponsors
+            </h2>
+            {sponsorImages.ourSponsors.map((image, index) => <img key={index} src={image.url} alt="Our Sponsor"/>)}
+            <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+              Supporters
+            </h2>
+            {sponsorImages.ourSupporters.map((image, index) => <img key={index} src={image.url} alt="Our Supporter"/>)}
+            <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+              Auxillary Supporters
+            </h2>
+            {sponsorImages.auxiliarySupporters.map((image, index) => <img key={index} src={image.url} alt="Auxiliary Supporter"/>)}
+        </div>
+    );
+}
 
-  export default SponsorImages;
+export default SponsorImages;

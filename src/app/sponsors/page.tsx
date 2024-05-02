@@ -29,7 +29,7 @@ import GR from "./AuxSupporters/GreaterRichmondConventionCenter.png"
 import Market from "./AuxSupporters/TheMarket25.png"
 
 import SponsorImages from "./SponsorImages"
-import AuxSponsImages from "./AuxSponsImages"
+//import AuxSponsImages from "./AuxSponsImages"
 
 export default function OurSponsors() {
   
@@ -70,15 +70,22 @@ export default function OurSponsors() {
         <br/>
         </div>
 
+        <div>
+        <SponsorImages/>
+        </div>
+
+        
         {/* Sponsors Section */}
-        <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+
+        {/* <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
             Our Sponsors
         </h2>
         <div>
         <SponsorImages/>
-        </div>
+        </div> */}
+
         {/* Supporters Section */}
-        <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+        {/* <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
             Supporters
         </h2>
         <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center align-start">
@@ -100,10 +107,10 @@ export default function OurSponsors() {
           <p className="sm:text-lg text-xs h-full">
             Clovia Lawrence, Margaret Grooms and Family
           </p>
-        </div>
+        </div> */}
 
         {/* Auxillary Supporters Section */}
-        <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
+        {/* <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
             Auxillary Supporters
         </h2>
         <div className="grid grid-cols-3 gap-4 basis-1/3 text-center w-6/7 lg:w-3/4 ml-10 mr-10 mb-10 place-items-center">
@@ -116,8 +123,8 @@ export default function OurSponsors() {
           <p className="sm:text-lg text-xs h-full">
             Urban League of Richmond Young Professionals
           </p>
-          <AuxSponsImages/>
-        </div>
+          
+        </div> */}
 
       </main>
     );

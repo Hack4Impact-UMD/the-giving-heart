@@ -356,6 +356,16 @@ export default function EventSignupPage() {
                       0
                     );
 
+                    const alreadyRegistered = userAttendData["data"].some(
+                      (item: any) =>
+                        item["attributes"]["users_permissions_user"]["data"][
+                          "attributes"
+                        ]["username"] === user.username &&
+                        item["attributes"]["event_role_shifts"]["data"][0][
+                          "id"
+                        ] === shift.shiftId
+                    );
+
                     return (
                       <div key={shift.shiftId} className="flex flex-col my-8">
                         <div className="flex flex-col sm:flex-row justify-between text-md sm:text-lg mb-4">
@@ -392,6 +402,16 @@ export default function EventSignupPage() {
                             (numRegisteredForShift || 0 / shift.capacity) * 100
                           }
                         />
+                        {numRegisteredForShift >= shift.capacity &&
+                          !alreadyRegistered && (
+                            <Button
+                              className="bg-[#72090E] w-32 h-8 mt-4 rounded-3xl"
+                              onClick={handleAddWaitlist}
+                            >
+                              {" "}
+                              Join Waitlist
+                            </Button>
+                          )}
                       </div>
                     );
                   })}

@@ -21,6 +21,7 @@ import { useAuthContext } from "@/utils/context/AuthContext";
 import { EventSignUpData } from "../_api/model";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
+import { Progress } from "@/components/ui/progress";
 import Modal from "./signupModal";
 import { Earth, Users, BookOpen, CalendarClock } from "lucide-react";
 
@@ -36,6 +37,7 @@ export default function EventSignupPage() {
   const volunteerRolesData = JSON.parse(`${searchParamsVolunteerRoles}`);
   const router = useRouter();
   const userAttendAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends?populate=*`;
+  const waitlistUserAttendAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends?populate=*`;
   const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
   const [selectedRole, setSelectedRole] = React.useState<string>("");
@@ -77,6 +79,11 @@ export default function EventSignupPage() {
     fetcher
   );
 
+  let { data: waitlistUserAttendData, error: waitlistUserAttendError } = useSWR(
+    waitlistUserAttendAddress,
+    fetcher
+  );
+
   const handleRegisterClick = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
@@ -86,12 +93,30 @@ export default function EventSignupPage() {
 
       var shiftCapacity = Number.MAX_VALUE;
       try {
+        // Check if user is already registered
+        console.log(userAttendData["data"]);
+        console.log("selectedRoleShift" + selectedRoleShift);
+
         for (const item of userAttendData["data"]) {
           if (
             item["attributes"]["users_permissions_user"]["data"]["attributes"][
               "username"
-            ] === user.username &&
-            item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
+            ] == user.username &&
+            item["attributes"]["event_role_shifts"]["data"][0]["id"] ==
+              selectedRoleShift
+          ) {
+            setShowTryAgainModal(true);
+            return;
+          }
+        }
+
+        // Check if user is already on waitlist
+        for (const item of waitlistUserAttendData["data"]) {
+          if (
+            item["attributes"]["users_permissions_user"]["data"]["attributes"][
+              "username"
+            ] == user.username &&
+            item["attributes"]["event_role_shifts"]["data"][0]["id"] ==
               selectedRoleShift
           ) {
             setShowTryAgainModal(true);
@@ -114,7 +139,7 @@ export default function EventSignupPage() {
 
         for (const item of userAttendData["data"]) {
           if (
-            item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
+            item["attributes"]["event_role_shifts"]["data"][0]["id"] ==
             selectedRoleShift
           ) {
             shiftCapacity =
@@ -146,6 +171,36 @@ export default function EventSignupPage() {
           },
         });
 
+        router.push("/dashboard");
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const handleAddWaitlist = async () => {
+    if (user) {
+      const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends`;
+      const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+
+      try {
+        await axios.post(address, {
+          headers: {
+            Authorization: `Bearer ${auth}`,
+          },
+          data: {
+            users_permissions_user: {
+              id: user.id,
+            },
+            event_role_shifts: {
+              id: selectedRoleShift,
+            },
+            checkIn: false,
+            checkOut: false,
+          },
+        });
+
+        console.log("Successfully added to waitlist.");
         router.push("/dashboard");
       } catch (error) {
         console.log(error);
@@ -290,25 +345,60 @@ export default function EventSignupPage() {
                   Choose what shifts you would like to work
                 </h3>
                 <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
-                  <Select
-                    sx={{
-                      marginTop: 2,
-                      marginLeft: 2,
-                      width: 200,
-                      height: 50,
-                    }}
-                    labelId="v-roles"
-                    id="v-roles"
-                    value={selectedRoleShift}
-                    onChange={handleRoleShiftSelection}
-                  >
-                    {availableShifts.map((shift: any) => (
-                      <MenuItem key={shift.shiftId} value={shift.shiftId}>
-                        {shift["eventRoleShiftTimeStart"]} -
-                        {shift["eventRoleShiftTimeEnd"]}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  {availableShifts.map((shift: any) => {
+                    const numRegisteredForShift = userAttendData["data"].reduce(
+                      (acc: number, item: any) => {
+                        if (
+                          item["attributes"]["event_role_shifts"]["data"][0][
+                            "id"
+                          ] === shift.shiftId
+                        ) {
+                          acc += 1;
+                        }
+                        return acc;
+                      },
+                      0
+                    );
+
+                    return (
+                      <div key={shift.shiftId} className="flex flex-col my-8">
+                        <div className="flex flex-col sm:flex-row justify-between text-md sm:text-lg mb-4">
+                          <div className="flex items-center mb-2 sm:mb-0">
+                            <input
+                              type="radio"
+                              name="shift"
+                              id="v-roles"
+                              // checked={selectedRoleShift === shift.shiftId}
+                              value={shift.shiftId}
+                              onChange={handleRoleShiftSelection}
+                              className="form-radio h-5 w-5 text-orange-600"
+                            />
+                            <label
+                              htmlFor={selectedRoleShift}
+                              className="ml-2 font-semibold"
+                            >
+                              {shift["eventRoleShiftTimeStart"]} -{" "}
+                              {shift["eventRoleShiftTimeEnd"]}
+                            </label>
+                          </div>
+
+                          <div className="flex flex-row pl-7">
+                            <p className="font-semibold mr-4">
+                              Capacity: {shift.capacity}
+                            </p>
+                            <p className="font-semibold">
+                              Open: {shift.capacity - numRegisteredForShift}
+                            </p>
+                          </div>
+                        </div>
+                        <Progress
+                          value={
+                            (numRegisteredForShift || 0 / shift.capacity) * 100
+                          }
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </li>
             </>
@@ -353,7 +443,7 @@ export default function EventSignupPage() {
         titleText="Full Capacity"
         descriptionText="This role and shit are at full capacity. Would you like to  join the waitlist?"
         buttonText="Join Waitlist"
-        onConfirm={() => console.log("TODO: Trigger waitlist function needed")}
+        onConfirm={handleAddWaitlist}
         open={showWaitlistModal}
         onOpenChange={setShowWaitlistModal}
       ></Modal>

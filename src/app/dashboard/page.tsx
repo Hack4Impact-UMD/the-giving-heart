@@ -238,6 +238,7 @@ export default function Dashboard() {
                   checkIn={userAttend["checkIn"]}
                   checkOut={userAttend["checkOut"]}
                   userAttendId={userAttend["id"]}
+                  shiftId={associatedEventRoleShift["shiftId"]}
                   onDropSpot={mutateUserAttend}
                 />
               );

@@ -1,12 +1,5 @@
 # The Giving Heart
 
-**Description**: [insert description later]
-
-**Point of Contact**:
-|Name| Email|
-| :--- | :--- |
-|Dan Nguyen| danthedevnguyen@gmail.com |
-
 # Getting Started
 
 First, run the development server:

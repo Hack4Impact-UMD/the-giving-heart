@@ -76,6 +76,7 @@ export default function RegisteredEventCard(props: EventData) {
       // Filter the entries to find the one with matching event_role_shifts
       const waitlistEntry = waitlistEntryResponse.data.data.find(
         (entry: any) =>
+          entry.attributes.event_role_shifts.data.length > 0 &&
           entry.attributes.event_role_shifts.data[0].id === props.shiftId
       );
 

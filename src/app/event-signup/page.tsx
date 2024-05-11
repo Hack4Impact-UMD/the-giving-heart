@@ -94,12 +94,13 @@ export default function EventSignupPage() {
       try {
         // Check if user is already registered for the shift
         for (const item of userAttendData["data"]) {
+          let userAttendData =
+            item["attributes"]["users_permissions_user"]["data"];
+          let shiftAttendData = item["attributes"]["event_role_shifts"]["data"];
           if (
-            item["attributes"]["users_permissions_user"]["data"]["attributes"][
-              "username"
-            ] == user.username &&
-            item["attributes"]["event_role_shifts"]["data"][0]["id"] ==
-              selectedRoleShift
+            userAttendData["attributes"]["username"] == user.username &&
+            shiftAttendData.length &&
+            shiftAttendData[0]["id"] == selectedRoleShift
           ) {
             setShowTryAgainModal(true);
             return;
@@ -108,12 +109,13 @@ export default function EventSignupPage() {
 
         // Check if user is already on waitlist
         for (const item of waitlistUserAttendData["data"]) {
+          let userAttendData =
+            item["attributes"]["users_permissions_user"]["data"];
+          let shiftAttendData = item["attributes"]["event_role_shifts"]["data"];
           if (
-            item["attributes"]["users_permissions_user"]["data"]["attributes"][
-              "username"
-            ] == user.username &&
-            item["attributes"]["event_role_shifts"]["data"][0]["id"] ==
-              selectedRoleShift
+            userAttendData["attributes"]["username"] == user.username &&
+            shiftAttendData.length &&
+            shiftAttendData[0]["id"] == selectedRoleShift
           ) {
             setShowTryAgainModal(true);
             return;
@@ -123,7 +125,7 @@ export default function EventSignupPage() {
         const numRegisteredForShift = userAttendData["data"].reduce(
           (acc: number, item: any) => {
             if (
-              item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
+              item["attributes"]["event_role_shifts"]["data"][0]["id"] ==
               selectedRoleShift
             ) {
               acc += 1;
@@ -347,7 +349,7 @@ export default function EventSignupPage() {
                         if (
                           item["attributes"]["event_role_shifts"]["data"][0][
                             "id"
-                          ] === shift.shiftId
+                          ] == shift.shiftId
                         ) {
                           acc += 1;
                         }
@@ -355,26 +357,6 @@ export default function EventSignupPage() {
                       },
                       0
                     );
-
-                    const alreadyRegistered =
-                      userAttendData["data"].some(
-                        (item: any) =>
-                          item["attributes"]["users_permissions_user"]["data"][
-                            "attributes"
-                          ]["username"] === user.username &&
-                          item["attributes"]["event_role_shifts"]["data"][0][
-                            "id"
-                          ] === shift.shiftId
-                      ) ||
-                      waitlistUserAttendData["data"].some(
-                        (item: any) =>
-                          item["attributes"]["users_permissions_user"]["data"][
-                            "attributes"
-                          ]["username"] === user.username &&
-                          item["attributes"]["event_role_shifts"]["data"][0][
-                            "id"
-                          ] === shift.shiftId
-                      );
 
                     return (
                       <div key={shift.shiftId} className="flex flex-col my-8">
@@ -412,19 +394,6 @@ export default function EventSignupPage() {
                             (numRegisteredForShift || 0 / shift.capacity) * 100
                           }
                         />
-                        {numRegisteredForShift >= shift.capacity &&
-                          !alreadyRegistered && (
-                            <Button
-                              className="bg-[#72090E] w-32 h-8 mt-4 rounded-3xl"
-                              onClick={() => {
-                                setSelectedRoleShift(shift.shiftId);
-                                handleAddWaitlist();
-                              }}
-                            >
-                              {" "}
-                              Join Waitlist
-                            </Button>
-                          )}
                       </div>
                     );
                   })}

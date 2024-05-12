@@ -73,11 +73,14 @@ export default function EventSignupPage() {
       })
       .then((res) => res.data);
 
+  const fetcherNoAuth = async (url: any) =>
+    await axios.get(url).then((res) => res.data);
+
   const [
     { data: waitlistUserAttendData, error: waitlistUserAttendError },
     { data: userAttendData, error: userAttendError },
   ] = [
-    useSWR(waitlistUserAttendAddress, fetcher),
+    useSWR(waitlistUserAttendAddress, fetcherNoAuth),
     useSWR(userAttendAddress, fetcher),
   ];
 

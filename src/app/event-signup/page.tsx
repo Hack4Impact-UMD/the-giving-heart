@@ -73,13 +73,13 @@ export default function EventSignupPage() {
       })
       .then((res) => res.data);
 
-  let { data: userAttendData, error: userAttendError } = useSWR(
-    userAttendAddress,
+  let { data: waitlistUserAttendData, error: waitlistUserAttendError } = useSWR(
+    waitlistUserAttendAddress,
     fetcher
   );
 
-  let { data: waitlistUserAttendData, error: waitlistUserAttendError } = useSWR(
-    waitlistUserAttendAddress,
+  let { data: userAttendData, error: userAttendError } = useSWR(
+    userAttendAddress,
     fetcher
   );
 

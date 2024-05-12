@@ -50,7 +50,7 @@ export default function TimeLineHelper() {
     "Fighting hunger & our future: 2010 - Beyond",
   ];
 
-  const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/about-us-page`;
+  const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/about-us-page?`;
   const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
   const fetcher = async (url: any) =>

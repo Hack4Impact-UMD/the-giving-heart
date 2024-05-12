@@ -73,15 +73,13 @@ export default function EventSignupPage() {
       })
       .then((res) => res.data);
 
-  let { data: waitlistUserAttendData, error: waitlistUserAttendError } = useSWR(
-    waitlistUserAttendAddress,
-    fetcher
-  );
-
-  let { data: userAttendData, error: userAttendError } = useSWR(
-    userAttendAddress,
-    fetcher
-  );
+  const [
+    { data: waitlistUserAttendData, error: waitlistUserAttendError },
+    { data: userAttendData, error: userAttendError },
+  ] = [
+    useSWR(waitlistUserAttendAddress, fetcher),
+    useSWR(userAttendAddress, fetcher),
+  ];
 
   const handleRegisterClick = async (event: { preventDefault: () => void }) => {
     event.preventDefault();

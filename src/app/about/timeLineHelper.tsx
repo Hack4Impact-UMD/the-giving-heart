@@ -54,17 +54,13 @@ export default function TimeLineHelper() {
   const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
   const fetcher = async (url: any) =>
-    await axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${auth}` },
-      })
-      .then((res) => {
-        return [
-          res.data["data"]["attributes"]["timeline_textfield_1"],
-          res.data["data"]["attributes"]["timeline_textfield_2"],
-          res.data["data"]["attributes"]["timeline_textfield_3"],
-        ];
-      });
+    await axios.get(url).then((res) => {
+      return [
+        res.data["data"]["attributes"]["timeline_textfield_1"],
+        res.data["data"]["attributes"]["timeline_textfield_2"],
+        res.data["data"]["attributes"]["timeline_textfield_3"],
+      ];
+    });
 
   let { data, error } = useSWR(address, fetcher);
 

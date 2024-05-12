@@ -25,6 +25,11 @@ import { Progress } from "@/components/ui/progress";
 import Modal from "./signupModal";
 import { Earth, Users, BookOpen, CalendarClock } from "lucide-react";
 
+interface VolunteerRole {
+  title: string;
+  volunteerRoleId: string;
+}
+
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
   const searchParamsEvent =
@@ -35,6 +40,15 @@ export default function EventSignupPage() {
     searchParams.get("volunteerRoles") ??
     '[{"title":"[Volunteer Role]", "description":"This was undefined", "eventRoleShiftTimeStart":"[Time]", "eventRoleShiftTimeEnd":"[Time]", "eventRoleShiftDate":"[Date]", "capacity":"10", "eventRoleShiftDescription":"This was undefined", "shiftId":"This was undefined", "volunteerRoleId":"This was undefined"}, {"title":"[Volunteer Role]", "description":"This was undefined", "eventRoleShiftTimeStart":"[Time]", "eventRoleShiftTimeEnd":"[Time]", "eventRoleShiftDate":"[Date]", "capacity":"10", "eventRoleShiftDescription":"This was undefined", "shiftId":"This was undefined", "volunteerRoleId":"This was undefined"}, {"title":"[Volunteer Role]", "description":"This was undefined", "eventRoleShiftTimeStart":"[Time]", "eventRoleShiftTimeEnd":"[Time]", "eventRoleShiftDate":"[Date]", "capacity":"10", "eventRoleShiftDescription":"This was undefined", "shiftId":"This was undefined", "volunteerRoleId":"This was undefined"}]'; //FIXME: Need to change default val of params
   const volunteerRolesData = JSON.parse(`${searchParamsVolunteerRoles}`);
+  const filteredVolunteerRolesData: VolunteerRole[] = volunteerRolesData.map(
+    ({ title, volunteerRoleId }: VolunteerRole) => ({ title, volunteerRoleId })
+  );
+  const volunteerRolesSet = new Set(
+    filteredVolunteerRolesData.map((obj) => JSON.stringify(obj))
+  );
+  const uniqueVolunteerRolesData = Array.from(volunteerRolesSet, (str) =>
+    JSON.parse(str)
+  );
   const router = useRouter();
   const userAttendAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends?populate=*`;
   const waitlistUserAttendAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends?populate=*`;
@@ -264,7 +278,7 @@ export default function EventSignupPage() {
                     <b>Available Positions</b>
                   </h4>
                   <ul className="mb-2">
-                    {eventD.volunteerRoles.map((role, index, array) => (
+                    {uniqueVolunteerRolesData.map((role, index, array) => (
                       <ul
                         key={index}
                         className="mb-2 text-base font-normal text-gray-500 dark:text-gray-400 pl-5 list-disc list-outside"
@@ -325,7 +339,7 @@ export default function EventSignupPage() {
                   value={selectedRole}
                   onChange={handleRoleSelection}
                 >
-                  {eventD.volunteerRoles.map((role, index) => (
+                  {uniqueVolunteerRolesData.map((role, index) => (
                     <MenuItem key={index} value={role.volunteerRoleId}>
                       {role.title}
                     </MenuItem>

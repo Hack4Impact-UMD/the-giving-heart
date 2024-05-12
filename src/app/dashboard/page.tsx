@@ -247,9 +247,6 @@ export default function Dashboard() {
           <div className="w-full self-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-20 gap-y-10">
             {Object.keys(organizedData).map((eventId) => {
               const event = organizedData[eventId].event;
-              const volunteerRolesString = generateVolunteerRolesString(
-                organizedData[eventId].volunteerRoles
-              );
 
               return (
                 <EventCard

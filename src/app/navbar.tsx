@@ -22,6 +22,8 @@ import { UserCircle2 } from "lucide-react";
 import { Settings } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { XCircle } from "lucide-react";
+import { CircleDollarSign } from "lucide-react";
+import { BookUser } from "lucide-react";
 import { X } from "lucide-react";
 import { removeToken } from "@/utils/helpers";
 import {
@@ -66,7 +68,11 @@ export default function Navbar() {
     <HelpCircle key="helpCircle" className="m-auto text-[#ed1c24]" />,
     <HeartHandshake key="heartHandshake" className="m-auto text-[#ed1c24]" />,
     <CalendarDays key="calendar" className="my-auto text-[#ed1c24]" />,
-    <UserCircle2 key="userCircle2" className="m-auto text-[#ed1c24]" />,
+    <CircleDollarSign
+      key="circleDollarSign"
+      className="m-auto text-[#ed1c24]"
+    />,
+    <BookUser key="bookUser" className="m-auto text-[#ed1c24]" />,
   ];
   const toggleMenu = () => {
     onClose(!isOpen);

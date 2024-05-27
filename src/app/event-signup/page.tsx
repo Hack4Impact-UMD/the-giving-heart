@@ -81,20 +81,13 @@ export default function EventSignupPage() {
   };
 
   const fetcher = async (url: any) =>
-    await axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${auth}` },
-      })
-      .then((res) => res.data);
-
-  const fetcherNoAuth = async (url: any) =>
     await axios.get(url).then((res) => res.data);
 
   const [
     { data: waitlistUserAttendData, error: waitlistUserAttendError },
     { data: userAttendData, error: userAttendError },
   ] = [
-    useSWR(waitlistUserAttendAddress, fetcherNoAuth),
+    useSWR(waitlistUserAttendAddress, fetcher),
     useSWR(userAttendAddress, fetcher),
   ];
 

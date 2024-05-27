@@ -21,11 +21,7 @@ export default function RegisterButton(selectedEventRoleShift: any) {
   //this will check if we have met capacity for registration
   //need to check if aggregate sum is less than capacity field
   const fetcher = async (url: any) =>
-    await axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${auth}` },
-      })
-      .then((res) => res.data);
+    await axios.get(url).then((res) => res.data);
 
   let { data, error } = useSWR(addressEventRoleShifts, fetcher);
 

@@ -65,12 +65,7 @@ export default function RegisteredEventCard(props: EventData) {
 
       // Move a user off the waitlist if there are users on the waitlist
       const waitlistEntryResponse = await axios.get(
-        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends?populate=*`,
-        {
-          headers: {
-            Authorization: `Bearer ${auth}`,
-          },
-        }
+        `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends?populate=*`
       );
 
       // Filter the entries to find the one with matching event_role_shifts

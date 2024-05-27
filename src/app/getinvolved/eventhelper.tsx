@@ -8,11 +8,7 @@ export default function EventHelper() {
   const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
   const fetcher = async (url: any) =>
-    await axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${auth}` },
-      })
-      .then((res) => res.data);
+    await axios.get(url).then((res) => res.data);
 
   let { data, error } = useSWR(address, fetcher);
 

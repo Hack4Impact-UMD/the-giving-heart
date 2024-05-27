@@ -135,11 +135,7 @@ export default function Dashboard() {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   const fetcher = async (url: any) =>
-    await axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${auth}` },
-      })
-      .then((res) => res.data);
+    await axios.get(url).then((res) => res.data);
 
   let { data, error } = useSWR(address, fetcher);
   let { data: userAttendData, error: userAttendError } = useSWR(

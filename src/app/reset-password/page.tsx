@@ -41,7 +41,7 @@ export default function ResetPassword({ searchParams }: Props) {
   });
   const router = useRouter();
   const form = useForm<FormData>({});
-  const [samePasswordError, setSamePasswordError] = React.useState(true);
+  const [samePasswordError, setSamePasswordError] = React.useState(false);
 
   const onSubmit = (values: FormData) => {
     axios

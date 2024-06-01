@@ -2,105 +2,172 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useAuthContext } from "@/utils/context/AuthContext";
-import { BookOpen, CalendarClock, Globe } from 'lucide-react';
-import { Progress } from "@/components/ui/progress"
-import { Separator } from "@/components/ui/separator"
-import { Button } from "@/components/ui/button"
+import { BookOpen, CalendarClock, Globe } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
+import axios from "axios";
+import useSWR from "swr";
+import { useEffect, useState } from "react";
 
+export default function Waitlist() {
+  const eventRoleShiftsAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/event-role-shifts?populate=*`;
+  const waitlistUserAttendAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends?populate=*`;
+  const { user, setUser } = useAuthContext();
 
-export default function Settings() {
-  const { user } = useAuthContext();
-  return (
-    <div>
-      <main className="flex min-h-screen flex-col items-center justify-between p-8">
-        <div className="z-10 max-w-5xl w-full items-center justify-between text-sm lg:flex">
-          <div className="w-full">
-            <h1 className="text-3xl text-[#860f13] font-medium mb-8 sm:text-3xl md:text-4xl">
-              Volunteer Waitlist
-            </h1>
-            <Card className="w-full">
-            <CardHeader>
-              <CardTitle className="text-[#860f13] font-medium text-2xl">[Event name]</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <h2 className="font-bold text-xl mb-2">Event Information</h2>
-              <div className="flex flex-row pt-4">
-                <div>
-                  <BookOpen className="w-12 h-12 mr-4" />
+  const fetcher = async (url: any) =>
+    await axios.get(url).then((res) => res.data);
+
+  const [
+    { data: waitlistUserAttendData, error: waitlistUserAttendError },
+    { data: eventRoleShiftData, error: eventRoleShiftError },
+  ] = [
+    useSWR(waitlistUserAttendAddress, fetcher),
+    useSWR(eventRoleShiftsAddress, fetcher),
+  ];
+
+  const [userWaitlistData, setUserWaitlistData] = useState([]);
+
+  useEffect(() => {
+    if (user && waitlistUserAttendData && waitlistUserAttendData.data) {
+      const filteredData = waitlistUserAttendData.data.filter((item: any) => {
+        return (
+          item.attributes.users_permissions_user.data.id === user.id &&
+          item.attributes.event_role_shifts.data.length > 0
+        );
+      });
+      setUserWaitlistData(filteredData);
+    }
+  }, [waitlistUserAttendData, user]);
+
+  if (eventRoleShiftError) return <div>Error loading data...</div>;
+  if (waitlistUserAttendError) return <div>Error loading data...</div>;
+  if (!waitlistUserAttendData) return <div>Loading...</div>;
+  if (!eventRoleShiftData) return <div>Loading...</div>;
+
+  function findWaitlistPosition(eventRoleShiftId: any) {
+    let position = 0;
+    waitlistUserAttendData.data.forEach((item: any) => {
+      const eventRoleShifts = item.attributes.event_role_shifts.data;
+      const userPermissionsUser = item.attributes.users_permissions_user.data;
+
+      const isSameEventRoleShift = eventRoleShifts[0].id == eventRoleShiftId;
+      const isDifferentUser = userPermissionsUser.id != user.id;
+      const isSameUser = userPermissionsUser.id == user.id;
+
+      if (isSameEventRoleShift) {
+        if (isDifferentUser) {
+          position++;
+        } else if (isSameUser) {
+          position++;
+          return;
+        }
+      }
+    });
+    return position;
+  }
+
+  function dropWaitlistEntry(waitlistId: any) {
+    const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends/${waitlistId}`;
+    const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
+
+    const dropWaitlistEntry = async () => {
+      try {
+        await axios.delete(address, {
+          headers: {
+            Authorization: `Bearer ${auth}`,
+          },
+        });
+        setUserWaitlistData(
+          userWaitlistData.filter((item: any) => item.id != waitlistId)
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    return dropWaitlistEntry;
+  }
+
+  return user ? (
+    <div className="bg-[#860E13] pt-16">
+      <h1 className="pb-4 font-medium font-openSans text-5xl mb-4 text-white flex items-center justify-center">
+        {" "}
+        Waitlist{" "}
+      </h1>
+
+      <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.30)] bg-white w-full flex flex-col items-center justify-center p-6 mt-6 mb-10">
+        <h2 className="font-semibold text-3xl mb-2 text-center"></h2>
+        <div className="w-full">
+          {userWaitlistData && userWaitlistData.length > 0 ? (
+            userWaitlistData.map((item: any) => {
+              let associatedEvent = eventRoleShiftData.data.find(
+                (shift: any) =>
+                  shift.id === item.attributes.event_role_shifts.data[0].id
+              );
+
+              return (
+                <div key={item.id} className="py-5">
+                  <a
+                    href="#"
+                    className="h-full w-full md:max-w-lg flex flex-row items-center justify-between space-x-4 border-none block max-w-sm p-6 bg-white rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  >
+                    <div className="w-full">
+                      <h5 className="mb-2 text-sm md:text-xl font-sans tracking-tight text-gray-900 dark:text-white">
+                        {associatedEvent.attributes.event.data.attributes.title}
+                      </h5>
+                      <p className="font-sans mb-2 text-gray-700 font-light text-xs dark:text-gray-400">
+                        <b>Date: </b>
+                        {associatedEvent.attributes.eventRoleShiftDate}
+                      </p>
+                      <p className="font-sans mb-2 text-gray-700 font-light text-xs dark:text-gray-400">
+                        <b>Role: </b>
+                        {
+                          associatedEvent.attributes.volunteer_role.data
+                            .attributes.title
+                        }
+                      </p>
+                      <p className="font-sans mb-2 text-gray-700 font-light text-xs dark:text-gray-400">
+                        <b>Shift: </b>
+                        {
+                          associatedEvent.attributes.eventRoleShiftTimeStart
+                        } - {associatedEvent.attributes.eventRoleShiftTimeEnd}
+                      </p>
+                      <p className="font-sans mb-2 text-gray-700 font-light text-xs dark:text-gray-400">
+                        Your position on the waitlist:{" "}
+                        {findWaitlistPosition(
+                          item.attributes.event_role_shifts.data[0].id
+                        )}
+                      </p>
+                      <Button
+                        variant="default"
+                        size="default"
+                        className="bg-[#ED1C24] text-white rounded-md"
+                        onClick={dropWaitlistEntry(item.id)}
+                      >
+                        Drop Spot
+                      </Button>
+                    </div>
+                  </a>
                 </div>
-                <div className="flex flex-col w-auto">
-                  <p className="font-semibold text-lg">Description:</p>
-                  <p className="font-light text-lg text-slate-600 leading-loose">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
-              </div>
+              );
+            })
+          ) : (
+            <p>You are not on the waitlist for any events.</p>
+          )}
+        </div>
+      </div>
 
-              <div className="flex flex-row pt-4">
-                <div>
-                  <CalendarClock className="w-12 h-12 mr-4" />
-                </div>
-                <div className="flex flex-col w-auto">
-                  <p className="font-semibold text-lg">Date & Time:</p>
-                  <p className="font-light text-lg text-slate-600 leading-loose">[Date] from [Start time] - [End time]</p>
-                </div>
-              </div>
-
-              <div className="flex flex-row pt-4">
-                <div>
-                  <Globe className="w-12 h-12 mr-4" />
-                </div>
-                <div className="flex flex-col w-auto justify-start">
-                  <p className="font-semibold text-lg">Location</p>
-                  <p className="font-light text-lg text-slate-600 leading-loose">[Location]</p>
-                </div>
-              </div>
-
-            <Separator className="mt-5"/>
-
-            </CardContent>
-            <CardContent>
-              <h2 className="font-bold text-xl mb-2">Volunteering Capacity</h2>
-
-              <div className="flex flex-col my-8">
-                <div className="flex flex-row justify-between text-lg mb-4">
-                  <p>[time]-[time]</p>
-                  <div className="flex flex-row">
-                    <p className="font-semibold mr-4">Capacity: 10</p>
-                    <p className="font-semibold">Open: 8</p>
-                  </div>
-                </div>
-                <Progress value={20} />
-                <Button className="bg-red-500 w-32 mt-4">Select Shift</Button>
-              </div>
-
-              <div className="flex flex-col my-8">
-                <div className="flex flex-row justify-between text-lg mb-4">
-                  <p>[time]-[time]</p>
-                  <div className="flex flex-row">
-                    <p className="font-semibold mr-4">Capacity: 10</p>
-                    <p className="font-semibold">Open: 4</p>
-                  </div>
-                </div>
-                <Progress value={60} />
-                <Button className="bg-red-500 w-32 mt-4">Select Shift</Button>
-              </div>
-
-              <div className="flex flex-col my-8">
-                <div className="flex flex-row justify-between text-lg mb-4">
-                  <p>[time]-[time]</p>
-                  <div className="flex flex-row">
-                    <p className="font-semibold mr-4">Capacity: 10</p>
-                    <p className="font-semibold">Open: 2</p>
-                  </div>
-                </div>
-                <Progress value={80} />
-                <Button className="bg-red-500 w-32 mt-4">Select Shift</Button>
-              </div>
-
-            </CardContent>
-            </Card>
-          </div>
+      <main className="flex min-h-screen flex-col justify-center px-16">
+        <div className="lg:m-10">
+          <div className="w-full self-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-20 gap-y-10"></div>
+          <div className="w-full self-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-20 gap-y-10"></div>
         </div>
       </main>
+    </div>
+  ) : (
+    <div>
+      <h1>Please log in to view this page</h1>
     </div>
   );
 }

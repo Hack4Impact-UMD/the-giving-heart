@@ -23,6 +23,7 @@ import { Settings } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { XCircle } from "lucide-react";
 import { CircleDollarSign } from "lucide-react";
+import { CircleEllipsis } from "lucide-react";
 import { BookUser } from "lucide-react";
 import { X } from "lucide-react";
 import { removeToken } from "@/utils/helpers";
@@ -40,6 +41,7 @@ const navigation = [
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
   { name: "Events", href: "/dashboard" },
+  { name: "Waitlist", href: "/waitlist" },
   { name: "Sponsors", href: "/sponsors" },
   { name: "Friends of Feast", href: "/friends-of-feast" },
 ];
@@ -49,6 +51,7 @@ const mobileLinks = [
   { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
   { name: "Events", href: "/dashboard" },
+  { name: "Waitlist", href: "/waitlist" },
   { name: "Sponsors", href: "/sponsors" },
   { name: "Friends of Feast", href: "/friends-of-feast" },
 ];
@@ -68,6 +71,7 @@ export default function Navbar() {
     <HelpCircle key="helpCircle" className="m-auto text-[#ed1c24]" />,
     <HeartHandshake key="heartHandshake" className="m-auto text-[#ed1c24]" />,
     <CalendarDays key="calendar" className="my-auto text-[#ed1c24]" />,
+    <CircleEllipsis key="circleEllipsis" className="m-auto text-[#ed1c24]" />,
     <CircleDollarSign
       key="circleDollarSign"
       className="m-auto text-[#ed1c24]"

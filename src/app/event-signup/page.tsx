@@ -214,6 +214,17 @@ export default function EventSignupPage() {
     }
   };
 
+  function formatTime(timeString: string) {
+    const [hours, minutes, seconds] = timeString.split(":").map(Number);
+    const date = new Date(Date.UTC(1970, 0, 1, hours, minutes, seconds));
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+      timeZone: "UTC",
+    });
+  }
+
   return (
     <main className="flex min-h-screen flex-col">
       <div
@@ -383,8 +394,8 @@ export default function EventSignupPage() {
                               htmlFor={selectedRoleShift}
                               className="ml-2 font-semibold"
                             >
-                              {shift["eventRoleShiftTimeStart"]} -{" "}
-                              {shift["eventRoleShiftTimeEnd"]}
+                              {formatTime(shift["eventRoleShiftTimeStart"])} -{" "}
+                              {formatTime(shift["eventRoleShiftTimeEnd"])}
                             </label>
                           </div>
 
@@ -399,7 +410,8 @@ export default function EventSignupPage() {
                         </div>
                         <Progress
                           value={
-                            (numRegisteredForShift || 0 / shift.capacity) * 100
+                            ((numRegisteredForShift || 0) / shift.capacity) *
+                            100
                           }
                         />
                       </div>

@@ -35,12 +35,12 @@ export default async function Home() {
         {/* Box with the "get involved" button */}
         <div className="flex-col align-center text-center justify-center w-5/6 lg:w-2/3 sm:h-80 h-44 bg-neutral-100 m-auto mt-10 mb-16 shadow shadow-black md:p-10 p-4">
           <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
-            Lorem Ipsum Dolor Sit Amet
+            Welcome to The Giving Heart!
           </h2>
           <p className="lg:pr-24 lg:pl-24 sm:text-lg text-xs">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Sed
-            euismod nisi porta lorem mollis aliquam. Lorem ipsum dolor sit amet.
+            A 501c3 volunteer-based nonprofit serving the Greater Richmond
+            Metropolitan Area. Learn more about how to get involved with our
+            mission by clicking the button below.
           </p>
           <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-3/5 rounded-md">
             <a key="getinvolved" href="/getinvolved">
@@ -101,23 +101,24 @@ export default async function Home() {
         </div>
 
         <div className="flex flex-col w-full sm:flex-row justify-around lg:mt-32 mb-10 mt-10">
-          <div className="sm:w-1/2 py-6 px-10">
-            <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl text-center sm:text-left">
+          <div className="w-full sm:w-1/2 py-6 px-10 text-center sm:text-left">
+            <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl">
               Watch Our Introduction Video
             </h2>
-            <p className="text-gray-500 text-xs mt-3 md:text-lg lg:text-xl text-center sm:text-left">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore.
+            <p className="text-gray-500 text-xs mt-3 md:text-lg lg:text-xl">
+              Video message about The Giving Heart from the mayor of the city
             </p>
           </div>
-          <div className="sm:w-2/3">
+          <div className="w-full sm:w-1/3 flex justify-center items-center sm:items-start mt-5 sm:mt-0">
+            {" "}
+            {/* Adjusted classes for responsive layout */}
             <iframe
-              className="sm:mt-8 w-5/6 aspect-video m-auto mb-10"
-              src="https://www.youtube.com/embed/y0sF5xhGreA?si=HGo6sxAIgZtJnXW2"
-              title="YouTube video player"
-              frameBorder="0"
+              width="360"
+              height="640"
+              src="https://www.youtube.com/embed/9QJb9x2ty7E"
+              title="Message from our Mayor"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
+              className="rounded-lg"
             ></iframe>
           </div>
         </div>

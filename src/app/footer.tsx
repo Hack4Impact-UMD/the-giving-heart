@@ -23,7 +23,8 @@ const fetcher = async (url: string) => {
   }
   const footer_email = data.data.attributes.footer_email;
   const footer_phone_number = data.data.attributes.footer_phone_number;
-  return [footer_email, footer_phone_number];
+  const footer_hours = data.data.attributes.footer_hours;
+  return [footer_email, footer_phone_number, footer_hours];
 };
 
 // TODO: Consider migrating to a server-side rendered component
@@ -41,9 +42,15 @@ export default function Footer() {
   return (
     <div className="w-full content-between px-5 text-white bg-[#860e13]">
       <div className="flex flex-col sm:flex-row justify-around mr-5 pt-5">
-        <p className="w-full sm:w-1/3 text-center sm:text-left sm:text-3xl md:text-4xl text-2xl mt-4 mr-2">
-          The Giving Heart ❤
-        </p>
+        <div className="m-4 flex flex-col sm:items-center">
+          <p className="w-full text-center sm:text-left sm:text-3xl md:text-4xl text-2xl">
+            The Giving Heart
+          </p>
+          <p className="text-md font-medium sm:pt-1">
+            {footerData ? <a>{footerData[2]}</a> : <a>Loading...</a>}
+          </p>
+          <p>9 am to 5 pm, Monday through Friday</p>
+        </div>
 
         <div className="m-4 flex flex-col sm:items-center">
           <div className="text-xl underline">Contact Us</div>

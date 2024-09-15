@@ -95,6 +95,11 @@ export default function RegisteredEventCard(props: EventData) {
           },
         });
 
+        //
+        // database function watching - new entry added
+        // check waitlistUserAttends (filter shifts) to check if it is empty -> if yes then new entry not from waitlist
+        // if not then entry is from the waitlist and send email accordingly
+
         // Delete the fetched entry from WaitlistUserAttends
         await axios.delete(
           `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends/${waitlistEntry.id}`,

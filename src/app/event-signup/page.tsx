@@ -24,6 +24,7 @@ import useSWR from "swr";
 import { Progress } from "@/components/ui/progress";
 import Modal from "./signupModal";
 import { Earth, Users, BookOpen, CalendarClock } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 interface VolunteerRole {
   title: string;
@@ -58,6 +59,7 @@ export default function EventSignupPage() {
   const [availableShifts, setAvailableShift] = useState([]);
   const [selectedRoleShift, setSelectedRoleShift] = useState("");
   const { user, setUser } = useAuthContext();
+  const { toast } = useToast();
 
   const [showTryAgainModal, setShowTryAgainModal] = useState(false);
   const [showWaitlistModal, setShowWaitlistModal] = useState(false);
@@ -208,6 +210,12 @@ export default function EventSignupPage() {
 
         console.log("Successfully added to waitlist.");
         router.push("/dashboard");
+        toast({
+          variant: "confirmation",
+          title: "Successfully added to waitlist.",
+          description:
+            "Navigate to the waitlist tab to view your waitlist positions.",
+        });
       } catch (error) {
         console.log(error);
       }

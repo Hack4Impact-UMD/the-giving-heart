@@ -179,8 +179,20 @@ export default function EventSignupPage() {
           },
         });
 
+        toast({
+          variant: "confirmation",
+          title: "Successfully registered for event.",
+          description:
+            "Please see the top section of the events dashboard to view your registered events.",
+        });
         router.push("/dashboard");
       } catch (error) {
+        toast({
+          variant: "destructive",
+          title: "Error registering for event.",
+          description:
+            "Please try again. If the issue persists, please contact support.",
+        });
         console.log(error);
       }
     }
@@ -217,6 +229,12 @@ export default function EventSignupPage() {
             "Navigate to the waitlist tab to view your waitlist positions.",
         });
       } catch (error) {
+        toast({
+          variant: "destructive",
+          title: "Error waitlisting for event.",
+          description:
+            "Please try again. If the issue persists, please contact support.",
+        });
         console.log(error);
       }
     }

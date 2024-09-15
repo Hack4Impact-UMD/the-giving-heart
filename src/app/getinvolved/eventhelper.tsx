@@ -31,7 +31,7 @@ export default function EventHelper() {
                 {item["attributes"]["description"]}
               </p>
             </div>
-            <div className="text-center box-border h-28 w-full bg-gray-400"></div>
+          
           </a>
         </div>
       ))}

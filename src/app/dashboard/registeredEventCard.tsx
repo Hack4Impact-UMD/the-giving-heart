@@ -12,6 +12,7 @@ import axios from "axios";
 import DropSpot from "./dropSpot";
 import { useToast } from "@/components/ui/use-toast";
 import Image from "../../../node_modules/next/image";
+import AWS from "aws-sdk";
 
 import { Progress } from "@/components/ui/progress";
 
@@ -38,12 +39,20 @@ interface EventData {
   onDropSpot: () => void;
 }
 
-// Create a custom Material-UI theme with Open Sans font
-const theme = createTheme({
-  typography: {
-    fontFamily: "Open Sans, sans-serif", // Use Open Sans font
-  },
+interface EmailParams {
+  to: string;
+  from: string;
+  subject: string;
+  message: string;
+}
+
+AWS.config.update({
+  region: process.env.NEXT_PUBLIC_AWS_SES_REGION,
+  accessKeyId: process.env.NEXT_PUBLIC_AWS_SES_KEY,
+  secretAccessKey: process.env.NEXT_PUBLIC_AWS_SES_SECRET,
 });
+
+const ses = new AWS.SES({ apiVersion: "latest" });
 
 export default function RegisteredEventCard(props: EventData) {
   const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends/${props.userAttendId}`;
@@ -76,7 +85,6 @@ export default function RegisteredEventCard(props: EventData) {
       );
 
       if (waitlistEntry) {
-        // add logic to send an email to this user
         const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends`;
         // Add the fetched entry to UserAttends
         await axios.post(address, {
@@ -95,10 +103,14 @@ export default function RegisteredEventCard(props: EventData) {
           },
         });
 
-        //
-        // database function watching - new entry added
-        // check waitlistUserAttends (filter shifts) to check if it is empty -> if yes then new entry not from waitlist
-        // if not then entry is from the waitlist and send email accordingly
+        sendEmail({
+          to: waitlistEntry.attributes.users_permissions_user.data.attributes
+            .email,
+          from: "thegivingheart.dev@gmail.com",
+          subject:
+            "You have been moved off the waitlist for The Giving Heart event",
+          message: `You have been moved off the waitlist for the event ${props.name} on ${props.eventRoleShiftDate} from ${props.eventRoleShiftTimeStart} to ${props.eventRoleShiftTimeEnd}. Please check your event dashboard on The Giving Heart site for more details.`,
+        });
 
         // Delete the fetched entry from WaitlistUserAttends
         await axios.delete(
@@ -195,4 +207,23 @@ export default function RegisteredEventCard(props: EventData) {
       </CardContent>
     </Card>
   );
+}
+
+export async function sendEmail({ to, from, subject, message }: EmailParams) {
+  const params = {
+    Source: from,
+    Destination: { ToAddresses: [to] },
+    Message: {
+      Subject: { Data: subject },
+      Body: { Text: { Data: message } },
+    },
+  };
+
+  try {
+    const result = await ses.sendEmail(params).promise();
+    return result.MessageId;
+  } catch (error) {
+    console.error("Error sending email: ", error);
+    throw error;
+  }
 }

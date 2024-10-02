@@ -102,6 +102,7 @@ export default function EventSignupPage() {
             item["attributes"]["users_permissions_user"]["data"];
           let shiftAttendData = item["attributes"]["event_role_shifts"]["data"];
           if (
+            userAttendData != null &&
             userAttendData["attributes"]["username"] == user.username &&
             shiftAttendData.length &&
             shiftAttendData[0]["id"] == selectedRoleShift
@@ -117,6 +118,7 @@ export default function EventSignupPage() {
             item["attributes"]["users_permissions_user"]["data"];
           let shiftAttendData = item["attributes"]["event_role_shifts"]["data"];
           if (
+            userAttendData != null &&
             userAttendData["attributes"]["username"] == user.username &&
             shiftAttendData.length &&
             shiftAttendData[0]["id"] == selectedRoleShift
@@ -386,19 +388,21 @@ export default function EventSignupPage() {
                 </h3>
                 <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
                   {availableShifts.map((shift: any) => {
-                    const numRegisteredForShift = userAttendData["data"].reduce(
-                      (acc: number, item: any) => {
-                        if (
-                          item["attributes"]["event_role_shifts"]["data"][0][
-                            "id"
-                          ] == shift.shiftId
-                        ) {
-                          acc += 1;
-                        }
-                        return acc;
-                      },
-                      0
-                    );
+                    const numRegisteredForShift =
+                      userAttendData &&
+                      userAttendData["data"].reduce(
+                        (acc: number, item: any) => {
+                          if (
+                            item["attributes"]["event_role_shifts"]["data"][0][
+                              "id"
+                            ] == shift.shiftId
+                          ) {
+                            acc += 1;
+                          }
+                          return acc;
+                        },
+                        0
+                      );
 
                     return (
                       <div key={shift.shiftId} className="flex flex-col my-8">

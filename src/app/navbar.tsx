@@ -38,7 +38,6 @@ import {
 
 const navigation = [
   { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
   { name: "Get Involved", href: "/getinvolved" },
   { name: "Events", href: "/dashboard" },
   { name: "Waitlist", href: "/waitlist" },

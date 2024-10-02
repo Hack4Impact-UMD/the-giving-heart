@@ -31,8 +31,13 @@ export default function Waitlist() {
   useEffect(() => {
     if (user && waitlistUserAttendData && waitlistUserAttendData.data) {
       const filteredData = waitlistUserAttendData.data.filter((item: any) => {
+        const userPermissionsUser = item.attributes.users_permissions_user;
+        const userId =
+          userPermissionsUser && userPermissionsUser.data
+            ? userPermissionsUser.data.id
+            : null;
         return (
-          item.attributes.users_permissions_user.data.id === user.id &&
+          userId === user.id &&
           item.attributes.event_role_shifts.data.length > 0
         );
       });

@@ -35,7 +35,7 @@ export default function GetInvolved() {
           </div>
         </div>
 
-        <div className="w-5/6 flex flex-col items-center mt-8 pb-16">
+        <div className="w-5/6 flex flex-col items-center mt-16 pb-16">
           <h1 className="text-lg md:text-4xl font-semibold">Donate</h1>
           <div className="text-center text-m dark:text-white mt-4 mb-8">
             <p className="mb-4">

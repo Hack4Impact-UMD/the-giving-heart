@@ -6,28 +6,41 @@ import { ArrowLeftCircle } from "lucide-react";
 import { ArrowRightCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { API } from "@/utils/constant";
-
 import ImageCarousel from "../components/ui/ImageCarousel";
 import AlertMessage from "@/components/ui/AlertMessage";
+import { Card } from "@/components/ui/card";
 
 export default async function Home() {
   const carouselImages = await fetchGallery();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
-      {/* Setting up the background image and the text to the side */}
-      <div className="flex w-full bg-cover bg-[url('./_images/homepage_bg.png')] text-white h-80">
-        <div className="sm:w-1/2 h-full p-4 md:text-center text-left">
-          <div className="mt-12">
-            <h1 className="text-3xl">Background Image</h1>
-          </div>
-        </div>
+      <div className="relative flex w-full bg-cover bg-[url('./_images/homepage_bg.png')] h-80">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent"></div>
 
-        <div className="w-1/2 md:p-16 p-2 pt-16">
-          <p className="text-med">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
+        <div className="relative flex items-center w-full h-full">
+          <div className="w-full">
+            {" "}
+            <Card className="bg-white/90 p-6 shadow-lg w-full border-none rounded-none">
+              {" "}
+              {/* Added rounded-none */}
+              <h2 className="text-lg text-gray-800 font-bold mb-2">
+                Latest News
+              </h2>
+              <p className="text-sm text-gray-800 leading-relaxed mb-2">
+                New address for correspondence and donations is 3714 Moody Ave.,
+                Richmond, Va. 23225. Our phone number remains the same:
+                804-749-4726!
+              </p>
+              <p className="text-sm text-gray-800 leading-relaxed">
+                ATTENTION - The Giving Heart has recently purged email addresses
+                from our newsletter. If you haven't done so already, please sign
+                up (again) for our Newsletter at the bottom of this page.
+                Remember that subscribers get the latest information, including
+                the ability to sign up before the general public!
+              </p>
+            </Card>
+          </div>
         </div>
       </div>
 
@@ -40,7 +53,9 @@ export default async function Home() {
           <p className="lg:pr-24 lg:pl-24 sm:text-lg text-xs">
             A 501c3 volunteer-based nonprofit serving the Greater Richmond
             Metropolitan Area. Learn more about how to get involved with our
-            mission by clicking the button below.
+            mission by clicking the button below. Our mission at the The Giving
+            Heart is to provide food, fellowship and essential items to those in
+            need.
           </p>
           <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-3/5 rounded-md">
             <a key="getinvolved" href="/getinvolved">

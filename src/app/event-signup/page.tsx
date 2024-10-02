@@ -264,7 +264,7 @@ export default function EventSignupPage() {
         <div>
           <div className=" bg-[#72090E] bg-opacity-70 p-3 my-2">
             <h1 className="pl-5 pr-5 text-neutral-50 text-5xl md:text-7xl">
-              Event registration
+              Event Registration
             </h1>
           </div>
           <div className="w-fit lg:m-auto">

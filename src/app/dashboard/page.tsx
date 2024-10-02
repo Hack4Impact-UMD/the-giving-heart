@@ -93,8 +93,9 @@ const organizeUserAttendData = (userAttendStrapiData: any, user: any) => {
   userAttendStrapiData["data"].forEach((item: any) => {
     const attr = item["attributes"];
     if (
+      attr["users_permissions_user"]["data"] != null &&
       attr["users_permissions_user"]["data"]["attributes"]["username"] ===
-      user.username
+        user.username
     ) {
       organizedData.userAttend.push({
         id: item["id"],

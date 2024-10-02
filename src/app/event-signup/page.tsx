@@ -21,6 +21,7 @@ import { Progress } from "@/components/ui/progress";
 import Modal from "./signupModal";
 import { Earth, Users, BookOpen, CalendarClock } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { getToken } from "@/utils/helpers";
 
 interface VolunteerRole {
   title: string;
@@ -88,6 +89,7 @@ export default function EventSignupPage() {
   ];
 
   const handleRegisterClick = async (event: { preventDefault: () => void }) => {
+    const authToken = getToken();
     event.preventDefault();
 
     if (user) {
@@ -161,7 +163,7 @@ export default function EventSignupPage() {
 
         await axios.post(address, {
           headers: {
-            Authorization: `Bearer ${auth}`,
+            Authorization: `Bearer ${authToken}`,
           },
           data: {
             users_permissions_user: {
@@ -195,6 +197,7 @@ export default function EventSignupPage() {
   };
 
   const handleAddWaitlist = async () => {
+    const authToken = getToken();
     if (user) {
       const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends`;
       const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
@@ -202,7 +205,7 @@ export default function EventSignupPage() {
       try {
         await axios.post(address, {
           headers: {
-            Authorization: `Bearer ${auth}`,
+            Authorization: `Bearer ${authToken}`,
           },
           data: {
             users_permissions_user: {

@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import { useAuthContext } from "@/utils/context/AuthContext";
+import { getToken } from "@/utils/helpers";
 
 // https://docs.strapi.io/dev-docs/integrations/next-js
 // https://strapi.io/blog/using-transactions-with-strapi-v4-with-tests
@@ -12,6 +13,7 @@ import { useAuthContext } from "@/utils/context/AuthContext";
 // this assumes that selectedRoleShift is the entire JSON that includes the role shift capacity
 export default function RegisterButton(selectedEventRoleShift: any) {
   const { user, setUser } = useAuthContext();
+  const authToken = getToken();
 
   const addressUserAttends = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends`;
   const addressEventRoleShifts = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/event-role-shifts`;
@@ -43,7 +45,7 @@ export default function RegisterButton(selectedEventRoleShift: any) {
           },
         },
         {
-          headers: { Authorization: `Bearer ${auth}` },
+          headers: { Authorization: `Bearer ${authToken}` },
         }
 
         //also need to populate

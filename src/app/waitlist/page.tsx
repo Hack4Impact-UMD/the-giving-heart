@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import useSWR from "swr";
 import { useEffect, useState } from "react";
+import { getToken } from "@/utils/helpers";
 
 export default function Waitlist() {
   const eventRoleShiftsAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/event-role-shifts?populate=*`;
@@ -73,6 +74,7 @@ export default function Waitlist() {
   }
 
   function dropWaitlistEntry(waitlistId: any) {
+    const authToken = getToken();
     const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends/${waitlistId}`;
     const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
@@ -80,7 +82,7 @@ export default function Waitlist() {
       try {
         await axios.delete(address, {
           headers: {
-            Authorization: `Bearer ${auth}`,
+            Authorization: `Bearer ${authToken}`,
           },
         });
         setUserWaitlistData(

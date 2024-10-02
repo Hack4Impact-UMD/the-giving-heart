@@ -12,6 +12,7 @@ import axios from "axios";
 import DropSpot from "./dropSpot";
 import { useToast } from "@/components/ui/use-toast";
 import Image from "../../../node_modules/next/image";
+import { getToken } from "../../utils/helpers";
 import AWS from "aws-sdk";
 
 import { Progress } from "@/components/ui/progress";
@@ -60,11 +61,12 @@ export default function RegisteredEventCard(props: EventData) {
   const { toast } = useToast();
 
   const handleDropSpot = async () => {
+    const authToken = getToken();
     try {
       await axios
         .delete(address, {
           headers: {
-            Authorization: `Bearer ${auth}`,
+            Authorization: `Bearer ${authToken}`,
           },
         })
         .then((res) => {
@@ -89,7 +91,7 @@ export default function RegisteredEventCard(props: EventData) {
         // Add the fetched entry to UserAttends
         await axios.post(address, {
           headers: {
-            Authorization: `Bearer ${auth}`,
+            Authorization: `Bearer ${authToken}`,
           },
           data: {
             users_permissions_user: {
@@ -119,7 +121,7 @@ export default function RegisteredEventCard(props: EventData) {
           `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends/${waitlistEntry.id}`,
           {
             headers: {
-              Authorization: `Bearer ${auth}`,
+              Authorization: `Bearer ${authToken}`,
             },
           }
         );

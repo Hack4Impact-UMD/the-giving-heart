@@ -180,8 +180,8 @@ export default function Dashboard() {
             />
             <p className="text-[#9D5425] self-center italic text-lg">
               {" "}
-              <strong> Note:</strong> You must register for an event to
-              volunteer for it.{" "}
+              <strong> Note:</strong> You must sign in before registering for an
+              event.{" "}
             </p>
           </div>
         ) : (

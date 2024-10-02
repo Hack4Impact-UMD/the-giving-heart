@@ -2,6 +2,7 @@
 import useSWR from "swr";
 import axios from "axios";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function EventHelper() {
   const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/volunteer-roles`;
@@ -31,10 +32,16 @@ export default function EventHelper() {
                 {item["attributes"]["description"]}
               </p>
             </div>
-          
           </a>
         </div>
       ))}
+      {
+        <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md  sm:w-5/12 sm:mt-4 md:h-14 h-10 w-3/5 rounded-md">
+          <a key="getinvolved" href="/dashboard">
+            Register now
+          </a>
+        </Button>
+      }
     </div>
   );
 }

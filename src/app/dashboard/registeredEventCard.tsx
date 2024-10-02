@@ -113,6 +113,8 @@ export default function RegisteredEventCard(props: EventData) {
         });
 
         // Delete the fetched entry from WaitlistUserAttends
+
+        console.log("waitlistEntry " + waitlistEntry);
         await axios.delete(
           `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/waitlist-user-attends/${waitlistEntry.id}`,
           {

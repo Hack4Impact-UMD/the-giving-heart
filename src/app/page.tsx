@@ -46,7 +46,7 @@ export default async function Home() {
 
       <div className="bg-white w-full">
         {/* Box with the "get involved" button */}
-        <div className="flex-col align-center text-center justify-center w-5/6 lg:w-2/3 sm:h-80 h-44 bg-neutral-100 m-auto mt-10 mb-16 shadow shadow-black md:p-10 p-4">
+        <div className="flex-col align-center text-center justify-center w-5/6 lg:w-2/3 sm:h-80 h-52 bg-neutral-100 m-auto mt-10 mb-16 shadow shadow-black md:p-10 p-4">
           <h2 className="sm:pb-8 pb-2 text-xl font-semibold">
             Welcome to The Giving Heart!
           </h2>
@@ -57,7 +57,7 @@ export default async function Home() {
             Heart is to provide food, fellowship and essential items to those in
             need.
           </p>
-          <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md mt-6 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-3/5 rounded-md">
+          <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md mt-2 sm:w-5/12 sm:mt-8 md:h-14 h-10 w-3/5 rounded-md">
             <a key="getinvolved" href="/getinvolved">
               Get Involved
             </a>

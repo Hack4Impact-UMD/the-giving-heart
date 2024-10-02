@@ -34,8 +34,8 @@ export default async function Home() {
               </p>
               <p className="text-sm text-gray-800 leading-relaxed">
                 ATTENTION - The Giving Heart has recently purged email addresses
-                from our newsletter. If you haven't done so already, please sign
-                up (again) for our Newsletter at the bottom of this page.
+                from our newsletter. If you haven&apos;t done so already, please
+                sign up (again) for our Newsletter at the bottom of this page.
                 Remember that subscribers get the latest information, including
                 the ability to sign up before the general public!
               </p>

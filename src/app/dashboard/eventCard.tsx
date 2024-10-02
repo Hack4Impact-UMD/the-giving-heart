@@ -11,7 +11,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "../../components/ui/tooltip"
+} from "../../components/ui/tooltip";
 import { Button } from "../../components/ui/button";
 import Image, { StaticImageData } from "../../../node_modules/next/image";
 
@@ -126,29 +126,30 @@ export const EventCard: React.FC<EventCardProps> = ({
                     </Button>
                   </span>
                 </TooltipTrigger>
-                <TooltipContent>You must sign in to register for this event.</TooltipContent>
+                <TooltipContent>
+                  You must sign in to register for this event.
+                </TooltipContent>
               </Tooltip>
             </TooltipProvider>
-            ) : (
-              <Button
-                variant="default"
-                size="default"
-                className="bg-[#ED1C24] text-white rounded-md"
+          ) : (
+            <Button
+              variant="default"
+              size="default"
+              className="bg-[#ED1C24] text-white rounded-md"
+            >
+              <Link
+                href={{
+                  pathname: `/event-signup`,
+                  query: {
+                    event: event,
+                    volunteerRoles: volunteerRoles,
+                  },
+                }}
               >
-                <Link
-                  href={{
-                    pathname: `/event-signup`,
-                    query: {
-                      event: event,
-                      volunteerRoles: volunteerRoles,
-                    },
-                  }}
-                >
-                  Register
-                </Link>
-              </Button>
-            )
-          }
+                Register
+              </Link>
+            </Button>
+          )}
         </CardFooter>
       </Card>
     </div>

@@ -1,18 +1,14 @@
 "use client";
 
-import { CardTitle } from "@/components/ui/card";
 import "./event_signup.css";
+import { SelectChangeEvent, FormControl } from "@mui/material";
 import {
-  Card,
-  CardHeader,
-  CardContent,
-  Typography,
-  SelectChangeEvent,
-  InputLabel,
-  FormControl,
-} from "@mui/material";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+} from "@/components/ui/select";
 import * as React from "react";
-import { Select, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Button } from "../../components/ui/button";
@@ -73,12 +69,10 @@ export default function EventSignupPage() {
     setSelectedRoleShift(event.target.value);
   };
 
-  const handleRoleSelection = (event: SelectChangeEvent<string>) => {
-    setSelectedRole(event.target.value);
+  const handleRoleSelection = (value: string) => {
+    setSelectedRole(value);
     setAvailableShift(
-      volunteerRolesData.filter(
-        (x: any) => x["volunteerRoleId"] === event.target.value
-      )
+      volunteerRolesData.filter((x: any) => x["volunteerRoleId"] === value)
     );
   };
 
@@ -359,21 +353,24 @@ export default function EventSignupPage() {
             </h3>
             <div className="w-11/12 m-auto border rounded-lg shadow-xl p-5">
               <FormControl>
-                <InputLabel sx={{ marginTop: 2 }} htmlFor="v-roles">
-                  Click to choose role
-                </InputLabel>
                 <Select
-                  sx={{ marginTop: 2, marginLeft: 2, width: 200, height: 50 }}
-                  labelId="v-roles"
-                  id="v-roles"
+                  onValueChange={handleRoleSelection}
                   value={selectedRole}
-                  onChange={handleRoleSelection}
                 >
-                  {uniqueVolunteerRolesData.map((role, index) => (
-                    <MenuItem key={index} value={role.volunteerRoleId}>
-                      {role.title}
-                    </MenuItem>
-                  ))}
+                  <SelectTrigger className="w-[200px] mt-2 ml-2">
+                    {selectedRole
+                      ? uniqueVolunteerRolesData.find(
+                          (role) => role.volunteerRoleId === selectedRole
+                        )?.title
+                      : "Select a role"}
+                  </SelectTrigger>
+                  <SelectContent>
+                    {uniqueVolunteerRolesData.map((role, index) => (
+                      <SelectItem key={index} value={role.volunteerRoleId}>
+                        {role.title}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
                 </Select>
               </FormControl>
             </div>

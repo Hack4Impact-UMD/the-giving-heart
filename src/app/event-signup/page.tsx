@@ -264,14 +264,13 @@ export default function EventSignupPage() {
           position: "relative",
         }}
       >
-        <div>
-          <div className=" bg-[#72090E] bg-opacity-70 p-3 my-2">
-            <h1 className="pl-5 pr-5 text-neutral-50 text-5xl md:text-7xl">
+        <div className="relative my-4 p-5">
+          <div className="absolute inset-0 bg-[#72090E] z-0 h-[170px]"></div>
+          <div className="relative z-10 text-center">
+            <h1 className="text-neutral-50 text-5xl md:text-7xl">
               Event Registration
             </h1>
-          </div>
-          <div className="w-fit lg:m-auto">
-            <h2 className="bg-[#72090E] bg-opacity-70 text-xl text-neutral-50 md:text-4xl p-3 pl-8 pr-8 my-2">
+            <h2 className="text-neutral-50 text-xl md:text-4xl mt-4">
               {eventD.event.title}
             </h2>
           </div>

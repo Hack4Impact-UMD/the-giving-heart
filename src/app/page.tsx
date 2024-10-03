@@ -110,31 +110,31 @@ export default async function Home() {
         {/* <RenderParams className={classes.params} /> */}
 
         {/* Gallery */}
-        <div className="mx-auto mt-5 mb-20">
+        <div className="mx-auto mt-5">
           <h1 className="text-center text-3xl p-10">Gallery</h1>
           <ImageCarousel images={carouselImages} />
         </div>
 
-        <div className="flex flex-col w-full sm:flex-row justify-around lg:mt-32 mb-10 mt-10">
-          <div className="w-full sm:w-1/2 py-6 px-10 text-center sm:text-left">
-            <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl">
-              Watch Our Introduction Video
-            </h2>
-            <p className="text-gray-500 text-xs mt-3 md:text-lg lg:text-xl">
-              Video message about The Giving Heart from the mayor of the city
-            </p>
-          </div>
-          <div className="w-full sm:w-1/3 flex justify-center items-center sm:items-start mt-5 sm:mt-0">
-            {" "}
-            {/* Adjusted classes for responsive layout */}
-            <iframe
-              width="360"
-              height="640"
-              src="https://www.youtube.com/embed/9QJb9x2ty7E"
-              title="Message from our Mayor"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              className="rounded-lg"
-            ></iframe>
+        <div className="flex flex-col">
+          <div className="flex flex-col w-full justify-around lg:mt-32 mb-10 mt-10">
+            <div className="w-full py-6 px-10 text-center">
+              <h2 className="font-semibold text-xl md:text-2xl lg:text-4xl">
+                Watch Our Introduction Video
+              </h2>
+              <p className="text-gray-500 text-xs mt-3 md:text-lg lg:text-xl">
+                Video message about The Giving Heart from the mayor of the city
+              </p>
+            </div>
+            <div className="w-full flex justify-center items-center mt-5">
+              <iframe
+                width="360"
+                height="640"
+                src="https://www.youtube.com/embed/9QJb9x2ty7E"
+                title="Message from our Mayor"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                className="rounded-lg"
+              ></iframe>
+            </div>
           </div>
         </div>
       </div>

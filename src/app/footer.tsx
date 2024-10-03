@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { User } from "lucide-react";
+import { Facebook, Instagram, Twitter, User } from "lucide-react";
 import { API } from "@/utils/constant";
 import Link from "next/link";
 import useSWR from "swr";
@@ -91,9 +91,15 @@ export default function Footer() {
           <div className="hidden sm:flex text-xl underline">Socials</div>
 
           <div className="hidden md:visible pt-1 md:flex justify-between items-center space-x-2">
-            <User />
-            <User />
-            <User />
+            <a
+              href="https://www.instagram.com/thegivingheartrva/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram />
+            </a>
+            <Facebook />
+            <Twitter />
           </div>
         </div>
       </div>

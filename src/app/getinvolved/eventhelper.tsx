@@ -17,7 +17,7 @@ export default function EventHelper() {
   if (!data) return <div>Loading...</div>;
 
   return (
-    <div className="w-full">
+    <div className="w-full align-center text-center justify-center">
       {data["data"].map((item: any) => (
         <div key="id" className="py-5">
           <a
@@ -35,13 +35,11 @@ export default function EventHelper() {
           </a>
         </div>
       ))}
-      {
-        <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md  sm:w-5/12 sm:mt-4 md:h-14 h-10 w-3/5 rounded-md">
-          <a key="getinvolved" href="/dashboard">
-            Register now
-          </a>
-        </Button>
-      }
+      <Button className="hover:text-black hover:bg-neutral-200 hover:border-solid hover:border hover:border-black bg-[#ed1c24] text-white text-sm md:text-md  sm:w-5/12 sm:mt-4 md:h-14 h-10 w-3/5 rounded-md">
+        <a key="getinvolved" href="/dashboard">
+          Register now
+        </a>
+      </Button>
     </div>
   );
 }

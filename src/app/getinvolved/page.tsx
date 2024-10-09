@@ -75,13 +75,13 @@ export default function GetInvolved() {
               >
                 Amazon Wish List
               </a>
-              . Don't forget that you can add The Giving Heart to your Amazon
-              Smiles list!
+              . Don&#39;t forget that you can add The Giving Heart to your
+              Amazon Smiles list!
             </p>
             <p className="mb-4">
               <strong>Collection Ideas:</strong> If you would like to start your
               own collection (great for schools, churches, and even
-              neighborhoods), here are a few items that we've identified.
+              neighborhoods), here are a few items that we&#39;ve identified.
             </p>
             <ul className="list-disc list-inside mb-4 text-left">
               <li>Toiletries</li>

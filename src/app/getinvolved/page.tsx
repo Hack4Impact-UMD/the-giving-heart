@@ -44,6 +44,13 @@ export default function GetInvolved() {
               <a href="tel:804-749-4726" className="text-red-500">
                 804-749-4726
               </a>{" "}
+              or email{" "}
+              <a
+                href="mailto:Sandra.Antoine@thegivingheart.org"
+                className="text-red-500"
+              >
+                Sandra.Antoine@thegivingheart.org
+              </a>{" "}
               to discuss what you have to offer. You can also{" "}
               <a
                 href="https://thegivingheart.org/wp-content/uploads/2020/10/donation-box-for-newsletter.docx"
@@ -68,13 +75,13 @@ export default function GetInvolved() {
               >
                 Amazon Wish List
               </a>
-              . Don&apos;t forget that you can add The Giving Heart to your
-              Amazon Smiles list!
+              . Don't forget that you can add The Giving Heart to your Amazon
+              Smiles list!
             </p>
             <p className="mb-4">
               <strong>Collection Ideas:</strong> If you would like to start your
               own collection (great for schools, churches, and even
-              neighborhoods), here are a few items that we&apos;ve identified.
+              neighborhoods), here are a few items that we've identified.
             </p>
             <ul className="list-disc list-inside mb-4 text-left">
               <li>Toiletries</li>
@@ -95,10 +102,14 @@ export default function GetInvolved() {
               <br />
               Greater Richmond Convention Center
               <br />
-              Drop-offs (at the Exhibition Hall) are available from 9 am to 1 pm
-              from November 21st to November 23rd. Call us at{" "}
+              Drop-offs (E-Z Box located in the Loading Dock) are available from
+              9 am to 3 pm from November 25th to November 27th. Call us at{" "}
               <a href="tel:804-749-4726" className="text-red-500">
                 804-749-4726
+              </a>{" "}
+              or{" "}
+              <a href="tel:804-690-9119" className="text-red-500">
+                804-690-9119
               </a>{" "}
               to discuss.
             </p>

@@ -18,18 +18,21 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "../../components/ui/button";
 import axios from "axios";
 import { useAuthContext } from "@/utils/context/AuthContext";
-import { EventSignUpData, UserAttendsData } from "../_api/model";
+import { EventSignUpData } from "../_api/model";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
+import Modal from "./signupModal";
 import { Earth, Users, BookOpen, CalendarClock } from "lucide-react";
 
 export default function EventSignupPage() {
   const searchParams = useSearchParams();
-  const searchParamsEvent = searchParams.get("event") ?? 
-    "{\"id\":\"This was undefined\", \"title\":\"[Event Name]\", \"description\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta.\", \"location\":\"[Location]\", \"eventDateStart\":\"[Date]\", \"eventDateEnd\":\"[Date]\", \"eventCheckInKey\":\"This was undefined\", \"signUpOpenDate\":\"[Date]\", \"signUpEndDate\":\"[Date]\"}"; //FIXME: Need to change default val of params
+  const searchParamsEvent =
+    searchParams.get("event") ??
+    '{"id":"This was undefined", "title":"[Event Name]", "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque rhoncus dui dignissim dui pellentesque, non pellentesque dolor dictum. In vel fermentum sem. Integer tempor congue porta.", "location":"[Location]", "eventDateStart":"[Date]", "eventDateEnd":"[Date]", "eventCheckInKey":"This was undefined", "signUpOpenDate":"[Date]", "signUpEndDate":"[Date]"}'; //FIXME: Need to change default val of params
   const eventData = JSON.parse(`${searchParamsEvent}`);
   const searchParamsVolunteerRoles =
-    searchParams.get("volunteerRoles") ?? "[{\"title\":\"[Volunteer Role]\", \"description\":\"This was undefined\", \"eventRoleShiftTimeStart\":\"[Time]\", \"eventRoleShiftTimeEnd\":\"[Time]\", \"eventRoleShiftDate\":\"[Date]\", \"capacity\":\"10\", \"eventRoleShiftDescription\":\"This was undefined\", \"shiftId\":\"This was undefined\", \"volunteerRoleId\":\"This was undefined\"}, {\"title\":\"[Volunteer Role]\", \"description\":\"This was undefined\", \"eventRoleShiftTimeStart\":\"[Time]\", \"eventRoleShiftTimeEnd\":\"[Time]\", \"eventRoleShiftDate\":\"[Date]\", \"capacity\":\"10\", \"eventRoleShiftDescription\":\"This was undefined\", \"shiftId\":\"This was undefined\", \"volunteerRoleId\":\"This was undefined\"}, {\"title\":\"[Volunteer Role]\", \"description\":\"This was undefined\", \"eventRoleShiftTimeStart\":\"[Time]\", \"eventRoleShiftTimeEnd\":\"[Time]\", \"eventRoleShiftDate\":\"[Date]\", \"capacity\":\"10\", \"eventRoleShiftDescription\":\"This was undefined\", \"shiftId\":\"This was undefined\", \"volunteerRoleId\":\"This was undefined\"}]"; //FIXME: Need to change default val of params
+    searchParams.get("volunteerRoles") ??
+    '[{"title":"[Volunteer Role]", "description":"This was undefined", "eventRoleShiftTimeStart":"[Time]", "eventRoleShiftTimeEnd":"[Time]", "eventRoleShiftDate":"[Date]", "capacity":"10", "eventRoleShiftDescription":"This was undefined", "shiftId":"This was undefined", "volunteerRoleId":"This was undefined"}, {"title":"[Volunteer Role]", "description":"This was undefined", "eventRoleShiftTimeStart":"[Time]", "eventRoleShiftTimeEnd":"[Time]", "eventRoleShiftDate":"[Date]", "capacity":"10", "eventRoleShiftDescription":"This was undefined", "shiftId":"This was undefined", "volunteerRoleId":"This was undefined"}, {"title":"[Volunteer Role]", "description":"This was undefined", "eventRoleShiftTimeStart":"[Time]", "eventRoleShiftTimeEnd":"[Time]", "eventRoleShiftDate":"[Date]", "capacity":"10", "eventRoleShiftDescription":"This was undefined", "shiftId":"This was undefined", "volunteerRoleId":"This was undefined"}]'; //FIXME: Need to change default val of params
   const volunteerRolesData = JSON.parse(`${searchParamsVolunteerRoles}`);
   const router = useRouter();
   const userAttendAddress = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends?populate=*`;
@@ -39,6 +42,9 @@ export default function EventSignupPage() {
   const [availableShifts, setAvailableShift] = useState([]);
   const [selectedRoleShift, setSelectedRoleShift] = useState("");
   const { user, setUser } = useAuthContext();
+
+  const [showTryAgainModal, setShowTryAgainModal] = useState(false);
+  const [showWaitlistModal, setShowWaitlistModal] = useState(false);
 
   const eventD: EventSignUpData = {
     event: eventData,
@@ -71,7 +77,6 @@ export default function EventSignupPage() {
     fetcher
   );
 
-  //TODO: disable if event registration window has expired
   const handleRegisterClick = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
@@ -79,70 +84,73 @@ export default function EventSignupPage() {
       const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends`;
       const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
 
-      userAttendData["data"].forEach((item: any) => {
-        if (
-          item["attributes"]["users_permissions_user"]["data"]["attributes"][
-          "username"
-          ] === user.username &&
-          item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
-          selectedRoleShift
-        ) {
-          // TODO: Add modal in replacement of console.log -> give user the option to try again or return to dashboard
-          console.log("User has already registered for this shift");
-          return;
+      var shiftCapacity = Number.MAX_VALUE;
+      try {
+        for (const item of userAttendData["data"]) {
+          if (
+            item["attributes"]["users_permissions_user"]["data"]["attributes"][
+              "username"
+            ] === user.username &&
+            item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
+              selectedRoleShift
+          ) {
+            setShowTryAgainModal(true);
+            return;
+          }
         }
-      });
 
-      //
-      const numRegisteredForShift = userAttendData["data"].reduce(
-        (acc: number, item: any) => {
+        const numRegisteredForShift = userAttendData["data"].reduce(
+          (acc: number, item: any) => {
+            if (
+              item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
+              selectedRoleShift
+            ) {
+              acc += 1;
+            }
+            return acc;
+          },
+          0
+        );
+
+        for (const item of userAttendData["data"]) {
           if (
             item["attributes"]["event_role_shifts"]["data"][0]["id"] ===
             selectedRoleShift
           ) {
-            acc += 1;
-          }
-          return acc;
-        },
-        0
-      );
-
-      volunteerRolesData.forEach((role: any) => {
-        if (role["volunteerRoleId"] === selectedRole) {
-          if (numRegisteredForShift >= role["capacity"]) {
-            // TODO: Add modal in replacement of console.log -> "Role is at full capacity" give the user the option to waitlist or return to dashboard
-            console.log("Shift is at full capacity");
-            return;
+            shiftCapacity =
+              item["attributes"]["event_role_shifts"]["data"][0]["attributes"][
+                "capacity"
+              ];
+            break;
           }
         }
-      });
 
-      try {
-        await axios
-          .post(address, {
-            headers: {
-              Authorization: `Bearer ${auth}`,
+        if (numRegisteredForShift >= shiftCapacity) {
+          setShowWaitlistModal(true);
+          return;
+        }
+
+        await axios.post(address, {
+          headers: {
+            Authorization: `Bearer ${auth}`,
+          },
+          data: {
+            users_permissions_user: {
+              id: user.id,
             },
-            data: {
-              users_permissions_user: {
-                id: user.id,
-              },
-              event_role_shifts: {
-                id: selectedRoleShift,
-              },
-              checkIn: false,
-              checkOut: false,
+            event_role_shifts: {
+              id: selectedRoleShift,
             },
-          })
-          .then((res) => {
-            console.log(res);
-            router.push("/dashboard");
-          });
+            checkIn: false,
+            checkOut: false,
+          },
+        });
+
+        router.push("/dashboard");
       } catch (error) {
         console.log(error);
       }
     }
-    //TODO: need to make sure that users haven't already registered for event
   };
 
   return (
@@ -186,7 +194,9 @@ export default function EventSignupPage() {
               <div className="flex">
                 <BookOpen />
                 <div className="flex flex-col w-11/12 pl-5">
-                  <h4><b>Description</b></h4>
+                  <h4>
+                    <b>Description</b>
+                  </h4>
 
                   <p className="mb-4 mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
                     {eventD.event.description}
@@ -196,13 +206,22 @@ export default function EventSignupPage() {
               <div className="flex">
                 <Users />
                 <div className="flex flex-col w-11/12 pl-5">
-                  <h4><b>Available Positions</b></h4>
+                  <h4>
+                    <b>Available Positions</b>
+                  </h4>
                   <ul className="mb-2">
                     {eventD.volunteerRoles.map((role, index, array) => (
-                      <ul key={index} className="mb-2 text-base font-normal text-gray-500 dark:text-gray-400 pl-5 list-disc list-outside">
-                        <li className="mb-2 mt-2"><b>Category #{index + 1}</b></li>
+                      <ul
+                        key={index}
+                        className="mb-2 text-base font-normal text-gray-500 dark:text-gray-400 pl-5 list-disc list-outside"
+                      >
+                        <li className="mb-2 mt-2">
+                          <b>Category #{index + 1}</b>
+                        </li>
                         <ul className="pl-5 list-disc list-inside">
-                          <li className="mt-2" key={index}>{role.title}</li>
+                          <li className="mt-2" key={index}>
+                            {role.title}
+                          </li>
                         </ul>
                       </ul>
                     ))}
@@ -212,7 +231,9 @@ export default function EventSignupPage() {
               <div className="flex">
                 <CalendarClock />
                 <div className="flex flex-col w-11/12 pl-5">
-                  <h4><b>Date & Time</b></h4>
+                  <h4>
+                    <b>Date & Time</b>
+                  </h4>
                   <p className="mb-4 mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
                     {eventD.event.eventDateStart} to {eventD.event.eventDateEnd}
                   </p>
@@ -221,7 +242,9 @@ export default function EventSignupPage() {
               <div className="flex">
                 <Earth />
                 <div className="flex flex-col w-11/12 pl-5">
-                  <h4><b>Location</b></h4>
+                  <h4>
+                    <b>Location</b>
+                  </h4>
                   <p className="mb-4 mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
                     {eventD.event.location}
                   </p>
@@ -316,6 +339,24 @@ export default function EventSignupPage() {
           )}
         </ol>
       </div>
+
+      <Modal
+        titleText="Sign-up Failed"
+        descriptionText="You have already registered for this shift."
+        buttonText="Try Again"
+        onConfirm={() => setShowTryAgainModal(false)}
+        open={showTryAgainModal}
+        onOpenChange={setShowTryAgainModal}
+      ></Modal>
+
+      <Modal
+        titleText="Full Capacity"
+        descriptionText="This role and shit are at full capacity. Would you like to  join the waitlist?"
+        buttonText="Join Waitlist"
+        onConfirm={() => console.log("TODO: Trigger waitlist function needed")}
+        open={showWaitlistModal}
+        onOpenChange={setShowWaitlistModal}
+      ></Modal>
 
       {/* <h3
         style={{

@@ -46,84 +46,9 @@ const theme = createTheme({
 });
 
 export default function RegisteredEventCard(props: EventData) {
-  // stuff to change the check in value created from the checkin button
-  const [isCheckedIn, setIsCheckedIn] = useState(props.checkIn ?? false);
-  const checkInStyles = {
-    backgroundColor: isCheckedIn ? "green" : "", // Change 'initialColor' to your desired initial background color
-  };
-  // stuff to change the check out value created from the check out button
-  const [isCheckedOut, setIsCheckedOut] = useState(props.checkOut ?? false);
-  const checkOutStyles = {
-    backgroundColor: isCheckedOut ? "green" : "", // Change 'initialColor' to your desired initial background color
-  };
-
   const address = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/user-attends/${props.userAttendId}`;
   const auth = `${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`;
   const { toast } = useToast();
-
-  const handleCheckInToggle = async () => {
-    const newToggleValue = !isCheckedIn;
-    setIsCheckedIn(newToggleValue);
-
-    try {
-      await axios
-        .put(address, {
-          headers: {
-            Authorization: `Bearer ${auth}`,
-          },
-          data: {
-            checkIn: newToggleValue,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          toast({
-            variant: "confirmation",
-            title: "Checked in!",
-            description: "You have successfully checked in.",
-          });
-        });
-    } catch (error) {
-      console.log(error);
-      toast({
-        variant: "destructive",
-        title: "Oops!",
-        description: "Something went wrong. Please try again.",
-      });
-    }
-  };
-
-  const handleCheckOutToggle = async () => {
-    const newToggleValue = !isCheckedOut;
-    setIsCheckedOut(newToggleValue);
-
-    try {
-      await axios
-        .put(address, {
-          headers: {
-            Authorization: `Bearer ${auth}`,
-          },
-          data: {
-            checkOut: newToggleValue,
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          toast({
-            variant: "confirmation",
-            title: "Checked out!",
-            description: "You have successfully checked out.",
-          });
-        });
-    } catch (error) {
-      console.log(error);
-      toast({
-        variant: "destructive",
-        title: "Oops!",
-        description: "Something went wrong. Please try again.",
-      });
-    }
-  };
 
   const handleDropSpot = async () => {
     try {
@@ -219,50 +144,6 @@ export default function RegisteredEventCard(props: EventData) {
             <DropSpot onDropSpot={handleDropSpot}></DropSpot>
           </div>
         </CardContent>
-
-        {/* CHECK IN/OUT SECTION (RED PART) */}
-
-        <Box sx={{ backgroundColor: "#860E13", px: 3, py: 3 }} className="rounded-b-lg">
-          <Typography sx={{ color: "white", fontSize: 20 }}>
-            <b>Event Check-In/Out</b>
-          </Typography>
-
-          <div className="flex space-x-2 items-start mt-3">
-            <Image src={badgeIcon} alt="badge-info-icon" />
-
-            <div className="flex flex-col">
-              <Typography sx={{ color: "#E6E5E5", fontSize: 14 }}>
-                <i>
-                  When the event has started, please check in/out of the event
-                  by clicking the switches below.
-                </i>
-              </Typography>
-            </div>
-          </div>
-
-          <div className="flex flex-row text-center justify-evenly my-3">
-            <div className="flex flex-col items-center">
-              <Typography sx={{ color: "white", fontSize: 18 }}>
-                <b>Check-In</b>
-              </Typography>
-              <Switch
-                checked={isCheckedIn}
-                onCheckedChange={handleCheckInToggle}
-                style={checkInStyles}
-              />
-            </div>
-            <div className="flex flex-col items-center">
-              <Typography sx={{ color: "white", fontSize: 18 }}>
-                <b>Check-Out</b>
-              </Typography>
-              <Switch
-                checked={isCheckedOut}
-                onCheckedChange={handleCheckOutToggle}
-                style={checkOutStyles}
-              />
-            </div>
-          </div>
-        </Box>
       </Card>
   );
 }

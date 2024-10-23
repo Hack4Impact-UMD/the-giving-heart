@@ -22,6 +22,7 @@ import globe from ".././_images/globe.svg";
 import AlertMessage from "../../components/ui/AlertMessage";
 import { useAuthContext } from "@/utils/context/AuthContext";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface EventCardProps {
   key: string;
@@ -40,6 +41,16 @@ export const EventCard: React.FC<EventCardProps> = ({
   const eventObject = JSON.parse(event);
   const volunteerRolesObject = JSON.parse(volunteerRoles);
   const { user } = useAuthContext();
+  const router = useRouter();
+
+  const handleClick = () => {
+    const query = new URLSearchParams({
+      event: event,
+      volunteerRoles: volunteerRoles,
+    }).toString();
+
+    router.push(`/event-signup?${query}`);
+  };
 
   return (
     <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.50)]">
@@ -110,19 +121,10 @@ export const EventCard: React.FC<EventCardProps> = ({
                       variant="default"
                       size="default"
                       className="bg-[#ED1C24] text-white rounded-md"
+                      onClick={handleClick}
                       disabled
                     >
-                      <Link
-                        href={{
-                          pathname: `/event-signup`,
-                          query: {
-                            event: event,
-                            volunteerRoles: volunteerRoles,
-                          },
-                        }}
-                      >
-                        Register
-                      </Link>
+                      Register
                     </Button>
                   </span>
                 </TooltipTrigger>
@@ -136,18 +138,9 @@ export const EventCard: React.FC<EventCardProps> = ({
               variant="default"
               size="default"
               className="bg-[#ED1C24] text-white rounded-md"
+              onClick={handleClick}
             >
-              <Link
-                href={{
-                  pathname: `/event-signup`,
-                  query: {
-                    event: event,
-                    volunteerRoles: volunteerRoles,
-                  },
-                }}
-              >
-                Register
-              </Link>
+              Register
             </Button>
           )}
         </CardFooter>

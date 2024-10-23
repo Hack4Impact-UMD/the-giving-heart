@@ -18,70 +18,61 @@ import RegisteredEventCard from "./registeredEventCard";
 const organizeData = (eventRoleShifts: any) => {
   const organizedData: StrapiEventData = {};
 
-  eventRoleShifts["data"].forEach((eventRoleShift: any) => {
-    const eventId = eventRoleShift["attributes"]["event"]["data"]["id"];
-    if (!organizedData[eventId]) {
+  eventRoleShifts?.data?.forEach((eventRoleShift: any) => {
+    const eventId = eventRoleShift?.attributes?.event?.data?.id;
+    if (eventId && !organizedData[eventId]) {
       organizedData[eventId] = {
         event: {
           id: eventId,
           title:
-            eventRoleShift["attributes"]["event"]["data"]["attributes"][
-              "title"
-            ],
+            eventRoleShift?.attributes?.event?.data?.attributes?.title ?? "",
           description:
-            eventRoleShift["attributes"]["event"]["data"]["attributes"][
-              "description"
-            ],
+            eventRoleShift?.attributes?.event?.data?.attributes?.description ??
+            "",
           location:
-            eventRoleShift["attributes"]["event"]["data"]["attributes"][
-              "location"
-            ],
+            eventRoleShift?.attributes?.event?.data?.attributes?.location ?? "",
           eventDateStart:
-            eventRoleShift["attributes"]["event"]["data"]["attributes"][
-              "eventDateStart"
-            ],
+            eventRoleShift?.attributes?.event?.data?.attributes
+              ?.eventDateStart ?? "",
           eventDateEnd:
-            eventRoleShift["attributes"]["event"]["data"]["attributes"][
-              "eventDateEnd"
-            ],
+            eventRoleShift?.attributes?.event?.data?.attributes?.eventDateEnd ??
+            "",
           eventCheckInKey:
-            eventRoleShift["attributes"]["event"]["data"]["attributes"][
-              "eventCheckInKey"
-            ],
+            eventRoleShift?.attributes?.event?.data?.attributes
+              ?.eventCheckInKey ?? "",
           signUpOpenDate:
-            eventRoleShift["attributes"]["event"]["data"]["attributes"][
-              "signUpOpenDate"
-            ],
+            eventRoleShift?.attributes?.event?.data?.attributes
+              ?.signUpOpenDate ?? "",
           signUpEndDate:
-            eventRoleShift["attributes"]["event"]["data"]["attributes"][
-              "signUpEndDate"
-            ],
+            eventRoleShift?.attributes?.event?.data?.attributes
+              ?.signUpEndDate ?? "",
         },
         volunteerRoles: [],
       };
     }
 
-    organizedData[eventId].volunteerRoles.push({
-      title:
-        eventRoleShift["attributes"]["volunteer_role"]["data"]["attributes"][
-          "title"
-        ],
-      description:
-        eventRoleShift["attributes"]["volunteer_role"]["data"]["attributes"][
-          "description"
-        ],
-      eventRoleShiftTimeStart:
-        eventRoleShift["attributes"]["eventRoleShiftTimeStart"],
-      eventRoleShiftTimeEnd:
-        eventRoleShift["attributes"]["eventRoleShiftTimeEnd"],
-      eventRoleShiftDate: eventRoleShift["attributes"]["eventRoleShiftDate"],
-      capacity: eventRoleShift["attributes"]["capacity"],
-      eventRoleShiftDescription:
-        eventRoleShift["attributes"]["eventRoleShiftDescription"],
-      shiftId: eventRoleShift["id"],
-      volunteerRoleId:
-        eventRoleShift["attributes"]["volunteer_role"]["data"]["id"],
-    });
+    if (eventRoleShift?.attributes?.volunteer_role?.data) {
+      organizedData[eventId]?.volunteerRoles.push({
+        title:
+          eventRoleShift?.attributes?.volunteer_role?.data?.attributes?.title ??
+          "",
+        description:
+          eventRoleShift?.attributes?.volunteer_role?.data?.attributes
+            ?.description ?? "",
+        eventRoleShiftTimeStart:
+          eventRoleShift?.attributes?.eventRoleShiftTimeStart ?? "",
+        eventRoleShiftTimeEnd:
+          eventRoleShift?.attributes?.eventRoleShiftTimeEnd ?? "",
+        eventRoleShiftDate:
+          eventRoleShift?.attributes?.eventRoleShiftDate ?? "",
+        capacity: eventRoleShift?.attributes?.capacity ?? 0,
+        eventRoleShiftDescription:
+          eventRoleShift?.attributes?.eventRoleShiftDescription ?? "",
+        shiftId: eventRoleShift?.id ?? "",
+        volunteerRoleId:
+          eventRoleShift?.attributes?.volunteer_role?.data?.id ?? "",
+      });
+    }
   });
 
   return organizedData;
@@ -90,31 +81,29 @@ const organizeData = (eventRoleShifts: any) => {
 const organizeUserAttendData = (userAttendStrapiData: any, user: any) => {
   const organizedData: UserAttendsData = { userAttend: [] };
 
-  userAttendStrapiData["data"].forEach((item: any) => {
-    const attr = item["attributes"];
+  userAttendStrapiData?.data?.forEach((item: any) => {
+    const attr = item?.attributes;
     if (
-      attr["users_permissions_user"]["data"] != null &&
-      attr["users_permissions_user"]["data"]["attributes"]["username"] ===
-        user.username
+      attr?.users_permissions_user?.data &&
+      attr?.users_permissions_user?.data?.attributes?.username ===
+        user?.username
     ) {
       organizedData.userAttend.push({
-        id: item["id"],
-        checkIn: attr["checkIn"],
-        checkOut: attr["checkOut"],
+        id: item?.id ?? "",
+        checkIn: attr?.checkIn ?? "",
+        checkOut: attr?.checkOut ?? "",
         users_permissions_user: {
           data: {
-            id: attr["users_permissions_user"]["data"]["id"],
+            id: attr?.users_permissions_user?.data?.id ?? "",
             attributes: {
               username:
-                attr["users_permissions_user"]["data"]["attributes"][
-                  "username"
-                ],
+                attr?.users_permissions_user?.data?.attributes?.username ?? "",
             },
           },
         },
         event_role_shifts: {
           data: {
-            id: attr["event_role_shifts"]["data"][0]["id"],
+            id: attr?.event_role_shifts?.data?.[0]?.id ?? "",
           },
         },
       });
@@ -125,7 +114,7 @@ const organizeUserAttendData = (userAttendStrapiData: any, user: any) => {
 };
 
 const generateVolunteerRolesString = (volunteerRoles: any) => {
-  return volunteerRoles.map((role: any) => `${role.title}`).join(", ");
+  return volunteerRoles?.map((role: any) => `${role.title}`).join(", ") ?? "";
 };
 
 export default function Dashboard() {
@@ -161,14 +150,12 @@ export default function Dashboard() {
   return (
     <div className="bg-[#860E13] pt-16">
       <h1 className="pb-4 font-medium font-openSans text-5xl mb-4 text-white flex items-center justify-center">
-        {" "}
-        Welcome!{" "}
+        Welcome!
       </h1>
 
       <div className="drop-shadow-[0_10px_10px_rgba(0,0,0,0.30)] bg-white w-full flex flex-col items-center justify-center p-6 mt-6 mb-10">
         <h2 className="font-semibold text-3xl mb-2 text-center">
-          {" "}
-          Upcoming Events Information{" "}
+          Upcoming Events Information
         </h2>
         {!user ? (
           <div className="flex flex-row items-center justify-center m-4">
@@ -180,9 +167,8 @@ export default function Dashboard() {
               className="mr-2"
             />
             <p className="text-[#9D5425] self-center italic text-lg">
-              {" "}
-              <strong> Note:</strong> You must sign in before registering for an
-              event.{" "}
+              <strong>Note:</strong> You must sign in before registering for an
+              event.
             </p>
           </div>
         ) : (
@@ -190,7 +176,6 @@ export default function Dashboard() {
         )}
         {user ? (
           <div className="border-2 border-[#838383] text-[#838383] py-2 px-4 rounded-full inline-block mb-4 min-w-min">
-            {" "}
             Account Type: Volunteer
           </div>
         ) : (
@@ -206,12 +191,11 @@ export default function Dashboard() {
               let associatedEventRoleShift: any = {};
 
               Object.keys(organizedData).forEach((event: any) => {
-                organizedData[event].volunteerRoles.forEach((role: any) => {
+                organizedData[event]?.volunteerRoles?.forEach((role: any) => {
                   if (
-                    role["shiftId"] ===
-                    userAttend["event_role_shifts"]["data"]["id"]
+                    role?.shiftId === userAttend?.event_role_shifts?.data?.id
                   ) {
-                    associatedEvent = organizedData[event]["event"];
+                    associatedEvent = organizedData[event]?.event;
                     associatedEventRoleShift = role;
                   }
                 });
@@ -219,23 +203,23 @@ export default function Dashboard() {
 
               return (
                 <RegisteredEventCard
-                  key={userAttend["id"]}
-                  name={associatedEvent["title"]}
-                  location={associatedEvent["location"]}
+                  key={userAttend?.id}
+                  name={associatedEvent?.title ?? ""}
+                  location={associatedEvent?.location ?? ""}
                   eventRoleShiftDate={
-                    associatedEventRoleShift["eventRoleShiftDate"]
+                    associatedEventRoleShift?.eventRoleShiftDate ?? ""
                   }
                   eventRoleShiftTimeStart={
-                    associatedEventRoleShift["eventRoleShiftTimeStart"]
+                    associatedEventRoleShift?.eventRoleShiftTimeStart ?? ""
                   }
                   eventRoleShiftTimeEnd={
-                    associatedEventRoleShift["eventRoleShiftTimeEnd"]
+                    associatedEventRoleShift?.eventRoleShiftTimeEnd ?? ""
                   }
-                  title={associatedEventRoleShift["title"]}
-                  checkIn={userAttend["checkIn"]}
-                  checkOut={userAttend["checkOut"]}
-                  userAttendId={userAttend["id"]}
-                  shiftId={associatedEventRoleShift["shiftId"]}
+                  title={associatedEventRoleShift?.title ?? ""}
+                  checkIn={userAttend?.checkIn ?? ""}
+                  checkOut={userAttend?.checkOut ?? ""}
+                  userAttendId={userAttend?.id ?? ""}
+                  shiftId={associatedEventRoleShift?.shiftId ?? ""}
                   onDropSpot={mutateUserAttend}
                 />
               );
@@ -243,14 +227,14 @@ export default function Dashboard() {
           </div>
           <div className="w-full self-center grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-20 gap-y-10">
             {Object.keys(organizedData).map((eventId) => {
-              const event = organizedData[eventId].event;
+              const event = organizedData[eventId]?.event;
 
               return (
                 <EventCard
                   key={eventId}
                   event={JSON.stringify(event)}
                   volunteerRoles={JSON.stringify(
-                    organizedData[eventId].volunteerRoles
+                    organizedData[eventId]?.volunteerRoles ?? []
                   )}
                   image={header_image}
                   setShowErrorMessage={setShowErrorMessage}
@@ -264,7 +248,7 @@ export default function Dashboard() {
         <AlertMessage
           success={false}
           description="Please sign in and try again."
-        ></AlertMessage>
+        />
       )}
     </div>
   );

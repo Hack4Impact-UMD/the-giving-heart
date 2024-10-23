@@ -104,7 +104,7 @@ export default function EventSignupPage() {
             item["attributes"]["users_permissions_user"]["data"];
           let shiftAttendData = item["attributes"]["event_role_shifts"]["data"];
           if (
-            userAttendData != null &&
+            userAttendData &&
             userAttendData["attributes"]["username"] == user.username &&
             shiftAttendData.length &&
             shiftAttendData[0]["id"] == selectedRoleShift
@@ -120,7 +120,7 @@ export default function EventSignupPage() {
             item["attributes"]["users_permissions_user"]["data"];
           let shiftAttendData = item["attributes"]["event_role_shifts"]["data"];
           if (
-            userAttendData != null &&
+            userAttendData &&
             userAttendData["attributes"]["username"] == user.username &&
             shiftAttendData.length &&
             shiftAttendData[0]["id"] == selectedRoleShift
@@ -130,28 +130,31 @@ export default function EventSignupPage() {
           }
         }
 
-        const numRegisteredForShift = userAttendData["data"].reduce(
-          (acc: number, item: any) => {
+        const numRegisteredForShift =
+          userAttendData &&
+          userAttendData["data"] &&
+          userAttendData["data"].reduce((acc: number, item: any) => {
+            const eventRoleShiftsData =
+              item["attributes"]["event_role_shifts"]["data"];
             if (
-              item["attributes"]["event_role_shifts"]["data"][0]["id"] ==
-              selectedRoleShift
+              eventRoleShiftsData &&
+              eventRoleShiftsData.length > 0 &&
+              eventRoleShiftsData[0]["id"] === selectedRoleShift
             ) {
               acc += 1;
             }
             return acc;
-          },
-          0
-        );
+          }, 0);
 
         for (const item of userAttendData["data"]) {
+          const eventRoleShiftsData =
+            item["attributes"]["event_role_shifts"]["data"];
           if (
-            item["attributes"]["event_role_shifts"]["data"][0]["id"] ==
-            selectedRoleShift
+            eventRoleShiftsData &&
+            eventRoleShiftsData.length > 0 &&
+            eventRoleShiftsData[0]["id"] === selectedRoleShift
           ) {
-            shiftCapacity =
-              item["attributes"]["event_role_shifts"]["data"][0]["attributes"][
-                "capacity"
-              ];
+            shiftCapacity = eventRoleShiftsData[0]["attributes"]["capacity"];
             break;
           }
         }
@@ -395,6 +398,9 @@ export default function EventSignupPage() {
                       userAttendData["data"].reduce(
                         (acc: number, item: any) => {
                           if (
+                            item &&
+                            item["attributes"]["event_role_shifts"]["data"]
+                              .length > 0 &&
                             item["attributes"]["event_role_shifts"]["data"][0][
                               "id"
                             ] == shift.shiftId

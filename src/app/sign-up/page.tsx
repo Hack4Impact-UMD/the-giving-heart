@@ -21,18 +21,25 @@ import { useAuthContext } from "@/utils/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { API } from "@/utils/constant";
 
-// TODO?: might want to consider making passwords require at least a special character or number
-const schema = z.object({
-  firstName: z.string().min(1),
-  lastName: z.string().min(1),
-  email: z.string().email(),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 characters",
-  }),
-  phoneNumber: z.string().min(10, {
-    message: "Invalid phone number",
-  }),
-});
+const schema = z
+  .object({
+    firstName: z.string().min(1, { message: "First name is required" }),
+    lastName: z.string().min(1, { message: "Last name is required" }),
+    email: z.string().email({ message: "Invalid email address" }),
+    password: z.string().min(8, {
+      message: "Password must be at least 8 characters",
+    }),
+    confirmPassword: z
+      .string()
+      .min(8, { message: "Confirm Password must be at least 8 characters" }),
+    phoneNumber: z.string().min(10, {
+      message: "Invalid phone number",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"], // Specify which field the error should appear under
+  });
 
 type FormData = z.infer<typeof schema>;
 
@@ -68,7 +75,7 @@ export default function SignUp() {
         router.push("/dashboard");
       })
       .catch((error) => {
-        if (error.response.status === 400) {
+        if (error.response?.status === 400) {
           setUserExistsError(true);
         }
         console.log("An error occurred:", error.response);
@@ -176,6 +183,27 @@ export default function SignUp() {
                           </FormControl>
                           {errors.password && (
                             <FormMessage>{errors.password.message}</FormMessage>
+                          )}
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="confirmPassword"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Confirm Password:</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="password"
+                              placeholder="Confirm password"
+                              {...field}
+                            />
+                          </FormControl>
+                          {errors.confirmPassword && (
+                            <FormMessage>
+                              {errors.confirmPassword.message}
+                            </FormMessage>
                           )}
                         </FormItem>
                       )}

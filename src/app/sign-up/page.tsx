@@ -218,8 +218,9 @@ export default function SignUp() {
                       <Button
                         type="submit"
                         className="bg-[#ED1C24] text-white px-8"
+                        disabled={true}
                       >
-                        Sign Up
+                        VOLUNTEER ROLES FILLED
                       </Button>
                     </div>
                   </form>

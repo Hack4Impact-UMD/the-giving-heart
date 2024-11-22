@@ -27,17 +27,9 @@ export default async function Home() {
               <h2 className="text-lg text-gray-800 font-bold mb-2">
                 Latest News
               </h2>
-              <p className="text-sm text-gray-800 leading-relaxed mb-2">
-                New address for correspondence and donations is 3714 Moody Ave.,
-                Richmond, Va. 23225. Our phone number remains the same:
-                804-749-4726!
-              </p>
               <p className="text-sm text-gray-800 leading-relaxed">
-                ATTENTION - The Giving Heart has recently purged email addresses
-                from our newsletter. If you haven&apos;t done so already, please
-                sign up (again) for our Newsletter at the bottom of this page.
-                Remember that subscribers get the latest information, including
-                the ability to sign up before the general public!
+                Contact the office at (804) 749-4726 or
+                inquiries@thegivingheart.org for updated information.
               </p>
             </Card>
           </div>
